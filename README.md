@@ -3,11 +3,11 @@
 # AnythinkSDK_iOS_SDK_5.5.8
 ## Third-party SDK version for AnyThink_ios_sdk_5.5.8
 
-<a href="https://docs.toponad.com/#/en-us/ios/GetStarted/TopOn_Get_Started" target = "_blank"> Integrate Guide for AnyThinkSDK for iOS(English) </a> 
+<a href="https://docs.toponad.com/#/en-us/ios/ios_doc/ios_access_doc" target = "_blank"> Integrate Guide for AnyThinkSDK for iOS(English) </a> 
 
 <a href="https://docs.toponad.com/#/en-us/ios/ios_doc/ios_errorcode" target = "_blank"> Error Code And FAQ(English) </a> 
 
-<a href="https://docs.toponad.com/#/zh-cn/ios/GetStarted/TopOn_Get_Started" target = "_blank"> AnyThinkSDK for iOS 中文集成文档 </a> 
+<a href="https://docs.toponad.com/#/zh-cn/ios/ios_doc/ios_access_doc" target = "_blank"> AnyThinkSDK for iOS 中文集成文档 </a> 
 
 <a href="https://docs.toponad.com/#/zh-cn/ios/ios_doc/ios_errorcode" target = "_blank"> Error Code And FAQ 中文版 </a> 
 
@@ -157,5 +157,5 @@ pod 'Fyber_Marketplace_SDK', '7.5.4'
 | startApp | 4.5.0 |25||
 | KuaiShou | 2.7.0 |28|需要额外导入第三方依赖：<br> AFNetworking/Godzippa/MJExtension/SDWebImage|
 | sigmob | 2.18.0 |29|sdk：WindSDK.framework <br>sigmob.bundle|
-| Ogury | 1.0.10 |36|OguryOED_1.0.3 包含以下sdk<br>OMSDK_Oguryco.framework<br>OguryAds.framework<br>OguryConsentManager.framework|
+| Ogury | 1.0.10 |36|OguryOED_1.0.10 包含以下sdk<br>OMSDK_Oguryco.framework<br>OguryAds.framework<br>OguryConsentManager.framework|
 | Fyber | 7.5.4 |37||
