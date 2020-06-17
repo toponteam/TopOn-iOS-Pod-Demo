@@ -20,6 +20,7 @@ extern NSString *const kFlurryPlacement;
 extern NSString *const kMopubPlacementName;
 extern NSString *const kMopubVideoPlacementName;
 extern NSString *const kMintegralPlacement;
+extern NSString *const kMintegralAdvancedPlacement;
 extern NSString *const kHeaderBiddingPlacement;
 extern NSString *const kGDTPlacement;
 extern NSString *const kGDTTemplatePlacement;

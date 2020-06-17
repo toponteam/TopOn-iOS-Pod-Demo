@@ -32,6 +32,11 @@
                                           kATCustomDataSegmentIDKey:@16382351
     };
     
+    //setting custom data for placement, channel&subchannel will be ignored
+    [[ATAPI sharedInstance] setCustomData:@{kATCustomDataChannelKey:@"placement_custom_data_channel",
+                                          kATCustomDataSubchannelKey:@"placement_custom_data_subchannel"
+    } forPlacementID:@"b5c1b048c498b9"];
+    
     
     [[ATAPI sharedInstance] getUserLocationWithCallback:^(ATUserLocation location) {
         if (location == ATUserLocationInEU) {
@@ -51,7 +56,6 @@
 
 
 #pragma mark - UISceneSession lifecycle
-
 //
 //- (UISceneConfiguration *)application:(UIApplication *)application configurationForConnectingSceneSession:(UISceneSession *)connectingSceneSession options:(UISceneConnectionOptions *)options {
 //    // Called when a new scene session is being created.

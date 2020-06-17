@@ -27,6 +27,10 @@ static NSString *const kNendPlacementID = @"b5cb96d97400b3";
 static NSString *const kMintegralPlacementID = @"b5dd363166a5ea";
 static NSString *const kBannerHeaderBiddingPlacementID = @"b5d146f9483215";
 static NSString *const kFyberPlacementID = @"b5e952a8d1ee45";
+static NSString *const kStartAppPlacementID = @"b5ed47a285a23a";
+static NSString *const kChartboostPlacementID = @"b5ee89f1a7eaf2";
+static NSString *const kVunglePlacementID = @"b5ee89f3e63d80";
+static NSString *const kAdColonyPlacementID = @"b5ee89f4d1791e";
 
 NSString *const kBannerShownNotification = @"banner_shown";
 NSString *const kBannerLoadingFailedNotification = @"banner_failed_to_load";
@@ -68,6 +72,10 @@ NSString *const kBannerLoadingFailedNotification = @"banner_failed_to_load";
                           kMintegralPlacement:kMintegralPlacementID,
                           kHeaderBiddingPlacement:kBannerHeaderBiddingPlacementID,
                           kFyberPlacement:kFyberPlacementID,
+                          kStartAppPlacement:kStartAppPlacementID,
+                          kVunglePlacementName:kVunglePlacementID,
+                          kChartboostPlacementName:kChartboostPlacementID,
+                          kAdcolonyPlacementName:kAdColonyPlacementID
                           };
     }
     return self;
@@ -144,13 +152,6 @@ NSString *const kBannerLoadingFailedNotification = @"banner_failed_to_load";
 }
 
 -(void) removeAdButtonTapped {
-    
-//    UIViewController *tVC = [[UIViewController alloc] init];
-//    tVC.title = @"New VC";
-//    tVC.view.backgroundColor = [UIColor redColor];
-//    [self.navigationController pushViewController:tVC animated:YES];
-//    return;
-    
     [[self.view viewWithTag:3333] removeFromSuperview];
     NSLog(@"banner removed");
 }
