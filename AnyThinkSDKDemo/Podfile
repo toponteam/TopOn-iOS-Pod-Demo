@@ -37,7 +37,7 @@ target 'AnyThinkSDKDemo' do
   pod 'MintegralAdSDK/BannerAd' ,'6.3.2'
   pod 'MintegralAdSDK/BidBannerAd','6.3.2'
   pod 'MintegralAdSDK/SplashAd','6.3.2'
-  pod 'MintegralAdSDK/NativeAd','6.3.2'
+  pod 'MintegralAdSDK/NativeAdvancedAd','6.3.2'
 
   #GDT
   pod 'AnyThinkiOS/AnyThinkGDTAdapter','5.5.9'
