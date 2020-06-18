@@ -1,7 +1,7 @@
 ## [IMPORTANT] DO NOT expose any of the frameworks to Windows operating system; Windows modifies frameworks, making them incomplete and resulting in compile errors.
 ## 【重要】请勿将iOS需要用到的SDK（包括.a、.framework及.embededframework格式的套件）下载或传送至Windows操作系统上，因为Windows文件系统会修改这些SDK，导致它们在Xcode中无法编译。
-# AnythinkSDK_iOS_SDK_5.5.8
-## Third-party SDK version for AnyThink_ios_sdk_5.5.8
+# AnythinkSDK_iOS_SDK_5.6.1
+## Third-party SDK version for AnyThink_ios_sdk_5.6.1
 
 <a href="https://docs.toponad.com/#/en-us/ios/ios_doc/ios_access_doc" target = "_blank"> Integrate Guide for AnyThinkSDK for iOS(English) </a> 
 
@@ -28,27 +28,27 @@ $ pod install
 
 ```
 #AnyThinkiOS
-pod 'AnyThinkiOS','5.5.8'
+pod 'AnyThinkiOS','5.6.1'
 
 #FaceBook
-pod 'AnyThinkiOS/AnyThinkFacebookAdapter','5.5.8'
+pod 'AnyThinkiOS/AnyThinkFacebookAdapter','5.6.1'
 pod 'FBAudienceNetwork' , '5.9.0'
 
 #Admob
-pod 'AnyThinkiOS/AnyThinkAdmobAdapter','5.5.8'
+pod 'AnyThinkiOS/AnyThinkAdmobAdapter','5.6.1'
 pod 'Google-Mobile-Ads-SDK','7.60.0'
 pod 'PersonalizedAdConsent'
 
 #TouTiao
-pod 'AnyThinkiOS/AnyThinkTouTiaoAdapter','5.5.8'
+pod 'AnyThinkiOS/AnyThinkTouTiaoAdapter','5.6.1'
 pod 'Bytedance-UnionAD' , '3.1.0.0'
 
 #Applovin
-pod 'AnyThinkiOS/AnyThinkApplovinAdapter','5.5.8'
+pod 'AnyThinkiOS/AnyThinkApplovinAdapter','5.6.1'
 pod 'AppLovinSDK', '6.12.6'
 
 #Mintegral
-pod 'AnyThinkiOS/AnyThinkMintegralAdapter','5.5.8'
+pod 'AnyThinkiOS/AnyThinkMintegralAdapter','5.6.1'
 pod 'MintegralAdSDK' ,'6.2.0'
 pod 'MintegralAdSDK/RewardVideoAd','6.2.0'
 pod 'MintegralAdSDK/BidRewardVideoAd','6.2.0'
@@ -59,60 +59,60 @@ pod 'MintegralAdSDK/BannerAd' ,'6.2.0'
 pod 'MintegralAdSDK/BidBannerAd','6.2.0'
 
 #GDT
-pod 'AnyThinkiOS/AnyThinkGDTAdapter','5.5.8'
+pod 'AnyThinkiOS/AnyThinkGDTAdapter','5.6.1'
 pod 'GDTMobSDK', '4.11.8'
 
 #Unity Ads
-pod 'AnyThinkiOS/AnyThinkUnityAdsAdapter','5.5.8'
+pod 'AnyThinkiOS/AnyThinkUnityAdsAdapter','5.6.1'
 pod 'UnityAds' , '3.4.2'
 
 #Chartboost
-pod 'AnyThinkiOS/AnyThinkChartboostAdapter','5.5.8'
+pod 'AnyThinkiOS/AnyThinkChartboostAdapter','5.6.1'
 pod 'ChartboostSDK','8.1.0'
 
 #Tapjoy
-pod 'AnyThinkiOS/AnyThinkTapjoyAdapter','5.5.8'
+pod 'AnyThinkiOS/AnyThinkTapjoyAdapter','5.6.1'
 pod 'TapjoySDK','12.4.2'
 
 #Nend
-pod 'AnyThinkiOS/AnyThinkNendAdapter','5.5.8'
+pod 'AnyThinkiOS/AnyThinkNendAdapter','5.6.1'
 pod 'NendSDK_iOS','5.3.1'
 
 #IronSource
-pod 'AnyThinkiOS/AnyThinkIronSourceAdapter','5.5.8'
+pod 'AnyThinkiOS/AnyThinkIronSourceAdapter','5.6.1'
 pod 'IronSourceSDK','6.16.1'
 
 #Inmobi
-pod 'AnyThinkiOS/AnyThinkInmobiAdapter','5.5.8'
+pod 'AnyThinkiOS/AnyThinkInmobiAdapter','5.6.1'
 pod 'InMobiSDK' ,'9.0.7'
 
 #Appnext
-pod 'AnyThinkiOS/AnyThinkAppnextAdapter','5.5.8'
+pod 'AnyThinkiOS/AnyThinkAppnextAdapter','5.6.1'
 #第三方不支持pod,请另行下载
 
 #Adcolony
-pod 'AnyThinkiOS/AnyThinkAdcolonyAdapter','5.5.8'
+pod 'AnyThinkiOS/AnyThinkAdcolonyAdapter','5.6.1'
 pod 'AdColony','4.1.4.0'
 
 #Vungle
-pod 'AnyThinkiOS/AnyThinkVungleAdapter','5.5.8'
+pod 'AnyThinkiOS/AnyThinkVungleAdapter','5.6.1'
 pod 'VungleSDK-iOS', '6.5.4'
 
 #Maio
-pod 'AnyThinkiOS/AnyThinkMaioAdapter','5.5.8'
+pod 'AnyThinkiOS/AnyThinkMaioAdapter','5.6.1'
 pod 'MaioSDK','1.5.0'
 
 #KuaiShou
-pod 'AnyThinkiOS/AnyThinkKSAdapter','5.5.8'
+pod 'AnyThinkiOS/AnyThinkKSAdapter','5.6.1'
 pod 'KSAdSDK', '2.7.0'
 pod 'SDWebImage'
 
 #Baidu
-pod 'AnyThinkiOS/AnyThinkBaiduAdapter','5.5.8'
+pod 'AnyThinkiOS/AnyThinkBaiduAdapter','5.6.1'
 #第三方不支持pod,请另行下载
 
 #Ogury
-pod 'AnyThinkiOS/AnyThinkOguryAdapter','5.5.8'
+pod 'AnyThinkiOS/AnyThinkOguryAdapter','5.6.1'
 #第三方不支持pod,请另行下载
 
 #Oneway
@@ -124,11 +124,11 @@ pod 'AnyThinkiOS/AnyThinkSigmobAdapter','5.5.8'
 pod 'SigmobAd-iOS', '2.18.0'
 
 #StartApp
-pod 'AnyThinkiOS/AnyThinkStartAppAdapter','5.5.8'
+pod 'AnyThinkiOS/AnyThinkStartAppAdapter','5.6.1'
 pod 'StartAppSDK', '4.5.0'
 
 #Fyber
-pod 'AnyThinkiOS/AnyThinkFyberAdapter','5.5.8'
+pod 'AnyThinkiOS/AnyThinkFyberAdapter','5.6.1'
 pod 'Fyber_Marketplace_SDK', '7.5.4'
 ```
 

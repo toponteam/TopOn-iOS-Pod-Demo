@@ -28,16 +28,14 @@ target 'AnyThinkSDKDemo' do
 
   #Mintegral
   pod 'AnyThinkiOS/AnyThinkMintegralAdapter','5.6.1'
-  pod 'MintegralAdSDK' ,'6.3.2'
-  pod 'MintegralAdSDK/RewardVideoAd','6.3.2'
-  pod 'MintegralAdSDK/BidRewardVideoAd','6.3.2'
-  pod 'MintegralAdSDK/BidInterstitialVideoAd','6.3.2'
-  pod 'MintegralAdSDK/InterstitialVideoAd','6.3.2'
-  pod 'MintegralAdSDK/InterstitialAd','6.3.2'
-  pod 'MintegralAdSDK/BannerAd' ,'6.3.2'
-  pod 'MintegralAdSDK/BidBannerAd','6.3.2'
-  pod 'MintegralAdSDK/SplashAd','6.3.2'
-  pod 'MintegralAdSDK/NativeAdvancedAd','6.3.2'
+  pod 'MintegralAdSDK' ,'6.2.0'
+  pod 'MintegralAdSDK/RewardVideoAd','6.2.0'
+  pod 'MintegralAdSDK/BidRewardVideoAd','6.2.0'
+  pod 'MintegralAdSDK/BidInterstitialVideoAd','6.2.0'
+  pod 'MintegralAdSDK/InterstitialVideoAd','6.2.0'
+  pod 'MintegralAdSDK/InterstitialAd','6.2.0'
+  pod 'MintegralAdSDK/BannerAd' ,'6.2.0'
+  pod 'MintegralAdSDK/BidBannerAd','6.2.0'
 
   #GDT
   pod 'AnyThinkiOS/AnyThinkGDTAdapter','5.6.1'
