@@ -116,11 +116,11 @@ pod 'AnyThinkiOS/AnyThinkOguryAdapter','5.6.1'
 #第三方不支持pod,请另行下载
 
 #Oneway
-pod 'AnyThinkiOS/AnyThinkOnewayAdapter','5.5.8'
+pod 'AnyThinkiOS/AnyThinkOnewayAdapter','5.6.1'
 #第三方不支持pod,请另行下载
 
 #Sigmob
-pod 'AnyThinkiOS/AnyThinkSigmobAdapter','5.5.8'
+pod 'AnyThinkiOS/AnyThinkSigmobAdapter','5.6.1'
 pod 'SigmobAd-iOS', '2.18.0'
 
 #StartApp
