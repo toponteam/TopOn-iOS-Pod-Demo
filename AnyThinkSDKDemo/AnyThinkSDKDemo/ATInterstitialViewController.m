@@ -18,6 +18,7 @@ NSString *const kHeaderBiddingPlacement = @"Header Bidding";
 NSString *const kStartAppPlacement = @"StartApp";
 NSString *const kStartAppVideoPlacement = @"StartApp(Video)";
 NSString *const kFyberPlacement = @"Fyber";
+NSString *const kSigmobRVIntPlacement = @"Sibmob(RV)";
 
 static NSString *const kGDTPlacementID = @"b5bacad8ea3036";
 static NSString *const kTTPlacementID = @"b5bacad7373b89";
