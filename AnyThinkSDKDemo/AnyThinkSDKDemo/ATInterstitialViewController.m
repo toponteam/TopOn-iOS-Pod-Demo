@@ -48,6 +48,7 @@ static NSString *const kNendVideoPlacementID = @"b5cb96dd930c57";
 static NSString *const kNendFullScreenPlacementID = @"b5cb96df0f1914";
 static NSString *const kMaioPlacementID = @"b5cb96cf795c4b";
 static NSString *const kSigmobPlacementID = @"b5d771f79e4a32";
+static NSString *const kSigmobIntRVPlacementID = @"b5d771f79e4a32";
 static NSString *const kKSPlacementID = @"b5d807a4846f50";
 static NSString *const kMyOfferPlacementID = @"b5db6c26999c31";
 static NSString *const kOguryPlacementID = @"b5dde238f2d2ce";
@@ -100,6 +101,7 @@ static NSString *const kFyberPlacementID = @"b5e952fc0d2744";
                           kNendFullScreenInterstitialPlacement:kNendFullScreenPlacementID,
                           kMaioPlacement:kMaioPlacementID,
                           kSigmobPlacement:kSigmobPlacementID,
+                          kSigmobRVIntPlacement:kSigmobIntRVPlacementID,
                           kKSPlacement:kKSPlacementID,
                           kMyOfferPlacement:kMyOfferPlacementID,
                           kOguryPlacement:kOguryPlacementID,
