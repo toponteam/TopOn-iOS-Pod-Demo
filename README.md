@@ -154,7 +154,7 @@ pod 'Fyber_Marketplace_SDK', '7.5.4'
 | TiTok | 3.1.0.0 |15|头条/穿山甲/TiTok|
 | Tapjoy | 12.4.2 |10||
 | Oneway | 2.3.0 |17||
-| Baidu | 4.68 |22||
+| Baidu | 4.69 |22||
 | Nend | 5.3.1 |23||
 | Maio | 1.5.0 |24||
 | startApp | 4.5.0 |25||
