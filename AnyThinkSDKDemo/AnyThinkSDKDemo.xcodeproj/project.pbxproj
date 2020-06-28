@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		452D4DC9249A3E2400A36ADC /* VungleSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 452D4DC8249A3E2400A36ADC /* VungleSDK.framework */; };
-		452D4DCB249A3E7300A36ADC /* MTGSDKNativeAdvanced.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 452D4DCA249A3E7300A36ADC /* MTGSDKNativeAdvanced.framework */; };
 		9BBD009924863048009EAD66 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BBD009824863048009EAD66 /* AppDelegate.m */; };
 		9BBD009C24863048009EAD66 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BBD009B24863048009EAD66 /* SceneDelegate.m */; };
 		9BBD009F24863048009EAD66 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BBD009E24863048009EAD66 /* ViewController.m */; };
@@ -28,8 +26,6 @@
 
 /* Begin PBXFileReference section */
 		44D83BDBBF3D3D426850A3E1 /* Pods-AnyThinkSDKDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AnyThinkSDKDemo.release.xcconfig"; path = "Target Support Files/Pods-AnyThinkSDKDemo/Pods-AnyThinkSDKDemo.release.xcconfig"; sourceTree = "<group>"; };
-		452D4DC8249A3E2400A36ADC /* VungleSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = VungleSDK.framework; sourceTree = "<group>"; };
-		452D4DCA249A3E7300A36ADC /* MTGSDKNativeAdvanced.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MTGSDKNativeAdvanced.framework; sourceTree = "<group>"; };
 		85EEA80B39960C835625EC2F /* Pods-AnyThinkSDKDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AnyThinkSDKDemo.debug.xcconfig"; path = "Target Support Files/Pods-AnyThinkSDKDemo/Pods-AnyThinkSDKDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		9BBD009424863048009EAD66 /* AnyThinkSDKDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AnyThinkSDKDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BBD009724863048009EAD66 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -65,9 +61,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				452D4DC9249A3E2400A36ADC /* VungleSDK.framework in Frameworks */,
 				C36CAF42111F732953C14234 /* Pods_AnyThinkSDKDemo.framework in Frameworks */,
-				452D4DCB249A3E7300A36ADC /* MTGSDKNativeAdvanced.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -91,19 +85,9 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		452D4DC7249A3DA200A36ADC /* SDK */ = {
-			isa = PBXGroup;
-			children = (
-				452D4DCA249A3E7300A36ADC /* MTGSDKNativeAdvanced.framework */,
-				452D4DC8249A3E2400A36ADC /* VungleSDK.framework */,
-			);
-			path = SDK;
-			sourceTree = "<group>";
-		};
 		9BBD008B24863047009EAD66 = {
 			isa = PBXGroup;
 			children = (
-				452D4DC7249A3DA200A36ADC /* SDK */,
 				9BBD009624863048009EAD66 /* AnyThinkSDKDemo */,
 				9BBD009524863048009EAD66 /* Products */,
 				2F88623D9B59A22EF880A819 /* Pods */,
