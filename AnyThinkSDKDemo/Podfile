@@ -11,7 +11,7 @@ target 'AnyThinkSDKDemo' do
 
   #FaceBook
   pod 'AnyThinkiOS/AnyThinkFacebookAdapter','5.5.9'
-  pod 'FBAudienceNetwork' , '5.9.0'
+  pod 'FBAudienceNetwork' , '5.10.1'
 
   #Admob
   pod 'AnyThinkiOS/AnyThinkAdmobAdapter','5.5.9'

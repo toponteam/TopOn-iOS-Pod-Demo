@@ -32,7 +32,7 @@ pod 'AnyThinkiOS','5.5.9'
 
 #FaceBook
 pod 'AnyThinkiOS/AnyThinkFacebookAdapter','5.5.9'
-pod 'FBAudienceNetwork' , '5.9.0'
+pod 'FBAudienceNetwork' , '5.10.1'
 
 #Admob
 pod 'AnyThinkiOS/AnyThinkAdmobAdapter','5.5.9'
@@ -139,7 +139,7 @@ pod 'Fyber_Marketplace_SDK', '7.5.4'
 
 | Network | SDK Version | Network firm ID| note |
 |---|---|---|---|
-| Facebook | 5.9.0 |1|FBAudienceNetwork.framework版本为5.9.0<br>FBSDKCoewKit.framework版本为6.0.0|
+| Facebook | 5.10.1 |1|FBAudienceNetwork.framework版本为5.9.0<br>FBSDKCoewKit.framework版本为6.0.0|
 | Admob | 7.60.0 |2||
 | Inmobi | 9.0.7 |3||
 | Applovin | 6.12.6 |5||
