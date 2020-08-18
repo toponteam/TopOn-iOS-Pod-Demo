@@ -31,16 +31,12 @@ static NSString *const kApplovinPlacementID = @"b5bacad34e4294";
 static NSString *const kFacebookPlacementID = @"b5baf4bf9829e4";
 static NSString *const kFacebookHeaderBiddingPlacementID = @"b5d133421525a6";
 static NSString *const kAllPlacementID = @"b5bacad26a752a";
-static NSString *const kOnewayPlacementID = @"b5baf65b3b8631";
 static NSString *const kInmobiPlacementID = @"b5baf524062aca";
-static NSString *const kFlurryPlacementID = @"b5baf52ed8b418";
-static NSString *const kMopubPlacementID = @"b5baf56f03dbe9";
 static NSString *const kChartboostPlacementID = @"b5baf5cd422553";
 static NSString *const kTapjoyPlacementID = @"b5baf5ebe8df89";
 static NSString *const kIronsourcePlacementID = @"b5baf617891a2e";
 static NSString *const kVunglePlacementID = @"b5baf61edafdbb";
 static NSString *const kAdColonyPlacementID = @"b5baf620280a65";
-static NSString *const kYeahmobiPlacementID = @"b5bc7fb8d54acc";
 static NSString *const kAppnextPlacementID = @"b5bc7fb9cbfff1";
 static NSString *const kBaiduPlacementID = @"b5c04ddc6ba49e";
 static NSString *const kUnityAdsPlacementID = @"b5c21a055a51ab";
@@ -56,6 +52,7 @@ static NSString *const kOguryPlacementID = @"b5dde238f2d2ce";
 static NSString *const kStartAppPlacementID = @"b5e731a0acabdf";
 static NSString *const kStartAppVideoPlacementID = @"b5e732a9577182";
 static NSString *const kFyberPlacementID = @"b5e952fc0d2744";
+static NSString *const kGAMPlacementID = @"b5f2389ab6ee63";
 
 @interface ATInterstitialViewController ()<ATInterstitialDelegate>
 @property(nonatomic, readonly) NSString *name;
@@ -83,17 +80,13 @@ static NSString *const kFyberPlacementID = @"b5e952fc0d2744";
                           kApplovinPlacement:kApplovinPlacementID,
                           kFacebookPlacement:kFacebookPlacementID,
                           kFacebookHeaderBiddingPlacement:kFacebookHeaderBiddingPlacementID,
-                          kOnewayPlacementName:kOnewayPlacementID,
                           kInmobiPlacement:kInmobiPlacementID,
-                          kFlurryPlacement:kFlurryPlacementID,
-                          kMopubPlacementName:kMopubPlacementID,
                           kChartboostPlacementName:kChartboostPlacementID,
                           kTapjoyPlacementName:kTapjoyPlacementID,
                           kIronsourcePlacementName:kIronsourcePlacementID,
                           kVunglePlacementName:kVunglePlacementID,
                           kAdcolonyPlacementName:kAdColonyPlacementID,
                           kAllPlacementName:kAllPlacementID,
-                          kYeahmobiPlacement:kYeahmobiPlacementID,
                           kAppnextPlacement:kAppnextPlacementID,
                           kBaiduPlacement:kBaiduPlacementID,
                           kUnityAdsPlacementName:kUnityAdsPlacementID,
@@ -108,7 +101,9 @@ static NSString *const kFyberPlacementID = @"b5e952fc0d2744";
                           kOguryPlacement:kOguryPlacementID,
                           kStartAppPlacement:kStartAppPlacementID,
                           kStartAppVideoPlacement:kStartAppVideoPlacementID,
-                          kFyberPlacement:kFyberPlacementID
+                          kFyberPlacement:kFyberPlacementID,
+                          kGAMPlacement:kGAMPlacementID
+
                           };
     }
     return self;
@@ -178,7 +173,7 @@ static NSString *const kFyberPlacementID = @"b5e952fc0d2744";
     _failureTipsLabel.hidden = YES;
     [self.view addSubview:_loadingView];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-        [[ATAdManager sharedManager] loadADWithPlacementID:_placementIDs[_name] extra:nil delegate:self];
+        [[ATAdManager sharedManager] loadADWithPlacementID:_placementIDs[_name] extra:[_name isEqualToString:kSigmobRVIntPlacement] ? @{kATInterstitialExtraUsesRewardedVideo:@YES} : nil delegate:self];
     });
 }
 

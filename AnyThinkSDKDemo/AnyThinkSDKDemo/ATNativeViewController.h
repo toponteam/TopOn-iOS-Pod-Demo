@@ -16,14 +16,10 @@ extern NSString *const kFacebookPlacement;
 extern NSString *const kFacebookHeaderBiddingPlacement;
 extern NSString *const kAdMobPlacement;
 extern NSString *const kApplovinPlacement;
-extern NSString *const kFlurryPlacement;
-extern NSString *const kMopubPlacementName;
-extern NSString *const kMopubVideoPlacementName;
 extern NSString *const kMintegralPlacement;
 extern NSString *const kHeaderBiddingPlacement;
 extern NSString *const kGDTPlacement;
 extern NSString *const kGDTTemplatePlacement;
-extern NSString *const kYeahmobiPlacement;
 extern NSString *const kAppnextPlacement;
 extern NSString *const kTTFeedPlacementName;
 //extern NSString *const kTTDrawPlacementName;
@@ -34,6 +30,9 @@ extern NSString *const kNendVideoPlacement;
 extern NSString *const kMaioPlacement;
 extern NSString *const kSigmobPlacement;
 extern NSString *const kKSPlacement;
+extern NSString *const kGAMPlacement;
+extern NSString *const kMyOfferPlacement;
+
 //extern NSString *const kKSDrawPlacement;
 @interface ATNativeViewController : UIViewController
 -(instancetype) initWithPlacementName:(NSString*)name;
@@ -48,5 +47,6 @@ extern NSString *const kKSPlacement;
 @property(nonatomic, readonly) UILabel *ratingLabel;
 @property(nonatomic, readonly) UIImageView *iconImageView;
 @property(nonatomic, readonly) UIImageView *mainImageView;
+@property(nonatomic, readonly) UIImageView *logoImageView;
 @property(nonatomic, readonly) UIImageView *sponsorImageView;
 @end

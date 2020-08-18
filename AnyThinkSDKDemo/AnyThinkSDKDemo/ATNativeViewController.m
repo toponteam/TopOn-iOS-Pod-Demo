@@ -15,13 +15,9 @@ NSString *const kFacebookPlacement = @"Facebook";
 NSString *const kFacebookHeaderBiddingPlacement = @"Facebook(Header Bidding)";
 NSString *const kAdMobPlacement = @"AdMob";
 NSString *const kApplovinPlacement = @"Applovin";
-NSString *const kFlurryPlacement = @"Flurry";
 NSString *const kMintegralPlacement = @"Mintegral";
-NSString *const kMopubPlacementName = @"Mopub";
-NSString *const kMopubVideoPlacementName = @"Mopub Video Placement";
 NSString *const kGDTPlacement = @"GDT";
 NSString *const kGDTTemplatePlacement = @"GDT(Template)";
-NSString *const kYeahmobiPlacement = @"Yeahmobi";
 NSString *const kAppnextPlacement = @"Appnext";
 NSString *const kTTFeedPlacementName = @"TT(Feed)";
 NSString *const kTTDrawPlacementName = @"TT(Draw)";
@@ -29,6 +25,7 @@ NSString *const kAllPlacementName = @"All";
 NSString *const kNendVideoPlacement = @"Nend(Video)";
 NSString *const kSigmobPlacement = @"Sigmob";
 NSString *const kKSDrawPlacement = @"KS(Draw)";
+NSString *const kGAMPlacement = @"GAM";
 
 
 static NSString *const kMPPlacementID = @"b5c2084d12aca4";
@@ -40,12 +37,8 @@ static NSString *const kFacebookPlacementID = @"b5b0f551340ea9";
 static NSString *const kFacebookHeaderBiddingPlacementID = @"b5d13342d52304";
 static NSString *const kAdMobPlacementID = @"b5b0f55228375a";
 static NSString *const kApplovinPlacementID = @"b5b0f554ec9c4e";
-static NSString *const kFlurryPlacementID = @"b5b0f554166ad1";
-static NSString *const kMopubPlacementID = @"b5b0f55624527a";
 static NSString *const kGDTPlacementID = @"b5bacac5f73476";
 static NSString *const kGDTTemplatePlacementID = @"b5bacac780e03b";
-static NSString *const kMopubVideoPlacementID = @"b5afbe325b1303";
-static NSString *const kYeahmobiPlacementID = @"b5bc7fb1d0b02f";
 static NSString *const kAppnextPlacementID = @"b5bc7fb2787f1e";
 static NSString *const kAllPlacementID = @"b5b0f5663c6e4a";
 static NSString *const kTTFeedPlacementID = @"b5c2c6d50e7f44";
@@ -53,6 +46,9 @@ static NSString *const kNendPlacementID = @"b5cb96d44c0c5f";
 static NSString *const kNendVideoPlacementID = @"b5cb96d5291e93";
 static NSString *const kBaiduPlacementID = @"b5d36c4ad68a26";
 static NSString *const kKSPlacementID = @"b5e4613e50cbf2";//@"b5e43ac9ca3fc5";
+static NSString *const kGAMPlacementID = @"b5f238964f3e6f";
+static NSString *const kMyOfferPlacementID = @"b5f33878ee0646";
+
 //static NSString *const kKSDrawPlcementID = @"b5e4613e50cbf2";
 //static NSString *const kTTDrawPlacementID = @"b5c2c6d62b9d65";
 
@@ -87,6 +83,10 @@ static NSString *const kKSPlacementID = @"b5e4613e50cbf2";//@"b5e43ac9ca3fc5";
     _mainImageView.contentMode = UIViewContentModeScaleAspectFit;
     [self addSubview:_mainImageView];
     
+    _logoImageView = [UIImageView autolayoutView];
+    _logoImageView.contentMode = UIViewContentModeScaleAspectFit;
+    [self addSubview:_logoImageView];
+    
     _sponsorImageView = [UIImageView autolayoutView];
     _sponsorImageView.contentMode = UIViewContentModeScaleAspectFit;
     [self addSubview:_sponsorImageView];
@@ -106,11 +106,13 @@ static NSString *const kKSPlacementID = @"b5e4613e50cbf2";//@"b5e43ac9ca3fc5";
     [super makeConstraintsForSubviews];
     NSDictionary *viewsDict = nil;
     if (self.mediaView != nil) {
-        viewsDict = @{@"titleLabel":self.titleLabel, @"textLabel":self.textLabel, @"ctaLabel":self.ctaLabel, @"ratingLabel":self.ratingLabel, @"iconImageView":self.iconImageView, @"mainImageView":self.mainImageView, @"mediaView":self.mediaView, @"advertiserLabel":self.advertiserLabel, @"sponsorImageView":self.sponsorImageView};
+        viewsDict = @{@"titleLabel":self.titleLabel, @"textLabel":self.textLabel, @"ctaLabel":self.ctaLabel, @"ratingLabel":self.ratingLabel, @"iconImageView":self.iconImageView, @"mainImageView":self.mainImageView, @"logoImageView":self.logoImageView, @"mediaView":self.mediaView, @"advertiserLabel":self.advertiserLabel, @"sponsorImageView":self.sponsorImageView};
     } else {
-        viewsDict = @{@"titleLabel":self.titleLabel, @"textLabel":self.textLabel, @"ctaLabel":self.ctaLabel, @"ratingLabel":self.ratingLabel, @"iconImageView":self.iconImageView, @"mainImageView":self.mainImageView, @"advertiserLabel":self.advertiserLabel, @"sponsorImageView":self.sponsorImageView};
+        viewsDict = @{@"titleLabel":self.titleLabel, @"textLabel":self.textLabel, @"ctaLabel":self.ctaLabel, @"ratingLabel":self.ratingLabel, @"iconImageView":self.iconImageView, @"logoImageView":self.logoImageView, @"mainImageView":self.mainImageView, @"advertiserLabel":self.advertiserLabel, @"sponsorImageView":self.sponsorImageView};
     }
     [self addConstraintsWithVisualFormat:@"|[mainImageView]|" options:0 metrics:nil views:viewsDict];
+    [self addConstraintsWithVisualFormat:@"[logoImageView(60)]-5-|" options:0 metrics:nil views:viewsDict];
+    [self addConstraintsWithVisualFormat:@"V:[logoImageView(20)]-5-|" options:0 metrics:nil views:viewsDict];
     [self addConstraintsWithVisualFormat:@"V:[iconImageView]-20-[mainImageView]|" options:0 metrics:nil views:viewsDict];
     
     [self addConstraintWithItem:self.iconImageView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:self.iconImageView attribute:NSLayoutAttributeHeight multiplier:1.0f constant:.0f];
@@ -180,19 +182,17 @@ static NSString *const kCallbackKey = @"request";
              kFacebookPlacement:kFacebookPlacementID,
              kFacebookHeaderBiddingPlacement:kFacebookHeaderBiddingPlacementID,
              kAdMobPlacement:kAdMobPlacementID,
-             kMopubPlacementName:kMopubPlacementID,
-             kMopubVideoPlacementName:kMopubVideoPlacementID,
              kApplovinPlacement:kApplovinPlacementID,
-             kFlurryPlacement:kFlurryPlacementID,
              kGDTPlacement:kGDTPlacementID,
              kGDTTemplatePlacement:kGDTTemplatePlacementID,
-             kYeahmobiPlacement:kYeahmobiPlacementID,
              kAppnextPlacement:kAppnextPlacementID,
              kTTFeedPlacementName:kTTFeedPlacementID,
              kNendPlacement:kNendPlacementID,
              kNendVideoPlacement:kNendVideoPlacementID,
              kBaiduPlacement:kBaiduPlacementID,
-             kKSPlacement:kKSPlacementID
+             kKSPlacement:kKSPlacementID,
+             kGAMPlacement:kGAMPlacementID,
+             kMyOfferPlacement:kMyOfferPlacementID
              };
 }
 
