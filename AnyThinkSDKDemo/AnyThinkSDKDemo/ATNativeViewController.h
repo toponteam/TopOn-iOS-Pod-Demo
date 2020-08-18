@@ -34,6 +34,8 @@ extern NSString *const kNendVideoPlacement;
 extern NSString *const kMaioPlacement;
 extern NSString *const kSigmobPlacement;
 extern NSString *const kKSPlacement;
+extern NSString *const kGAMPlacement;
+
 //extern NSString *const kKSDrawPlacement;
 @interface ATNativeViewController : UIViewController
 -(instancetype) initWithPlacementName:(NSString*)name;

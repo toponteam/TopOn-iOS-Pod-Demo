@@ -56,6 +56,7 @@ static NSString *const kOguryPlacementID = @"b5dde238f2d2ce";
 static NSString *const kStartAppPlacementID = @"b5e731a0acabdf";
 static NSString *const kStartAppVideoPlacementID = @"b5e732a9577182";
 static NSString *const kFyberPlacementID = @"b5e952fc0d2744";
+static NSString *const kGAMPlacementID = @"b5f2389ab6ee63";
 
 @interface ATInterstitialViewController ()<ATInterstitialDelegate>
 @property(nonatomic, readonly) NSString *name;
@@ -108,7 +109,8 @@ static NSString *const kFyberPlacementID = @"b5e952fc0d2744";
                           kOguryPlacement:kOguryPlacementID,
                           kStartAppPlacement:kStartAppPlacementID,
                           kStartAppVideoPlacement:kStartAppVideoPlacementID,
-                          kFyberPlacement:kFyberPlacementID
+                          kFyberPlacement:kFyberPlacementID,
+                          kGAMPlacement:kGAMPlacementID
                           };
     }
     return self;
@@ -177,9 +179,7 @@ static NSString *const kFyberPlacementID = @"b5e952fc0d2744";
     NSLog(@"Begin loading interstitial ad");
     _failureTipsLabel.hidden = YES;
     [self.view addSubview:_loadingView];
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-        [[ATAdManager sharedManager] loadADWithPlacementID:_placementIDs[_name] extra:nil delegate:self];
-    });
+    [[ATAdManager sharedManager] loadADWithPlacementID:_placementIDs[_name] extra:[_name isEqualToString:kSigmobRVIntPlacement] ? @{kATInterstitialExtraUsesRewardedVideo:@YES} : nil delegate:self];
 }
 
 -(void) showAD {

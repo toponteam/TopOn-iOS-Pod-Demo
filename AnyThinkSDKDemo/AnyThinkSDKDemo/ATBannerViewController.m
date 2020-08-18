@@ -28,6 +28,10 @@ static NSString *const kMintegralPlacementID = @"b5dd363166a5ea";
 static NSString *const kBannerHeaderBiddingPlacementID = @"b5d146f9483215";
 static NSString *const kFyberPlacementID = @"b5e952a8d1ee45";
 static NSString *const kStartAppPlacementID = @"b5ed47a285a23a";
+static NSString *const kChartboostPlacementID = @"b5ee89f1a7eaf2";
+static NSString *const kVunglePlacementID = @"b5ee89f3e63d80";
+static NSString *const kAdColonyPlacementID = @"b5ee89f4d1791e";
+static NSString *const kGAMPlacementID = @"b5f2389932a2ec";
 
 NSString *const kBannerShownNotification = @"banner_shown";
 NSString *const kBannerLoadingFailedNotification = @"banner_failed_to_load";
@@ -69,7 +73,11 @@ NSString *const kBannerLoadingFailedNotification = @"banner_failed_to_load";
                           kMintegralPlacement:kMintegralPlacementID,
                           kHeaderBiddingPlacement:kBannerHeaderBiddingPlacementID,
                           kFyberPlacement:kFyberPlacementID,
-                          kStartAppPlacement:kStartAppPlacementID
+                          kStartAppPlacement:kStartAppPlacementID,
+                          kVunglePlacementName:kVunglePlacementID,
+                          kChartboostPlacementName:kChartboostPlacementID,
+                          kAdcolonyPlacementName:kAdColonyPlacementID,
+                          kGAMPlacement:kGAMPlacementID
                           };
     }
     return self;
@@ -140,9 +148,7 @@ NSString *const kBannerLoadingFailedNotification = @"banner_failed_to_load";
 -(void) reloadADButtonTapped {
     _failureTipsLabel.hidden = YES;
     [self.view addSubview:_loadingView];
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-        [[ATAdManager sharedManager] loadADWithPlacementID:_placementIDs[_name] extra:@{kATAdLoadingExtraBannerAdSizeKey:[NSValue valueWithCGSize:_adSize], kATAdLoadingExtraBannerSizeAdjustKey:@NO} delegate:self];
-    });
+    [[ATAdManager sharedManager] loadADWithPlacementID:_placementIDs[_name] extra:@{kATAdLoadingExtraBannerAdSizeKey:[NSValue valueWithCGSize:_adSize], kATAdLoadingExtraBannerSizeAdjustKey:@NO} delegate:self];
 }
 
 -(void) removeAdButtonTapped {

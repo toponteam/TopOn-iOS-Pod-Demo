@@ -62,10 +62,10 @@ static NSString *const kCellIdentifier = @"cell";
      extern const CGFloat FBAdOptionsViewHeight;
      */
     _placementNames = @[@[kSigmobPlacement, kGDTPlacement, kBaiduPlacement, kTTPlacementName, kAllPlacementName],
-                        @[kStartAppPlacement, kStartAppVideoPlacement, kMyOfferPlacement, kSigmobRVIntPlacement,kSigmobPlacement,kKSPlacement, kHeaderBiddingPlacement, kNendPlacement, kNendInterstitialVideoPlacement, kNendFullScreenInterstitialPlacement, kMaioPlacement, kUnityAdsPlacementName, kFacebookPlacement, kAdMobPlacement, kInmobiPlacement, kFlurryPlacement, kApplovinPlacement, kMintegralPlacement, kMintegralVideoPlacement, kMopubPlacementName, kGDTPlacement, kChartboostPlacementName, kTapjoyPlacementName, kIronsourcePlacementName, kVunglePlacementName, kAdcolonyPlacementName, kTTPlacementName, kTTVideoPlacement, kOnewayPlacementName, kYeahmobiPlacement, kAppnextPlacement, kBaiduPlacement, kOguryPlacement,kFyberPlacement,kAllPlacementName],
-                        @[kStartAppPlacement, kHeaderBiddingPlacement,kNendPlacement, kFacebookPlacement,kMintegralPlacement,kAdMobPlacement, kInmobiPlacement, kFlurryPlacement, kApplovinPlacement, kGDTPlacement, kMopubPlacementName, kTTPlacementName, kYeahmobiPlacement, kAppnextPlacement, kBaiduPlacement, kFyberPlacement, kStartAppPlacement, kAllPlacementName],
-                        @[kStartAppPlacement, kMyOfferPlacement, kSigmobPlacement,kKSPlacement, kHeaderBiddingPlacement, kNendPlacement, kMaioPlacement, kFacebookPlacement, kAdMobPlacement, kInmobiPlacement, kFlurryPlacement, kApplovinPlacement, kMintegralPlacement, kMopubPlacementName, kGDTPlacement, kChartboostPlacementName, kTapjoyPlacementName, kIronsourcePlacementName, kVunglePlacementName, kAdcolonyPlacementName, kUnityAdsPlacementName, kTTPlacementName, kOnewayPlacementName, kYeahmobiPlacement, kAppnextPlacement, kBaiduPlacement, kOguryPlacement, kFyberPlacement, kAllPlacementName],
-                        @[kHeaderBiddingPlacement, kNendPlacement, kNendVideoPlacement, kTTFeedPlacementName, kTTDrawPlacementName, kMPPlacement, kFacebookPlacement, kAdMobPlacement, kInmobiPlacement, kFlurryPlacement, kApplovinPlacement, kMintegralPlacement, kMopubPlacementName, kGDTPlacement, kGDTTemplatePlacement, kYeahmobiPlacement, kAppnextPlacement, kBaiduPlacement, kKSPlacement,kKSDrawPlacement, kAllPlacementName],
+                        @[kGAMPlacement, kStartAppPlacement, kStartAppVideoPlacement, kMyOfferPlacement, kSigmobRVIntPlacement,kSigmobPlacement,kKSPlacement, kHeaderBiddingPlacement, kNendPlacement, kNendInterstitialVideoPlacement, kNendFullScreenInterstitialPlacement, kMaioPlacement, kUnityAdsPlacementName, kFacebookPlacement, kAdMobPlacement, kInmobiPlacement, kFlurryPlacement, kApplovinPlacement, kMintegralPlacement, kMintegralVideoPlacement, kMopubPlacementName, kGDTPlacement, kChartboostPlacementName, kTapjoyPlacementName, kIronsourcePlacementName, kVunglePlacementName, kAdcolonyPlacementName, kTTPlacementName, kTTVideoPlacement, kOnewayPlacementName, kYeahmobiPlacement, kAppnextPlacement, kBaiduPlacement, kOguryPlacement,kFyberPlacement,kAllPlacementName],
+                        @[kGAMPlacement,kChartboostPlacementName, kVunglePlacementName, kAdcolonyPlacementName, kStartAppPlacement, kHeaderBiddingPlacement,kNendPlacement, kFacebookPlacement,kMintegralPlacement,kAdMobPlacement, kInmobiPlacement, kFlurryPlacement, kApplovinPlacement, kGDTPlacement, kMopubPlacementName, kTTPlacementName, kYeahmobiPlacement, kAppnextPlacement, kBaiduPlacement, kFyberPlacement, kStartAppPlacement, kAllPlacementName],
+                        @[kGAMPlacement, kStartAppPlacement, kMyOfferPlacement, kSigmobPlacement,kKSPlacement, kHeaderBiddingPlacement, kNendPlacement, kMaioPlacement, kFacebookPlacement, kAdMobPlacement, kInmobiPlacement, kFlurryPlacement, kApplovinPlacement, kMintegralPlacement, kMopubPlacementName, kGDTPlacement, kChartboostPlacementName, kTapjoyPlacementName, kIronsourcePlacementName, kVunglePlacementName, kAdcolonyPlacementName, kUnityAdsPlacementName, kTTPlacementName, kOnewayPlacementName, kYeahmobiPlacement, kAppnextPlacement, kBaiduPlacement, kOguryPlacement, kFyberPlacement, kAllPlacementName],
+                        @[kGAMPlacement, kHeaderBiddingPlacement, kNendPlacement, kNendVideoPlacement, kTTFeedPlacementName, kTTDrawPlacementName, kMPPlacement, kFacebookPlacement, kAdMobPlacement, kInmobiPlacement, kFlurryPlacement, kApplovinPlacement, kMintegralPlacement, kMopubPlacementName, kGDTPlacement, kGDTTemplatePlacement, kYeahmobiPlacement, kAppnextPlacement, kBaiduPlacement, kKSPlacement,kKSDrawPlacement, kAllPlacementName],
                         @[kNendPlacement, kTTFeedPlacementName, kTTDrawPlacementName, kMPPlacement, kFacebookPlacement, kAdMobPlacement, kInmobiPlacement, kFlurryPlacement, kApplovinPlacement, kMintegralPlacement, kMopubPlacementName, kGDTPlacement, kGDTTemplatePlacement, kYeahmobiPlacement, kAppnextPlacement, kAllPlacementName],
                         @[kTTFeedPlacementName, kMPPlacement, kFacebookPlacement, kAdMobPlacement, kApplovinPlacement, kMintegralPlacement, kGDTPlacement, kYeahmobiPlacement, kAppnextPlacement, kAllPlacementName]];
     
@@ -89,6 +89,66 @@ static NSString *const kCellIdentifier = @"cell";
     [[ATAPI sharedInstance] presentDataConsentDialogInViewController:self dismissalCallback:^{
         
     }];
+}
+
+/**
+ extern NSString *const kATSplashExtraGDTAppID;
+ extern NSString *const kATSplashExtraGDTUnitID;
+ #pragma mark - TT
+ extern NSString *const kATSplashExtraAppID;
+ extern NSString *const kATSplashExtraSlotID;
+ extern NSString *const kATSplashExtraPersonalizedTemplateFlag;
+ #pragma mark - Baidu
+ extern NSString *const kATSplashExtraBaiduAppID;
+ extern NSString *const kATSplashExtraBaiduAdPlaceID;
+ #pragma mark - Sibmob
+ extern NSString *const kATSplashExtraSigmobAppKey;
+ extern NSString *const kATSplashExtraSigmobAppID;
+ extern NSString *const kATSplashExtraSigmobPlacementID;
+ */
+
+NSDictionary *SplashInfo(NSInteger row) {
+    NSTimeInterval tolerateTimeout = 5.0f;
+    return @{@0:@{kATSplashExtraNetworkFirmID:@6,
+                  kATSplashExtraAdSourceIDKey:@"72004",
+                  kATSplashExtraMintegralAppID:@"104036",
+                  kATSplashExtraMintegralAppKey:@"ef13ef712aeb0f6eb3d698c4c08add96",
+                  kATSplashExtraMintegralUnitID:@"275050",
+                  kATSplashExtraTolerateTimeoutKey:@(tolerateTimeout)
+    },//mintegral
+             @1:@{kATSplashExtraNetworkFirmID:@29,
+                  kATSplashExtraAdSourceIDKey:@"72008",
+                  kATSplashExtraSigmobAppKey:@"c8bee8e83f296c2a",
+                  kATSplashExtraSigmobAppID:@"1830",
+                  kATSplashExtraSigmobPlacementID:@"e430bc36052",
+                  kATSplashExtraTolerateTimeoutKey:@(tolerateTimeout)
+             },//sigmob
+             @2:@{kATSplashExtraNetworkFirmID:@8,
+                  kATSplashExtraAdSourceIDKey:@"71998",
+                  kATSplashExtraGDTAppID:@"1105344611",
+                  kATSplashExtraGDTUnitID:@"9040714184494018",
+                  kATSplashExtraTolerateTimeoutKey:@(tolerateTimeout)
+             },//gdt
+             @3:@{kATSplashExtraNetworkFirmID:@22,
+                  kATSplashExtraAdSourceIDKey:@"72010",
+                  kATSplashExtraBaiduAppID:@"ccb60059",
+                  kATSplashExtraBaiduAdPlaceID:@"2058492",
+                  kATSplashExtraTolerateTimeoutKey:@(tolerateTimeout)
+             },//baidu
+             @4:@{kATSplashExtraNetworkFirmID:@15,
+                  kATSplashExtraAdSourceIDKey:@"71991",
+                  kATSplashExtraAppID:@"5015421",
+                  kATSplashExtraSlotID:@"815421339",
+                  kATSplashExtraTolerateTimeoutKey:@(tolerateTimeout)
+             },//tt
+             @5:@{kATSplashExtraNetworkFirmID:@6,
+                  kATSplashExtraAdSourceIDKey:@"72004",
+                  kATSplashExtraMintegralAppID:@"104036",
+                  kATSplashExtraMintegralAppKey:@"ef13ef712aeb0f6eb3d698c4c08add96",
+                  kATSplashExtraMintegralUnitID:@"275050",
+                  kATSplashExtraTolerateTimeoutKey:@(tolerateTimeout)
+             }
+    }[@(row)];
 }
 
 -(NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {
@@ -156,10 +216,10 @@ static NSString *const kCellIdentifier = @"cell";
         if ( @available(iOS 13.0, *) ) {
            mainWindow = [UIApplication sharedApplication].windows.firstObject;
            [mainWindow makeKeyWindow];
-           [[ATAdManager sharedManager] loadADWithPlacementID:@[@"b5d771f34bc73d", @"b5c1b0470c7e4a", @"b5c1b047a970fe", @"b5c1b048c498b9", @"b5c22f0e5cc7a0"][[indexPath row]] extra:@{kATSplashExtraTolerateTimeoutKey:@3.0f} customData:nil delegate:self window:mainWindow windowScene:mainWindow.windowScene containerView:label];
+           [[ATAdManager sharedManager] loadADWithPlacementID:@[@"b5d771f34bc73d", @"b5c1b0470c7e4a", @"b5c1b047a970fe", @"b5c1b048c498b9", @"b5c22f0e5cc7a0"][[indexPath row]] extra:SplashInfo(indexPath.row) customData:nil delegate:self window:mainWindow windowScene:mainWindow.windowScene containerView:label];
         } else {
             mainWindow = [UIApplication sharedApplication].keyWindow;
-            [[ATAdManager sharedManager] loadADWithPlacementID:@[@"b5d771f34bc73d", @"b5c1b0470c7e4a", @"b5c1b047a970fe", @"b5c1b048c498b9", @"b5c22f0e5cc7a0"][[indexPath row]] extra:@{kATSplashExtraTolerateTimeoutKey:@3.0f} customData:nil delegate:self window:mainWindow containerView:label];
+            [[ATAdManager sharedManager] loadADWithPlacementID:@[@"b5d771f34bc73d", @"b5c1b0470c7e4a", @"b5c1b047a970fe", @"b5c1b048c498b9", @"b5c22f0e5cc7a0"][[indexPath row]] extra:SplashInfo(indexPath.row) customData:nil delegate:self window:mainWindow containerView:label];
         }
     }
 }

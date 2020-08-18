@@ -70,6 +70,7 @@ static NSString *const kMyOfferPlacementID = @"b5db6c247dbb1e";
 static NSString *const kOguryPlacementID = @"b5dde2379dc6ce";
 static NSString *const kStartAppPlacementID = @"b5e7319f619931";
 static NSString *const kFyberPlacementID = @"b5e952fd487bf9";
+static NSString *const kGAMPlacementID = @"b5f23897bba4ca";
 
 @implementation ATRewardedVideoVideoViewController
 -(instancetype) initWithPlacementName:(NSString*)name {
@@ -107,7 +108,8 @@ static NSString *const kFyberPlacementID = @"b5e952fd487bf9";
                           kMyOfferPlacement:kMyOfferPlacementID,
                           kOguryPlacement:kOguryPlacementID,
                           kStartAppPlacement:kStartAppPlacementID,
-                          kFyberPlacement:kFyberPlacementID
+                          kFyberPlacement:kFyberPlacementID,
+                          kGAMPlacement:kGAMPlacementID
                           };
     }
     return self;
