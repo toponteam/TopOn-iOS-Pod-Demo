@@ -20,7 +20,7 @@ target 'AnyThinkSDKDemo' do
 
 #   #TouTiao
 #   pod 'AnyThinkiOS/AnyThinkTouTiaoAdapter','5.6.7'
-# #  pod 'Bytedance-UnionAD' , '3.2.0.1'
+#   pod 'Bytedance-UnionAD' , '3.2.5.0'
 
 #   #Applovin
 #   pod 'AnyThinkiOS/AnyThinkApplovinAdapter','5.6.7'
@@ -77,7 +77,7 @@ target 'AnyThinkSDKDemo' do
 
 #   #Vungle
 #   pod 'AnyThinkiOS/AnyThinkVungleAdapter','5.6.7'
-# #  pod 'VungleSDK-iOS', '6.7.1'
+#   pod 'VungleSDK-iOS', '6.7.1'
 
 #   #Maio
 #   pod 'AnyThinkiOS/AnyThinkMaioAdapter','5.6.7'
@@ -99,7 +99,7 @@ target 'AnyThinkSDKDemo' do
 
 #   #Sigmob
 #   pod 'AnyThinkiOS/AnyThinkSigmobAdapter','5.6.7'
-#   pod 'SigmobAd-iOS', '2.20.0'
+#   pod 'SigmobAd-iOS', '2.20.1'
 
 #   #StartApp
 #   pod 'AnyThinkiOS/AnyThinkStartAppAdapter','5.6.7'
