@@ -229,10 +229,10 @@ NSDictionary *SplashInfo(NSInteger row) {
         if ( @available(iOS 13.0, *) ) {
            mainWindow = [UIApplication sharedApplication].windows.firstObject;
            [mainWindow makeKeyWindow];
-           [[ATAdManager sharedManager] loadADWithPlacementID:@[@"b5ee89f9859d05",@"b5d771f34bc73d", @"b5c1b0470c7e4a", @"b5c1b047a970fe",  @"b5c1b048c498b9", @"b5c22f0e5cc7a0",@"b5f842af26114c", @"b5f33c33431ca0"][[indexPath row]] extra:SplashInfo(indexPath.row) customData:nil delegate:self window:mainWindow windowScene:mainWindow.windowScene containerView:label];
+           [[ATAdManager sharedManager] loadADWithPlacementID:@[@"b5ee89f9859d05", @"b5d771f34bc73d", @"b5c1b0470c7e4a", @"b5c1b047a970fe", @"b5c1b048c498b9", @"b5f842af26114c", @"b5c22f0e5cc7a0", @"b5f33c33431ca0"][[indexPath row]] extra:SplashInfo(indexPath.row) customData:nil delegate:self window:mainWindow windowScene:mainWindow.windowScene containerView:label];
         } else {
             mainWindow = [UIApplication sharedApplication].keyWindow;
-            [[ATAdManager sharedManager] loadADWithPlacementID:@[@"b5ee89f9859d05",@"b5d771f34bc73d", @"b5c1b0470c7e4a", @"b5c1b047a970fe",  @"b5c1b048c498b9", @"b5c22f0e5cc7a0",@"b5f842af26114c", @"b5f33c33431ca0"][[indexPath row]] extra:SplashInfo(indexPath.row) customData:nil delegate:self window:mainWindow containerView:label];
+            [[ATAdManager sharedManager] loadADWithPlacementID:@[@"b5ee89f9859d05", @"b5d771f34bc73d", @"b5c1b0470c7e4a", @"b5c1b047a970fe", @"b5c1b048c498b9", @"b5f842af26114c", @"b5c22f0e5cc7a0", @"b5f33c33431ca0"][[indexPath row]] extra:SplashInfo(indexPath.row) customData:nil delegate:self window:mainWindow containerView:label];
         }
     }
 }
