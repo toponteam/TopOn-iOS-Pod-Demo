@@ -51,8 +51,9 @@ static NSString *const kMyOfferPlacementID = @"b5db6c26999c31";
 static NSString *const kOguryPlacementID = @"b5dde238f2d2ce";
 static NSString *const kStartAppPlacementID = @"b5e731a0acabdf";
 static NSString *const kStartAppVideoPlacementID = @"b5e732a9577182";
-static NSString *const kFyberPlacementID = @"b5e952fc0d2744";
+static NSString *const kFyberPlacementID = @"b5e96db2198474";
 static NSString *const kGAMPlacementID = @"b5f2389ab6ee63";
+static NSString *const kHeliumPlacementID = @"b5f583ec12143f";
 
 @interface ATInterstitialViewController ()<ATInterstitialDelegate>
 @property(nonatomic, readonly) NSString *name;
@@ -102,8 +103,8 @@ static NSString *const kGAMPlacementID = @"b5f2389ab6ee63";
                           kStartAppPlacement:kStartAppPlacementID,
                           kStartAppVideoPlacement:kStartAppVideoPlacementID,
                           kFyberPlacement:kFyberPlacementID,
-                          kGAMPlacement:kGAMPlacementID
-
+                          kGAMPlacement:kGAMPlacementID,
+                          kHeliumPlacement:kHeliumPlacementID
                           };
     }
     return self;

@@ -36,6 +36,8 @@ NSString *const kMaioPlacement = @"Maio";
 NSString *const kKSPlacement = @"KS";
 NSString *const kMyOfferPlacement = @"MyOffer";
 NSString *const kOguryPlacement = @"Ogury";
+NSString *const kHeliumPlacement = @"Helium";
+
 
 static NSString *const kPlacement0ID = @"b5ad9ba61dcb39";
 static NSString *const kInmobiPlacementID = @"b5b44a03522f92";
@@ -63,8 +65,10 @@ static NSString *const kKSPlacementID = @"b5d807a31aa7dd";
 static NSString *const kMyOfferPlacementID = @"b5db6c247dbb1e";
 static NSString *const kOguryPlacementID = @"b5dde2379dc6ce";
 static NSString *const kStartAppPlacementID = @"b5e7319f619931";
-static NSString *const kFyberPlacementID = @"b5e952fd487bf9";
+static NSString *const kFyberPlacementID = @"b5e96db106d8f2";
 static NSString *const kGAMPlacementID = @"b5f23897bba4ca";
+static NSString *const kHeliumPlacementID = @"b5f583ea323756";
+
 
 @implementation ATRewardedVideoVideoViewController
 -(instancetype) initWithPlacementName:(NSString*)name {
@@ -98,7 +102,8 @@ static NSString *const kGAMPlacementID = @"b5f23897bba4ca";
                           kOguryPlacement:kOguryPlacementID,
                           kStartAppPlacement:kStartAppPlacementID,
                           kFyberPlacement:kFyberPlacementID,
-                          kGAMPlacement:kGAMPlacementID
+                          kGAMPlacement:kGAMPlacementID,
+                          kHeliumPlacement:kHeliumPlacementID
                           };
     }
     return self;
