@@ -11,7 +11,7 @@ target 'AnyThinkSDKDemo' do
 
   # #FaceBook
 #  pod 'AnyThinkiOS/AnyThinkFacebookAdapter','5.7.3'
-  # pod 'FBAudienceNetwork' , '6.0.0'
+  # pod 'FBAudienceNetwork' , '6.2.0'
 
   # #Admob
   pod 'AnyThinkiOS/AnyThinkAdmobAdapter','5.7.3'
@@ -20,7 +20,7 @@ target 'AnyThinkSDKDemo' do
 
 #   #TouTiao
 #  pod 'AnyThinkiOS/AnyThinkTouTiaoAdapter','5.7.3'
-#   pod 'Bytedance-UnionAD' , '3.3.0.0'
+#   pod 'Bytedance-UnionAD' , '3.3.0.4'
 
 #   #Applovin
 #  pod 'AnyThinkiOS/AnyThinkApplovinAdapter','5.7.3'
@@ -28,20 +28,20 @@ target 'AnyThinkSDKDemo' do
 
 #   #Mintegral
 #   pod 'AnyThinkiOS/AnyThinkMintegralAdapter','5.7.3'
-#   pod 'MintegralAdSDK' ,'6.6.3'
-#   pod 'MintegralAdSDK/RewardVideoAd','6.6.3'
-#   pod 'MintegralAdSDK/BidRewardVideoAd','6.6.3'
-#   pod 'MintegralAdSDK/BidInterstitialVideoAd','6.6.3'
-#   pod 'MintegralAdSDK/InterstitialVideoAd','6.6.3'
-#   pod 'MintegralAdSDK/InterstitialAd','6.6.3'
-#   pod 'MintegralAdSDK/BannerAd' ,'6.6.3'
-#   pod 'MintegralAdSDK/BidBannerAd','6.6.3'
-#   pod 'MintegralAdSDK/SplashAd','6.6.3'
-#   pod 'MintegralAdSDK/NativeAdvancedAd','6.6.3'
+#   pod 'MintegralAdSDK' ,'6.6.5.1'
+#   pod 'MintegralAdSDK/RewardVideoAd','6.6.5.1'
+#   pod 'MintegralAdSDK/BidRewardVideoAd','6.6.5.1'
+#   pod 'MintegralAdSDK/BidInterstitialVideoAd','6.6.5.1'
+#   pod 'MintegralAdSDK/InterstitialVideoAd','6.6.5.1'
+#   pod 'MintegralAdSDK/InterstitialAd','6.6.5.1'
+#   pod 'MintegralAdSDK/BannerAd' ,'6.6.5.1'
+#   pod 'MintegralAdSDK/BidBannerAd','6.6.5.1'
+#   pod 'MintegralAdSDK/SplashAd','6.6.5.1'
+#   pod 'MintegralAdSDK/NativeAdvancedAd','6.6.5.1'
 
 #   #GDT
 #  pod 'AnyThinkiOS/AnyThinkGDTAdapter','5.7.3'
-#   pod 'GDTMobSDK', '4.11.11'
+#   pod 'GDTMobSDK', '4.11.12'
 
 #   #Unity Ads
 #  pod 'AnyThinkiOS/AnyThinkUnityAdsAdapter','5.7.3'
@@ -99,7 +99,7 @@ target 'AnyThinkSDKDemo' do
 #
 ##   #Sigmob
 #  pod 'AnyThinkiOS/AnyThinkSigmobAdapter','5.7.3'
-##   pod 'SigmobAd-iOS', '2.21.0'
+##   pod 'SigmobAd-iOS', '2.22.0'
 #
 ##   #StartApp
 #  pod 'AnyThinkiOS/AnyThinkStartAppAdapter','5.7.3'
