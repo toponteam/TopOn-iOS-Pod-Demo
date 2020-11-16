@@ -105,7 +105,9 @@ static NSString *const kOnlineApiPlacementID = @"b5fa250b176abb";
                           kStartAppPlacement:kStartAppPlacementID,
                           kFyberPlacement:kFyberPlacementID,
                           kGAMPlacement:kGAMPlacementID,
-                          kHeliumPlacement:kHeliumPlacementID
+                          kHeliumPlacement:kHeliumPlacementID,
+                          kADXPlacement:kADXPlacementID,
+                          kOnlineApiPlacement:kOnlineApiPlacementID
                           };
     }
     return self;

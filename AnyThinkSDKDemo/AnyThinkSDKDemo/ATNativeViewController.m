@@ -195,7 +195,9 @@ static NSString *const kCallbackKey = @"request";
              kBaiduPlacement:kBaiduPlacementID,
              kKSPlacement:kKSPlacementID,
              kGAMPlacement:kGAMPlacementID,
-             kMyOfferPlacement:kMyOfferPlacementID
+             kMyOfferPlacement:kMyOfferPlacementID,
+             kADXPlacement:kADXPlacementID,
+             kOnlineApiPlacement:kOnlineApiPlacementID
              };
 }
 
