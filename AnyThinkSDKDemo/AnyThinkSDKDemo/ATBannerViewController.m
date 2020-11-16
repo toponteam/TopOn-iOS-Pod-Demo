@@ -31,6 +31,8 @@ static NSString *const kVunglePlacementID = @"b5ee89f3e63d80";
 static NSString *const kAdColonyPlacementID = @"b5ee89f4d1791e";
 static NSString *const kGAMPlacementID = @"b5f2389932a2ec";
 static NSString *const kMyofferPlacementID = @"b5f33c3231eb91";
+static NSString *const kADXPlacementID = @"b5fa24ff8a7446";
+static NSString *const kOnlineApiPlacementID = @"b5fa2508fbdaf6";
 
 NSString *const kBannerShownNotification = @"banner_shown";
 NSString *const kBannerLoadingFailedNotification = @"banner_failed_to_load";
@@ -74,7 +76,9 @@ NSString *const kBannerLoadingFailedNotification = @"banner_failed_to_load";
                           kChartboostPlacementName:kChartboostPlacementID,
                           kAdcolonyPlacementName:kAdColonyPlacementID,
                           kGAMPlacement:kGAMPlacementID,
-                          kMyOfferPlacement:kMyofferPlacementID
+                          kMyOfferPlacement:kMyofferPlacementID,
+                          kADXPlacement:kADXPlacementID,
+                          kOnlineApiPlacement:kOnlineApiPlacementID
                           };
     }
     return self;
@@ -133,6 +137,11 @@ NSString *const kBannerLoadingFailedNotification = @"banner_failed_to_load";
         NSLog(@"ATBannerViewController::banner ad not ready, will load");
         [self reloadADButtonTapped];
     }
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    [self removeAdButtonTapped];
 }
 
 -(void) readyButtonTapped {

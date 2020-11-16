@@ -35,7 +35,8 @@ extern NSString *const kStartAppPlacement;
 extern NSString *const kFyberPlacement;
 extern NSString *const kGAMPlacement;
 extern NSString *const kHeliumPlacement;
-
+extern NSString *const kADXPlacement;
+extern NSString *const kOnlineApiPlacement;
 
 @interface ATRewardedVideoVideoViewController : UIViewController
 -(instancetype) initWithPlacementName:(NSString*)name;

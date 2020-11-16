@@ -34,6 +34,8 @@ extern NSString *const kVunglePlacementName;
 extern NSString *const kAdcolonyPlacementName;
 extern NSString *const kGAMPlacement;
 extern NSString *const kMyOfferPlacement;
+extern NSString *const kADXPlacement;
+extern NSString *const kOnlineApiPlacement;
 
 @interface ATBannerViewController : UIViewController
 -(instancetype) initWithPlacementName:(NSString*)name;
