@@ -15,12 +15,12 @@ target 'AnyThinkSDKDemo' do
 
   # #Admob
   pod 'AnyThinkiOS/AnyThinkAdmobAdapter','5.7.1'
-  # pod 'Google-Mobile-Ads-SDK','7.64.0'
-  # pod 'PersonalizedAdConsent'
+   pod 'Google-Mobile-Ads-SDK','7.64.0'
+   pod 'PersonalizedAdConsent'
 
 #   #TouTiao
   pod 'AnyThinkiOS/AnyThinkTouTiaoAdapter','5.7.1'
-#   pod 'Bytedance-UnionAD' , '3.3.0.0'
+  pod 'Bytedance-UnionAD' , '3.3.0.4'
 
 #   #Applovin
   pod 'AnyThinkiOS/AnyThinkApplovinAdapter','5.7.1'

@@ -7,6 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9B4CC6AC25663F1800D2EFAC /* TouTiaoSplashCustomEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B4CC69125663F1800D2EFAC /* TouTiaoSplashCustomEvent.m */; };
+		9B4CC6AD25663F1800D2EFAC /* TouTiaoSplashAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B4CC69225663F1800D2EFAC /* TouTiaoSplashAdapter.m */; };
+		9B4CC6AE25663F1800D2EFAC /* TouTiaoInterstitialCustomEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B4CC69625663F1800D2EFAC /* TouTiaoInterstitialCustomEvent.m */; };
+		9B4CC6AF25663F1800D2EFAC /* TouTiaoInterstitialAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B4CC69825663F1800D2EFAC /* TouTiaoInterstitialAdapter.m */; };
+		9B4CC6B025663F1800D2EFAC /* TouTiaoNativeAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B4CC69B25663F1800D2EFAC /* TouTiaoNativeAdapter.m */; };
+		9B4CC6B125663F1800D2EFAC /* TouTiaoNativeCustomEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B4CC69C25663F1800D2EFAC /* TouTiaoNativeCustomEvent.m */; };
+		9B4CC6B225663F1800D2EFAC /* TouTiaoNativeRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B4CC69D25663F1800D2EFAC /* TouTiaoNativeRenderer.m */; };
+		9B4CC6B325663F1800D2EFAC /* TouTiaoRewardedVideoCustomEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B4CC6A425663F1800D2EFAC /* TouTiaoRewardedVideoCustomEvent.m */; };
+		9B4CC6B425663F1800D2EFAC /* TouTiaoRewardedVideoAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B4CC6A525663F1800D2EFAC /* TouTiaoRewardedVideoAdapter.m */; };
+		9B4CC6B525663F1800D2EFAC /* TouTiaoBannerAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B4CC6A725663F1800D2EFAC /* TouTiaoBannerAdapter.m */; };
+		9B4CC6B625663F1800D2EFAC /* TouTiaoBannerCustomEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B4CC6AA25663F1800D2EFAC /* TouTiaoBannerCustomEvent.m */; };
 		9BBD009924863048009EAD66 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BBD009824863048009EAD66 /* AppDelegate.m */; };
 		9BBD009C24863048009EAD66 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BBD009B24863048009EAD66 /* SceneDelegate.m */; };
 		9BBD009F24863048009EAD66 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BBD009E24863048009EAD66 /* ViewController.m */; };
@@ -27,6 +38,29 @@
 /* Begin PBXFileReference section */
 		44D83BDBBF3D3D426850A3E1 /* Pods-AnyThinkSDKDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AnyThinkSDKDemo.release.xcconfig"; path = "Target Support Files/Pods-AnyThinkSDKDemo/Pods-AnyThinkSDKDemo.release.xcconfig"; sourceTree = "<group>"; };
 		85EEA80B39960C835625EC2F /* Pods-AnyThinkSDKDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AnyThinkSDKDemo.debug.xcconfig"; path = "Target Support Files/Pods-AnyThinkSDKDemo/Pods-AnyThinkSDKDemo.debug.xcconfig"; sourceTree = "<group>"; };
+		9B4CC69125663F1800D2EFAC /* TouTiaoSplashCustomEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TouTiaoSplashCustomEvent.m; sourceTree = "<group>"; };
+		9B4CC69225663F1800D2EFAC /* TouTiaoSplashAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TouTiaoSplashAdapter.m; sourceTree = "<group>"; };
+		9B4CC69325663F1800D2EFAC /* TouTiaoSplashAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouTiaoSplashAdapter.h; sourceTree = "<group>"; };
+		9B4CC69425663F1800D2EFAC /* TouTiaoSplashCustomEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouTiaoSplashCustomEvent.h; sourceTree = "<group>"; };
+		9B4CC69625663F1800D2EFAC /* TouTiaoInterstitialCustomEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TouTiaoInterstitialCustomEvent.m; sourceTree = "<group>"; };
+		9B4CC69725663F1800D2EFAC /* TouTiaoInterstitialAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouTiaoInterstitialAdapter.h; sourceTree = "<group>"; };
+		9B4CC69825663F1800D2EFAC /* TouTiaoInterstitialAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TouTiaoInterstitialAdapter.m; sourceTree = "<group>"; };
+		9B4CC69925663F1800D2EFAC /* TouTiaoInterstitialCustomEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouTiaoInterstitialCustomEvent.h; sourceTree = "<group>"; };
+		9B4CC69B25663F1800D2EFAC /* TouTiaoNativeAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TouTiaoNativeAdapter.m; sourceTree = "<group>"; };
+		9B4CC69C25663F1800D2EFAC /* TouTiaoNativeCustomEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TouTiaoNativeCustomEvent.m; sourceTree = "<group>"; };
+		9B4CC69D25663F1800D2EFAC /* TouTiaoNativeRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TouTiaoNativeRenderer.m; sourceTree = "<group>"; };
+		9B4CC69E25663F1800D2EFAC /* TouTiaoNativeRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouTiaoNativeRenderer.h; sourceTree = "<group>"; };
+		9B4CC69F25663F1800D2EFAC /* TouTiaoNativeAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouTiaoNativeAdapter.h; sourceTree = "<group>"; };
+		9B4CC6A025663F1800D2EFAC /* TouTiaoNativeCustomEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouTiaoNativeCustomEvent.h; sourceTree = "<group>"; };
+		9B4CC6A225663F1800D2EFAC /* TouTiaoRewardedVideoAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouTiaoRewardedVideoAdapter.h; sourceTree = "<group>"; };
+		9B4CC6A325663F1800D2EFAC /* TouTiaoRewardedVideoCustomEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouTiaoRewardedVideoCustomEvent.h; sourceTree = "<group>"; };
+		9B4CC6A425663F1800D2EFAC /* TouTiaoRewardedVideoCustomEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TouTiaoRewardedVideoCustomEvent.m; sourceTree = "<group>"; };
+		9B4CC6A525663F1800D2EFAC /* TouTiaoRewardedVideoAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TouTiaoRewardedVideoAdapter.m; sourceTree = "<group>"; };
+		9B4CC6A725663F1800D2EFAC /* TouTiaoBannerAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TouTiaoBannerAdapter.m; sourceTree = "<group>"; };
+		9B4CC6A825663F1800D2EFAC /* TouTiaoBannerCustomEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouTiaoBannerCustomEvent.h; sourceTree = "<group>"; };
+		9B4CC6A925663F1800D2EFAC /* TouTiaoBannerAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouTiaoBannerAdapter.h; sourceTree = "<group>"; };
+		9B4CC6AA25663F1800D2EFAC /* TouTiaoBannerCustomEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TouTiaoBannerCustomEvent.m; sourceTree = "<group>"; };
+		9B4CC6AB25663F1800D2EFAC /* ATTTBannerAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATTTBannerAdapter.h; sourceTree = "<group>"; };
 		9BBD009424863048009EAD66 /* AnyThinkSDKDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AnyThinkSDKDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BBD009724863048009EAD66 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		9BBD009824863048009EAD66 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -85,6 +119,76 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		9B4CC68F25663F1800D2EFAC /* TTAdapter */ = {
+			isa = PBXGroup;
+			children = (
+				9B4CC69025663F1800D2EFAC /* Splash */,
+				9B4CC69525663F1800D2EFAC /* Interstitial */,
+				9B4CC69A25663F1800D2EFAC /* Native */,
+				9B4CC6A125663F1800D2EFAC /* RewardedVideo */,
+				9B4CC6A625663F1800D2EFAC /* Banner */,
+			);
+			path = TTAdapter;
+			sourceTree = "<group>";
+		};
+		9B4CC69025663F1800D2EFAC /* Splash */ = {
+			isa = PBXGroup;
+			children = (
+				9B4CC69125663F1800D2EFAC /* TouTiaoSplashCustomEvent.m */,
+				9B4CC69225663F1800D2EFAC /* TouTiaoSplashAdapter.m */,
+				9B4CC69325663F1800D2EFAC /* TouTiaoSplashAdapter.h */,
+				9B4CC69425663F1800D2EFAC /* TouTiaoSplashCustomEvent.h */,
+			);
+			path = Splash;
+			sourceTree = "<group>";
+		};
+		9B4CC69525663F1800D2EFAC /* Interstitial */ = {
+			isa = PBXGroup;
+			children = (
+				9B4CC69625663F1800D2EFAC /* TouTiaoInterstitialCustomEvent.m */,
+				9B4CC69725663F1800D2EFAC /* TouTiaoInterstitialAdapter.h */,
+				9B4CC69825663F1800D2EFAC /* TouTiaoInterstitialAdapter.m */,
+				9B4CC69925663F1800D2EFAC /* TouTiaoInterstitialCustomEvent.h */,
+			);
+			path = Interstitial;
+			sourceTree = "<group>";
+		};
+		9B4CC69A25663F1800D2EFAC /* Native */ = {
+			isa = PBXGroup;
+			children = (
+				9B4CC69B25663F1800D2EFAC /* TouTiaoNativeAdapter.m */,
+				9B4CC69C25663F1800D2EFAC /* TouTiaoNativeCustomEvent.m */,
+				9B4CC69D25663F1800D2EFAC /* TouTiaoNativeRenderer.m */,
+				9B4CC69E25663F1800D2EFAC /* TouTiaoNativeRenderer.h */,
+				9B4CC69F25663F1800D2EFAC /* TouTiaoNativeAdapter.h */,
+				9B4CC6A025663F1800D2EFAC /* TouTiaoNativeCustomEvent.h */,
+			);
+			path = Native;
+			sourceTree = "<group>";
+		};
+		9B4CC6A125663F1800D2EFAC /* RewardedVideo */ = {
+			isa = PBXGroup;
+			children = (
+				9B4CC6A225663F1800D2EFAC /* TouTiaoRewardedVideoAdapter.h */,
+				9B4CC6A325663F1800D2EFAC /* TouTiaoRewardedVideoCustomEvent.h */,
+				9B4CC6A425663F1800D2EFAC /* TouTiaoRewardedVideoCustomEvent.m */,
+				9B4CC6A525663F1800D2EFAC /* TouTiaoRewardedVideoAdapter.m */,
+			);
+			path = RewardedVideo;
+			sourceTree = "<group>";
+		};
+		9B4CC6A625663F1800D2EFAC /* Banner */ = {
+			isa = PBXGroup;
+			children = (
+				9B4CC6A725663F1800D2EFAC /* TouTiaoBannerAdapter.m */,
+				9B4CC6A825663F1800D2EFAC /* TouTiaoBannerCustomEvent.h */,
+				9B4CC6A925663F1800D2EFAC /* TouTiaoBannerAdapter.h */,
+				9B4CC6AA25663F1800D2EFAC /* TouTiaoBannerCustomEvent.m */,
+				9B4CC6AB25663F1800D2EFAC /* ATTTBannerAdapter.h */,
+			);
+			path = Banner;
+			sourceTree = "<group>";
+		};
 		9BBD008B24863047009EAD66 = {
 			isa = PBXGroup;
 			children = (
@@ -106,6 +210,7 @@
 		9BBD009624863048009EAD66 /* AnyThinkSDKDemo */ = {
 			isa = PBXGroup;
 			children = (
+				9B4CC68F25663F1800D2EFAC /* TTAdapter */,
 				9BBD00B5248630C8009EAD66 /* ATBannerViewController.h */,
 				9BBD00B2248630C7009EAD66 /* ATBannerViewController.m */,
 				9BBD00BB248630C8009EAD66 /* ATDrawViewController.h */,
@@ -267,17 +372,28 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9B4CC6AE25663F1800D2EFAC /* TouTiaoInterstitialCustomEvent.m in Sources */,
 				9BBD009F24863048009EAD66 /* ViewController.m in Sources */,
 				9BBD009924863048009EAD66 /* AppDelegate.m in Sources */,
 				9BBD00C0248630C8009EAD66 /* MTAutolayoutCategories.m in Sources */,
+				9B4CC6B125663F1800D2EFAC /* TouTiaoNativeCustomEvent.m in Sources */,
+				9B4CC6B625663F1800D2EFAC /* TouTiaoBannerCustomEvent.m in Sources */,
 				9BBD00C3248630C8009EAD66 /* ATDrawViewController.m in Sources */,
 				9BBD00AA2486304C009EAD66 /* main.m in Sources */,
+				9B4CC6B225663F1800D2EFAC /* TouTiaoNativeRenderer.m in Sources */,
 				9BBD009C24863048009EAD66 /* SceneDelegate.m in Sources */,
+				9B4CC6B525663F1800D2EFAC /* TouTiaoBannerAdapter.m in Sources */,
 				9BBD00BE248630C8009EAD66 /* ATBannerViewController.m in Sources */,
 				9BBD00C1248630C8009EAD66 /* ATNativeViewController.m in Sources */,
+				9B4CC6B425663F1800D2EFAC /* TouTiaoRewardedVideoAdapter.m in Sources */,
 				9BBD00BF248630C8009EAD66 /* ATInterstitialViewController.m in Sources */,
+				9B4CC6B325663F1800D2EFAC /* TouTiaoRewardedVideoCustomEvent.m in Sources */,
+				9B4CC6AF25663F1800D2EFAC /* TouTiaoInterstitialAdapter.m in Sources */,
 				9BBD00C4248630C8009EAD66 /* ATNativeBannerViewController.m in Sources */,
+				9B4CC6AC25663F1800D2EFAC /* TouTiaoSplashCustomEvent.m in Sources */,
 				9BBD00C2248630C8009EAD66 /* ATRewardedVideoVideoViewController.m in Sources */,
+				9B4CC6B025663F1800D2EFAC /* TouTiaoNativeAdapter.m in Sources */,
+				9B4CC6AD25663F1800D2EFAC /* TouTiaoSplashAdapter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
