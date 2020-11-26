@@ -4,11 +4,15 @@
 [![License](https://github.com/toponteam/TopOn-iOS-Pod-Demo/blob/master/LICENSE)](https://github.com/toponteam/TopOn-iOS-Pod-Demo/blob/master/LICENSE)
 
 
-<!-- todo -->
-Thanks for taking a look at AnyThinkiOS! We offers diversified and competitive monetization solution and supports a variety of Ad formats including Native Ad, Interstitial Ad, Banner Ad, and Rewarded Video Ad. The AnyThinkiOS platform works with multiple ad networks include AdMob, Facebook, UnityAds, Vungle, AdColony, AppLovin, Tapjoy, Chartboost, TikTok and Mintegral etc.
+TopOn is an ad mediation platform that helps global app developers manage ad networks conveniently and maximize revenue lightly. Especially in China, TopOn becomes the Top #1 mediation platform. Until now, We have cooperated with around 400 companies. We have supported rich local advertising platform resources and lots of global ad platforms. 
 
-##Communication
 
+## Communication
+Official website ： https://www.toponad.com/
+Business Cooperation : business@toponad.com
+Market Cooperation : leon@toponad.com
+Technical Support : support@toponad.com
+QQ & wechat 188108875(Harry)
 
 ### Installation with CocoaPods
 
