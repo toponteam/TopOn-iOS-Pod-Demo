@@ -1,28 +1,69 @@
-## [IMPORTANT] DO NOT expose any of the frameworks to Windows operating system; Windows modifies frameworks, making them incomplete and resulting in compile errors.
-## 【重要】请勿将iOS需要用到的SDK（包括.a、.framework及.embededframework格式的套件）下载或传送至Windows操作系统上，因为Windows文件系统会修改这些SDK，导致它们在Xcode中无法编译。
-# AnythinkSDK_iOS_SDK_5.7.3
-## Third-party SDK version for AnyThink_ios_sdk_5.7.3
+# TopOn-iOS-Pod-Demo SDK for iOS
+[![CocoaPods Compatible](http://img.shields.io/badge/pod-v1.9.3-blue.svg)](https://github.com/toponteam/TopOn-iOS-Pod-Demo)
+[![Platform](https://img.shields.io/badge/platform-iOS%209%2B-brightgreen.svg?style=flat)](https://github.com/toponteam/TopOn-iOS-Pod-Demo)
 
-<a href="https://docs.toponad.com/#/en-us/ios/ios_doc/ios_access_doc" target = "_blank"> Integrate Guide for AnyThinkSDK for iOS(English) </a> 
+TopOn is an ad mediation platform that helps global app developers manage ad networks conveniently and maximize revenue lightly. Especially in China, TopOn becomes the Top #1 mediation platform. Until now, We have cooperated with around 400 companies. We have supported rich local advertising platform resources and lots of global ad platforms. 
 
-<a href="https://docs.toponad.com/#/en-us/ios/ios_doc/ios_errorcode" target = "_blank"> Error Code And FAQ(English) </a> 
 
-<a href="https://docs.toponad.com/#/zh-cn/ios/ios_doc/ios_access_doc" target = "_blank"> AnyThinkSDK for iOS 中文集成文档 </a> 
+## Communication
+Official website ： https://www.toponad.com/
 
-<a href="https://docs.toponad.com/#/zh-cn/ios/ios_doc/ios_errorcode" target = "_blank"> Error Code And FAQ 中文版 </a> 
+Business Cooperation : business@toponad.com
 
-<br>
-(建议从这里的链接下载,git的download zip会出现文件损坏的问题，导致无法编译)下载地址（download）：<br>
+Market Cooperation : leon@toponad.com
 
-<a href="https://docs.toponad.com/#/zh-cn/ios/download/package" target="_blank">TopOn iOS SDK(中文）</a>
+Technical Support : support@toponad.com
 
-<a href="https://docs.toponad.com/#/en-us/ios/download/package" target="_blank">TopOn iOS SDK(English）</a>
+QQ & wechat 188108875(Harry)
 
-## How To Get Stared
-+ Run the following command:<br>
+### Installation with CocoaPods
+
+[CocoaPods](https://cocoapods.org/) is a dependency manager for Swift and Objective-C Cocoa projects, which automates and simplifies the process of using 3rd-party libraries like the TopOn-iOS-SDK in your projects. You can install it with the following command:
+
 ```
+$ gem install cocoapods
+```
+
+**Podfile**
+To integrate AnyThinkiOS SDK into your Xcode project using CocoaPods, specify it in your Podfile:
+
+```
+source 'https://github.com/CocoaPods/Specs.git'
+platform :ios, '9.0'
+
+target 'AnyThinkSDKDemo' do
+      pod 'AnyThinkiOS','sdk_version'
+end
+```
+
+#### Subspecs
+
+By default, you get mediation core and all ad network adapters, if you only mediation some ad networks , you need to specify it. 
+
+Podfile example:
+
+```
+pod 'AnyThinkiOS/AnyThinkFacebookAdapter'
+pod 'AnyThinkiOS/AnyThinkAdmobAdapter'
+pod 'AnyThinkiOS/AnyThinkTouTiaoAdapter'
+pod 'AnyThinkiOS/AnyThinkMintegralAdapter'
+```
+
+Then, run the following command:
+
+```bash
 $ pod install
 ```
-+ 请先运行pod install才能保证demo正常运行。
-+ 可根据接入的广告平台自行修改Podfile
 
+## Requirements
+
+- iOS 9.0 and up
+- Xcode 9.3 and up
+
+## Integration instructions
+https://docs.toponad.com/#/en-us/ios/ios_doc/ios_sdk_config_access
+
+
+## LICENSE
+
+See the [LICENSE](LICENSE) file.
