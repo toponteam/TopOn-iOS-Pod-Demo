@@ -60,6 +60,11 @@ $ pod install
 - iOS 9.0 and up
 - Xcode 9.3 and up
 
+## Integration instructions
+```
+https://docs.toponad.com/#/en-us/ios/ios_doc/ios_sdk_config_access
+```
+
 ## LICENSE
 
 See the [LICENSE](LICENSE) file.
