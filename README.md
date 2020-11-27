@@ -1,8 +1,6 @@
 # TopOn-iOS-Pod-Demo SDK for iOS
 [![CocoaPods Compatible](http://img.shields.io/badge/pod-v1.9.3-blue.svg)](https://github.com/toponteam/TopOn-iOS-Pod-Demo)
 [![Platform](https://img.shields.io/badge/platform-iOS%209%2B-brightgreen.svg?style=flat)](https://github.com/toponteam/TopOn-iOS-Pod-Demo)
-[![License](https://github.com/toponteam/TopOn-iOS-Pod-Demo/blob/master/LICENSE)](https://github.com/toponteam/TopOn-iOS-Pod-Demo/blob/master/LICENSE)
-
 
 TopOn is an ad mediation platform that helps global app developers manage ad networks conveniently and maximize revenue lightly. Especially in China, TopOn becomes the Top #1 mediation platform. Until now, We have cooperated with around 400 companies. We have supported rich local advertising platform resources and lots of global ad platforms. 
 
