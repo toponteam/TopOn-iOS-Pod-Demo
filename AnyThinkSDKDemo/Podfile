@@ -7,106 +7,110 @@ target 'AnyThinkSDKDemo' do
   use_frameworks!
   
   #AnyThinkiOS
-  pod 'AnyThinkiOS','5.7.5'
+  pod 'AnyThinkiOS','5.7.7'
 
   # #FaceBook
-  pod 'AnyThinkiOS/AnyThinkFacebookAdapter','5.7.5'
+  pod 'AnyThinkiOS/AnyThinkFacebookAdapter','5.7.7'
 #   pod 'FBAudienceNetwork' , '6.2.0'
 #
 #  # #Admob
-  pod 'AnyThinkiOS/AnyThinkAdmobAdapter','5.7.5'
+  pod 'AnyThinkiOS/AnyThinkAdmobAdapter','5.7.7'
    pod 'Google-Mobile-Ads-SDK','7.67.0'
    pod 'PersonalizedAdConsent'
 #
 ##   #TouTiao
-  pod 'AnyThinkiOS/AnyThinkTouTiaoAdapter','5.7.5'
-#   pod 'Bytedance-UnionAD' , '3.3.0.5'
+  pod 'AnyThinkiOS/AnyThinkTouTiaoAdapter','5.7.7'
+#   pod 'Bytedance-UnionAD' , '3.4.1.0'
 #
 ##   #Applovin
-  pod 'AnyThinkiOS/AnyThinkApplovinAdapter','5.7.5'
+  pod 'AnyThinkiOS/AnyThinkApplovinAdapter','5.7.7'
 #   pod 'AppLovinSDK', '6.14.6'
+
+##   #mopub
+  pod 'AnyThinkiOS/AnyThinkMopubAdapter','5.7.7'
+  pod 'mopub-ios-sdk', '5.15.0'
 #
 ##   #Mintegral
-   pod 'AnyThinkiOS/AnyThinkMintegralAdapter','5.7.5'
-#   pod 'MintegralAdSDK' ,'6.6.8'
-#   pod 'MintegralAdSDK/RewardVideoAd','6.6.8'
-#   pod 'MintegralAdSDK/BidRewardVideoAd','6.6.8'
-#   pod 'MintegralAdSDK/BidInterstitialVideoAd','6.6.8'
-#   pod 'MintegralAdSDK/InterstitialVideoAd','6.6.8'
-#   pod 'MintegralAdSDK/InterstitialAd','6.6.8'
-#   pod 'MintegralAdSDK/BannerAd' ,'6.6.8'
-#   pod 'MintegralAdSDK/BidBannerAd','6.6.8'
-#   pod 'MintegralAdSDK/SplashAd','6.6.8'
-#   pod 'MintegralAdSDK/NativeAdvancedAd','6.6.8'
+   pod 'AnyThinkiOS/AnyThinkMintegralAdapter','5.7.7'
+#   pod 'MintegralAdSDK' ,'6.7.3'
+#   pod 'MintegralAdSDK/RewardVideoAd','6.7.3'
+#   pod 'MintegralAdSDK/BidRewardVideoAd','6.7.3'
+#   pod 'MintegralAdSDK/BidInterstitialVideoAd','6.7.3'
+#   pod 'MintegralAdSDK/InterstitialVideoAd','6.7.3'
+#   pod 'MintegralAdSDK/InterstitialAd','6.7.3'
+#   pod 'MintegralAdSDK/BannerAd' ,'6.7.3'
+#   pod 'MintegralAdSDK/BidBannerAd','6.7.3'
+#   pod 'MintegralAdSDK/SplashAd','6.7.3'
+#   pod 'MintegralAdSDK/NativeAdvancedAd','6.7.3'
 #
 ##   #GDT
-  pod 'AnyThinkiOS/AnyThinkGDTAdapter','5.7.5'
+  pod 'AnyThinkiOS/AnyThinkGDTAdapter','5.7.7'
 #   pod 'GDTMobSDK', '4.11.12'
 #
 ##   #Unity Ads
-  pod 'AnyThinkiOS/AnyThinkUnityAdsAdapter','5.7.5'
+  pod 'AnyThinkiOS/AnyThinkUnityAdsAdapter','5.7.7'
 #   pod 'UnityAds' , '3.5.0'
 #
 ##   #Chartboost
-  pod 'AnyThinkiOS/AnyThinkChartboostAdapter','5.7.5'
+  pod 'AnyThinkiOS/AnyThinkChartboostAdapter','5.7.7'
 ##   pod 'ChartboostSDK','8.3.1'
 ##
 ###   #Tapjoy
-  pod 'AnyThinkiOS/AnyThinkTapjoyAdapter','5.7.5'
+  pod 'AnyThinkiOS/AnyThinkTapjoyAdapter','5.7.7'
 #  pod 'TapjoySDK','12.7.0'
 ##
 ###   #Nend
-  pod 'AnyThinkiOS/AnyThinkNendAdapter','5.7.5'
+  pod 'AnyThinkiOS/AnyThinkNendAdapter','5.7.7'
 #   pod 'NendSDK_iOS','7.0.0'
 ##
 ###   #IronSource
-  pod 'AnyThinkiOS/AnyThinkIronSourceAdapter','5.7.5'
+  pod 'AnyThinkiOS/AnyThinkIronSourceAdapter','5.7.7'
 #  pod 'IronSourceSDK','7.0.3'
 ##
 ###   #Inmobi
-  pod 'AnyThinkiOS/AnyThinkInmobiAdapter','5.7.5'
+  pod 'AnyThinkiOS/AnyThinkInmobiAdapter','5.7.7'
 #   pod 'InMobiSDK/Core' ,'9.1.0'
 ##
 ###   #Appnext
-  pod 'AnyThinkiOS/AnyThinkAppnextAdapter','5.7.5'
+  pod 'AnyThinkiOS/AnyThinkAppnextAdapter','5.7.7'
 ###   #第三方不支持pod,请另行下载
 ##
 ###   #Adcolony
-  pod 'AnyThinkiOS/AnyThinkAdcolonyAdapter','5.7.5'
+  pod 'AnyThinkiOS/AnyThinkAdcolonyAdapter','5.7.7'
 #   pod 'AdColony','4.4.0'
 ##
 ###   #Vungle
-  pod 'AnyThinkiOS/AnyThinkVungleAdapter','5.7.5'
+  pod 'AnyThinkiOS/AnyThinkVungleAdapter','5.7.7'
 #   pod 'VungleSDK-iOS', '6.7.1'
 ##
 ###   #Maio
-  pod 'AnyThinkiOS/AnyThinkMaioAdapter','5.7.5'
+  pod 'AnyThinkiOS/AnyThinkMaioAdapter','5.7.7'
 #   pod 'MaioSDK','1.5.4'
 ##
 ###   #KuaiShou
-  pod 'AnyThinkiOS/AnyThinkKSAdapter','5.7.5'
-#   pod 'KSAdSDK', '3.3.4'
+  pod 'AnyThinkiOS/AnyThinkKSAdapter','5.7.7'
+#   pod 'KSAdSDK', '3.3.6'
 #   pod 'SDWebImage'
 ##
 ###   #Baidu
-  pod 'AnyThinkiOS/AnyThinkBaiduAdapter','5.7.5'
+  pod 'AnyThinkiOS/AnyThinkBaiduAdapter','5.7.7'
 ###   #第三方不支持pod,请另行下载
 ##
 ###   #Ogury
-  pod 'AnyThinkiOS/AnyThinkOguryAdapter','5.7.5'
+  pod 'AnyThinkiOS/AnyThinkOguryAdapter','5.7.7'
 ###   #第三方不支持pod,请另行下载
 ##
 ##
 ###   #Sigmob
-  pod 'AnyThinkiOS/AnyThinkSigmobAdapter','5.7.5'
+  pod 'AnyThinkiOS/AnyThinkSigmobAdapter','5.7.7'
 #   pod 'SigmobAd-iOS', '2.22.0'
 ##
 ###   #StartApp
-  pod 'AnyThinkiOS/AnyThinkStartAppAdapter','5.7.5'
+  pod 'AnyThinkiOS/AnyThinkStartAppAdapter','5.7.7'
 #   pod 'StartAppSDK', '4.5.0'
 ##
 ###   #Fyber
-  pod 'AnyThinkiOS/AnyThinkFyberAdapter','5.7.5'
+  pod 'AnyThinkiOS/AnyThinkFyberAdapter','5.7.7'
 #   pod 'Fyber_Marketplace_SDK', '7.6.4'
 
 
