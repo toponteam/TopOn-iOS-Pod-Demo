@@ -48,6 +48,7 @@ static NSString *const kFacebookPlacementID = @"b5b44a02112383";
 static NSString *const kFacebookHeaderBiddingPlacementID = @"b5d133438158c6";
 static NSString *const kAdMobPlacementID = @"b5b44a02bf08c0";
 static NSString *const kApplovinPlacementID = @"b5b44a0646e64b";
+static NSString *const kMopubPlacementID = @"b5b44a088ba48d";
 static NSString *const kGDTPlacementID = @"b5c0f7cd196a4c";
 static NSString *const kTapjoyRVPlacementID = @"b5b44a0ac855ff";//to be modified
 static NSString *const kChartboostRVPlacementID = @"b5b44a09a5c912";//to be modified
@@ -86,6 +87,7 @@ static NSString *const kOnlineApiPlacementID = @"b5fa250b176abb";
                           kFacebookHeaderBiddingPlacement:kFacebookHeaderBiddingPlacementID,
                           kAdMobPlacement:kAdMobPlacementID,
                           kGDTPlacement:kGDTPlacementID,
+                          kMopubPlacementName:kMopubPlacementID,
                           kApplovinPlacement:kApplovinPlacementID,
                           kTapjoyPlacementName:kTapjoyRVPlacementID,
                           kChartboostPlacementName:kChartboostRVPlacementID,

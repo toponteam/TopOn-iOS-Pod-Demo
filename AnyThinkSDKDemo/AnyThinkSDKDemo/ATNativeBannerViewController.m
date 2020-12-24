@@ -17,6 +17,7 @@ static NSString *const kMintegralPlacementID = @"b5b0f555698607";
 static NSString *const kFacebookPlacementID = @"b5b0f551340ea9";
 static NSString *const kAdMobPlacementID = @"b5b0f55228375a";
 static NSString *const kApplovinPlacementID = @"b5b0f554ec9c4e";
+static NSString *const kMopubPlacementID = @"b5b0f55624527a";
 static NSString *const kGDTPlacementID = @"b5bacac5f73476";
 static NSString *const kGDTTemplatePlacementID = @"b5bacac780e03b";
 static NSString *const kAppnextPlacementID = @"b5bc7fb2787f1e";
@@ -53,6 +54,7 @@ static NSString *const kKSPlacementID = @"b5e4613e50cbf2";
                           kInmobiPlacement:kInmobiPlacementID,
                           kFacebookPlacement:kFacebookPlacementID,
                           kAdMobPlacement:kAdMobPlacementID,
+                          kMopubPlacementName:kMopubPlacementID,
                           kApplovinPlacement:kApplovinPlacementID,
                           kGDTPlacement:kGDTPlacementID,
                           kGDTTemplatePlacement:kGDTTemplatePlacementID,

@@ -16,6 +16,8 @@ NSString *const kFacebookHeaderBiddingPlacement = @"Facebook(Header Bidding)";
 NSString *const kAdMobPlacement = @"AdMob";
 NSString *const kApplovinPlacement = @"Applovin";
 NSString *const kMintegralPlacement = @"Mintegral";
+NSString *const kMintegralAdvancedPlacement = @"Mintegral(Advanced)";
+NSString *const kMopubPlacementName = @"Mopub";
 NSString *const kGDTPlacement = @"GDT";
 NSString *const kGDTTemplatePlacement = @"GDT(Template)";
 NSString *const kAppnextPlacement = @"Appnext";
@@ -33,12 +35,14 @@ NSString *const kOnlineApiPlacement = @"OnlineApi";
 static NSString *const kMPPlacementID = @"b5c2084d12aca4";
 static NSString *const kPlacement0ID = @"b5ad9ba61dcb39";
 static NSString *const kInmobiPlacementID = @"b5b0f553483724";
+static NSString *const kMintegralAdvancedPlacementID = @"b5ee1d26cb56ee";
 static NSString *const kMintegralPlacementID = @"b5b0f555698607";
 static NSString *const kMintegralHeaderBiddingPlacementID = @"b5d1333d023691";
 static NSString *const kFacebookPlacementID = @"b5b0f551340ea9";
 static NSString *const kFacebookHeaderBiddingPlacementID = @"b5d13342d52304";
 static NSString *const kAdMobPlacementID = @"b5b0f55228375a";
 static NSString *const kApplovinPlacementID = @"b5b0f554ec9c4e";
+static NSString *const kMopubPlacementID = @"b5b0f55624527a";
 static NSString *const kGDTPlacementID = @"b5bacac5f73476";
 static NSString *const kGDTTemplatePlacementID = @"b5bacac780e03b";
 static NSString *const kAppnextPlacementID = @"b5bc7fb2787f1e";
@@ -179,12 +183,14 @@ static NSString *const kCallbackKey = @"request";
     return @{
              kMPPlacement:kMPPlacementID,
              kMintegralPlacement:kMintegralPlacementID,
+             kMintegralAdvancedPlacement:kMintegralAdvancedPlacementID,
              kHeaderBiddingPlacement:kMintegralHeaderBiddingPlacementID,
              kAllPlacementName:kAllPlacementID,
              kInmobiPlacement:kInmobiPlacementID,
              kFacebookPlacement:kFacebookPlacementID,
              kFacebookHeaderBiddingPlacement:kFacebookHeaderBiddingPlacementID,
              kAdMobPlacement:kAdMobPlacementID,
+             kMopubPlacementName:kMopubPlacementID,
              kApplovinPlacement:kApplovinPlacementID,
              kGDTPlacement:kGDTPlacementID,
              kGDTTemplatePlacement:kGDTTemplatePlacementID,

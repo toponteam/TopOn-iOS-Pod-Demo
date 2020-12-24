@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9B6DF73D259436DD004E9FDB /* ATSplashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B6DF73C259436DD004E9FDB /* ATSplashViewController.m */; };
 		9BBD009924863048009EAD66 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BBD009824863048009EAD66 /* AppDelegate.m */; };
 		9BBD009C24863048009EAD66 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BBD009B24863048009EAD66 /* SceneDelegate.m */; };
 		9BBD009F24863048009EAD66 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BBD009E24863048009EAD66 /* ViewController.m */; };
@@ -27,6 +28,8 @@
 /* Begin PBXFileReference section */
 		44D83BDBBF3D3D426850A3E1 /* Pods-AnyThinkSDKDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AnyThinkSDKDemo.release.xcconfig"; path = "Target Support Files/Pods-AnyThinkSDKDemo/Pods-AnyThinkSDKDemo.release.xcconfig"; sourceTree = "<group>"; };
 		85EEA80B39960C835625EC2F /* Pods-AnyThinkSDKDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AnyThinkSDKDemo.debug.xcconfig"; path = "Target Support Files/Pods-AnyThinkSDKDemo/Pods-AnyThinkSDKDemo.debug.xcconfig"; sourceTree = "<group>"; };
+		9B6DF73B259436DD004E9FDB /* ATSplashViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATSplashViewController.h; sourceTree = "<group>"; };
+		9B6DF73C259436DD004E9FDB /* ATSplashViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATSplashViewController.m; sourceTree = "<group>"; };
 		9BBD009424863048009EAD66 /* AnyThinkSDKDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AnyThinkSDKDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BBD009724863048009EAD66 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		9BBD009824863048009EAD66 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -118,6 +121,8 @@
 				9BBD00B6248630C8009EAD66 /* ATNativeViewController.m */,
 				9BBD00B7248630C8009EAD66 /* ATRewardedVideoVideoViewController.h */,
 				9BBD00BA248630C8009EAD66 /* ATRewardedVideoVideoViewController.m */,
+				9B6DF73B259436DD004E9FDB /* ATSplashViewController.h */,
+				9B6DF73C259436DD004E9FDB /* ATSplashViewController.m */,
 				9BBD00B8248630C8009EAD66 /* MTAutolayoutCategories.h */,
 				9BBD00B4248630C8009EAD66 /* MTAutolayoutCategories.m */,
 				9BBD009724863048009EAD66 /* AppDelegate.h */,
@@ -146,8 +151,6 @@
 				9BBD009024863048009EAD66 /* Sources */,
 				9BBD009124863048009EAD66 /* Frameworks */,
 				9BBD009224863048009EAD66 /* Resources */,
-				8EC0A2389FCAD0453EF72E74 /* [CP] Embed Pods Frameworks */,
-				CB8DE9EC6741906FC7A5C5EA /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -204,40 +207,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		8EC0A2389FCAD0453EF72E74 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-AnyThinkSDKDemo/Pods-AnyThinkSDKDemo-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-AnyThinkSDKDemo/Pods-AnyThinkSDKDemo-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-AnyThinkSDKDemo/Pods-AnyThinkSDKDemo-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		CB8DE9EC6741906FC7A5C5EA /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-AnyThinkSDKDemo/Pods-AnyThinkSDKDemo-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-AnyThinkSDKDemo/Pods-AnyThinkSDKDemo-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-AnyThinkSDKDemo/Pods-AnyThinkSDKDemo-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		DA7F5C55A1721AB762DC9448 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -277,6 +246,7 @@
 				9BBD00C1248630C8009EAD66 /* ATNativeViewController.m in Sources */,
 				9BBD00BF248630C8009EAD66 /* ATInterstitialViewController.m in Sources */,
 				9BBD00C4248630C8009EAD66 /* ATNativeBannerViewController.m in Sources */,
+				9B6DF73D259436DD004E9FDB /* ATSplashViewController.m in Sources */,
 				9BBD00C2248630C8009EAD66 /* ATRewardedVideoVideoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -421,6 +391,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6YXYV74FF7;
 				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/AnyThinkSDKDemo/Core",
+				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"COCOAPODS=1",
@@ -438,6 +412,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.anythink.AnyThinkSDKDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -452,6 +427,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6YXYV74FF7;
 				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/AnyThinkSDKDemo/Core",
+				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"COCOAPODS=1",
@@ -469,6 +448,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.anythink.AnyThinkSDKDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
