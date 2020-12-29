@@ -44,6 +44,8 @@ extern NSString *const kGAMPlacement;
 extern NSString *const kHeliumPlacement;
 extern NSString *const kADXPlacement;
 extern NSString *const kOnlineApiPlacement;
+extern NSString *const kKidozPlacement;
+extern NSString *const kMyTargetPlacement;
 
 @interface ATInterstitialViewController : UIViewController
 -(instancetype) initWithPlacementName:(NSString*)name;

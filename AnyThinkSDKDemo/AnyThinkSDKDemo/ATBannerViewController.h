@@ -37,6 +37,8 @@ extern NSString *const kGAMPlacement;
 extern NSString *const kMyOfferPlacement;
 extern NSString *const kADXPlacement;
 extern NSString *const kOnlineApiPlacement;
+extern NSString *const kKidozPlacement;
+extern NSString *const kMyTargetPlacement;
 
 @interface ATBannerViewController : UIViewController
 -(instancetype) initWithPlacementName:(NSString*)name;

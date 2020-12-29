@@ -57,6 +57,9 @@ static NSString *const kGAMPlacementID = @"b5f2389ab6ee63";
 static NSString *const kHeliumPlacementID = @"b5f583ec12143f";
 static NSString *const kADXPlacementID = @"b5fa25016e80bd";
 static NSString *const kOnlineApiPlacementID = @"b5fa250771e076";
+static NSString *const kKidozPlacementID = @"b5feaa2df0e121";
+static NSString *const kMyTargetPlacementID = @"b5feaa306e483c";
+
 
 @interface ATInterstitialViewController ()<ATInterstitialDelegate>
 @property(nonatomic, readonly) NSString *name;
@@ -110,7 +113,9 @@ static NSString *const kOnlineApiPlacementID = @"b5fa250771e076";
                           kGAMPlacement:kGAMPlacementID,
                           kHeliumPlacement:kHeliumPlacementID,
                           kADXPlacement:kADXPlacementID,
-                          kOnlineApiPlacement:kOnlineApiPlacementID
+                          kOnlineApiPlacement:kOnlineApiPlacementID,
+                          kKidozPlacement:kKidozPlacementID,
+                          kMyTargetPlacement:kMyTargetPlacementID
                           };
     }
     return self;
