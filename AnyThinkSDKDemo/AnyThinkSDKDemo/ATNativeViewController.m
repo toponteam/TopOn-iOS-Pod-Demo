@@ -97,6 +97,10 @@ static NSString *const kOnlineApiPlacementID = @"b5fa2508579446";
     _sponsorImageView = [UIImageView autolayoutView];
     _sponsorImageView.contentMode = UIViewContentModeScaleAspectFit;
     [self addSubview:_sponsorImageView];
+    
+    _dislikeButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    _dislikeButton.translatesAutoresizingMaskIntoConstraints = NO;
+    [self addSubview:_dislikeButton];
 }
 
 -(NSArray<UIView*>*)clickableViews {
@@ -127,6 +131,15 @@ static NSString *const kOnlineApiPlacementID = @"b5fa2508579446";
     [self.titleLabel setContentCompressionResistancePriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
     [self addConstraintsWithVisualFormat:@"|-15-[iconImageView(90)]-8-[titleLabel]-8-[sponsorImageView]-15-|" options:NSLayoutFormatAlignAllTop metrics:nil views:viewsDict];
     [self addConstraintsWithVisualFormat:@"V:|-15-[titleLabel]-8-[textLabel]-8-[ctaLabel]-8-[ratingLabel]-8-[advertiserLabel]" options:NSLayoutFormatAlignAllLeading | NSLayoutFormatAlignAllTrailing metrics:nil views:viewsDict];
+    
+    NSLayoutConstraint *btn_right = [NSLayoutConstraint constraintWithItem:self.dislikeButton attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeRight multiplier:1 constant:-50];
+    NSLayoutConstraint *btn_top = [NSLayoutConstraint constraintWithItem:self.dislikeButton attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeTop multiplier:1 constant:-0];
+    NSLayoutConstraint *btn_width = [NSLayoutConstraint constraintWithItem:self.dislikeButton attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:40];
+    NSLayoutConstraint *btn_height = [NSLayoutConstraint constraintWithItem:self.dislikeButton attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:40];
+    [self addConstraints:@[btn_right,btn_top,btn_width,btn_height]];
+    
+    UIImage *closeImg = [UIImage imageNamed:@"icon_webview_close" inBundle:[NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:@"AnyThinkSDK" ofType:@"bundle"]] compatibleWithTraitCollection:nil];
+    [_dislikeButton setImage:closeImg forState:0];
 }
 
 -(void) makeConstraintsDrawVideoAssets {

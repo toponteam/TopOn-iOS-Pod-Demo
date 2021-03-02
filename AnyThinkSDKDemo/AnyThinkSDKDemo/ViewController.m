@@ -144,11 +144,8 @@ static NSString *const kCellIdentifier = @"cell";
         ATInterstitialViewController *tVC = [[ATInterstitialViewController alloc] initWithPlacementName:_placementNames[[indexPath section]][[indexPath row]]];
         [self.navigationController pushViewController:tVC animated:YES];
     } else if ([indexPath section] == 0) {
-        // not sigmob
-        if (indexPath.row != 1) {
             ATSplashViewController *tVC = [[ATSplashViewController alloc] initWithPlacementName:_placementNames[[indexPath section]][[indexPath row]]];
             [self.navigationController pushViewController:tVC animated:YES];
-        }
     }
 }
 

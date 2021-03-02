@@ -53,4 +53,6 @@ extern NSString *const kOnlineApiPlacement;
 @property(nonatomic, readonly) UIImageView *mainImageView;
 @property(nonatomic, readonly) UIImageView *logoImageView;
 @property(nonatomic, readonly) UIImageView *sponsorImageView;
+@property(nonatomic, readonly) UIButton *dislikeButton;
+
 @end
