@@ -32,6 +32,7 @@ static NSString *const kFacebookPlacementID = @"b5baf4bf9829e4";
 static NSString *const kFacebookHeaderBiddingPlacementID = @"b5d133421525a6";
 static NSString *const kAllPlacementID = @"b5bacad26a752a";
 static NSString *const kInmobiPlacementID = @"b5baf524062aca";
+static NSString *const kMopubPlacementID = @"b5baf56f03dbe9";
 static NSString *const kChartboostPlacementID = @"b5baf5cd422553";
 static NSString *const kTapjoyPlacementID = @"b5baf5ebe8df89";
 static NSString *const kIronsourcePlacementID = @"b5baf617891a2e";
@@ -54,6 +55,11 @@ static NSString *const kStartAppVideoPlacementID = @"b5e732a9577182";
 static NSString *const kFyberPlacementID = @"b5e96db2198474";
 static NSString *const kGAMPlacementID = @"b5f2389ab6ee63";
 static NSString *const kHeliumPlacementID = @"b5f583ec12143f";
+static NSString *const kADXPlacementID = @"b5fa25016e80bd";
+static NSString *const kOnlineApiPlacementID = @"b5fa250771e076";
+static NSString *const kKidozPlacementID = @"b5feaa2df0e121";
+static NSString *const kMyTargetPlacementID = @"b5feaa306e483c";
+
 
 @interface ATInterstitialViewController ()<ATInterstitialDelegate>
 @property(nonatomic, readonly) NSString *name;
@@ -82,6 +88,7 @@ static NSString *const kHeliumPlacementID = @"b5f583ec12143f";
                           kFacebookPlacement:kFacebookPlacementID,
                           kFacebookHeaderBiddingPlacement:kFacebookHeaderBiddingPlacementID,
                           kInmobiPlacement:kInmobiPlacementID,
+                          kMopubPlacementName:kMopubPlacementID,
                           kChartboostPlacementName:kChartboostPlacementID,
                           kTapjoyPlacementName:kTapjoyPlacementID,
                           kIronsourcePlacementName:kIronsourcePlacementID,
@@ -104,7 +111,11 @@ static NSString *const kHeliumPlacementID = @"b5f583ec12143f";
                           kStartAppVideoPlacement:kStartAppVideoPlacementID,
                           kFyberPlacement:kFyberPlacementID,
                           kGAMPlacement:kGAMPlacementID,
-                          kHeliumPlacement:kHeliumPlacementID
+                          kHeliumPlacement:kHeliumPlacementID,
+                          kADXPlacement:kADXPlacementID,
+                          kOnlineApiPlacement:kOnlineApiPlacementID,
+                          kKidozPlacement:kKidozPlacementID,
+                          kMyTargetPlacement:kMyTargetPlacementID
                           };
     }
     return self;

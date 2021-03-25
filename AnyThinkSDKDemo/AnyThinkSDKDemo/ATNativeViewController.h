@@ -16,7 +16,9 @@ extern NSString *const kFacebookPlacement;
 extern NSString *const kFacebookHeaderBiddingPlacement;
 extern NSString *const kAdMobPlacement;
 extern NSString *const kApplovinPlacement;
+extern NSString *const kMopubPlacementName;
 extern NSString *const kMintegralPlacement;
+extern NSString *const kMintegralAdvancedPlacement;
 extern NSString *const kHeaderBiddingPlacement;
 extern NSString *const kGDTPlacement;
 extern NSString *const kGDTTemplatePlacement;
@@ -32,6 +34,8 @@ extern NSString *const kSigmobPlacement;
 extern NSString *const kKSPlacement;
 extern NSString *const kGAMPlacement;
 extern NSString *const kMyOfferPlacement;
+extern NSString *const kADXPlacement;
+extern NSString *const kOnlineApiPlacement;
 
 //extern NSString *const kKSDrawPlacement;
 @interface ATNativeViewController : UIViewController
@@ -49,4 +53,6 @@ extern NSString *const kMyOfferPlacement;
 @property(nonatomic, readonly) UIImageView *mainImageView;
 @property(nonatomic, readonly) UIImageView *logoImageView;
 @property(nonatomic, readonly) UIImageView *sponsorImageView;
+@property(nonatomic, readonly) UIButton *dislikeButton;
+
 @end

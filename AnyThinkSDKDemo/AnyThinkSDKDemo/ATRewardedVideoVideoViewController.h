@@ -13,6 +13,7 @@ extern NSString *const kFacebookHeaderBiddingPlacement;
 extern NSString *const kAdMobPlacement;
 extern NSString *const kApplovinPlacement;
 extern NSString *const kGDTPlacement;
+extern NSString *const kMopubPlacementName;
 extern NSString *const kMintegralPlacement;
 extern NSString *const kHeaderBiddingPlacement;
 extern NSString *const kTapjoyPlacementName;
@@ -35,7 +36,10 @@ extern NSString *const kStartAppPlacement;
 extern NSString *const kFyberPlacement;
 extern NSString *const kGAMPlacement;
 extern NSString *const kHeliumPlacement;
-
+extern NSString *const kADXPlacement;
+extern NSString *const kOnlineApiPlacement;
+extern NSString *const kKidozPlacement;
+extern NSString *const kMyTargetPlacement;
 
 @interface ATRewardedVideoVideoViewController : UIViewController
 -(instancetype) initWithPlacementName:(NSString*)name;

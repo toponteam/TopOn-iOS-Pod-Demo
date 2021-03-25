@@ -16,6 +16,7 @@ static NSString *const kTTPlacementID = @"b5bacacfc470c9";
 static NSString *const kAdmobPlacementID = @"b5bacacef17717";
 static NSString *const kApplovinPlacementID = @"b5bacace1549da";
 static NSString *const kFacebookPlacementID = @"b5baf502bb23e3";
+static NSString *const kMopubPlacementID = @"b5baf57068e0b6";
 static NSString *const kInmobiPlacementID = @"b5baf522891992";
 static NSString *const kAllPlacementID = @"b5bacaccb61c29";
 static NSString *const kAppnextPlacementID = @"b5bc7fb78288e9";
@@ -31,6 +32,11 @@ static NSString *const kVunglePlacementID = @"b5ee89f3e63d80";
 static NSString *const kAdColonyPlacementID = @"b5ee89f4d1791e";
 static NSString *const kGAMPlacementID = @"b5f2389932a2ec";
 static NSString *const kMyofferPlacementID = @"b5f33c3231eb91";
+static NSString *const kADXPlacementID = @"b5fa24ff8a7446";
+static NSString *const kOnlineApiPlacementID = @"b5fa2508fbdaf6";
+static NSString *const kKidozPlacementID = @"b5feaa2cfe2959";
+static NSString *const kMyTargetPlacementID = @"b5feaa31284737";
+
 
 NSString *const kBannerShownNotification = @"banner_shown";
 NSString *const kBannerLoadingFailedNotification = @"banner_failed_to_load";
@@ -60,6 +66,7 @@ NSString *const kBannerLoadingFailedNotification = @"banner_failed_to_load";
                           kAdMobPlacement:kAdmobPlacementID,
                           kApplovinPlacement:kApplovinPlacementID,
                           kFacebookPlacement:kFacebookPlacementID,
+                          kMopubPlacementName:kMopubPlacementID,
                           kInmobiPlacement:kInmobiPlacementID,
                           kAllPlacementName:kAllPlacementID,
                           kAppnextPlacement:kAppnextPlacementID,
@@ -74,7 +81,11 @@ NSString *const kBannerLoadingFailedNotification = @"banner_failed_to_load";
                           kChartboostPlacementName:kChartboostPlacementID,
                           kAdcolonyPlacementName:kAdColonyPlacementID,
                           kGAMPlacement:kGAMPlacementID,
-                          kMyOfferPlacement:kMyofferPlacementID
+                          kMyOfferPlacement:kMyofferPlacementID,
+                          kADXPlacement:kADXPlacementID,
+                          kOnlineApiPlacement:kOnlineApiPlacementID,
+                          kKidozPlacement:kKidozPlacementID,
+                          kMyTargetPlacement:kMyTargetPlacementID
                           };
     }
     return self;
@@ -133,6 +144,11 @@ NSString *const kBannerLoadingFailedNotification = @"banner_failed_to_load";
         NSLog(@"ATBannerViewController::banner ad not ready, will load");
         [self reloadADButtonTapped];
     }
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    [self removeAdButtonTapped];
 }
 
 -(void) readyButtonTapped {

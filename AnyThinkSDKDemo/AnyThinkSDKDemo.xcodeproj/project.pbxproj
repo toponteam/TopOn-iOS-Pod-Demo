@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9B6DF73D259436DD004E9FDB /* ATSplashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B6DF73C259436DD004E9FDB /* ATSplashViewController.m */; };
 		9BBD009924863048009EAD66 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BBD009824863048009EAD66 /* AppDelegate.m */; };
 		9BBD009C24863048009EAD66 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BBD009B24863048009EAD66 /* SceneDelegate.m */; };
 		9BBD009F24863048009EAD66 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BBD009E24863048009EAD66 /* ViewController.m */; };
@@ -21,12 +22,38 @@
 		9BBD00C2248630C8009EAD66 /* ATRewardedVideoVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BBD00BA248630C8009EAD66 /* ATRewardedVideoVideoViewController.m */; };
 		9BBD00C3248630C8009EAD66 /* ATDrawViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BBD00BC248630C8009EAD66 /* ATDrawViewController.m */; };
 		9BBD00C4248630C8009EAD66 /* ATNativeBannerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BBD00BD248630C8009EAD66 /* ATNativeBannerViewController.m */; };
+		AC498DA725EE345300955C17 /* GoogleAppMeasurement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC498D9F25EE345300955C17 /* GoogleAppMeasurement.framework */; };
+		AC498DA825EE345300955C17 /* PersonalizedAdConsent.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC498DA025EE345300955C17 /* PersonalizedAdConsent.framework */; };
+		AC498DA925EE345300955C17 /* GoogleUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC498DA125EE345300955C17 /* GoogleUtilities.framework */; };
+		AC498DAA25EE345300955C17 /* PromisesObjC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC498DA225EE345300955C17 /* PromisesObjC.framework */; };
+		AC498DAB25EE345300955C17 /* AnyThinkAdmobAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC498DA325EE345300955C17 /* AnyThinkAdmobAdapter.framework */; };
+		AC498DAC25EE345300955C17 /* nanopb.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC498DA425EE345300955C17 /* nanopb.framework */; };
+		AC498DAD25EE345300955C17 /* GoogleMobileAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC498DA525EE345300955C17 /* GoogleMobileAds.framework */; };
+		AC498DAE25EE345300955C17 /* UserMessagingPlatform.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC498DA625EE345300955C17 /* UserMessagingPlatform.framework */; };
+		AC498DB325EE352B00955C17 /* WindSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC498DB025EE352B00955C17 /* WindSDK.framework */; };
+		AC498DB425EE352B00955C17 /* AnyThinkSigmobAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC498DB125EE352B00955C17 /* AnyThinkSigmobAdapter.framework */; };
+		AC498DB525EE352B00955C17 /* Sigmob.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AC498DB225EE352B00955C17 /* Sigmob.bundle */; };
+		AC498DB725EE35D600955C17 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC498DB625EE35D600955C17 /* AVFoundation.framework */; };
+		AC498DB925EE35DE00955C17 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC498DB825EE35DE00955C17 /* AdSupport.framework */; };
+		AC498DBB25EE35E500955C17 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC498DBA25EE35E500955C17 /* CoreLocation.framework */; };
+		AC498DBD25EE35EB00955C17 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC498DBC25EE35EB00955C17 /* CoreMedia.framework */; };
+		AC498DBF25EE35F200955C17 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC498DBE25EE35F200955C17 /* CoreMotion.framework */; };
+		AC498DC125EE35F700955C17 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC498DC025EE35F700955C17 /* CoreTelephony.framework */; };
+		AC498DC325EE35FD00955C17 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC498DC225EE35FD00955C17 /* MobileCoreServices.framework */; };
+		AC498DC525EE360300955C17 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC498DC425EE360300955C17 /* SafariServices.framework */; };
+		AC498DC725EE360800955C17 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC498DC625EE360800955C17 /* StoreKit.framework */; };
+		AC498DC925EE360D00955C17 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC498DC825EE360D00955C17 /* SystemConfiguration.framework */; };
+		AC498DCB25EE361200955C17 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC498DCA25EE361200955C17 /* WebKit.framework */; };
+		AC498DCD25EE361D00955C17 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = AC498DCC25EE361800955C17 /* libsqlite3.tbd */; };
+		AC498DCF25EE362500955C17 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = AC498DCE25EE362200955C17 /* libz.tbd */; };
 		C36CAF42111F732953C14234 /* Pods_AnyThinkSDKDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7A388D01471A9429C81957B /* Pods_AnyThinkSDKDemo.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		44D83BDBBF3D3D426850A3E1 /* Pods-AnyThinkSDKDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AnyThinkSDKDemo.release.xcconfig"; path = "Target Support Files/Pods-AnyThinkSDKDemo/Pods-AnyThinkSDKDemo.release.xcconfig"; sourceTree = "<group>"; };
 		85EEA80B39960C835625EC2F /* Pods-AnyThinkSDKDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AnyThinkSDKDemo.debug.xcconfig"; path = "Target Support Files/Pods-AnyThinkSDKDemo/Pods-AnyThinkSDKDemo.debug.xcconfig"; sourceTree = "<group>"; };
+		9B6DF73B259436DD004E9FDB /* ATSplashViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATSplashViewController.h; sourceTree = "<group>"; };
+		9B6DF73C259436DD004E9FDB /* ATSplashViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATSplashViewController.m; sourceTree = "<group>"; };
 		9BBD009424863048009EAD66 /* AnyThinkSDKDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AnyThinkSDKDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BBD009724863048009EAD66 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		9BBD009824863048009EAD66 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -53,6 +80,30 @@
 		9BBD00BB248630C8009EAD66 /* ATDrawViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATDrawViewController.h; sourceTree = "<group>"; };
 		9BBD00BC248630C8009EAD66 /* ATDrawViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATDrawViewController.m; sourceTree = "<group>"; };
 		9BBD00BD248630C8009EAD66 /* ATNativeBannerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATNativeBannerViewController.m; sourceTree = "<group>"; };
+		AC498D9F25EE345300955C17 /* GoogleAppMeasurement.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleAppMeasurement.framework; sourceTree = "<group>"; };
+		AC498DA025EE345300955C17 /* PersonalizedAdConsent.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PersonalizedAdConsent.framework; sourceTree = "<group>"; };
+		AC498DA125EE345300955C17 /* GoogleUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleUtilities.framework; sourceTree = "<group>"; };
+		AC498DA225EE345300955C17 /* PromisesObjC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PromisesObjC.framework; sourceTree = "<group>"; };
+		AC498DA325EE345300955C17 /* AnyThinkAdmobAdapter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AnyThinkAdmobAdapter.framework; sourceTree = "<group>"; };
+		AC498DA425EE345300955C17 /* nanopb.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = nanopb.framework; sourceTree = "<group>"; };
+		AC498DA525EE345300955C17 /* GoogleMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMobileAds.framework; sourceTree = "<group>"; };
+		AC498DA625EE345300955C17 /* UserMessagingPlatform.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UserMessagingPlatform.framework; sourceTree = "<group>"; };
+		AC498DB025EE352B00955C17 /* WindSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = WindSDK.framework; sourceTree = "<group>"; };
+		AC498DB125EE352B00955C17 /* AnyThinkSigmobAdapter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AnyThinkSigmobAdapter.framework; sourceTree = "<group>"; };
+		AC498DB225EE352B00955C17 /* Sigmob.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Sigmob.bundle; sourceTree = "<group>"; };
+		AC498DB625EE35D600955C17 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		AC498DB825EE35DE00955C17 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		AC498DBA25EE35E500955C17 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		AC498DBC25EE35EB00955C17 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		AC498DBE25EE35F200955C17 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		AC498DC025EE35F700955C17 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		AC498DC225EE35FD00955C17 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		AC498DC425EE360300955C17 /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
+		AC498DC625EE360800955C17 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		AC498DC825EE360D00955C17 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		AC498DCA25EE361200955C17 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		AC498DCC25EE361800955C17 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		AC498DCE25EE362200955C17 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		E7A388D01471A9429C81957B /* Pods_AnyThinkSDKDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AnyThinkSDKDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -61,7 +112,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AC498DAB25EE345300955C17 /* AnyThinkAdmobAdapter.framework in Frameworks */,
+				AC498DCF25EE362500955C17 /* libz.tbd in Frameworks */,
+				AC498DC925EE360D00955C17 /* SystemConfiguration.framework in Frameworks */,
+				AC498DAA25EE345300955C17 /* PromisesObjC.framework in Frameworks */,
+				AC498DAD25EE345300955C17 /* GoogleMobileAds.framework in Frameworks */,
+				AC498DA725EE345300955C17 /* GoogleAppMeasurement.framework in Frameworks */,
+				AC498DC125EE35F700955C17 /* CoreTelephony.framework in Frameworks */,
+				AC498DBB25EE35E500955C17 /* CoreLocation.framework in Frameworks */,
+				AC498DAC25EE345300955C17 /* nanopb.framework in Frameworks */,
+				AC498DC725EE360800955C17 /* StoreKit.framework in Frameworks */,
+				AC498DC525EE360300955C17 /* SafariServices.framework in Frameworks */,
+				AC498DCB25EE361200955C17 /* WebKit.framework in Frameworks */,
+				AC498DA825EE345300955C17 /* PersonalizedAdConsent.framework in Frameworks */,
+				AC498DB925EE35DE00955C17 /* AdSupport.framework in Frameworks */,
+				AC498DA925EE345300955C17 /* GoogleUtilities.framework in Frameworks */,
+				AC498DBD25EE35EB00955C17 /* CoreMedia.framework in Frameworks */,
+				AC498DAE25EE345300955C17 /* UserMessagingPlatform.framework in Frameworks */,
+				AC498DCD25EE361D00955C17 /* libsqlite3.tbd in Frameworks */,
+				AC498DB725EE35D600955C17 /* AVFoundation.framework in Frameworks */,
 				C36CAF42111F732953C14234 /* Pods_AnyThinkSDKDemo.framework in Frameworks */,
+				AC498DB425EE352B00955C17 /* AnyThinkSigmobAdapter.framework in Frameworks */,
+				AC498DC325EE35FD00955C17 /* MobileCoreServices.framework in Frameworks */,
+				AC498DB325EE352B00955C17 /* WindSDK.framework in Frameworks */,
+				AC498DBF25EE35F200955C17 /* CoreMotion.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -71,6 +145,19 @@
 		1BE5C78DE8928691D97412C1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AC498DCE25EE362200955C17 /* libz.tbd */,
+				AC498DCC25EE361800955C17 /* libsqlite3.tbd */,
+				AC498DCA25EE361200955C17 /* WebKit.framework */,
+				AC498DC825EE360D00955C17 /* SystemConfiguration.framework */,
+				AC498DC625EE360800955C17 /* StoreKit.framework */,
+				AC498DC425EE360300955C17 /* SafariServices.framework */,
+				AC498DC225EE35FD00955C17 /* MobileCoreServices.framework */,
+				AC498DC025EE35F700955C17 /* CoreTelephony.framework */,
+				AC498DBE25EE35F200955C17 /* CoreMotion.framework */,
+				AC498DBC25EE35EB00955C17 /* CoreMedia.framework */,
+				AC498DBA25EE35E500955C17 /* CoreLocation.framework */,
+				AC498DB825EE35DE00955C17 /* AdSupport.framework */,
+				AC498DB625EE35D600955C17 /* AVFoundation.framework */,
 				E7A388D01471A9429C81957B /* Pods_AnyThinkSDKDemo.framework */,
 			);
 			name = Frameworks;
@@ -88,6 +175,8 @@
 		9BBD008B24863047009EAD66 = {
 			isa = PBXGroup;
 			children = (
+				AC498DAF25EE352B00955C17 /* sigmob */,
+				AC498D9E25EE345300955C17 /* admob */,
 				9BBD009624863048009EAD66 /* AnyThinkSDKDemo */,
 				9BBD009524863048009EAD66 /* Products */,
 				2F88623D9B59A22EF880A819 /* Pods */,
@@ -118,6 +207,8 @@
 				9BBD00B6248630C8009EAD66 /* ATNativeViewController.m */,
 				9BBD00B7248630C8009EAD66 /* ATRewardedVideoVideoViewController.h */,
 				9BBD00BA248630C8009EAD66 /* ATRewardedVideoVideoViewController.m */,
+				9B6DF73B259436DD004E9FDB /* ATSplashViewController.h */,
+				9B6DF73C259436DD004E9FDB /* ATSplashViewController.m */,
 				9BBD00B8248630C8009EAD66 /* MTAutolayoutCategories.h */,
 				9BBD00B4248630C8009EAD66 /* MTAutolayoutCategories.m */,
 				9BBD009724863048009EAD66 /* AppDelegate.h */,
@@ -135,6 +226,33 @@
 			path = AnyThinkSDKDemo;
 			sourceTree = "<group>";
 		};
+		AC498D9E25EE345300955C17 /* admob */ = {
+			isa = PBXGroup;
+			children = (
+				AC498D9F25EE345300955C17 /* GoogleAppMeasurement.framework */,
+				AC498DA025EE345300955C17 /* PersonalizedAdConsent.framework */,
+				AC498DA125EE345300955C17 /* GoogleUtilities.framework */,
+				AC498DA225EE345300955C17 /* PromisesObjC.framework */,
+				AC498DA325EE345300955C17 /* AnyThinkAdmobAdapter.framework */,
+				AC498DA425EE345300955C17 /* nanopb.framework */,
+				AC498DA525EE345300955C17 /* GoogleMobileAds.framework */,
+				AC498DA625EE345300955C17 /* UserMessagingPlatform.framework */,
+			);
+			name = admob;
+			path = Pods/AnyThinkiOS/admob;
+			sourceTree = "<group>";
+		};
+		AC498DAF25EE352B00955C17 /* sigmob */ = {
+			isa = PBXGroup;
+			children = (
+				AC498DB025EE352B00955C17 /* WindSDK.framework */,
+				AC498DB125EE352B00955C17 /* AnyThinkSigmobAdapter.framework */,
+				AC498DB225EE352B00955C17 /* Sigmob.bundle */,
+			);
+			name = sigmob;
+			path = Pods/AnyThinkiOS/sigmob;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -146,8 +264,7 @@
 				9BBD009024863048009EAD66 /* Sources */,
 				9BBD009124863048009EAD66 /* Frameworks */,
 				9BBD009224863048009EAD66 /* Resources */,
-				8EC0A2389FCAD0453EF72E74 /* [CP] Embed Pods Frameworks */,
-				CB8DE9EC6741906FC7A5C5EA /* [CP] Copy Pods Resources */,
+				888D1066486B9D7EFE435BB6 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -197,6 +314,7 @@
 			files = (
 				9BBD00A72486304C009EAD66 /* LaunchScreen.storyboard in Resources */,
 				9BBD00A42486304C009EAD66 /* Assets.xcassets in Resources */,
+				AC498DB525EE352B00955C17 /* Sigmob.bundle in Resources */,
 				9BBD00A224863048009EAD66 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -204,24 +322,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		8EC0A2389FCAD0453EF72E74 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-AnyThinkSDKDemo/Pods-AnyThinkSDKDemo-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-AnyThinkSDKDemo/Pods-AnyThinkSDKDemo-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-AnyThinkSDKDemo/Pods-AnyThinkSDKDemo-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		CB8DE9EC6741906FC7A5C5EA /* [CP] Copy Pods Resources */ = {
+		888D1066486B9D7EFE435BB6 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -277,6 +378,7 @@
 				9BBD00C1248630C8009EAD66 /* ATNativeViewController.m in Sources */,
 				9BBD00BF248630C8009EAD66 /* ATInterstitialViewController.m in Sources */,
 				9BBD00C4248630C8009EAD66 /* ATNativeBannerViewController.m in Sources */,
+				9B6DF73D259436DD004E9FDB /* ATSplashViewController.m in Sources */,
 				9BBD00C2248630C8009EAD66 /* ATRewardedVideoVideoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -420,6 +522,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6YXYV74FF7;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/AnyThinkSDKDemo/Core",
+					"$(PROJECT_DIR)/Pods/AnyThinkiOS/admob",
+					"$(PROJECT_DIR)/Pods/AnyThinkiOS/sigmob",
+				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"COCOAPODS=1",
@@ -437,6 +546,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.anythink.AnyThinkSDKDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -450,6 +560,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6YXYV74FF7;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/AnyThinkSDKDemo/Core",
+					"$(PROJECT_DIR)/Pods/AnyThinkiOS/admob",
+					"$(PROJECT_DIR)/Pods/AnyThinkiOS/sigmob",
+				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"COCOAPODS=1",
@@ -467,6 +584,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.anythink.AnyThinkSDKDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";

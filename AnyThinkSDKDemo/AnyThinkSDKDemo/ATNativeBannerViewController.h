@@ -13,6 +13,7 @@ extern NSString *const kInmobiPlacement;
 extern NSString *const kFacebookPlacement;
 extern NSString *const kAdMobPlacement;
 extern NSString *const kApplovinPlacement;
+extern NSString *const kMopubPlacementName;
 extern NSString *const kMintegralPlacement;
 extern NSString *const kGDTPlacement;
 extern NSString *const kGDTTemplatePlacement;
