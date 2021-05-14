@@ -19,8 +19,8 @@ target 'AnyThinkSDKDemo' do
 #   pod 'PersonalizedAdConsent'
 ##
 ###   #TouTiao
-#  pod 'AnyThinkiOS/AnyThinkTouTiaoAdapter','5.7.44'
-##   pod 'Ads-CN' , '3.6.1.1'
+#  pod 'AnyThinkiOS/AnyThinkPangleAdapter','5.7.44'
+#   pod 'Ads-CN' , '3.6.1.1'
 ##
 ###   #Applovin
 #  pod 'AnyThinkiOS/AnyThinkApplovinAdapter','5.7.44'
