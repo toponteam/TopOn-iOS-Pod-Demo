@@ -261,6 +261,15 @@ static NSString *const kOnlineApiPlacementID = @"b5fa2509a93b71";
     NSLog(@"ATSplashViewController::splashZoomOutViewDidCloseForPlacementID:%@ extra:%@",placementID,extra);
 }
 
+- (void)splashDetailDidClosedForPlacementID:(NSString*)placementID extra:(NSDictionary *) extra {
+    NSLog(@"ATSplashViewController::splashDetailDidClosedForPlacementID:%@ extra:%@",placementID,extra);
+}
+
+- (void)splashDidShowFailedForPlacementID:(NSString*)placementID error:(NSError *)error extra:(NSDictionary *) extra {
+    NSLog(@"ATSplashViewController::splashDidShowFailedForPlacementID:%@ error:%@ extra:%@",placementID,error,extra);
+}
+
+
 // MARK:- ATNativeSplashDelegate
 - (void)didClickNaitveSplashAdForPlacementID:(NSString *)placementID extra:(NSDictionary *)extra {
     NSLog(@"ATSplashViewController::didClickNaitveSplashAdForPlacementID:%@ extra:%@",placementID,extra);
