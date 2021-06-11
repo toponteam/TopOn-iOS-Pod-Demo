@@ -188,6 +188,9 @@ static NSString *const kOnlineApiPlacementID = @"b5fa2509a93b71";
 //    NSMutableDictionary *info = [NSMutableDictionary dictionary];
 //    info[@"result"] = @{@"isLoading":checkLoadModel.isLoading ? @"YES" : @"NO", @"isReady":checkLoadModel.isReady ? @"YES" : @"NO", @"adOfferInfo":checkLoadModel.adOfferInfo};
 //    NSLog(@"%@",[NSString stringWithFormat:@"\nAPI invocation info:\n*****************************\n%@ \n*****************************", info]);
+//    5.7.53
+    NSArray *caches = [[ATAdManager sharedManager] getSplashValidAdsForPlacementID: _placementIDs[_name]];
+    NSLog(@"ValidAds -- %@",caches);
     
     BOOL ready = [[ATAdManager sharedManager] splashReadyForPlacementID:_placementIDs[_name]];
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:ready ? @"Ready!" : @"Not Yet!" message:nil preferredStyle:UIAlertControllerStyleAlert];

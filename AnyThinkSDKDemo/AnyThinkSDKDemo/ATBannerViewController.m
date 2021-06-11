@@ -152,6 +152,11 @@ NSString *const kBannerLoadingFailedNotification = @"banner_failed_to_load";
 }
 
 -(void) readyButtonTapped {
+//    v5.7.53
+    ATCheckLoadModel *model = [[ATAdManager sharedManager] checkBannerLoadStatusForPlacementID:_placementIDs[_name]];
+    NSArray *array = [[ATAdManager sharedManager] getBannerValidAdsForPlacementID:_placementIDs[_name]];
+    NSLog(@"ValidAds -- %@",array);
+    
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:[[ATAdManager sharedManager] bannerAdReadyForPlacementID:_placementIDs[_name]] ? @"Ready!" : @"Not Yet!" message:nil preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *action = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:nil];
     [alert addAction:action];

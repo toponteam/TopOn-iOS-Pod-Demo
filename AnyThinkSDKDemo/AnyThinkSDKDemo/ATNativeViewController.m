@@ -297,6 +297,11 @@ static NSString *const kCallbackKey = @"request";
     UIAlertAction *action = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:nil];
     [alert addAction:action];
     [self presentViewController:alert animated:YES completion:nil];
+    
+//    5.7.53
+    ATCheckLoadModel *model = [[ATAdManager sharedManager] checkNativeLoadStatusForPlacementID:_placementIDs[_name]];
+    NSArray *array = [[ATAdManager sharedManager] getNativeValidAdsForPlacementID:_placementIDs[_name]];
+    NSLog(@"ValidAds -- %@",array);
 }
 
 -(void) removeAdButtonTapped {

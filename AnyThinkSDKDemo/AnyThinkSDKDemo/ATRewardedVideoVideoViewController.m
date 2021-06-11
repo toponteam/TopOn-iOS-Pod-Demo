@@ -169,6 +169,10 @@ static NSString *const kMyTargetPlacementID = @"b5feaa2f32f161";
 //    [alert addAction:action];
 //    [self presentViewController:alert animated:YES completion:nil];
     [[ATAdManager sharedManager] checkRewardedVideoLoadStatusForPlacementID:_placementIDs[_name]];
+    
+//    5.7.53
+    NSArray *array = [[ATAdManager sharedManager] getRewardedVideoValidAdsForPlacementID:_placementIDs[_name]];
+    NSLog(@"ValidAds -- %@",array);
 
 }
 

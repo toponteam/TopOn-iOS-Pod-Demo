@@ -171,6 +171,9 @@ static NSString *const kMyTargetPlacementID = @"b5feaa306e483c";
 //    [alert addAction:action];
 //    [self presentViewController:alert animated:YES completion:nil];
     [[ATAdManager sharedManager] checkInterstitialLoadStatusForPlacementID:_placementIDs[_name]];
+//    5.7.53
+    NSArray *array = [[ATAdManager sharedManager] getInterstitialValidAdsForPlacementID:_placementIDs[_name]];
+    NSLog(@"ValidAds --  %@",array);
 }
 
 -(void) clearAdButtonTapped {
