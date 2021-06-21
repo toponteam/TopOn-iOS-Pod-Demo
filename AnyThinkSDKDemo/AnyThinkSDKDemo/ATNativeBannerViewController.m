@@ -111,7 +111,7 @@ static NSString *const kKSPlacementID = @"b5e4613e50cbf2";
     if ([ATNativeBannerWrapper nativeBannerAdReadyForPlacementID:_placementID]) {
         [self showAd];
     } else {
-        [ATNativeBannerWrapper loadNativeBannerAdWithPlacementID:_placementID extra:@{kExtraInfoNativeAdSizeKey:[NSValue valueWithCGSize:CGSizeMake(CGRectGetWidth(self.view.bounds), 120.0f)]} customData:nil delegate:self];
+        [ATNativeBannerWrapper loadNativeBannerAdWithPlacementID:_placementID extra:@{kATExtraInfoNativeAdSizeKey:[NSValue valueWithCGSize:CGSizeMake(CGRectGetWidth(self.view.bounds), 120.0f)]} customData:nil delegate:self];
     }
 }
 
@@ -123,7 +123,7 @@ static NSString *const kKSPlacementID = @"b5e4613e50cbf2";
 }
 
 -(void) reloadADButtonTapped {
-    [ATNativeBannerWrapper loadNativeBannerAdWithPlacementID:_placementID extra:@{kExtraInfoNativeAdSizeKey:[NSValue valueWithCGSize:CGSizeMake(CGRectGetWidth(self.view.bounds), 120.0f)]} customData:nil delegate:self];
+    [ATNativeBannerWrapper loadNativeBannerAdWithPlacementID:_placementID extra:@{kATExtraInfoNativeAdSizeKey:[NSValue valueWithCGSize:CGSizeMake(CGRectGetWidth(self.view.bounds), 120.0f)]} customData:nil delegate:self];
 }
 
 -(void) removeAdButtonTapped {
