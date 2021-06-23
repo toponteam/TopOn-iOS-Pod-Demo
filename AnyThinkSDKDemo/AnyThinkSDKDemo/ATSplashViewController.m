@@ -35,6 +35,8 @@ static NSString *const kOnlineApiPlacementID = @"b5fa2509a93b71";
 @property(nonatomic, readonly) UIButton *readyButton;
 @property(nonatomic, readonly) NSString *name;
 @property(nonatomic, readonly) NSDictionary *placementIDs;
+@property(nonatomic, strong) UIButton *skipButton;
+
 @end
 
 @implementation ATSplashViewController
@@ -222,9 +224,32 @@ static NSString *const kOnlineApiPlacementID = @"b5fa2509a93b71";
     }else {
         mainWindow = [UIApplication sharedApplication].keyWindow;
     }
-    [[ATAdManager sharedManager] showSplashWithPlacementID:_placementIDs[_name] window:mainWindow delegate:self];
+    
+    self.skipButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.skipButton.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.3];
+    self.skipButton.frame = CGRectMake([UIScreen mainScreen].bounds.size.width - 90 - 30, 50, 90, 28);
+    self.skipButton.layer.cornerRadius = 14;
+    self.skipButton.titleLabel.font = [UIFont systemFontOfSize:14];
+    
+    NSMutableDictionary *mutableDict = [NSMutableDictionary dictionary];
+    [mutableDict setValue:@5000 forKey:kATSplashExtraCountdownKey];
+    [mutableDict setValue:self.skipButton forKey:kATSplashExtraCustomSkipButtonKey];
+    [mutableDict setValue:@500 forKey:kATSplashExtraCountdownIntervalKey];
+    
+    [[ATAdManager sharedManager] showSplashWithPlacementID:_placementIDs[_name] window:mainWindow extra:mutableDict delegate:self];
 }
 
+- (void)splashCountdownTime:(NSInteger)countdown forPlacementID:(NSString *)placementID extra:(NSDictionary *)extra {
+    NSLog(@"ATSplashViewController::splashCountdownTime:%ld forPlacementID:%@",countdown,placementID);
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        NSString *title = [NSString stringWithFormat:@"%lds | 自定义Skip",countdown/1000];
+        if (countdown/1000) {
+            [self.skipButton setTitle:title forState:UIControlStateNormal];
+        }
+    });
+    
+}
 // MARK:- splash delegate
 
 - (void)didFailToLoadADWithPlacementID:(NSString *)placementID error:(NSError *)error {
