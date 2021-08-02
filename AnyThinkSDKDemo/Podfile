@@ -6,48 +6,97 @@ target 'AnyThinkSDKDemo' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
   
+  pod 'TopOnTest','1.0.0'
   
-  pod 'TopOnTest', :path=> '/Users/guopeng/Documents/GitHub/topon_pod_test'
-
-  pod 'TopOnTest/AnyThinkGDTAdapterTT', :path=> '/Users/guopeng/Documents/GitHub/topon_pod_test'
+  pod 'TopOnTest/AnyThinkApplovinAdapterTT','1.0.0'
   
-  pod 'TopOnTest/AnyThinkApplovinAdapterTT', :path=> '/Users/guopeng/Documents/GitHub/topon_pod_test'
+  pod 'TopOnTest/AnyThinkGDTAdapterTT','1.0.0'
 
-  pod 'TopOnTest/AnyThinkUnityAdsAdapterTT', :path=> '/Users/guopeng/Documents/GitHub/topon_pod_test'
+  pod 'TopOnTest/AnyThinkUnityAdsAdapterTT','1.0.0'
 
-  pod 'TopOnTest/AnyThinkSigmobAdapterTT', :path=> '/Users/guopeng/Documents/GitHub/topon_pod_test'
+  pod 'TopOnTest/AnyThinkSigmobAdapterTT','1.0.0'
 
-  pod 'TopOnTest/AnyThinkKuaiShouAdapterTT', :path=> '/Users/guopeng/Documents/GitHub/topon_pod_test'
+  pod 'TopOnTest/AnyThinkKuaiShouAdapterTT','1.0.0'
 
-  pod 'TopOnTest/AnyThinkAdColonyAdapterTT', :path=> '/Users/guopeng/Documents/GitHub/topon_pod_test'
+  pod 'TopOnTest/AnyThinkAdColonyAdapterTT','1.0.0'
 
-  pod 'TopOnTest/AnyThinkTapjoyAdapterTT', :path=> '/Users/guopeng/Documents/GitHub/topon_pod_test'
+  pod 'TopOnTest/AnyThinkTapjoyAdapterTT','1.0.0'
+  
+  pod 'TopOnTest/AnyThinkBaiduAdapterTT','1.0.0'
+  
+  pod 'TopOnTest/AnyThinkNendAdapterTT','1.0.0'
 
-  pod 'TopOnTest/AnyThinkBaiduAdapterTT', :path=> '/Users/guopeng/Documents/GitHub/topon_pod_test'
+  pod 'TopOnTest/AnyThinkMaioAdapterTT','1.0.0'
 
-  pod 'TopOnTest/AnyThinkNendAdapterTT', :path=> '/Users/guopeng/Documents/GitHub/topon_pod_test'
+  pod 'TopOnTest/AnyThinkMyTargetAdapterTT','1.0.0'
 
-  pod 'TopOnTest/AnyThinkMaioAdapterTT', :path=> '/Users/guopeng/Documents/GitHub/topon_pod_test'
+  pod 'TopOnTest/AnyThinkFyberAdapterTT','1.0.0'
 
-  pod 'TopOnTest/AnyThinkMyTargetAdapterTT', :path=> '/Users/guopeng/Documents/GitHub/topon_pod_test'
+  pod 'TopOnTest/AnyThinkChartboostAdapterTT','1.0.0'
 
-  pod 'TopOnTest/AnyThinkFyberAdapterTT', :path=> '/Users/guopeng/Documents/GitHub/topon_pod_test'
+  pod 'TopOnTest/AnyThinkStartAppAdapterTT','1.0.0'
 
-  pod 'TopOnTest/AnyThinkChartboostAdapterTT', :path=> '/Users/guopeng/Documents/GitHub/topon_pod_test'
+  pod 'TopOnTest/AnyThinkIronSourceAdapterTT','1.0.0'
+  
+  pod 'TopOnTest/AnyThinkInmobiAdapterTT','1.0.0'
 
-  pod 'TopOnTest/AnyThinkStartAppAdapterTT', :path=> '/Users/guopeng/Documents/GitHub/topon_pod_test'
+  pod 'TopOnTest/AnyThinkMintegralAdapterTT','1.0.0'
 
-  pod 'TopOnTest/AnyThinkIronSourceAdapterTT', :path=> '/Users/guopeng/Documents/GitHub/topon_pod_test'
+  pod 'TopOnTest/AnyThinkAdmobAdapterTT','1.0.0'
 
-  pod 'TopOnTest/AnyThinkInmobiAdapterTT', :path=> '/Users/guopeng/Documents/GitHub/topon_pod_test'
+  pod 'TopOnTest/AnyThinkFacebookAdapterTT','1.0.0'
 
-  pod 'TopOnTest/AnyThinkMintegralAdapterTT', :path=> '/Users/guopeng/Documents/GitHub/topon_pod_test'
+  pod 'TopOnTest/AnyThinkMopubAdapterTT','1.0.0'
 
-  pod 'TopOnTest/AnyThinkAdmobAdapterTT', :path=> '/Users/guopeng/Documents/GitHub/topon_pod_test'
+  pod 'TopOnTest/AnyThinkKidozAdapterTT','1.0.0'
 
-  pod 'TopOnTest/AnyThinkFacebookAdapterTT', :path=> '/Users/guopeng/Documents/GitHub/topon_pod_test'
+  pod 'TopOnTest/AnyThinkOguryAdapterTT','1.0.0'
+ 
+  pod 'TopOnTest/AnyThinkVungleAdapterTT','1.0.0'
+  
+  
+    
+#  pod 'TopOnTest', :path=> '/Users/guopeng/Documents/GitHub/topon_pod_test'
 
-  pod 'TopOnTest/AnyThinkMopubAdapterTT', :path=> '/Users/guopeng/Documents/GitHub/topon_pod_test'
+  #pod 'TopOnTest/AnyThinkGDTAdapterTT', :path=> '/Users/guopeng/Documents/GitHub/topon_pod_test'
+  
+ # pod 'TopOnTest/AnyThinkApplovinAdapterTT', :path=> '/Users/guopeng/Documents/GitHub/topon_pod_test'
+
+ # pod 'TopOnTest/AnyThinkUnityAdsAdapterTT', :path=> '/Users/guopeng/Documents/GitHub/topon_pod_test'
+
+  #pod 'TopOnTest/AnyThinkSigmobAdapterTT', :path=> '/Users/guopeng/Documents/GitHub/topon_pod_test'
+
+  #pod 'TopOnTest/AnyThinkKuaiShouAdapterTT', :path=> '/Users/guopeng/Documents/GitHub/topon_pod_test'
+
+  #pod 'TopOnTest/AnyThinkAdColonyAdapterTT', :path=> '/Users/guopeng/Documents/GitHub/topon_pod_test'
+
+ # pod 'TopOnTest/AnyThinkTapjoyAdapterTT', :path=> '/Users/guopeng/Documents/GitHub/topon_pod_test'
+
+ # pod 'TopOnTest/AnyThinkBaiduAdapterTT', :path=> '/Users/guopeng/Documents/GitHub/topon_pod_test'
+
+  #pod 'TopOnTest/AnyThinkNendAdapterTT', :path=> '/Users/guopeng/Documents/GitHub/topon_pod_test'
+
+ # pod 'TopOnTest/AnyThinkMaioAdapterTT', :path=> '/Users/guopeng/Documents/GitHub/topon_pod_test'
+
+ # pod 'TopOnTest/AnyThinkMyTargetAdapterTT', :path=> '/Users/guopeng/Documents/GitHub/topon_pod_test'
+
+  #pod 'TopOnTest/AnyThinkFyberAdapterTT', :path=> '/Users/guopeng/Documents/GitHub/topon_pod_test'
+
+ # pod 'TopOnTest/AnyThinkChartboostAdapterTT', :path=> '/Users/guopeng/Documents/GitHub/topon_pod_test'
+
+  #pod 'TopOnTest/AnyThinkStartAppAdapterTT', :path=> '/Users/guopeng/Documents/GitHub/topon_pod_test'
+
+  #pod 'TopOnTest/AnyThinkIronSourceAdapterTT', :path=> '/Users/guopeng/Documents/GitHub/topon_pod_test'
+
+  #pod 'TopOnTest/AnyThinkInmobiAdapterTT', :path=> '/Users/guopeng/Documents/GitHub/topon_pod_test'
+
+  #pod 'TopOnTest/AnyThinkMintegralAdapterTT', :path=> '/Users/guopeng/Documents/GitHub/topon_pod_test'
+
+  #pod 'TopOnTest/AnyThinkAdmobAdapterTT', :path=> '/Users/guopeng/Documents/GitHub/topon_pod_test'
+
+  #pod 'TopOnTest/AnyThinkFacebookAdapterTT', :path=> '/Users/guopeng/Documents/GitHub/topon_pod_test'
+
+  #pod 'TopOnTest/AnyThinkMopubAdapterTT', :path=> '/Users/guopeng/Documents/GitHub/topon_pod_test'
 
   
   

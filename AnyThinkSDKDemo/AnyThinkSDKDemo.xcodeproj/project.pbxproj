@@ -36,6 +36,7 @@
 		AC498DCD25EE361D00955C17 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = AC498DCC25EE361800955C17 /* libsqlite3.tbd */; };
 		AC498DCF25EE362500955C17 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = AC498DCE25EE362200955C17 /* libz.tbd */; };
 		C36CAF42111F732953C14234 /* Pods_AnyThinkSDKDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7A388D01471A9429C81957B /* Pods_AnyThinkSDKDemo.framework */; };
+		E08FC7CE26B7D9E500FCBFC1 /* FBBiddingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E08FC7CD26B7D9E500FCBFC1 /* FBBiddingKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -82,6 +83,7 @@
 		AC498DCA25EE361200955C17 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		AC498DCC25EE361800955C17 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		AC498DCE25EE362200955C17 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		E08FC7CD26B7D9E500FCBFC1 /* FBBiddingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBBiddingKit.framework; sourceTree = "<group>"; };
 		E7A388D01471A9429C81957B /* Pods_AnyThinkSDKDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AnyThinkSDKDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -103,6 +105,7 @@
 				AC498DB725EE35D600955C17 /* AVFoundation.framework in Frameworks */,
 				C36CAF42111F732953C14234 /* Pods_AnyThinkSDKDemo.framework in Frameworks */,
 				AC498DC325EE35FD00955C17 /* MobileCoreServices.framework in Frameworks */,
+				E08FC7CE26B7D9E500FCBFC1 /* FBBiddingKit.framework in Frameworks */,
 				AC498DBF25EE35F200955C17 /* CoreMotion.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -161,6 +164,7 @@
 		9BBD009624863048009EAD66 /* AnyThinkSDKDemo */ = {
 			isa = PBXGroup;
 			children = (
+				E08FC7CD26B7D9E500FCBFC1 /* FBBiddingKit.framework */,
 				9BBD00B5248630C8009EAD66 /* ATBannerViewController.h */,
 				9BBD00B2248630C7009EAD66 /* ATBannerViewController.m */,
 				9BBD00BB248630C8009EAD66 /* ATDrawViewController.h */,
@@ -484,6 +488,7 @@
 					"$(PROJECT_DIR)/AnyThinkSDKDemo/Core",
 					"$(PROJECT_DIR)/Pods/AnyThinkiOS/admob",
 					"$(PROJECT_DIR)/Pods/AnyThinkiOS/sigmob",
+					"$(PROJECT_DIR)/AnyThinkSDKDemo",
 				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
@@ -522,6 +527,7 @@
 					"$(PROJECT_DIR)/AnyThinkSDKDemo/Core",
 					"$(PROJECT_DIR)/Pods/AnyThinkiOS/admob",
 					"$(PROJECT_DIR)/Pods/AnyThinkiOS/sigmob",
+					"$(PROJECT_DIR)/AnyThinkSDKDemo",
 				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",

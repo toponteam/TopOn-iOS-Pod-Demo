@@ -1,0 +1,6 @@
+framework module FBBiddingKit {
+  umbrella header "FBBiddingKit.h"
+
+  export *
+  module * { export * }
+}
