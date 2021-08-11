@@ -189,7 +189,7 @@ static NSString *const kMyTargetPlacementID = @"b5feaa306e483c";
     _failureTipsLabel.hidden = YES;
     [self.view addSubview:_loadingView];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-        [[ATAdManager sharedManager] loadADWithPlacementID:_placementIDs[_name] extra:[_name isEqualToString:kSigmobRVIntPlacement] ? @{kATInterstitialExtraUsesRewardedVideo:@YES} : nil delegate:self];
+        [[ATAdManager sharedManager] loadADWithPlacementID:_placementIDs[_name] extra:[_name isEqualToString:kSigmobRVIntPlacement] ? @{kATInterstitialExtraUsesRewardedVideo:@NO} : nil delegate:self];
     });
 }
 
