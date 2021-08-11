@@ -45,7 +45,7 @@ target 'AnyThinkSDKDemo' do
 ##
 ###   #GDT
 #  pod 'AnyThinkiOS/AnyThinkGDTAdapter','5.7.63'
-##   pod 'GDTMobSDK', '4.12.81'
+##   pod 'GDTMobSDK', '4.13.0'
 ##
 ###   #Unity Ads
 #  pod 'AnyThinkiOS/AnyThinkUnityAdsAdapter','5.7.63'
@@ -89,7 +89,7 @@ target 'AnyThinkSDKDemo' do
 ###
 ####   #KuaiShou
 #  pod 'AnyThinkiOS/AnyThinkKSAdapter','5.7.63'
-##   pod 'KSAdSDK', '3.3.10.1'
+##   pod 'KSAdSDK', '3.3.13'
 ##   pod 'SDWebImage'
 ###
 ####   #Baidu
@@ -103,7 +103,7 @@ target 'AnyThinkSDKDemo' do
 ###
 ####   #Sigmob
 #  pod 'AnyThinkiOS/AnyThinkSigmobAdapter','5.7.63'
-##   pod 'SigmobAd-iOS', '3.2.1'
+##   pod 'SigmobAd-iOS', '3.2.4'
 ###
 ####   #StartApp
 #  pod 'AnyThinkiOS/AnyThinkStartAppAdapter','5.7.63'
