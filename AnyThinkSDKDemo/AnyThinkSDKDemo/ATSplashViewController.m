@@ -123,10 +123,10 @@ static NSString *const kOnlineApiPlacementID = @"b5fa2509a93b71";
         };
     } else if ([name isEqualToString:kSigmobPlacement]) {
         extra = @{kATSplashExtraNetworkFirmID:@29,
-                  kATSplashExtraAdSourceIDKey:@"72008",
-                  kATSplashExtraSigmobAppKey:@"c8bee8e83f296c2a",
-                  kATSplashExtraSigmobAppID:@"1830",
-                  kATSplashExtraSigmobPlacementID:@"e430bc36052",
+                  kATSplashExtraAdSourceIDKey:@"12302",
+                  kATSplashExtraSigmobAppKey:@"eccdcdbd9adbd4a7",
+                  kATSplashExtraSigmobAppID:@"6877",
+                  kATSplashExtraSigmobPlacementID:@"ea1f8f9bd12",
                   kATSplashExtraTolerateTimeoutKey:@(tolerateTimeout)
         };
     } else if ([name isEqualToString:kGDTPlacement]) {
@@ -145,9 +145,9 @@ static NSString *const kOnlineApiPlacementID = @"b5fa2509a93b71";
         };
     } else if ([name isEqualToString:kTTPlacementName]) {
         extra = @{kATSplashExtraNetworkFirmID:@15,
-                  kATSplashExtraAdSourceIDKey:@"71991",
-                  kATSplashExtraAppID:@"5015421",
-                  kATSplashExtraSlotID:@"815421339",
+                  kATSplashExtraAdSourceIDKey:@"3628",
+                  kATSplashExtraAppID:@"5000546",
+                  kATSplashExtraSlotID:@"800546808",
                   kATSplashExtraTolerateTimeoutKey:@(tolerateTimeout)
         };
     } else if ([name isEqualToString:kAdMobPlacement]) {
