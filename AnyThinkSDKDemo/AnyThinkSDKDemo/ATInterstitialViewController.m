@@ -45,7 +45,7 @@ static NSString *const kNendPlacementID = @"b5cb96db9b3b0f";
 static NSString *const kNendVideoPlacementID = @"b5cb96dd930c57";
 static NSString *const kNendFullScreenPlacementID = @"b5cb96df0f1914";
 static NSString *const kMaioPlacementID = @"b5cb96cf795c4b";
-static NSString *const kSigmobPlacementID = @"b5d771f79e4a32";
+static NSString *const kSigmobPlacementID = @"b5ed8ceb5a286d";
 static NSString *const kSigmobIntRVPlacementID = @"b5d771f79e4a32";
 static NSString *const kKSPlacementID = @"b5d807a4846f50";
 static NSString *const kMyOfferPlacementID = @"b5db6c26999c31";
@@ -189,7 +189,7 @@ static NSString *const kMyTargetPlacementID = @"b5feaa306e483c";
     _failureTipsLabel.hidden = YES;
     [self.view addSubview:_loadingView];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-        [[ATAdManager sharedManager] loadADWithPlacementID:_placementIDs[_name] extra:[_name isEqualToString:kSigmobRVIntPlacement] ? @{kATInterstitialExtraUsesRewardedVideo:@NO} : nil delegate:self];
+        [[ATAdManager sharedManager] loadADWithPlacementID:_placementIDs[_name] extra:[_name isEqualToString:kSigmobRVIntPlacement] ? @{kATInterstitialExtraUsesRewardedVideo:@YES} : nil delegate:self];
     });
 }
 
