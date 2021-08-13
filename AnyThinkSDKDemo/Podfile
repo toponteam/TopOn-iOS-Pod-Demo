@@ -28,7 +28,7 @@ target 'AnyThinkSDKDemo' do
   pod 'AnyThinkiOS/AnyThinkKidozAdapter','5.7.65'
   pod 'AnyThinkiOS/AnyThinkFyberAdapter','5.7.65'
   pod 'AnyThinkiOS/AnyThinkMyTargetAdapter','5.7.65'
-  pod 'AnyThinkiOS/AnyThinkKuaiShouAdapter','5.7.65'  #AnyThinkKSAdapter
+  pod 'AnyThinkiOS/AnyThinkKSAdapter','5.7.65' 
   pod 'AnyThinkiOS/AnyThinkBaiduAdapter','5.7.65'
   pod 'AnyThinkiOS/AnyThinkOguryAdapter','5.7.65'
   pod 'AnyThinkiOS/AnyThinkMopubAdapter','5.7.65'
