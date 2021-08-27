@@ -10,7 +10,6 @@ target 'AnyThinkSDKDemo' do
   pod 'AnyThinkiOS','5.7.70'
   pod 'AnyThinkiOS/AnyThinkAdmobAdapter','5.7.70'
   pod 'AnyThinkiOS/AnyThinkPangleAdapter','5.7.70'
-  pod 'Ads-CN-Beta','3.9.0.2'
   pod 'AnyThinkiOS/AnyThinkFacebookAdapter','5.7.70'
   pod 'AnyThinkiOS/AnyThinkGDTAdapter','5.7.70'
   pod 'AnyThinkiOS/AnyThinkMintegralAdapter','5.7.70'
