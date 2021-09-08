@@ -35,8 +35,6 @@ extern NSString *const kVunglePlacementName;
 extern NSString *const kAdcolonyPlacementName;
 extern NSString *const kGAMPlacement;
 extern NSString *const kMyOfferPlacement;
-extern NSString *const kADXPlacement;
-extern NSString *const kOnlineApiPlacement;
 extern NSString *const kKidozPlacement;
 extern NSString *const kMyTargetPlacement;
 
