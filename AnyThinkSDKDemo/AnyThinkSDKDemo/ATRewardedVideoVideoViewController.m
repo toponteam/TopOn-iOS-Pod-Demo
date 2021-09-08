@@ -111,8 +111,6 @@ static NSString *const kMyTargetPlacementID = @"b5feaa2f32f161";
                           kFyberPlacement:kFyberPlacementID,
                           kGAMPlacement:kGAMPlacementID,
                           kHeliumPlacement:kHeliumPlacementID,
-                          kADXPlacement:kADXPlacementID,
-                          kOnlineApiPlacement:kOnlineApiPlacementID,
                           kKidozPlacement:kKidozPlacementID,
                           kMyTargetPlacement:kMyTargetPlacementID
                           };

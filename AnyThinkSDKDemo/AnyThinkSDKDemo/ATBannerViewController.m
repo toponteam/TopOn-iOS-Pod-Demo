@@ -80,8 +80,6 @@ NSString *const kBannerLoadingFailedNotification = @"banner_failed_to_load";
                           kAdcolonyPlacementName:kAdColonyPlacementID,
                           kGAMPlacement:kGAMPlacementID,
                           kMyOfferPlacement:kMyofferPlacementID,
-                          kADXPlacement:kADXPlacementID,
-                          kOnlineApiPlacement:kOnlineApiPlacementID,
                           kKidozPlacement:kKidozPlacementID,
                           kMyTargetPlacement:kMyTargetPlacementID
                           };

@@ -53,9 +53,7 @@ static NSString *const kMyofferPlacementID = @"b5f33c33431ca0";
             kAdMobPlacement:kAdmobPlacementID,
             kKSPlacement:kKSPlacementID,
             kAllPlacementName:kAllPlacementID,
-            kMyOfferPlacement:kMyofferPlacementID,
-            kADXPlacement:kADXPlacementID,
-            kOnlineApiPlacement:kOnlineApiPlacementID
+            kMyOfferPlacement:kMyofferPlacementID
         };
     }
     return self;
