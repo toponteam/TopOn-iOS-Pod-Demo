@@ -290,6 +290,18 @@ static NSString *const kMyofferPlacementID = @"b5f33c33431ca0";
     NSLog(@"ATSplashViewController::splashDidShowFailedForPlacementID:%@ error:%@ extra:%@",placementID,error,extra);
 }
 
+- (void)didFinishLoadingSplashADWithPlacementID:(NSString *)placementID isTimeout:(BOOL)isTimeout{
+    NSLog(@"ATSplashViewController::didFinishLoadingSplashADWithPlacementID:%@ isTimeout:%d",placementID,isTimeout);
+//    NSLog(@"开屏成功:%@----是否超时:%d",placementID,isTimeout);
+}
+
+- (void)didTimeoutLoadingSplashADWithPlacementID:(NSString *)placementID{
+    
+    NSLog(@"ATSplashViewController::didTimeoutLoadingSplashADWithPlacementID:%@",placementID);
+
+//    NSLog(@"开屏超时:%@",placementID);
+}
+
 
 // MARK:- ATNativeSplashDelegate
 - (void)didClickNaitveSplashAdForPlacementID:(NSString *)placementID extra:(NSDictionary *)extra {
