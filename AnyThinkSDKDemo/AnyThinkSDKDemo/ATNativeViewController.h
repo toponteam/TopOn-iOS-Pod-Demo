@@ -34,8 +34,6 @@ extern NSString *const kSigmobPlacement;
 extern NSString *const kKSPlacement;
 extern NSString *const kGAMPlacement;
 extern NSString *const kMyOfferPlacement;
-extern NSString *const kADXPlacement;
-extern NSString *const kOnlineApiPlacement;
 
 //extern NSString *const kKSDrawPlacement;
 @interface ATNativeViewController : UIViewController

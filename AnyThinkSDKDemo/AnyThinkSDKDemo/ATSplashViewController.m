@@ -22,8 +22,6 @@ static NSString *const kAdmobPlacementID = @"b5f842af26114c";
 static NSString *const kKSPlacementID = @"b5fb767e454cce";
 static NSString *const kAllPlacementID = @"b5c22f0e5cc7a0";
 static NSString *const kMyofferPlacementID = @"b5f33c33431ca0";
-static NSString *const kADXPlacementID = @"b5fa25036683d2";
-static NSString *const kOnlineApiPlacementID = @"b5fa2509a93b71";
 
 @interface ATSplashViewController ()<ATSplashDelegate,ATNativeSplashDelegate>
 
