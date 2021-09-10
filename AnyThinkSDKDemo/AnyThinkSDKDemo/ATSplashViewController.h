@@ -20,6 +20,7 @@ extern NSString *const kAdMobPlacement;
 extern NSString *const kKSPlacement;
 extern NSString *const kMyOfferPlacement;
 extern NSString *const kAllPlacementName;
+extern NSString *const kKlevinPlacement;
 
 @interface ATSplashViewController : UIViewController
 

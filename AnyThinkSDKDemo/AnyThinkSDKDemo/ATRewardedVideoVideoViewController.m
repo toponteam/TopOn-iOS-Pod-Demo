@@ -74,6 +74,7 @@ static NSString *const kGAMPlacementID = @"b5f23897bba4ca";
 static NSString *const kHeliumPlacementID = @"b5f583ea323756";
 static NSString *const kKidozPlacementID = @"b5feaa2c0a6191";
 static NSString *const kMyTargetPlacementID = @"b5feaa2f32f161";
+static NSString *const kKlevinPlacementID = @"b613affe9af84c";
 
 
 @implementation ATRewardedVideoVideoViewController
@@ -112,7 +113,8 @@ static NSString *const kMyTargetPlacementID = @"b5feaa2f32f161";
                           kGAMPlacement:kGAMPlacementID,
                           kHeliumPlacement:kHeliumPlacementID,
                           kKidozPlacement:kKidozPlacementID,
-                          kMyTargetPlacement:kMyTargetPlacementID
+                          kMyTargetPlacement:kMyTargetPlacementID,
+                          kKlevinPlacement: kKlevinPlacementID
                           };
     }
     return self;

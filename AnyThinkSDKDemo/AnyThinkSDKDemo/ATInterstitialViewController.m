@@ -19,6 +19,7 @@ NSString *const kStartAppPlacement = @"StartApp";
 NSString *const kStartAppVideoPlacement = @"StartApp(Video)";
 NSString *const kFyberPlacement = @"Fyber";
 NSString *const kSigmobRVIntPlacement = @"Sibmob(RV)";
+NSString *const kKlevinPlacement = @"Klevin";
 
 static NSString *const kGDTPlacementID = @"b5bacad8ea3036";
 static NSString *const kTTPlacementID = @"b5bacad7373b89";
@@ -57,6 +58,7 @@ static NSString *const kGAMPlacementID = @"b5f2389ab6ee63";
 static NSString *const kHeliumPlacementID = @"b5f583ec12143f";
 static NSString *const kKidozPlacementID = @"b5feaa2df0e121";
 static NSString *const kMyTargetPlacementID = @"b5feaa306e483c";
+static NSString *const kKlevinPlacementID = @"b613affb04196f";
 
 
 @interface ATInterstitialViewController ()<ATInterstitialDelegate>
@@ -111,7 +113,8 @@ static NSString *const kMyTargetPlacementID = @"b5feaa306e483c";
                           kGAMPlacement:kGAMPlacementID,
                           kHeliumPlacement:kHeliumPlacementID,
                           kKidozPlacement:kKidozPlacementID,
-                          kMyTargetPlacement:kMyTargetPlacementID
+                          kMyTargetPlacement:kMyTargetPlacementID,
+                          kKlevinPlacement: kKlevinPlacementID
                           };
     }
     return self;
