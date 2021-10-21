@@ -198,5 +198,9 @@ Pod::Spec.new do |s|
     ss.ios.deployment_target = '9.0'
     ss.vendored_frameworks = 'klevin/KlevinAdSDK.framework','klevin/AnyThinkKlevinAdapter.framework'
  end
-
+ 
+  s.subspec 'mobrain' do |ss|
+    ss.ios.deployment_target = '9.0'
+    ss.vendored_frameworks = 'mobrain/ABUAdAdmobAdapter.framework','mobrain/ABUAdBaiduAdapter.framework','mobrain/ABUAdGdtAdapter.framework','mobrain/ABUAdSDK.framework','mobrain/ABUAdSDKAdapter.framework','mobrain/ABUAdSigmobAdapter.framework','mobrain/ABUAdUnityAdapter.framework','mobrain/AnyThinkMobrainAdapter.framework','mobrain/OfmMobrainAdapter.framework','mobrain/OfmSDK.framework','mobrain/OfmTopOnAdapter.framework'
+ end
 end

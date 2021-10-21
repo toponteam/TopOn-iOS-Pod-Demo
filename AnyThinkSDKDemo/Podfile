@@ -27,7 +27,8 @@ target 'AnyThinkSDKDemo' do
   pod 'LocalThrirdPartySDK/MyTarget', :path=> 'ThrirdPartySDK/'
   pod 'LocalThrirdPartySDK/nend', :path=> 'ThrirdPartySDK/'
   pod 'LocalThrirdPartySDK/ogury', :path=> 'ThrirdPartySDK/'
-  
+  pod 'LocalThrirdPartySDK/core', :path=> 'ThrirdPartySDK/'
+
 #  pod 'LocalThrirdPartySDK/pangle_noChina', :path=> 'ThrirdPartySDK/'
 #  pod 'LocalThrirdPartySDK/pangle_china_common', :path=> 'ThrirdPartySDK/'
   
