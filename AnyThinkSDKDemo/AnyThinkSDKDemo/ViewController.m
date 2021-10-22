@@ -63,19 +63,26 @@ static NSString *const kCellIdentifier = @"cell";
      extern const CGFloat FBAdOptionsViewHeight;
      */
     _placementNames = @[
-                        
+        
+                        // Splash
                         @[kMintegralPlacement, kSigmobPlacement, kGDTPlacement, kGDTZoomOutPlacement, kBaiduPlacement, kTTPlacementName, kAdMobPlacement, kKSPlacement, kAllPlacementName, kMyOfferPlacement,kKlevinPlacement],
                         
+                        //Interstitial
                         @[kGAMPlacement,kStartAppPlacement, kStartAppVideoPlacement, kSigmobRVIntPlacement, kSigmobPlacement, kMyOfferPlacement, kOguryPlacement,kKSPlacement, kHeaderBiddingPlacement, kNendPlacement, kNendInterstitialVideoPlacement, kNendFullScreenInterstitialPlacement, kMaioPlacement, kUnityAdsPlacementName, kFacebookPlacement, kAdMobPlacement, kInmobiPlacement, kApplovinPlacement, kMintegralPlacement, kMintegralVideoPlacement, kMopubPlacementName, kGDTPlacement, kChartboostPlacementName, kTapjoyPlacementName, kIronsourcePlacementName, kVunglePlacementName, kAdcolonyPlacementName, kTTPlacementName, kTTVideoPlacement, kAppnextPlacement, kBaiduPlacement, kFyberPlacement, kHeliumPlacement, kKidozPlacement, kMyTargetPlacement,kAllPlacementName,kKlevinPlacement],
                         
+                        // Banner
                         @[kGAMPlacement,kChartboostPlacementName, kVunglePlacementName, kAdcolonyPlacementName, kStartAppPlacement, kHeaderBiddingPlacement,kNendPlacement, kFacebookPlacement, kMintegralPlacement,kAdMobPlacement, kInmobiPlacement, kApplovinPlacement, kGDTPlacement, kMopubPlacementName, kTTPlacementName, kAppnextPlacement, kBaiduPlacement, kFyberPlacement, kUnityAdsPlacementName, kMyOfferPlacement,kKidozPlacement, kMyTargetPlacement, kAllPlacementName],
                         
+                        // RV
                         @[kGAMPlacement,kStartAppPlacement, kSigmobPlacement, kMyOfferPlacement, kOguryPlacement,kKSPlacement, kHeaderBiddingPlacement, kNendPlacement, kMaioPlacement, kFacebookPlacement, kAdMobPlacement, kInmobiPlacement, kApplovinPlacement, kMintegralPlacement, kMopubPlacementName, kGDTPlacement, kChartboostPlacementName, kTapjoyPlacementName, kIronsourcePlacementName, kVunglePlacementName, kAdcolonyPlacementName, kUnityAdsPlacementName, kTTPlacementName, kAppnextPlacement, kBaiduPlacement, kFyberPlacement, kHeliumPlacement,kKidozPlacement, kMyTargetPlacement, kAllPlacementName,kKlevinPlacement],
                         
-                        @[kMyOfferPlacement, kGAMPlacement,kMintegralAdvancedPlacement, kHeaderBiddingPlacement, kNendPlacement, kNendVideoPlacement, kTTFeedPlacementName, kTTDrawPlacementName, kMPPlacement, kFacebookPlacement, kAdMobPlacement, kInmobiPlacement, kApplovinPlacement, kMintegralPlacement, kMopubPlacementName, kGDTPlacement, kGDTTemplatePlacement, kAppnextPlacement, kBaiduPlacement,kKSPlacement,kKSDrawPlacement, kAllPlacementName],
+                        // Native
+                        @[kMyOfferPlacement, kGAMPlacement,kMintegralAdvancedPlacement, kHeaderBiddingPlacement, kNendPlacement, kNendVideoPlacement, kTTFeedPlacementName, kTTDrawPlacementName, kMPPlacement, kFacebookPlacement, kAdMobPlacement, kInmobiPlacement, kApplovinPlacement, kMintegralPlacement, kMopubPlacementName, kGDTPlacement, kGDTTemplatePlacement, kAppnextPlacement, kBaiduPlacement,kKSPlacement,kKSDrawPlacement,kSigmobPlacement, kAllPlacementName],
                         
-                        @[kKSPlacement,kNendPlacement, kTTFeedPlacementName, kTTDrawPlacementName, kMPPlacement, kFacebookPlacement, kAdMobPlacement, kInmobiPlacement, kApplovinPlacement, kMintegralPlacement, kMopubPlacementName, kGDTPlacement, kGDTTemplatePlacement, kAppnextPlacement, kAllPlacementName],
+                        // Native Banner
+                        @[kKSPlacement,kNendPlacement, kTTFeedPlacementName, kTTDrawPlacementName, kMPPlacement, kFacebookPlacement, kAdMobPlacement, kInmobiPlacement, kApplovinPlacement, kMintegralPlacement, kMopubPlacementName, kGDTPlacement, kGDTTemplatePlacement, kAppnextPlacement,kAllPlacementName],
                         
+                        // Native Splash
                         @[kKSPlacement,kTTFeedPlacementName, kMPPlacement, kFacebookPlacement, kAdMobPlacement, kApplovinPlacement, kMintegralPlacement, kGDTPlacement, kAppnextPlacement, kAllPlacementName]];
     
     
