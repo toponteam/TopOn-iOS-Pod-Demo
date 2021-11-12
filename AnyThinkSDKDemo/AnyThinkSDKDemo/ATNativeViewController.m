@@ -55,6 +55,7 @@ static NSString *const kKSPlacementID = @"b5e4613e50cbf2";//@"b5e43ac9ca3fc5";
 static NSString *const kGAMPlacementID = @"b5f238964f3e6f";
 static NSString *const kMyOfferPlacementID = @"b5f33878ee0646";
 static NSString *const kSigmobPlacementID = @"b6170cda99de6d";
+static NSString *const kKlevinPlacementID = @"b6172985f45143";
 
 //static NSString *const kKSDrawPlcementID = @"b5e4613e50cbf2";
 //static NSString *const kTTDrawPlacementID = @"b5c2c6d62b9d65";
@@ -215,7 +216,8 @@ static NSString *const kCallbackKey = @"request";
              kKSPlacement:kKSPlacementID,
              kGAMPlacement:kGAMPlacementID,
              kMyOfferPlacement:kMyOfferPlacementID,
-             kSigmobPlacement:kSigmobPlacementID
+             kSigmobPlacement:kSigmobPlacementID,
+             kKlevinPlacement:kKlevinPlacementID
              };
 }
 

@@ -16,6 +16,7 @@
 #import "ATDrawViewController.h"
 #import <AnyThinkSplash/AnyThinkSplash.h>
 #import <AnyThinkNative/AnyThinkNative.h>
+#import <AppTrackingTransparency/AppTrackingTransparency.h>
 
 @interface ViewController ()<UITableViewDelegate, UITableViewDataSource, ATSplashDelegate, ATNativeSplashDelegate>
 @property(nonatomic, readonly) UITableView *tableView;
@@ -53,6 +54,17 @@ static NSString *const kCellIdentifier = @"cell";
 
 -(void) handlerBannerEvent:(NSNotification*)notification {
     [self enterNextBanner];
+}
+
+- (void)viewDidAppear:(BOOL)animated{
+    if (@available(iOS 14, *)) {
+//         iOS 14
+        [ATTrackingManager requestTrackingAuthorizationWithCompletionHandler:^(ATTrackingManagerAuthorizationStatus status) {
+        }];
+    } else {
+        // Fallback on earlier versions
+    }
+
 }
 
 - (void)viewDidLoad {
@@ -102,6 +114,7 @@ static NSString *const kCellIdentifier = @"cell";
 
 
 -(void)policyButtonTapped {
+    //        If the users are not in mainland China, you need to call the following codes. Before this, please make sure that the authorization pop-up window of AppTrackingTransparency has popped up correctly, refer to the link: https://docs.toponad.com/#/en-us/ios/ios_doc/ios_sdk_config_access?id=_24-ios-15-support
     [[ATAPI sharedInstance] presentDataConsentDialogInViewController:self dismissalCallback:^{
         
     }];
