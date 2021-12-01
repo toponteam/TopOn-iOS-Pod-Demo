@@ -177,6 +177,11 @@ static NSString *const kKlevinPlacementID = @"b6172985f45143";
 @property(nonatomic, readonly) UIButton *removeAdButton;
 @property(nonatomic, readonly) UIButton *readyButton;
 @property(nonatomic, readonly) NSMutableDictionary *numberOfLoadAndCallback;
+
+@property(nonatomic, readwrite) DMADView *adView;
+@property(nonatomic, strong) ATNativeAdOffer *nativeAdOffer;
+@property(nonatomic, strong) ATNativeADConfiguration *config;
+
 @end
 static NSString *const kLoadKey = @"load";
 static NSString *const kCallbackKey = @"request";
@@ -335,10 +340,23 @@ static NSInteger adViewTag = 3333;
     config.renderingViewClass = [DMADView class];
     config.rootViewController = self;
     config.context = @{kATNativeAdConfigurationContextAdOptionsViewFrameKey:[NSValue valueWithCGRect:CGRectMake(CGRectGetWidth(self.view.bounds) - 43.0f, .0f, 43.0f, 18.0f)], kATNativeAdConfigurationContextAdLogoViewFrameKey:[NSValue valueWithCGRect:CGRectMake(.0f, .0f, 54.0f, 18.0f)], kATNativeAdConfigurationContextNetworkLogoViewFrameKey:[NSValue valueWithCGRect:CGRectMake(CGRectGetWidth(config.ADFrame) - 18.0f, CGRectGetHeight(config.ADFrame) - 18.0f, 18.0f, 18.0f)]};
-    UIView *adView = [[ATAdManager sharedManager] retriveAdViewWithPlacementID:_placementIDs[_name] configuration:config];
-    adView.tag = adViewTag;
-    [self.view addSubview:adView];
-    if (adView == nil) NSLog(@"retrive ad view failed");
+    
+    self.config = config;
+    
+    
+    
+    self.nativeAdOffer = [[ATAdManager sharedManager] getNativeAdOfferWithPlacementID:_placementIDs[_name] scene:@""];
+    
+    self.adView = [self.nativeAdOffer rendererWithConfiguration:config];
+
+
+    
+    self.adView.tag = adViewTag;
+    
+    [self.view addSubview:self.adView];
+    if (self.adView == nil) NSLog(@"retrive ad view failed");
+    
+
 }
     
 -(void) didStartPlayingVideoInAdView:(ATNativeADView*)adView placementID:(NSString*)placementID {
