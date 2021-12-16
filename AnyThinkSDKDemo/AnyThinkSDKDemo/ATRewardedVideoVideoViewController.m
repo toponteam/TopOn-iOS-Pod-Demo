@@ -235,4 +235,31 @@ static NSString *const kKlevinPlacementID = @"b613affe9af84c";
 -(void) rewardedVideoDidClickForPlacementID:(NSString*)placementID extra:(NSDictionary *)extra {
     NSLog(@"ATRewardedVideoVideoViewController::rewardedVideoDidClickForPlacementID:%@ extra:%@", placementID, extra);
 }
+
+// again
+- (void)rewardedVideoAgainDidFailToPlayForPlacementID:(NSString *)placementID error:(NSError *)error extra:(NSDictionary *)extra {
+    NSLog(@"ATRewardedVideoVideoViewController::rewardedVideoAgainDidFailToPlayForPlacementID:%@ error:%@ extra:%@", placementID, error, extra);
+
+}
+
+- (void)rewardedVideoAgainDidClickForPlacementID:(NSString *)placementID extra:(NSDictionary *)extra {
+    NSLog(@"ATRewardedVideoVideoViewController::rewardedVideoAgainDidClickForPlacementID:%@ extra:%@", placementID, extra);
+
+}
+
+- (void)rewardedVideoAgainDidEndPlayingForPlacementID:(NSString *)placementID extra:(NSDictionary *)extra {
+    NSLog(@"ATRewardedVideoVideoViewController::rewardedVideoAgainDidEndPlayingForPlacementID:%@ extra:%@", placementID, extra);
+
+}
+
+- (void)rewardedVideoAgainDidRewardSuccessForPlacemenID:(NSString *)placementID extra:(NSDictionary *)extra {
+    NSLog(@"ATRewardedVideoVideoViewController::rewardedVideoAgainDidRewardSuccessForPlacemenID:%@ extra:%@", placementID, extra);
+
+}
+
+- (void)rewardedVideoAgainDidStartPlayingForPlacementID:(NSString *)placementID extra:(NSDictionary *)extra {
+    NSLog(@"ATRewardedVideoVideoViewController::rewardedVideoAgainDidStartPlayingForPlacementID:%@ extra:%@", placementID, extra);
+
+}
+
 @end

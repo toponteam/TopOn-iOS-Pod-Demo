@@ -111,72 +111,72 @@ static NSString *const kKlevinPlacementID = @"b613aff35cd174";
 - (NSDictionary *)getSplashInfo:(NSString *)name {
     NSDictionary *extra = nil;
     NSTimeInterval tolerateTimeout = 5.5f;
-    if ([name isEqualToString:kMintegralPlacement]) {
-        extra = @{kATSplashExtraNetworkFirmID:@6,
-                  kATSplashExtraAdSourceIDKey:@"72004",
-                  kATSplashExtraMintegralAppID:@"104036",
-                  kATSplashExtraMintegralAppKey:@"ef13ef712aeb0f6eb3d698c4c08add96",
-                  kATSplashExtraMintegralUnitID:@"275050",
-                  kATSplashExtraTolerateTimeoutKey:@(tolerateTimeout)
-        };
-    } else if ([name isEqualToString:kSigmobPlacement]) {
-        extra = @{kATSplashExtraNetworkFirmID:@29,
-                  kATSplashExtraAdSourceIDKey:@"12302",
-                  kATSplashExtraSigmobAppKey:@"eccdcdbd9adbd4a7",
-                  kATSplashExtraSigmobAppID:@"6877",
-                  kATSplashExtraSigmobPlacementID:@"ea1f8f9bd12",
-                  kATSplashExtraTolerateTimeoutKey:@(tolerateTimeout)
-        };
-    } else if ([name isEqualToString:kGDTPlacement]) {
-        extra = @{kATSplashExtraNetworkFirmID:@8,
-                  kATSplashExtraAdSourceIDKey:@"71998",
-                  kATSplashExtraGDTAppID:@"1105344611",
-                  kATSplashExtraGDTUnitID:@"9040714184494018",
-                  kATSplashExtraTolerateTimeoutKey:@(tolerateTimeout)
-        };
-    } else if ([name isEqualToString:kBaiduPlacement]) {
-        extra = @{kATSplashExtraNetworkFirmID:@22,
-                  kATSplashExtraAdSourceIDKey:@"72010",
-                  kATSplashExtraBaiduAppID:@"ccb60059",
-                  kATSplashExtraBaiduAdPlaceID:@"2058492",
-                  kATSplashExtraTolerateTimeoutKey:@(tolerateTimeout)
-        };
-    } else if ([name isEqualToString:kTTPlacementName]) {
-        extra = @{kATSplashExtraNetworkFirmID:@15,
-                  kATSplashExtraAdSourceIDKey:@"3628",
-                  kATSplashExtraAppID:@"5000546",
-                  kATSplashExtraSlotID:@"800546808",
-                  kATSplashExtraTolerateTimeoutKey:@(tolerateTimeout)
-        };
-    } else if ([name isEqualToString:kAdMobPlacement]) {
-        extra = @{kATSplashExtraNetworkFirmID:@2,
-                  kATSplashExtraAdSourceIDKey:@"145203",
-                  kATSplashExtraAdmobAppID:@"ca-app-pub-9488501426181082~6772985580,",
-                  kATSplashExtraAdmobUnitID:@"ca-app-pub-3940256099942544/1033173712",
-                  kATSplashExtraAdmobOrientation:@(1),
-                  kATSplashExtraTolerateTimeoutKey:@(tolerateTimeout)
-        };
-    } else if ([name isEqualToString:kKSPlacement]) {
-        extra = @{kATSplashExtraNetworkFirmID:@28,
-                  kATSplashExtraAdSourceIDKey:@"197933",
-                  kATSplashExtraKSAppID:@"501400011",
-                  kATSplashExtraKSPosID:@"5014000369",
-                  kATSplashExtraShowDirectionKey:@(0),
-                  kATSplashExtraTolerateTimeoutKey:@(tolerateTimeout)
-        };
-    } else if ([name isEqualToString:kAllPlacementName]) {
-        extra = @{kATSplashExtraNetworkFirmID:@6,
-                  kATSplashExtraAdSourceIDKey:@"72004",
-                  kATSplashExtraMintegralAppID:@"104036",
-                  kATSplashExtraMintegralAppKey:@"ef13ef712aeb0f6eb3d698c4c08add96",
-                  kATSplashExtraMintegralUnitID:@"275050",
-                  kATSplashExtraTolerateTimeoutKey:@(tolerateTimeout)
-        };
-    } else {
+//    if ([name isEqualToString:kMintegralPlacement]) {
+//        extra = @{kATSplashExtraNetworkFirmID:@6,
+//                  kATSplashExtraAdSourceIDKey:@"72004",
+//                  kATSplashExtraMintegralAppID:@"104036",
+//                  kATSplashExtraMintegralAppKey:@"ef13ef712aeb0f6eb3d698c4c08add96",
+//                  kATSplashExtraMintegralUnitID:@"275050",
+//                  kATSplashExtraTolerateTimeoutKey:@(tolerateTimeout)
+//        };
+//    } else if ([name isEqualToString:kSigmobPlacement]) {
+//        extra = @{kATSplashExtraNetworkFirmID:@29,
+//                  kATSplashExtraAdSourceIDKey:@"12302",
+//                  kATSplashExtraSigmobAppKey:@"eccdcdbd9adbd4a7",
+//                  kATSplashExtraSigmobAppID:@"6877",
+//                  kATSplashExtraSigmobPlacementID:@"ea1f8f9bd12",
+//                  kATSplashExtraTolerateTimeoutKey:@(tolerateTimeout)
+//        };
+//    } else if ([name isEqualToString:kGDTPlacement]) {
+//        extra = @{kATSplashExtraNetworkFirmID:@8,
+//                  kATSplashExtraAdSourceIDKey:@"71998",
+//                  kATSplashExtraGDTAppID:@"1105344611",
+//                  kATSplashExtraGDTUnitID:@"9040714184494018",
+//                  kATSplashExtraTolerateTimeoutKey:@(tolerateTimeout)
+//        };
+//    } else if ([name isEqualToString:kBaiduPlacement]) {
+//        extra = @{kATSplashExtraNetworkFirmID:@22,
+//                  kATSplashExtraAdSourceIDKey:@"72010",
+//                  kATSplashExtraBaiduAppID:@"ccb60059",
+//                  kATSplashExtraBaiduAdPlaceID:@"2058492",
+//                  kATSplashExtraTolerateTimeoutKey:@(tolerateTimeout)
+//        };
+//    } else if ([name isEqualToString:kTTPlacementName]) {
+//        extra = @{kATSplashExtraNetworkFirmID:@15,
+//                  kATSplashExtraAdSourceIDKey:@"3628",
+//                  kATSplashExtraAppID:@"5000546",
+//                  kATSplashExtraSlotID:@"800546808",
+//                  kATSplashExtraTolerateTimeoutKey:@(tolerateTimeout)
+//        };
+//    } else if ([name isEqualToString:kAdMobPlacement]) {
+//        extra = @{kATSplashExtraNetworkFirmID:@2,
+//                  kATSplashExtraAdSourceIDKey:@"145203",
+//                  kATSplashExtraAdmobAppID:@"ca-app-pub-9488501426181082~6772985580,",
+//                  kATSplashExtraAdmobUnitID:@"ca-app-pub-3940256099942544/1033173712",
+//                  kATSplashExtraAdmobOrientation:@(1),
+//                  kATSplashExtraTolerateTimeoutKey:@(tolerateTimeout)
+//        };
+//    } else if ([name isEqualToString:kKSPlacement]) {
+//        extra = @{kATSplashExtraNetworkFirmID:@28,
+//                  kATSplashExtraAdSourceIDKey:@"197933",
+//                  kATSplashExtraKSAppID:@"501400011",
+//                  kATSplashExtraKSPosID:@"5014000369",
+//                  kATSplashExtraShowDirectionKey:@(0),
+//                  kATSplashExtraTolerateTimeoutKey:@(tolerateTimeout)
+//        };
+//    } else if ([name isEqualToString:kAllPlacementName]) {
+//        extra = @{kATSplashExtraNetworkFirmID:@6,
+//                  kATSplashExtraAdSourceIDKey:@"72004",
+//                  kATSplashExtraMintegralAppID:@"104036",
+//                  kATSplashExtraMintegralAppKey:@"ef13ef712aeb0f6eb3d698c4c08add96",
+//                  kATSplashExtraMintegralUnitID:@"275050",
+//                  kATSplashExtraTolerateTimeoutKey:@(tolerateTimeout)
+//        };
+//    } else {
         extra = @{
             kATSplashExtraTolerateTimeoutKey:@(tolerateTimeout)
        };
-    }
+//    }
     
     return extra;
 }
