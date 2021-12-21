@@ -45,6 +45,7 @@ extern NSString *const kHeliumPlacement;
 extern NSString *const kKidozPlacement;
 extern NSString *const kMyTargetPlacement;
 extern NSString *const kKlevinPlacement;
+extern NSString *const kDirectOfferPlacement;
 
 @interface ATInterstitialViewController : UIViewController
 -(instancetype) initWithPlacementName:(NSString*)name;

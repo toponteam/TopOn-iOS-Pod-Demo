@@ -23,6 +23,8 @@ static NSString *const kKSPlacementID = @"b5fb767e454cce";
 static NSString *const kAllPlacementID = @"b5c22f0e5cc7a0";
 static NSString *const kMyofferPlacementID = @"b5f33c33431ca0";
 static NSString *const kKlevinPlacementID = @"b613aff35cd174";
+static NSString *const kDirectOfferPlacementID = @"b61bffcf212e16";
+
 
 @interface ATSplashViewController ()<ATSplashDelegate,ATNativeSplashDelegate>
 
@@ -55,7 +57,8 @@ static NSString *const kKlevinPlacementID = @"b613aff35cd174";
             kKSPlacement:kKSPlacementID,
             kAllPlacementName:kAllPlacementID,
             kMyOfferPlacement:kMyofferPlacementID,
-            kKlevinPlacement: kKlevinPlacementID
+            kKlevinPlacement: kKlevinPlacementID,
+            kDirectOfferPlacement:kDirectOfferPlacementID
         };
     }
     return self;

@@ -24,6 +24,7 @@ extern NSString *const kAllPlacementName;
 extern NSString *const kNendPlacement;
 extern NSString *const kMaioPlacement;
 extern NSString *const kKSPlacement;
+
 @interface ATNativeBannerViewController : UIViewController
 -(instancetype) initWithPlacementName:(NSString*)name;
 @end

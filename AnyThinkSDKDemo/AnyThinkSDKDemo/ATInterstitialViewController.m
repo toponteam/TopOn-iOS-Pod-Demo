@@ -59,6 +59,7 @@ static NSString *const kHeliumPlacementID = @"b5f583ec12143f";
 static NSString *const kKidozPlacementID = @"b5feaa2df0e121";
 static NSString *const kMyTargetPlacementID = @"b5feaa306e483c";
 static NSString *const kKlevinPlacementID = @"b613affb04196f";
+static NSString *const kDirectOfferPlacementID = @"b61bffcd9dda20";
 
 
 @interface ATInterstitialViewController ()<ATInterstitialDelegate>
@@ -114,7 +115,9 @@ static NSString *const kKlevinPlacementID = @"b613affb04196f";
                           kHeliumPlacement:kHeliumPlacementID,
                           kKidozPlacement:kKidozPlacementID,
                           kMyTargetPlacement:kMyTargetPlacementID,
-                          kKlevinPlacement: kKlevinPlacementID
+                          kKlevinPlacement: kKlevinPlacementID,
+                          kDirectOfferPlacement:kDirectOfferPlacementID
+
                           };
     }
     return self;
