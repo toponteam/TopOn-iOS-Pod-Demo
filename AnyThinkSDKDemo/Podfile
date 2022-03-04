@@ -24,7 +24,7 @@ target 'AnyThinkSDKDemo' do
   pod 'AnyThinkiOS/AnyThinkIronSourceAdapter','5.8.13'
   pod 'AnyThinkiOS/AnyThinkMaioAdapter','5.8.13'
   pod 'AnyThinkiOS/AnyThinkNendAdapter','5.8.13'
-  pod 'AnyThinkiOS/AnyThinkSigmobAdapter','5.8.13'
+#  pod 'AnyThinkiOS/AnyThinkSigmobAdapter','5.8.13'
   pod 'AnyThinkiOS/AnyThinkStartAppAdapter','5.8.13'
   pod 'AnyThinkiOS/AnyThinkKidozAdapter','5.8.13'
   pod 'AnyThinkiOS/AnyThinkFyberAdapter','5.8.13'
@@ -37,6 +37,7 @@ target 'AnyThinkSDKDemo' do
   pod 'AnyThinkiOS/AnyThinkKlevinAdapter','5.8.13'
 
 
+  
 # 本地pod
 #  pod 'LocalThirdPartySDK/core', :path=> 'LSDK/'
 #  pod 'LocalThirdPartySDK/admob', :path=> 'LSDK/'
