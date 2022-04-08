@@ -9,6 +9,12 @@
 #import "ATBannerViewController.h"
 #import <AnyThinkSDK/AnyThinkSDK.h>
 #import <AnyThinkBanner/AnyThinkBanner.h>
+
+#import "ATADFootView.h"
+#import "ATModelButton.h"
+#import "ATMenuView.h"
+#import "ATSuspendedButton.h"
+
 //#import <GoogleMobileAds/GoogleMobileAds.h>
 
 static NSString *const kGDTPlacementID = @"b5bacad0803fd1";
@@ -40,141 +46,141 @@ static NSString *const kDirectOfferPlacementID = @"b61bfff452d054";
 NSString *const kBannerShownNotification = @"banner_shown";
 NSString *const kBannerLoadingFailedNotification = @"banner_failed_to_load";
 @interface ATBannerViewController ()<ATBannerDelegate>
-@property(nonatomic, readonly) NSString *name;
-@property(nonatomic, readonly) NSDictionary<NSString*, NSString*>* placementIDs;
-@property(nonatomic, readonly) UIActivityIndicatorView *loadingView;
-@property(nonatomic, readonly) UIButton *reloadADButton;
-@property(nonatomic, readonly) UIButton *clearAdButton;
-@property(nonatomic, readonly) UIButton *showAdButton;
-@property(nonatomic, readonly) UILabel *failureTipsLabel;
-@property(nonatomic, readonly) UIButton *removeAdButton;
-@property(nonatomic, weak) UIView *bannerView;
-@property(nonatomic, weak) UIView *embededView;
-@property(nonatomic, readonly) UIButton *readyButton;
+@property (nonatomic, strong) ATADFootView *footView;
+
+@property (nonatomic, strong) UIView *modelBackView;
+
+@property (nonatomic, strong) ATModelButton *modelButton;
+
+@property (nonatomic, strong) ATMenuView *menuView;
+
+@property (nonatomic, strong) UITextView *textView;
+
+@property (copy, nonatomic) NSString *placementID;
+
+@property (nonatomic, strong) UIView *adView;
+
+@property (nonatomic, strong) ATSuspendedButton *suspendedBtn;
+
+@property (copy, nonatomic) NSDictionary<NSString *, NSString *> *placementIDs;
+
+@property(nonatomic, strong) NSString *togetherLoadAdStr;
 @property(nonatomic, readonly) CGSize adSize;
 @end
 
 @implementation ATBannerViewController
--(instancetype) initWithPlacementName:(NSString*)name {
-    self = [super initWithNibName:nil bundle:nil];
-    if (self != nil) {
-        _name = name;
-        _placementIDs = @{
-                          kGDTPlacement:kGDTPlacementID,
-                          kTTPlacementName:kTTPlacementID,
-                          kAdMobPlacement:kAdmobPlacementID,
-                          kApplovinPlacement:kApplovinPlacementID,
-                          kFacebookPlacement:kFacebookPlacementID,
-                          kMopubPlacementName:kMopubPlacementID,
-                          kInmobiPlacement:kInmobiPlacementID,
-                          kAllPlacementName:kAllPlacementID,
-                          kAppnextPlacement:kAppnextPlacementID,
-                          kBaiduPlacement:kBaiduPlacementID,
-                          kUnityAdsPlacementName:kUnityAdsPlacementID,
-                          kNendPlacement:kNendPlacementID,
-                          kMintegralPlacement:kMintegralPlacementID,
-                          kHeaderBiddingPlacement:kBannerHeaderBiddingPlacementID,
-                          kFyberPlacement:kFyberPlacementID,
-                          kStartAppPlacement:kStartAppPlacementID,
-                          kVunglePlacementName:kVunglePlacementID,
-                          kChartboostPlacementName:kChartboostPlacementID,
-                          kAdcolonyPlacementName:kAdColonyPlacementID,
-                          kGAMPlacement:kGAMPlacementID,
-                          kMyOfferPlacement:kMyofferPlacementID,
-                          kKidozPlacement:kKidozPlacementID,
-                          kMyTargetPlacement:kMyTargetPlacementID,
-                          kDirectOfferPlacement:kDirectOfferPlacementID
 
-                          };
-    }
+-(instancetype)init{
+    self = [super init];
+    _placementIDs = @{
+                      kGDTPlacement:kGDTPlacementID,
+                      kTTPlacementName:kTTPlacementID,
+                      kAdMobPlacement:kAdmobPlacementID,
+                      kApplovinPlacement:kApplovinPlacementID,
+                      kFacebookPlacement:kFacebookPlacementID,
+                      kMopubPlacementName:kMopubPlacementID,
+                      kInmobiPlacement:kInmobiPlacementID,
+                      kAllPlacementName:kAllPlacementID,
+                      kAppnextPlacement:kAppnextPlacementID,
+                      kBaiduPlacement:kBaiduPlacementID,
+                      kUnityAdsPlacementName:kUnityAdsPlacementID,
+                      kNendPlacement:kNendPlacementID,
+                      kMintegralPlacement:kMintegralPlacementID,
+                      kHeaderBiddingPlacement:kBannerHeaderBiddingPlacementID,
+                      kFyberPlacement:kFyberPlacementID,
+                      kStartAppPlacement:kStartAppPlacementID,
+                      kVunglePlacementName:kVunglePlacementID,
+                      kChartboostPlacementName:kChartboostPlacementID,
+                      kAdcolonyPlacementName:kAdColonyPlacementID,
+                      kGAMPlacement:kGAMPlacementID,
+                      kMyOfferPlacement:kMyofferPlacementID,
+                      kKidozPlacement:kKidozPlacementID,
+                      kMyTargetPlacement:kMyTargetPlacementID,
+                      kDirectOfferPlacement:kDirectOfferPlacementID
+
+                      };
+    
+    _placementID = [[_placementIDs allValues]firstObject];
+    
     return self;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    self.title = _name;
-    _reloadADButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [_reloadADButton addTarget:self action:@selector(reloadADButtonTapped) forControlEvents:UIControlEventTouchUpInside];
-    [_reloadADButton setTitleColor:_reloadADButton.tintColor forState:UIControlStateNormal];
-    [_reloadADButton setTitle:@"Reload AD" forState:UIControlStateNormal];
-    _reloadADButton.frame = CGRectMake(.0f, CGRectGetMaxY(self.view.bounds) - 100.0f, (CGRectGetWidth(self.view.bounds) - 40) / 2.0f, 60.0f);
-    [self.view addSubview:_reloadADButton];
+  
+  
     
-    _showAdButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [_showAdButton addTarget:self action:@selector(showBanner) forControlEvents:UIControlEventTouchUpInside];
-    [_showAdButton setTitleColor:_showAdButton.tintColor forState:UIControlStateNormal];
-    [_showAdButton setTitle:@"Show AD" forState:UIControlStateNormal];
-    _showAdButton.frame = CGRectMake(CGRectGetMaxX(_reloadADButton.frame) + 40.0f, CGRectGetMinY(_reloadADButton.frame), (CGRectGetWidth(self.view.bounds) - 40) / 2.0f, 60.0f);
-    [self.view addSubview:_showAdButton];
+    UIButton *clearBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 80, 20)];
+    [clearBtn setTitle:@"clear log" forState:UIControlStateNormal];
+    [clearBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [clearBtn addTarget:self action:@selector(clearLog) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *btnItem = [[UIBarButtonItem alloc] initWithCustomView:clearBtn];
+    self.navigationItem.rightBarButtonItem = btnItem;
     
-    _clearAdButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [_clearAdButton addTarget:self action:@selector(clearAdButtonTapped) forControlEvents:UIControlEventTouchUpInside];
-    [_clearAdButton setTitleColor:_clearAdButton.tintColor forState:UIControlStateNormal];
-    [_clearAdButton setTitle:@"clear cache" forState:UIControlStateNormal];
-    _clearAdButton.frame = CGRectMake(.0f, CGRectGetMinY(_reloadADButton.frame) - 20.0f - 60.0f, (CGRectGetWidth(self.view.bounds) - 40) / 2.0f, 60.0f);
-    [self.view addSubview:_clearAdButton];
-    
-    _removeAdButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [_removeAdButton addTarget:self action:@selector(removeAdButtonTapped) forControlEvents:UIControlEventTouchUpInside];
-    [_removeAdButton setTitleColor:_removeAdButton.tintColor forState:UIControlStateNormal];
-    [_removeAdButton setTitle:@"Remove Ad" forState:UIControlStateNormal];
-    _removeAdButton.frame = CGRectMake(CGRectGetMaxX(_clearAdButton.frame) + 40.0f, CGRectGetMinY(_clearAdButton.frame), (CGRectGetWidth(self.view.bounds) - 40) / 2.0f, 60.0f);
-    [self.view addSubview:_removeAdButton];
-    
-    _readyButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [_readyButton addTarget:self action:@selector(readyButtonTapped) forControlEvents:UIControlEventTouchUpInside];
-    [_readyButton setTitleColor:_readyButton.tintColor forState:UIControlStateNormal];
-    [_readyButton setTitle:@"Ad Ready?" forState:UIControlStateNormal];
-    _readyButton.frame = CGRectMake(CGRectGetMinX(_clearAdButton.frame), CGRectGetMinY(_clearAdButton.frame) - 65.0f, (CGRectGetWidth(self.view.bounds) - 40) / 2.0f, 60.0f);
-    [self.view addSubview:_readyButton];
-    
-    _failureTipsLabel = [[UILabel alloc] initWithFrame:CGRectMake(.0f, 64.0f, CGRectGetWidth(self.view.bounds), 400.0f)];
-    _failureTipsLabel.text = @"Failed to load ad";
-    _failureTipsLabel.textAlignment = NSTextAlignmentCenter;
-    [self.view addSubview:_failureTipsLabel];
-    _failureTipsLabel.hidden = YES;
+    [self.view addSubview:self.modelBackView];
+    [self.view addSubview:self.modelButton];
+    [self.view addSubview:self.menuView];
+    [self.view addSubview:self.textView];
+    [self.view addSubview:self.footView];
+    [self.view addSubview:self.suspendedBtn];
     
     _adSize = CGSizeMake(CGRectGetWidth(self.view.bounds), 250.0f);
-    if ([[ATAdManager sharedManager] bannerAdReadyForPlacementID:_placementIDs[_name]]) {
-        NSLog(@"ATBannerViewController::banner ad ready, will show");
-        [self showBanner];
-    } else {
-        NSLog(@"ATBannerViewController::banner ad not ready, will load");
-        [self reloadADButtonTapped];
-    }
+    
+    [self.modelBackView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.view.mas_centerX);
+        make.width.mas_equalTo(kScreenW - kScaleW(52));
+        make.height.mas_equalTo(kScaleW(360));
+        make.top.equalTo(self.view.mas_top).offset(kNavigationBarHeight + kScaleW(20));
+    }];
+    
+    [self.modelButton mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.view.mas_centerX);
+        make.width.mas_equalTo(kScaleW(340));
+        make.height.mas_equalTo(kScaleW(360));
+        make.top.equalTo(self.modelBackView.mas_top);
+    }];
+
+    [self.menuView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.width.mas_equalTo(kScreenW - kScaleW(52));
+        make.height.mas_equalTo(kScaleW(242));
+        make.top.equalTo(self.modelBackView.mas_bottom).offset(kScaleW(20));
+        make.centerX.equalTo(self.view.mas_centerX);
+    }];
+
+    [self.textView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.menuView.mas_bottom).offset(kScaleW(20));
+        make.bottom.equalTo(self.footView.mas_top).offset(kScaleW(-20));
+        make.width.mas_equalTo(kScreenW - kScaleW(52));
+        make.centerX.equalTo(self.view.mas_centerX);
+    }];
+
+    [self.footView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(self.view.mas_bottom);
+        make.left.equalTo(self.view.mas_left);
+        make.right.equalTo(self.view.mas_right);
+        make.height.mas_equalTo(kScaleW(340));
+    }];
+    
+    [self.suspendedBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.height.mas_equalTo(kScaleW(100));
+        make.top.equalTo(self.view.mas_top).offset(kScaleW(200));
+        make.right.equalTo(self.view.mas_right);
+    }];
 }
+
+- (void)clearLog
+{
+    self.textView.text = @"";
+}
+
 
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
     [self removeAdButtonTapped];
 }
 
--(void) readyButtonTapped {
-//    v5.7.53
-    ATCheckLoadModel *model = [[ATAdManager sharedManager] checkBannerLoadStatusForPlacementID:_placementIDs[_name]];
-    NSArray *array = [[ATAdManager sharedManager] getBannerValidAdsForPlacementID:_placementIDs[_name]];
-    NSLog(@"ValidAds -- %@",array);
-    
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:[[ATAdManager sharedManager] bannerAdReadyForPlacementID:_placementIDs[_name]] ? @"Ready!" : @"Not Yet!" message:nil preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *action = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:nil];
-    [alert addAction:action];
-    [self presentViewController:alert animated:YES completion:nil];
-}
 
--(void) reloadADButtonTapped {
-    _failureTipsLabel.hidden = YES;
-    [self.view addSubview:_loadingView];
-    
-    //GADCurrentOrientationAnchoredAdaptiveBannerAdSizeWithWidth 自适应
-    //GADPortraitAnchoredAdaptiveBannerAdSizeWithWidth 竖屏
-    //GADLandscapeAnchoredAdaptiveBannerAdSizeWithWidth 横屏
-//    GADAdSize admobSize = GADCurrentOrientationAnchoredAdaptiveBannerAdSizeWithWidth(CGRectGetWidth(self.view.bounds));
-    
-//    [[ATAdManager sharedManager] loadADWithPlacementID:_placementIDs[_name] extra:@{kATAdLoadingExtraBannerAdSizeKey:[NSValue valueWithCGSize:_adSize], kATAdLoadingExtraBannerSizeAdjustKey:@NO,kATAdLoadingExtraAdmobBannerSizeKey:[NSValue valueWithCGSize:admobSize.size],kATAdLoadingExtraAdmobAdSizeFlagsKey:@(admobSize.flags)} delegate:self];
-    
-    [[ATAdManager sharedManager] loadADWithPlacementID:_placementIDs[_name] extra:@{kATAdLoadingExtraBannerAdSizeKey:[NSValue valueWithCGSize:_adSize], kATAdLoadingExtraBannerSizeAdjustKey:@NO} delegate:self];
-}
 
 -(void) removeAdButtonTapped {
     
@@ -197,11 +203,34 @@ NSString *const kBannerLoadingFailedNotification = @"banner_failed_to_load";
     NSLog(@"ATBannerViewController::dealloc");
 }
 
--(void) showBanner {
-    if ([[ATAdManager sharedManager] bannerAdReadyForPlacementID:_placementIDs[_name]]) {
+#pragma mark - Action
+- (void)loadAd
+{
+    [[ATAdManager sharedManager] loadADWithPlacementID:self.placementID extra:@{kATAdLoadingExtraBannerAdSizeKey:[NSValue valueWithCGSize:_adSize], kATAdLoadingExtraBannerSizeAdjustKey:@NO} delegate:self];
+}
+
+- (void)checkAd
+{
+    // list
+    NSArray *array = [[ATAdManager sharedManager] getBannerValidAdsForPlacementID:self.placementID];
+    NSLog(@"ValidAds.count:%ld--- ValidAds:%@",array.count,array);
+
+//    ATCheckLoadModel *model = [[ATAdManager sharedManager] checkBannerLoadStatusForPlacementID:self.placementID];
+
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:[[ATAdManager sharedManager] bannerAdReadyForPlacementID:self.placementID] ? @"Ready!" : @"Not Yet!" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    [self presentViewController:alert animated:YES completion:^{
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [alert dismissViewControllerAnimated:YES completion:nil];
+        });
+    }];
+}
+
+- (void)showAd
+{
+    if ([[ATAdManager sharedManager] bannerAdReadyForPlacementID:self.placementID]) {
         NSInteger tag = 3333;
         [[self.view viewWithTag:tag] removeFromSuperview];
-        ATBannerView *bannerView = [[ATAdManager sharedManager] retrieveBannerViewForPlacementID:_placementIDs[_name]];
+        ATBannerView *bannerView = [[ATAdManager sharedManager] retrieveBannerViewForPlacementID:self.placementID scene:@"f600938d045dd3"];
         if (bannerView != nil) {
             bannerView.delegate = self;
             bannerView.presentingViewController = self;
@@ -210,59 +239,279 @@ NSString *const kBannerLoadingFailedNotification = @"banner_failed_to_load";
             bannerView.layer.borderColor = [UIColor redColor].CGColor;
             bannerView.layer.borderWidth = .5f;
             bannerView.backgroundColor = [UIColor colorWithRed:.0f green:.0f blue:1.0f alpha:.4f];
+            self.adView = bannerView;
             [self.view addSubview:bannerView];
-            [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.view attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:bannerView attribute:NSLayoutAttributeCenterX multiplier:1.0f constant:.0f]];
-            [self.view addConstraint:[NSLayoutConstraint constraintWithItem:bannerView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTop multiplier:1.0f constant:CGRectGetHeight([UIApplication sharedApplication].statusBarFrame) + CGRectGetHeight(self.navigationController.navigationBar.frame)]];
-            [self.view addConstraint:[NSLayoutConstraint constraintWithItem:bannerView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant:_adSize.width]];
-            [self.view addConstraint:[NSLayoutConstraint constraintWithItem:bannerView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant:_adSize.height]];
+            
+            [bannerView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.height.equalTo(@(_adSize.height));
+                make.width.equalTo(@(_adSize.width));
+                make.centerX.equalTo(self.view.mas_centerX);
+                make.top.equalTo(self.view).offset(100);
+            }];
         }else {
-            NSLog(@"BannerView is nil for placementID:%@", _placementIDs[_name]);
+            NSLog(@"BannerView is nil for placementID:%@", self.placementID);
         }
     } else {
-        NSLog(@"Banner ad's not ready for placementID:%@", _placementIDs[_name]);
+        NSLog(@"Banner ad's not ready for placementID:%@", self.placementID);
     }
 }
 
+
+- (void)removeAd
+{
+    if (self.adView && self.adView.superview) {
+        [self.adView removeFromSuperview];
+    }
+}
+
+- (void)showLog:(NSString *)logStr
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        NSString *logS = self.textView.text;
+        NSString *log = nil;
+        if (![logS isEqualToString:@""]) {
+            log = [NSString stringWithFormat:@"%@\n%@", logS, logStr];
+        } else {
+            log = [NSString stringWithFormat:@"%@", logStr];
+        }
+        self.textView.text = log;
+        [self.textView scrollRangeToVisible:NSMakeRange(self.textView.text.length, 1)];
+    });
+}
+
+
 #pragma mark - delegate method(s)
+- (void)didStartLoadingADSourceWithPlacementID:(NSString *)placementID extra:(NSDictionary*)extra{
+    
+    NSLog(@"广告源--AD--开始--ATBannerViewController::didStartLoadingADSourceWithPlacementID:%@---extra:%@", placementID,extra);
+    
+//    [self showLog:[NSString stringWithFormat:@"didStartLoadingADSourceWithPlacementID:%@---extra:%@", placementID,extra]];
+    [self.suspendedBtn recordWithPlacementId:self.placementID protocol:NSStringFromSelector(_cmd)];
+}
+
+- (void)didFinishLoadingADSourceWithPlacementID:(NSString *)placementID extra:(NSDictionary*)extra{
+    
+    NSLog(@"广告源--AD--完成--ATBannerViewController::didFinishLoadingADSourceWithPlacementID:%@---extra:%@", placementID,extra);
+    
+//    [self showLog:[NSString stringWithFormat:@"didFinishLoadingADSourceWithPlacementID:%@---extra:%@", placementID,extra]];
+    [self.suspendedBtn recordWithPlacementId:self.placementID protocol:NSStringFromSelector(_cmd)];
+}
+
+- (void)didFailToLoadADSourceWithPlacementID:(NSString*)placementID extra:(NSDictionary*)extra error:(NSError*)error{
+    NSLog(@"广告源--AD--失败--ATBannerViewController::didFailToLoadADSourceWithPlacementID:%@---error:%@", placementID,error);
+    
+//    [self showLog:[NSString stringWithFormat:@"didFailToLoadADSourceWithPlacementID:%@--%@", placementID],error];
+    [self.suspendedBtn recordWithPlacementId:self.placementID protocol:NSStringFromSelector(_cmd)];
+}
+
+// bidding
+- (void)didStartBiddingADSourceWithPlacementID:(NSString *)placementID extra:(NSDictionary*)extra{
+    
+    NSLog(@"广告源--bid--开始--ATBannerViewController::didStartBiddingADSourceWithPlacementID:%@---extra:%@", placementID,extra);
+    
+//    [self showLog:[NSString stringWithFormat:@"didStartBiddingADSourceWithPlacementID:%@---extra:%@", placementID,extra]];
+    [self.suspendedBtn recordWithPlacementId:self.placementID protocol:NSStringFromSelector(_cmd)];
+}
+
+- (void)didFinishBiddingADSourceWithPlacementID:(NSString *)placementID extra:(NSDictionary*)extra{
+    
+    NSLog(@"广告源--bid--完成--ATBannerViewController::didFinishBiddingADSourceWithPlacementID:%@--extra:%@", placementID,extra);
+    
+//    [self showLog:[NSString stringWithFormat:@"didFinishBiddingADSourceWithPlacementID:%@---extra:%@", placementID,extra]];
+    [self.suspendedBtn recordWithPlacementId:self.placementID protocol:NSStringFromSelector(_cmd)];
+}
+
+- (void)didFailBiddingADSourceWithPlacementID:(NSString*)placementID extra:(NSDictionary*)extra error:(NSError*)error{
+    
+    NSLog(@"广告源--bid--失败--ATBannerViewController::didFailBiddingADSourceWithPlacementID:%@--error:%@", placementID,error);
+    
+//    [self showLog:[NSString stringWithFormat:@"didFailBiddingADSourceWithPlacementID:%@", placementID]];
+    [self.suspendedBtn recordWithPlacementId:self.placementID protocol:NSStringFromSelector(_cmd)];
+}
+
 -(void) didFinishLoadingADWithPlacementID:(NSString *)placementID {
     NSLog(@"ATBannerViewController::didFinishLoadingADWithPlacementID:%@", placementID);
-    [_loadingView removeFromSuperview];
+    
+    [self showLog:[NSString stringWithFormat:@"didFinishLoadingADWithPlacementID:%@", placementID]];
+    [self.suspendedBtn recordWithPlacementId:self.placementID protocol:NSStringFromSelector(_cmd)];
 }
 
 -(void) didFailToLoadADWithPlacementID:(NSString*)placementID error:(NSError*)error {
     NSLog(@"ATBannerViewController::didFailToLoadADWithPlacementID:%@ error:%@", placementID, error);
-    _failureTipsLabel.hidden = NO;
-#ifdef BANNER_AUTO_TEST
-    [[NSNotificationCenter defaultCenter] postNotificationName:kBannerLoadingFailedNotification object:nil];
-    [self.navigationController popViewControllerAnimated:NO];
-#endif
+    
+    [self showLog:[NSString stringWithFormat:@"ATBannerViewController::didFailToLoadADWithPlacementID:%@ errorCode:%ld", placementID, error.code]];
+    [self.suspendedBtn recordWithPlacementId:self.placementID protocol:NSStringFromSelector(_cmd)];
 }
-
 
 -(void) bannerView:(ATBannerView *)bannerView failedToAutoRefreshWithPlacementID:(NSString *)placementID error:(NSError *)error {
     NSLog(@"ATBannerViewController::bannerView:failedToAutoRefreshWithPlacementID:%@ error:%@", placementID, error);
+    
+    [self showLog:[NSString stringWithFormat:@"bannerView:failedToAutoRefreshWithPlacementID:%@ errorCode:%ld", placementID, error.code]];
+    [self.suspendedBtn recordWithPlacementId:self.placementID protocol:NSStringFromSelector(_cmd)];
 }
 
 #pragma mark - add networkID and adsourceID delegate
+- (void)bannerView:(ATBannerView *)bannerView didDeepLinkOrJumpForPlacementID:(NSString *)placementID extra:(NSDictionary *)extra result:(BOOL)success {
+    NSLog(@"ATBannerViewController:: didDeepLinkOrJumpForPlacementID:placementID:%@ with extra: %@, success:%@", placementID,extra, success ? @"YES" : @"NO");
+    
+    [self showLog:[NSString stringWithFormat:@"didDeepLinkOrJumpForPlacementID:%@, success:%@", placementID, success ? @"YES" : @"NO"]];
+    [self.suspendedBtn recordWithPlacementId:self.placementID protocol:NSStringFromSelector(_cmd)];
+}
 
 -(void) bannerView:(ATBannerView*)bannerView didShowAdWithPlacementID:(NSString*)placementID extra:(NSDictionary *)extra{
     NSLog(@"ATBannerViewController::bannerView:didShowAdWithPlacementID:%@ with extra: %@", placementID,extra);
-#ifdef BANNER_AUTO_TEST
-    [[NSNotificationCenter defaultCenter] postNotificationName:kBannerShownNotification object:nil];
-    [self.navigationController popViewControllerAnimated:NO];
-#endif
+    
+    [self showLog:[NSString stringWithFormat:@"bannerView:didShowAdWithPlacementID:%@", placementID]];
+    [self.suspendedBtn recordWithPlacementId:self.placementID protocol:NSStringFromSelector(_cmd)];
 }
+
 -(void) bannerView:(ATBannerView*)bannerView didClickWithPlacementID:(NSString*)placementID extra:(NSDictionary *)extra{
     NSLog(@"ATBannerViewController::bannerView:didClickWithPlacementID:%@ with extra: %@", placementID,extra);
+    
+    [self showLog:[NSString stringWithFormat:@"bannerView:didClickWithPlacementID:%@", placementID]];
+    [self.suspendedBtn recordWithPlacementId:self.placementID protocol:NSStringFromSelector(_cmd)];
 }
--(void) bannerView:(ATBannerView*)bannerView didCloseWithPlacementID:(NSString*)placementID extra:(NSDictionary *)extra{
-    NSLog(@"ATBannerViewController::bannerView:didCloseWithPlacementID:%@ with extra: %@", placementID,extra);
-}
+
 -(void) bannerView:(ATBannerView*)bannerView didAutoRefreshWithPlacement:(NSString*)placementID extra:(NSDictionary *)extra{
     NSLog(@"ATBannerViewController::bannerView:didAutoRefreshWithPlacement:%@ with extra: %@", placementID,extra);
+    
+    [self showLog:[NSString stringWithFormat:@"bannerView:didAutoRefreshWithPlacement:%@", placementID]];
+    [self.suspendedBtn recordWithPlacementId:self.placementID protocol:NSStringFromSelector(_cmd)];
 }
 
 -(void) bannerView:(ATBannerView*)bannerView didTapCloseButtonWithPlacementID:(NSString*)placementID extra:(NSDictionary*)extra {
     NSLog(@"ATBannerViewController::bannerView:didTapCloseButtonWithPlacementID:%@ extra: %@", placementID,extra);
+    
+    [self.adView removeFromSuperview];
+    self.adView = nil;
+    
+    [self showLog:[NSString stringWithFormat:@"bannerView:didTapCloseButtonWithPlacementID:%@", placementID]];
+    [self.suspendedBtn recordWithPlacementId:self.placementID protocol:NSStringFromSelector(_cmd)];
 }
+
+-(void) bannerDidShowForPlacementID:(NSString*)placementID extra:(NSDictionary*)extra {
+    NSLog(@"ATBannerViewController::bannerDidShowForPlacementID:%@ with extra: %@", placementID,extra);
+    
+    [self showLog:[NSString stringWithFormat:@"bannerDidShowForPlacementID:%@", placementID]];
+    [self.suspendedBtn recordWithPlacementId:self.placementID protocol:NSStringFromSelector(_cmd)];
+}
+
+-(void) bannerDidCloseForPlacementID:(NSString*)placementID extra:(NSDictionary*)extra {
+    NSLog(@"ATBannerViewController::bannerView:bannerDidCloseForPlacementID:%@ extra: %@", placementID,extra);
+    
+    [self showLog:[NSString stringWithFormat:@"bannerView:bannerDidCloseForPlacementID:%@", placementID]];
+    [self.suspendedBtn recordWithPlacementId:self.placementID protocol:NSStringFromSelector(_cmd)];
+}
+
+-(void) bannerDidClickForPlacementID:(NSString*)placementID extra:(NSDictionary*)extra {
+    NSLog(@"ATBannerViewController::bannerDidClickForPlacementID:%@ with extra: %@", placementID,extra);
+    
+    [self showLog:[NSString stringWithFormat:@"bannerDidClickForPlacementID:%@", placementID]];
+    [self.suspendedBtn recordWithPlacementId:self.placementID protocol:NSStringFromSelector(_cmd)];
+}
+
+-(void) bannerDeepLinkOrJumpForPlacementID:(NSString*)placementID extra:(NSDictionary*)extra result:(BOOL)success {
+    NSLog(@"ATBannerViewController:: bannerDeepLinkOrJumpForPlacementID:placementID:%@ with extra: %@, success:%@", placementID,extra, success ? @"YES" : @"NO");
+    
+    [self showLog:[NSString stringWithFormat:@"bannerDeepLinkOrJumpForPlacementID:placementID:%@, success:%@", placementID, success ? @"YES" : @"NO"]];
+    [self.suspendedBtn recordWithPlacementId:self.placementID protocol:NSStringFromSelector(_cmd)];
+}
+
+#pragma mark - lazy
+- (ATADFootView *)footView
+{
+    if (!_footView) {
+//        _footView = [[ATADFootView alloc] initWithFrame:CGRectMake(0, 0, kScreenW, kScaleW(340))];
+        _footView = [[ATADFootView alloc] initWithRemoveBtn];
+        __weak typeof(self) weakSelf = self;
+        [_footView setClickLoadBlock:^{
+            NSLog(@"点击加载");
+            [weakSelf loadAd];
+        }];
+        [_footView setClickReadyBlock:^{
+            NSLog(@"点击准备");
+            [weakSelf checkAd];
+        }];
+        [_footView setClickShowBlock:^{
+            NSLog(@"点击展示");
+            [weakSelf showAd];
+        }];
+        [_footView setClickRemoveBlock:^{
+            NSLog(@"点击移除");
+            [weakSelf removeAd];
+        }];
+        
+        if (![NSStringFromClass([self class]) containsString:@"Auto"]) {
+            [_footView.loadBtn setTitle:@"Load Banner AD" forState:UIControlStateNormal];
+            [_footView.readyBtn setTitle:@"Is Banner AD Ready" forState:UIControlStateNormal];
+            [_footView.showBtn setTitle:@"Show Banner AD" forState:UIControlStateNormal];
+        }
+        
+    }
+    return _footView;
+}
+
+- (UIView *)modelBackView
+{
+    if (!_modelBackView) {
+        _modelBackView = [[UIView alloc] init];
+        _modelBackView.backgroundColor = [UIColor whiteColor];
+        _modelBackView.layer.masksToBounds = YES;
+        _modelBackView.layer.cornerRadius = 5;
+    }
+    return _modelBackView;
+}
+
+- (ATModelButton *)modelButton
+{
+    if (!_modelButton) {
+        _modelButton = [[ATModelButton alloc] initWithFrame:CGRectMake(0, 0, kScreenW, kScaleW(532))];
+        _modelButton.backgroundColor = [UIColor whiteColor];
+        _modelButton.modelLabel.text = @"Banner";
+        _modelButton.image.image = [UIImage imageNamed:@"banner"];
+    }
+    return _modelButton;
+}
+
+- (ATMenuView *)menuView
+{
+    if (!_menuView) {
+        _menuView = [[ATMenuView alloc] initWithMenuList:self.placementIDs.allKeys subMenuList:nil];
+        _menuView.layer.masksToBounds = YES;
+        _menuView.layer.cornerRadius = 5;
+        __weak typeof (self) weakSelf = self;
+        [_menuView setSelectMenu:^(NSString * _Nonnull selectMenu) {
+            weakSelf.placementID = weakSelf.placementIDs[selectMenu];
+            NSLog(@"select placementId:%@", weakSelf.placementID);
+        }];
+    }
+    return _menuView;
+}
+
+- (UITextView *)textView
+{
+    if (!_textView) {
+        _textView = [[UITextView alloc] init];
+        _textView.backgroundColor = [UIColor whiteColor];
+        _textView.layer.masksToBounds = YES;
+        _textView.layer.cornerRadius = 5;
+        _textView.editable = NO;
+        _textView.text = @"";
+    }
+    return _textView;
+}
+
+- (ATSuspendedButton *)suspendedBtn
+{
+    if (!_suspendedBtn) {
+        _suspendedBtn = [[ATSuspendedButton alloc] initWithProtocolList:@[@"ATAdLoadingDelegate", @"ATBannerDelegate"]];
+        [_suspendedBtn setImage:[UIImage imageNamed:@"topon_logo"] forState:UIControlStateNormal];
+        _suspendedBtn.layer.masksToBounds = YES;
+        _suspendedBtn.layer.cornerRadius = kScaleW(50);
+        _suspendedBtn.layer.borderWidth = kScaleW(1);
+        _suspendedBtn.layer.borderColor = [[UIColor grayColor] CGColor];
+    }
+    return _suspendedBtn;
+}
+
 @end

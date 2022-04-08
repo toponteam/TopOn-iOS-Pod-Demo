@@ -9,7 +9,10 @@
 #import "ATSplashViewController.h"
 #import <AnyThinkSplash/AnyThinkSplash.h>
 #import <AnyThinkNative/AnyThinkNative.h>
-
+#import "ATADFootView.h"
+#import "ATModelButton.h"
+#import "ATMenuView.h"
+#import "ATSuspendedButton.h"
 NSString *const kGDTZoomOutPlacement = @"GDT(V+)";
 
 static NSString *const kMintegralPlacementID = @"b5ee89f9859d05";
@@ -28,46 +31,59 @@ static NSString *const kDirectOfferPlacementID = @"b61bffcf212e16";
 
 @interface ATSplashViewController ()<ATSplashDelegate,ATNativeSplashDelegate>
 
-@property(nonatomic, readonly) UIActivityIndicatorView *loadingView;
-@property(nonatomic, readonly) UIButton *reloadADButton;
-@property(nonatomic, readonly) UIButton *clearAdButton;
-@property(nonatomic, readonly) UIButton *showAdButton;
-@property(nonatomic, readonly) UILabel *failureTipsLabel;
-@property(nonatomic, readonly) UIButton *readyButton;
-@property(nonatomic, readonly) NSString *name;
-@property(nonatomic, readonly) NSDictionary *placementIDs;
+@property (nonatomic, strong) ATADFootView *footView;
+
+@property (nonatomic, strong) UIView *modelBackView;
+
+@property (nonatomic, strong) ATModelButton *modelButton;
+
+@property (nonatomic, strong) ATMenuView *menuView;
+
+@property (nonatomic, strong) UITextView *textView;
+
+@property (copy, nonatomic) NSString *placementID;
+
 @property(nonatomic, strong) UIButton *skipButton;
+
+@property (nonatomic, strong) ATSuspendedButton *suspendedBtn;
+
+@property (copy, nonatomic) NSDictionary<NSString *, NSString *> *placementIDs;
+
+@property(nonatomic, strong) NSString *togetherLoadAdStr;
+
+
+@property(nonatomic, strong) NSString *defaultAdSourceConfigStr;
+
 
 @end
 
 @implementation ATSplashViewController
 
-- (instancetype)initWithPlacementName:(NSString *)name {
-    self = [super initWithNibName:nil bundle:nil];
-    if (self != nil) {
-        _name = name;
-        _placementIDs = @{
-            kMintegralPlacement:kMintegralPlacementID,
-            kSigmobPlacement:kSigmobPlacementID,
-            kGDTPlacement:kGDTPlacementID,
-            kGDTZoomOutPlacement:kGDTZoomOutPlacementID,
-            kBaiduPlacement:kBaiduPlacementID,
-            kTTPlacementName:kTTPlacementID,
-            kAdMobPlacement:kAdmobPlacementID,
-            kKSPlacement:kKSPlacementID,
-            kAllPlacementName:kAllPlacementID,
-            kMyOfferPlacement:kMyofferPlacementID,
-            kKlevinPlacement: kKlevinPlacementID,
-            kDirectOfferPlacement:kDirectOfferPlacementID
-        };
-    }
-    return self;
+-(instancetype)init{
+    self = [super init];
+    
+    _placementIDs = @{
+        kMintegralPlacement:kMintegralPlacementID,
+        kSigmobPlacement:kSigmobPlacementID,
+        kGDTPlacement:kGDTPlacementID,
+        kGDTZoomOutPlacement:kGDTZoomOutPlacementID,
+        kBaiduPlacement:kBaiduPlacementID,
+        kTTPlacementName:kTTPlacementID,
+        kAdMobPlacement:kAdmobPlacementID,
+        kKSPlacement:kKSPlacementID,
+        kAllPlacementName:kAllPlacementID,
+        kMyOfferPlacement:kMyofferPlacementID,
+        kKlevinPlacement: kKlevinPlacementID,
+        kDirectOfferPlacement:kDirectOfferPlacementID
+    };
+    self.placementID = [[_placementIDs allValues]firstObject];
+    
+    return  self;
 }
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.title = _name;
+  
     
     [self setupSubviews];
 }
@@ -75,40 +91,68 @@ static NSString *const kDirectOfferPlacementID = @"b61bffcf212e16";
 - (void)setupSubviews {
     self.view.backgroundColor = [UIColor whiteColor];
     
-    _reloadADButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [_reloadADButton addTarget:self action:@selector(reloadADButtonTapped) forControlEvents:UIControlEventTouchUpInside];
-    [_reloadADButton setTitleColor:_reloadADButton.tintColor forState:UIControlStateNormal];
-    [_reloadADButton setTitle:@"Reload AD" forState:UIControlStateNormal];
-    _reloadADButton.frame = CGRectMake(.0f, CGRectGetMaxY(self.view.bounds) - 100.0f, (CGRectGetWidth(self.view.bounds) - 40) / 2.0f, 60.0f);
-    [self.view addSubview:_reloadADButton];
+    UIButton *clearBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 80, 20)];
+    [clearBtn setTitle:@"clear log" forState:UIControlStateNormal];
+    [clearBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [clearBtn addTarget:self action:@selector(clearLog) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *btnItem = [[UIBarButtonItem alloc] initWithCustomView:clearBtn];
+    self.navigationItem.rightBarButtonItem = btnItem;
     
-    _showAdButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [_showAdButton addTarget:self action:@selector(showAD) forControlEvents:UIControlEventTouchUpInside];
-    [_showAdButton setTitleColor:_showAdButton.tintColor forState:UIControlStateNormal];
-    [_showAdButton setTitle:@"Show AD" forState:UIControlStateNormal];
-    _showAdButton.frame = CGRectMake(CGRectGetMaxX(_reloadADButton.frame) + 40.0f, CGRectGetMinY(_reloadADButton.frame), (CGRectGetWidth(self.view.bounds) - 40) / 2.0f, 60.0f);
-    [self.view addSubview:_showAdButton];
+    [self.view addSubview:self.modelBackView];
+    [self.modelBackView addSubview:self.modelButton];
+    [self.view addSubview:self.menuView];
+    [self.view addSubview:self.textView];
+    [self.view addSubview:self.footView];
+    [self.view addSubview:self.suspendedBtn];
     
-    _clearAdButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [_clearAdButton addTarget:self action:@selector(clearAdButtonTapped) forControlEvents:UIControlEventTouchUpInside];
-    [_clearAdButton setTitleColor:_clearAdButton.tintColor forState:UIControlStateNormal];
-    [_clearAdButton setTitle:@"clear cache" forState:UIControlStateNormal];
-    _clearAdButton.frame = CGRectMake(.0f, CGRectGetMinY(_reloadADButton.frame) - 20.0f - 60.0f, (CGRectGetWidth(self.view.bounds) - 40) / 2.0f, 60.0f);
-    [self.view addSubview:_clearAdButton];
+    [self.modelBackView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.view.mas_centerX);
+        make.width.mas_equalTo(kScreenW - kScaleW(52));
+        make.height.mas_equalTo(kScaleW(360));
+        make.top.equalTo(self.view.mas_top).offset(kNavigationBarHeight + kScaleW(20));
+    }];
     
-    _readyButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [_readyButton addTarget:self action:@selector(readyButtonTapped) forControlEvents:UIControlEventTouchUpInside];
-    [_readyButton setTitleColor:_readyButton.tintColor forState:UIControlStateNormal];
-    [_readyButton setTitle:@"Ad Ready?" forState:UIControlStateNormal];
-    _readyButton.frame = CGRectMake(CGRectGetMaxX(_clearAdButton.frame) + 40.0f, CGRectGetMinY(_clearAdButton.frame), (CGRectGetWidth(self.view.bounds) - 40) / 2.0f, 60.0f);
-    [self.view addSubview:_readyButton];
+
+    [self.modelButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.view.mas_centerX);
+        make.width.mas_equalTo(kScaleW(340));
+        make.height.mas_equalTo(kScaleW(360));
+        make.top.equalTo(self.modelBackView.mas_top);
+    }];
     
-    _failureTipsLabel = [[UILabel alloc] initWithFrame:CGRectMake(.0f, 64.0f, CGRectGetWidth(self.view.bounds), 400.0f)];
-    _failureTipsLabel.text = @"Failed to load ad";
-    _failureTipsLabel.textAlignment = NSTextAlignmentCenter;
-    [self.view addSubview:_failureTipsLabel];
-    _failureTipsLabel.hidden = YES;
+    [self.menuView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.mas_equalTo(kScreenW - kScaleW(52));
+        make.height.mas_equalTo(kScaleW(242));
+        make.top.equalTo(self.modelBackView.mas_bottom).offset(kScaleW(20));
+        make.centerX.equalTo(self.view.mas_centerX);
+    }];
+    
+    [self.textView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.menuView.mas_bottom).offset(kScaleW(20));
+        make.bottom.equalTo(self.footView.mas_top).offset(kScaleW(-20));
+        make.width.mas_equalTo(kScreenW - kScaleW(52));
+        make.centerX.equalTo(self.view.mas_centerX);
+    }];
+    
+    [self.footView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(self.view);
+        make.left.equalTo(self.view);
+        make.right.equalTo(self.view);
+        make.height.mas_equalTo(kScaleW(340));
+    }];
+    
+    [self.suspendedBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.height.mas_equalTo(kScaleW(100));
+        make.top.equalTo(self.view.mas_top).offset(kScaleW(200));
+        make.right.equalTo(self.view.mas_right);
+    }];
 }
+
+- (void)clearLog
+{
+    self.textView.text = @"";
+}
+
 
 // MARK:- data
 - (NSDictionary *)getSplashInfo:(NSString *)name {
@@ -184,40 +228,91 @@ static NSString *const kDirectOfferPlacementID = @"b61bffcf212e16";
     return extra;
 }
 
-// MARK:- actions
--(void) readyButtonTapped {
-    // another method
-//    ATCheckLoadModel *checkLoadModel = [[ATAdManager sharedManager] checkSplashLoadStatusForPlacementID:_placementIDs[_name]];
-//    NSMutableDictionary *info = [NSMutableDictionary dictionary];
-//    info[@"result"] = @{@"isLoading":checkLoadModel.isLoading ? @"YES" : @"NO", @"isReady":checkLoadModel.isReady ? @"YES" : @"NO", @"adOfferInfo":checkLoadModel.adOfferInfo};
-//    NSLog(@"%@",[NSString stringWithFormat:@"\nAPI invocation info:\n*****************************\n%@ \n*****************************", info]);
-//    5.7.53
-    NSArray *caches = [[ATAdManager sharedManager] getSplashValidAdsForPlacementID: _placementIDs[_name]];
-    NSLog(@"ValidAds -- %@",caches);
-    
-    BOOL ready = [[ATAdManager sharedManager] splashReadyForPlacementID:_placementIDs[_name]];
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:ready ? @"Ready!" : @"Not Yet!" message:nil preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *action = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:nil];
-    [alert addAction:action];
-    [self presentViewController:alert animated:YES completion:nil];
-}
+
 
 - (void)clearAdButtonTapped {
     
 }
 
-- (void)reloadADButtonTapped {
+- (void)showLog:(NSString *)logStr
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        NSString *logS = self.textView.text;
+        NSString *log = nil;
+        if (![logS isEqualToString:@""]) {
+            log = [NSString stringWithFormat:@"%@\n%@", logS, logStr];
+        } else {
+            log = [NSString stringWithFormat:@"%@", logStr];
+        }
+        self.textView.text = log;
+        [self.textView scrollRangeToVisible:NSMakeRange(self.textView.text.length, 1)];
+    });
+}
+
+
+- (void)loadAd
+{
+    UIInterfaceOrientation deviceOrientaion = [self currentInterfaceOrientation];
+    BOOL landscape = UIInterfaceOrientationIsLandscape(deviceOrientaion);
+    
     UILabel *label = nil;
-    label = [[UILabel alloc] initWithFrame:CGRectMake(.0f, .0f, CGRectGetWidth([UIScreen mainScreen].bounds), 100.0f)];
+    label = [[UILabel alloc] initWithFrame:CGRectMake(.0f, .0f, landscape ? 120 : UIScreen.mainScreen.bounds.size.width, landscape ? UIScreen.mainScreen.bounds.size.height : 100.0f)];
     label.text = @"Container";
     label.textColor = [UIColor redColor];
     label.backgroundColor = [UIColor whiteColor];
     label.textAlignment = NSTextAlignmentCenter;
-
-    [[ATAdManager sharedManager] loadADWithPlacementID:_placementIDs[_name] extra:[self getSplashInfo:_name] delegate:self containerView:nil];
+    
+    NSMutableDictionary *mutableDict = [NSMutableDictionary dictionary];
+    [mutableDict setValue:self forKey:kATExtraInfoRootViewControllerKey];
+    //    [mutableDict setValue:self forKey:kATSplashExtraRootViewControllerKey];
+    [mutableDict setValue:@5.5 forKey:kATSplashExtraTolerateTimeoutKey];
+    
+    [[ATAdManager sharedManager] loadADWithPlacementID:self.placementID
+                                                 extra:mutableDict
+                                              delegate:self
+                                         containerView:label
+                                 defaultAdSourceConfig:self.modelButton.isSelected ? self.defaultAdSourceConfigStr : nil];
+}
+- (UIInterfaceOrientation)currentInterfaceOrientation
+{
+    if (@available(iOS 13.0, *)) {
+        UIWindow *firstWindow = [[[UIApplication sharedApplication] windows] firstObject];
+        if (firstWindow == nil) { return UIInterfaceOrientationUnknown; }
+        
+        UIWindowScene *windowScene = firstWindow.windowScene;
+        if (windowScene == nil){ return UIInterfaceOrientationUnknown; }
+        
+        return windowScene.interfaceOrientation;
+    } else {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+        return UIApplication.sharedApplication.statusBarOrientation;
+#pragma clang diagnostic pop
+        
+    }
 }
 
-- (void)showAD {
+- (void)checkAd
+{
+    // another method
+    //    ATCheckLoadModel *checkLoadModel = [[ATAdManager sharedManager] checkSplashLoadStatusForPlacementID:self.placementID];
+    
+    // list
+    NSArray *caches = [[ATAdManager sharedManager] getSplashValidAdsForPlacementID:self.placementID];
+    NSLog(@"ValidAds.count:%ld--- ValidAds:%@",caches.count,caches);
+
+    BOOL ready = [[ATAdManager sharedManager] splashReadyForPlacementID:self.placementID];
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:ready ? @"Ready!" : @"Not Yet!" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    [self presentViewController:alert animated:YES completion:^{
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [alert dismissViewControllerAnimated:YES completion:nil];
+        });
+    }];
+}
+
+- (void)showAd
+{
     UIWindow *mainWindow = nil;
     if ( @available(iOS 13.0, *) ) {
         mainWindow = [UIApplication sharedApplication].windows.firstObject;
@@ -228,110 +323,288 @@ static NSString *const kDirectOfferPlacementID = @"b61bffcf212e16";
     
     self.skipButton = [UIButton buttonWithType:UIButtonTypeCustom];
     self.skipButton.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.3];
-    self.skipButton.frame = CGRectMake([UIScreen mainScreen].bounds.size.width - 90 - 30, 50, 90, 28);
-    self.skipButton.layer.cornerRadius = 14;
+    self.skipButton.frame = CGRectMake([UIScreen mainScreen].bounds.size.width - 80 - 20, 50, 80, 21);
+    self.skipButton.layer.cornerRadius = 10.5;
     self.skipButton.titleLabel.font = [UIFont systemFontOfSize:14];
     
     NSMutableDictionary *mutableDict = [NSMutableDictionary dictionary];
-    [mutableDict setValue:@5000 forKey:kATSplashExtraCountdownKey];
+    [mutableDict setValue:@50000 forKey:kATSplashExtraCountdownKey];
     [mutableDict setValue:self.skipButton forKey:kATSplashExtraCustomSkipButtonKey];
     [mutableDict setValue:@500 forKey:kATSplashExtraCountdownIntervalKey];
     
-    [[ATAdManager sharedManager] showSplashWithPlacementID:_placementIDs[_name] window:mainWindow extra:mutableDict delegate:self];
+    [[ATAdManager sharedManager] showSplashWithPlacementID:self.placementID
+                                                    window:mainWindow
+                                                     extra:mutableDict
+                                                  delegate:self];
 }
 
-- (void)splashCountdownTime:(NSInteger)countdown forPlacementID:(NSString *)placementID extra:(NSDictionary *)extra {
-    NSLog(@"ATSplashViewController::splashCountdownTime:%ld forPlacementID:%@",countdown,placementID);
+
+// MARK:- splash delegate
+#pragma mark - delegates
+
+- (void)didStartLoadingADSourceWithPlacementID:(NSString *)placementID extra:(NSDictionary*)extra{
+    
+    NSLog(@"广告源--AD--开始--ATSplashViewController::didStartLoadingADSourceWithPlacementID:%@---extra:%@", placementID,extra);
+    
+    //    [self showLog:[NSString stringWithFormat:@"didStartLoadingADSourceWithPlacementID:%@---extra:%@", placementID,extra]];
+    
+    [self.suspendedBtn recordWithPlacementId:self.placementID protocol:NSStringFromSelector(_cmd)];
+}
+
+- (void)didFinishLoadingADSourceWithPlacementID:(NSString *)placementID extra:(NSDictionary*)extra{
+    
+    NSLog(@"广告源--AD--完成--ATSplashViewController::didFinishLoadingADSourceWithPlacementID:%@---extra:%@", placementID,extra);
+    
+    //    [self showLog:[NSString stringWithFormat:@"didFinishLoadingADSourceWithPlacementID:%@---extra:%@", placementID,extra]];
+    
+    [self.suspendedBtn recordWithPlacementId:self.placementID protocol:NSStringFromSelector(_cmd)];
+}
+
+- (void)didFailToLoadADSourceWithPlacementID:(NSString*)placementID extra:(NSDictionary*)extra error:(NSError*)error{
+    NSLog(@"广告源--AD--失败--ATSplashViewController::didFailToLoadADSourceWithPlacementID:%@---error:%@", placementID,error);
+    
+    //    [self showLog:[NSString stringWithFormat:@"didFailToLoadADSourceWithPlacementID:%@--%@", placementID],error];
+    
+    [self.suspendedBtn recordWithPlacementId:self.placementID protocol:NSStringFromSelector(_cmd)];
+}
+
+// bidding
+- (void)didStartBiddingADSourceWithPlacementID:(NSString *)placementID extra:(NSDictionary*)extra{
+    
+    NSLog(@"广告源--bid--开始--ATSplashViewController::didStartBiddingADSourceWithPlacementID:%@---extra:%@", placementID,extra);
+    
+    //    [self showLog:[NSString stringWithFormat:@"didStartBiddingADSourceWithPlacementID:%@---extra:%@", placementID,extra]];
+    
+    [self.suspendedBtn recordWithPlacementId:self.placementID protocol:NSStringFromSelector(_cmd)];
+}
+
+- (void)didFinishBiddingADSourceWithPlacementID:(NSString *)placementID extra:(NSDictionary*)extra{
+    
+    NSLog(@"广告源--bid--完成--ATSplashViewController::didFinishBiddingADSourceWithPlacementID:%@--extra:%@", placementID,extra);
+    
+    //    [self showLog:[NSString stringWithFormat:@"didFinishBiddingADSourceWithPlacementID:%@---extra:%@", placementID,extra]];
+    
+    [self.suspendedBtn recordWithPlacementId:self.placementID protocol:NSStringFromSelector(_cmd)];
+}
+
+- (void)didFailBiddingADSourceWithPlacementID:(NSString*)placementID extra:(NSDictionary*)extra error:(NSError*)error{
+    
+    NSLog(@"广告源--bid--失败--ATSplashViewController::didFailBiddingADSourceWithPlacementID:%@--error:%@", placementID,error);
+    
+    //    [self showLog:[NSString stringWithFormat:@"didFailBiddingADSourceWithPlacementID:%@", placementID]];
+    
+    [self.suspendedBtn recordWithPlacementId:self.placementID protocol:NSStringFromSelector(_cmd)];
+}
+
+- (void)didFinishLoadingSplashADWithPlacementID:(NSString *)placementID isTimeout:(BOOL)isTimeout
+{
+    NSLog(@"开屏成功:%@----是否超时:%d",placementID,isTimeout);
+    NSLog(@"开屏didFinishLoadingSplashADWithPlacementID:");
+    [self showLog:[NSString stringWithFormat:@"开屏成功:%@----是否超时:%d",placementID,isTimeout]];
+    
+    [self.suspendedBtn recordWithPlacementId:self.placementID protocol:NSStringFromSelector(_cmd)];
+}
+
+- (void)didTimeoutLoadingSplashADWithPlacementID:(NSString *)placementID
+{
+    NSLog(@"开屏超时:%@",placementID);
+    NSLog(@"开屏didTimeoutLoadingSplashADWithPlacementID:");
+    
+    [self showLog:[NSString stringWithFormat:@"开屏超时:%@",placementID]];
+    
+    [self.suspendedBtn recordWithPlacementId:self.placementID protocol:NSStringFromSelector(_cmd)];
+}
+
+- (void)didFailToLoadADWithPlacementID:(NSString *)placementID error:(NSError *)error {
+    
+    NSLog(@"开屏ATSplashViewController:: didFailToLoadADWithPlacementID");
+    
+    [self showLog:[NSString stringWithFormat:@"开屏加载失败:%@--%@",placementID,error]];
+    [self.suspendedBtn recordWithPlacementId:self.placementID protocol:NSStringFromSelector(_cmd)];
+}
+
+- (void)didFinishLoadingADWithPlacementID:(NSString *)placementID {
+    
+    NSLog(@"开屏ATSplashViewController:: didFinishLoadingADWithPlacementID");
+    
+    [self showLog:[NSString stringWithFormat:@"开屏加载成功:%@",placementID]];
+    [self.suspendedBtn recordWithPlacementId:self.placementID protocol:NSStringFromSelector(_cmd)];
+}
+
+- (void)splashDeepLinkOrJumpForPlacementID:(NSString *)placementID extra:(NSDictionary *)extra result:(BOOL)success
+{
+    NSLog(@"开屏ATSplashViewController:: splashDeepLinkOrJumpForPlacementID:placementID:%@ with extra: %@, success:%@", placementID,extra, success ? @"YES" : @"NO");
+    
+    [self showLog:[NSString stringWithFormat:@"splashDeepLinkOrJumpForPlacementID:placementID:%@ with extra: %@, success:%@", placementID,extra, success ? @"YES" : @"NO"]];
+    [self.suspendedBtn recordWithPlacementId:self.placementID protocol:NSStringFromSelector(_cmd)];
+}
+
+- (void)splashDidClickForPlacementID:(NSString *)placementID extra:(NSDictionary *)extra
+{
+    NSLog(@"开屏ATSplashViewController::splashDidClickForPlacementID:%@ extra:%@",placementID,extra);
+    [self showLog:[NSString stringWithFormat:@"splashDidClickForPlacementID:%@ extra:%@",placementID,extra]];
+    [self.suspendedBtn recordWithPlacementId:self.placementID protocol:NSStringFromSelector(_cmd)];
+}
+
+- (void)splashDidCloseForPlacementID:(NSString *)placementID extra:(NSDictionary *)extra
+{
+    NSLog(@"开屏ATSplashViewController::splashDidCloseForPlacementID:%@ extra:%@",placementID,extra);
+    [self showLog:[NSString stringWithFormat:@"splashDidCloseForPlacementID:%@ extra:%@",placementID,extra]];
+    [self.suspendedBtn recordWithPlacementId:self.placementID protocol:NSStringFromSelector(_cmd)];
+}
+
+- (void)splashDidShowForPlacementID:(NSString *)placementID extra:(NSDictionary *)extra
+{
+    NSLog(@"开屏ATSplashViewController::splashDidShowForPlacementID:%@ extra:%@",placementID,extra);
+    [self showLog:[NSString stringWithFormat:@"splashDidShowForPlacementID:%@ extra:%@",placementID,extra]];
+    [self.suspendedBtn recordWithPlacementId:self.placementID protocol:NSStringFromSelector(_cmd)];
+}
+
+-(void)splashZoomOutViewDidClickForPlacementID:(NSString*)placementID extra:(NSDictionary *) extra
+{
+    NSLog(@"开屏ATSplashViewController::splashZoomOutViewDidClickForPlacementID:%@ extra:%@",placementID,extra);
+    [self showLog:[NSString stringWithFormat:@"splashZoomOutViewDidClickForPlacementID:%@ extra:%@",placementID,extra]];
+    [self.suspendedBtn recordWithPlacementId:self.placementID protocol:NSStringFromSelector(_cmd)];
+}
+
+-(void)splashZoomOutViewDidCloseForPlacementID:(NSString*)placementID extra:(NSDictionary *) extra
+{
+    NSLog(@"开屏ATSplashViewController::splashZoomOutViewDidCloseForPlacementID:%@ extra:%@",placementID,extra);
+    [self showLog:[NSString stringWithFormat:@"splashZoomOutViewDidCloseForPlacementID:%@ extra:%@",placementID,extra]];
+    [self.suspendedBtn recordWithPlacementId:self.placementID protocol:NSStringFromSelector(_cmd)];
+}
+
+- (void)splashDetailDidClosedForPlacementID:(NSString*)placementID extra:(NSDictionary *) extra
+{
+    NSLog(@"ATSplashViewController::splashDetailDidClosedForPlacementID:%@ extra:%@",placementID,extra);
+    [self showLog:[NSString stringWithFormat:@"splashDetailDidClosedForPlacementID:%@ extra:%@",placementID,extra]];
+    [self.suspendedBtn recordWithPlacementId:self.placementID protocol:NSStringFromSelector(_cmd)];
+}
+
+- (void)splashDidShowFailedForPlacementID:(NSString*)placementID error:(NSError *)error extra:(NSDictionary *) extra
+{
+    NSLog(@"开屏ATSplashViewController::splashDidShowFailedForPlacementID:%@ error:%@ extra:%@",placementID,error,extra);
+    [self showLog:[NSString stringWithFormat:@"splashDidShowFailedForPlacementID:%@ error:%@ extra:%@",placementID,error,extra]];
+    [self.suspendedBtn recordWithPlacementId:self.placementID protocol:NSStringFromSelector(_cmd)];
+}
+
+- (void)splashCountdownTime:(NSInteger)countdown forPlacementID:(NSString *)placementID extra:(NSDictionary *)extra
+{
+    NSLog(@"开屏ATSplashViewController::splashCountdownTime:%ld forPlacementID:%@",countdown,placementID);
+    [self showLog:[NSString stringWithFormat:@"splashCountdownTime:%ld forPlacementID:%@",countdown,placementID]];
+    [self.suspendedBtn recordWithPlacementId:self.placementID protocol:NSStringFromSelector(_cmd)];
     
     dispatch_async(dispatch_get_main_queue(), ^{
-        NSString *title = [NSString stringWithFormat:@"%lds | 自定义Skip",countdown/1000];
+        NSString *title = [NSString stringWithFormat:@"%lds | Skip",countdown/1000];
         if (countdown/1000) {
             [self.skipButton setTitle:title forState:UIControlStateNormal];
         }
     });
+}
+
+
+#pragma mark - lazy
+
+- (NSString *)defaultAdSourceConfigStr{
     
-}
-// MARK:- splash delegate
-
-- (void)didFailToLoadADWithPlacementID:(NSString *)placementID error:(NSError *)error {
-    NSLog(@"ATSplashViewController::didFailToLoadADWithPlacementID:%@ error:%@",placementID,error);
-}
-
-- (void)didFinishLoadingADWithPlacementID:(NSString *)placementID {
-    NSLog(@"ATSplashViewController::didFinishLoadingADWithPlacementID:%@",placementID);
-}
-
-- (void)splashDeepLinkOrJumpForPlacementID:(NSString *)placementID extra:(NSDictionary *)extra result:(BOOL)success {
-    NSLog(@"ATSplashViewController:: splashDeepLinkOrJumpForPlacementID:placementID:%@ with extra: %@, success:%@", placementID,extra, success ? @"YES" : @"NO");
-}
-
-- (void)splashDidClickForPlacementID:(NSString *)placementID extra:(NSDictionary *)extra {
-    NSLog(@"ATSplashViewController::splashDidClickForPlacementID:%@ extra:%@",placementID,extra);
-
-}
-
-- (void)splashDidCloseForPlacementID:(NSString *)placementID extra:(NSDictionary *)extra {
-    NSLog(@"ATSplashViewController::splashDidCloseForPlacementID:%@ extra:%@",placementID,extra);
-
-}
-
-- (void)splashDidShowForPlacementID:(NSString *)placementID extra:(NSDictionary *)extra {
-    NSLog(@"ATSplashViewController::splashDidShowForPlacementID:%@ extra:%@",placementID,extra);
-}
-
--(void)splashZoomOutViewDidClickForPlacementID:(NSString*)placementID extra:(NSDictionary *) extra {
-    NSLog(@"ATSplashViewController::splashZoomOutViewDidClickForPlacementID:%@ extra:%@",placementID,extra);
-}
-
--(void)splashZoomOutViewDidCloseForPlacementID:(NSString*)placementID extra:(NSDictionary *) extra {
-    NSLog(@"ATSplashViewController::splashZoomOutViewDidCloseForPlacementID:%@ extra:%@",placementID,extra);
-}
-
-- (void)splashDetailDidClosedForPlacementID:(NSString*)placementID extra:(NSDictionary *) extra {
-    NSLog(@"ATSplashViewController::splashDetailDidClosedForPlacementID:%@ extra:%@",placementID,extra);
-}
-
-- (void)splashDidShowFailedForPlacementID:(NSString*)placementID error:(NSError *)error extra:(NSDictionary *) extra {
-    NSLog(@"ATSplashViewController::splashDidShowFailedForPlacementID:%@ error:%@ extra:%@",placementID,error,extra);
-}
-
-- (void)didFinishLoadingSplashADWithPlacementID:(NSString *)placementID isTimeout:(BOOL)isTimeout{
-    NSLog(@"ATSplashViewController::didFinishLoadingSplashADWithPlacementID:%@ isTimeout:%d",placementID,isTimeout);
-//    NSLog(@"开屏成功:%@----是否超时:%d",placementID,isTimeout);
-}
-
-- (void)didTimeoutLoadingSplashADWithPlacementID:(NSString *)placementID{
+    NSString *str = @"{\"unit_id\":1331013,\"nw_firm_id\":22,\"adapter_class\":\"ATBaiduSplashAdapter\",\"content\":\"{\\\"button_type\\\":\\\"0\\\",\\\"ad_place_id\\\":\\\"7852632\\\",\\\"app_id\\\":\\\"e232e8e6\\\"}\"}";
     
-    NSLog(@"ATSplashViewController::didTimeoutLoadingSplashADWithPlacementID:%@",placementID);
-
-//    NSLog(@"开屏超时:%@",placementID);
+    return str;
 }
 
-
-// MARK:- ATNativeSplashDelegate
-- (void)didClickNaitveSplashAdForPlacementID:(NSString *)placementID extra:(NSDictionary *)extra {
-    NSLog(@"ATSplashViewController::didClickNaitveSplashAdForPlacementID:%@ extra:%@",placementID,extra);
+- (ATADFootView *)footView
+{
+    if (!_footView) {
+        _footView = [[ATADFootView alloc] init];
+        
+        __weak typeof(self) weakSelf = self;
+        [_footView setClickLoadBlock:^{
+            NSLog(@"点击加载");
+            [weakSelf loadAd];
+        }];
+        [_footView setClickReadyBlock:^{
+            NSLog(@"点击准备");
+            [weakSelf checkAd];
+        }];
+        [_footView setClickShowBlock:^{
+            NSLog(@"点击展示");
+            [weakSelf showAd];
+        }];
+        
+        
+        if (![NSStringFromClass([self class]) containsString:@"Auto"]) {
+            [_footView.loadBtn setTitle:@"Load Splash AD" forState:UIControlStateNormal];
+            [_footView.readyBtn setTitle:@"Is Splash AD Ready" forState:UIControlStateNormal];
+            [_footView.showBtn setTitle:@"Show Splash AD" forState:UIControlStateNormal];
+        }
+    }
+    return _footView;
 }
 
-- (void)didCloseNativeSplashAdForPlacementID:(NSString *)placementID extra:(NSDictionary *)extra {
-    NSLog(@"ATSplashViewController::didCloseNativeSplashAdForPlacementID:%@ extra:%@",placementID,extra);
+- (UIView *)modelBackView
+{
+    if (!_modelBackView) {
+        _modelBackView = [[UIView alloc] init];
+        _modelBackView.backgroundColor = [UIColor whiteColor];
+        _modelBackView.layer.masksToBounds = YES;
+        _modelBackView.layer.cornerRadius = 5;
+    }
+    return _modelBackView;
 }
 
-- (void)didNativeSplashDeeplinkOrJumpForPlacementID:(NSString *)placementID extra:(NSDictionary *)extra result:(BOOL)success {
-    NSLog(@"ATSplashViewController::didCloseNativeSplashAdForPlacementID:%@ extra:%@, result:%@",placementID,extra, success ? @"YES" : @"NO");
+- (ATModelButton *)modelButton
+{
+    if (!_modelButton) {
+        _modelButton = [[ATModelButton alloc] initWithFrame:CGRectMake(0, 0, kScreenW, kScaleW(532))];
+        _modelButton.backgroundColor = [UIColor whiteColor];
+        _modelButton.modelLabel.text = @"Default Splash";
+        _modelButton.image.image = [UIImage imageNamed:@"splash"];
+        _modelButton.selected = YES;
+        [_modelButton addTarget:self action:@selector(defaultAction) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _modelButton;
 }
 
-- (void)didShowNativeSplashAdForPlacementID:(NSString *)placementID extra:(NSDictionary *)extra {
-    NSLog(@"ATSplashViewController::didShowNativeSplashAdForPlacementID:%@ extra:%@",placementID,extra);
+- (ATMenuView *)menuView
+{
+    if (!_menuView) {
+        _menuView = [[ATMenuView alloc] initWithMenuList:self.placementIDs.allKeys subMenuList:nil];
+        _menuView.layer.masksToBounds = YES;
+        _menuView.layer.cornerRadius = 5;
+        
+        __weak typeof (self) weakSelf = self;
+        [_menuView setSelectMenu:^(NSString * _Nonnull selectMenu) {
+            weakSelf.placementID = weakSelf.placementIDs[selectMenu];
+            NSLog(@"select placementId:%@", weakSelf.placementID);
+        }];
+    }
+    return _menuView;
 }
 
-- (void)failedToLoadNativeSplashAdForPlacementID:(NSString *)placementID error:(NSError *)error {
-    NSLog(@"ATSplashViewController::didShowNativeSplashAdForPlacementID:%@ error:%@",placementID,error);
+- (UITextView *)textView
+{
+    if (!_textView) {
+        _textView = [[UITextView alloc] init];
+        _textView.backgroundColor = [UIColor whiteColor];
+        _textView.layer.masksToBounds = YES;
+        _textView.layer.cornerRadius = 5;
+        _textView.editable = NO;
+        _textView.text = nil;
+    }
+    return _textView;
 }
 
-- (void)finishLoadingNativeSplashAdForPlacementID:(NSString *)placementID {
-    NSLog(@"ATSplashViewController::finishLoadingNativeSplashAdForPlacementID:%@",placementID);
+- (ATSuspendedButton *)suspendedBtn
+{
+    if (!_suspendedBtn) {
+        _suspendedBtn = [[ATSuspendedButton alloc] initWithProtocolList:@[@"ATAdLoadingDelegate", @"ATSplashDelegate"]];
+        [_suspendedBtn setImage:[UIImage imageNamed:@"topon_logo"] forState:UIControlStateNormal];
+        _suspendedBtn.layer.masksToBounds = YES;
+        _suspendedBtn.layer.cornerRadius = kScaleW(50);
+        _suspendedBtn.layer.borderWidth = kScaleW(1);
+        _suspendedBtn.layer.borderColor = [[UIColor grayColor] CGColor];
+    }
+    return _suspendedBtn;
 }
-
 
 @end

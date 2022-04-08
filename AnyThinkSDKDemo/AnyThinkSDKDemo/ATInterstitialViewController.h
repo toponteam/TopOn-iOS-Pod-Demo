@@ -48,5 +48,5 @@ extern NSString *const kKlevinPlacement;
 extern NSString *const kDirectOfferPlacement;
 
 @interface ATInterstitialViewController : UIViewController
--(instancetype) initWithPlacementName:(NSString*)name;
+
 @end

@@ -7,6 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		04CF321F280007900083B5AA /* ATHomeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CF320C2800078F0083B5AA /* ATHomeTableViewCell.m */; };
+		04CF3220280007900083B5AA /* ATHomeFootView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CF320E2800078F0083B5AA /* ATHomeFootView.m */; };
+		04CF3221280007900083B5AA /* ATModelButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CF32112800078F0083B5AA /* ATModelButton.m */; };
+		04CF3222280007900083B5AA /* ATADFootView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CF32132800078F0083B5AA /* ATADFootView.m */; };
+		04CF3223280007900083B5AA /* ATSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CF32142800078F0083B5AA /* ATSelectViewController.m */; };
+		04CF3224280007900083B5AA /* ATSuspendedButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CF32162800078F0083B5AA /* ATSuspendedButton.m */; };
+		04CF3225280007900083B5AA /* ATAutomationTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CF32172800078F0083B5AA /* ATAutomationTestViewController.m */; };
+		04CF3226280007900083B5AA /* ATAutomationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CF321B2800078F0083B5AA /* ATAutomationTableViewCell.m */; };
+		04CF3227280007900083B5AA /* ATMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CF321C2800078F0083B5AA /* ATMenuView.m */; };
+		04CF322B280008520083B5AA /* ATRewardVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CF3229280008510083B5AA /* ATRewardVideoViewController.m */; };
+		04CF323328000EDC0083B5AA /* ATNativeShowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CF322F28000EDB0083B5AA /* ATNativeShowViewController.m */; };
+		04CF323428000EDC0083B5AA /* ATNativeMessageStreamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CF323028000EDB0083B5AA /* ATNativeMessageStreamViewController.m */; };
+		04CF323728000F550083B5AA /* DMADView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CF323628000F550083B5AA /* DMADView.m */; };
+		04CF323A28000F6D0083B5AA /* ATAutoLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CF323928000F6D0083B5AA /* ATAutoLayout.m */; };
+		04CF323F28000FB70083B5AA /* ATNativeRenderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CF323B28000FB70083B5AA /* ATNativeRenderView.m */; };
+		04CF3243280011D50083B5AA /* MTAutolayoutCategories.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CF3242280011D30083B5AA /* MTAutolayoutCategories.m */; };
 		9B6DF73D259436DD004E9FDB /* ATSplashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B6DF73C259436DD004E9FDB /* ATSplashViewController.m */; };
 		9BBD009924863048009EAD66 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BBD009824863048009EAD66 /* AppDelegate.m */; };
 		9BBD009C24863048009EAD66 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BBD009B24863048009EAD66 /* SceneDelegate.m */; };
@@ -39,6 +55,39 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		04CF320B2800078F0083B5AA /* ATHomeFootView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATHomeFootView.h; sourceTree = "<group>"; };
+		04CF320C2800078F0083B5AA /* ATHomeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATHomeTableViewCell.m; sourceTree = "<group>"; };
+		04CF320D2800078F0083B5AA /* ATHomeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATHomeTableViewCell.h; sourceTree = "<group>"; };
+		04CF320E2800078F0083B5AA /* ATHomeFootView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATHomeFootView.m; sourceTree = "<group>"; };
+		04CF32102800078F0083B5AA /* ATSelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATSelectViewController.h; sourceTree = "<group>"; };
+		04CF32112800078F0083B5AA /* ATModelButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATModelButton.m; sourceTree = "<group>"; };
+		04CF32122800078F0083B5AA /* ATMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATMenuView.h; sourceTree = "<group>"; };
+		04CF32132800078F0083B5AA /* ATADFootView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATADFootView.m; sourceTree = "<group>"; };
+		04CF32142800078F0083B5AA /* ATSelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATSelectViewController.m; sourceTree = "<group>"; };
+		04CF32162800078F0083B5AA /* ATSuspendedButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATSuspendedButton.m; sourceTree = "<group>"; };
+		04CF32172800078F0083B5AA /* ATAutomationTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATAutomationTestViewController.m; sourceTree = "<group>"; };
+		04CF32182800078F0083B5AA /* ATAutomationTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATAutomationTableViewCell.h; sourceTree = "<group>"; };
+		04CF32192800078F0083B5AA /* ATSuspendedButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATSuspendedButton.h; sourceTree = "<group>"; };
+		04CF321A2800078F0083B5AA /* ATAutomationTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATAutomationTestViewController.h; sourceTree = "<group>"; };
+		04CF321B2800078F0083B5AA /* ATAutomationTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATAutomationTableViewCell.m; sourceTree = "<group>"; };
+		04CF321C2800078F0083B5AA /* ATMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATMenuView.m; sourceTree = "<group>"; };
+		04CF321D2800078F0083B5AA /* ATModelButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATModelButton.h; sourceTree = "<group>"; };
+		04CF321E2800078F0083B5AA /* ATADFootView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATADFootView.h; sourceTree = "<group>"; };
+		04CF3228280007DA0083B5AA /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		04CF3229280008510083B5AA /* ATRewardVideoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATRewardVideoViewController.m; sourceTree = "<group>"; };
+		04CF322A280008510083B5AA /* ATRewardVideoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATRewardVideoViewController.h; sourceTree = "<group>"; };
+		04CF322D28000EDB0083B5AA /* ATNativeMessageStreamViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATNativeMessageStreamViewController.h; sourceTree = "<group>"; };
+		04CF322F28000EDB0083B5AA /* ATNativeShowViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATNativeShowViewController.m; sourceTree = "<group>"; };
+		04CF323028000EDB0083B5AA /* ATNativeMessageStreamViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATNativeMessageStreamViewController.m; sourceTree = "<group>"; };
+		04CF323128000EDB0083B5AA /* ATNativeShowViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATNativeShowViewController.h; sourceTree = "<group>"; };
+		04CF323528000F550083B5AA /* DMADView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMADView.h; sourceTree = "<group>"; };
+		04CF323628000F550083B5AA /* DMADView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMADView.m; sourceTree = "<group>"; };
+		04CF323828000F6D0083B5AA /* ATAutoLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATAutoLayout.h; sourceTree = "<group>"; };
+		04CF323928000F6D0083B5AA /* ATAutoLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATAutoLayout.m; sourceTree = "<group>"; };
+		04CF323B28000FB70083B5AA /* ATNativeRenderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATNativeRenderView.m; sourceTree = "<group>"; };
+		04CF323C28000FB70083B5AA /* ATNativeRenderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATNativeRenderView.h; sourceTree = "<group>"; };
+		04CF3241280011D30083B5AA /* MTAutolayoutCategories.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MTAutolayoutCategories.h; sourceTree = "<group>"; };
+		04CF3242280011D30083B5AA /* MTAutolayoutCategories.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MTAutolayoutCategories.m; sourceTree = "<group>"; };
 		44D83BDBBF3D3D426850A3E1 /* Pods-AnyThinkSDKDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AnyThinkSDKDemo.release.xcconfig"; path = "Target Support Files/Pods-AnyThinkSDKDemo/Pods-AnyThinkSDKDemo.release.xcconfig"; sourceTree = "<group>"; };
 		85EEA80B39960C835625EC2F /* Pods-AnyThinkSDKDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AnyThinkSDKDemo.debug.xcconfig"; path = "Target Support Files/Pods-AnyThinkSDKDemo/Pods-AnyThinkSDKDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		9B6DF73B259436DD004E9FDB /* ATSplashViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATSplashViewController.h; sourceTree = "<group>"; };
@@ -110,6 +159,54 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		04CF320A2800078F0083B5AA /* View */ = {
+			isa = PBXGroup;
+			children = (
+				04CF323C28000FB70083B5AA /* ATNativeRenderView.h */,
+				04CF323B28000FB70083B5AA /* ATNativeRenderView.m */,
+				04CF3241280011D30083B5AA /* MTAutolayoutCategories.h */,
+				04CF3242280011D30083B5AA /* MTAutolayoutCategories.m */,
+				04CF323828000F6D0083B5AA /* ATAutoLayout.h */,
+				04CF323928000F6D0083B5AA /* ATAutoLayout.m */,
+				04CF323528000F550083B5AA /* DMADView.h */,
+				04CF323628000F550083B5AA /* DMADView.m */,
+				04CF320B2800078F0083B5AA /* ATHomeFootView.h */,
+				04CF320C2800078F0083B5AA /* ATHomeTableViewCell.m */,
+				04CF320D2800078F0083B5AA /* ATHomeTableViewCell.h */,
+				04CF320E2800078F0083B5AA /* ATHomeFootView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		04CF320F2800078F0083B5AA /* BaseVc */ = {
+			isa = PBXGroup;
+			children = (
+				04CF32102800078F0083B5AA /* ATSelectViewController.h */,
+				04CF32112800078F0083B5AA /* ATModelButton.m */,
+				04CF32122800078F0083B5AA /* ATMenuView.h */,
+				04CF32132800078F0083B5AA /* ATADFootView.m */,
+				04CF32142800078F0083B5AA /* ATSelectViewController.m */,
+				04CF32152800078F0083B5AA /* Automation */,
+				04CF321C2800078F0083B5AA /* ATMenuView.m */,
+				04CF321D2800078F0083B5AA /* ATModelButton.h */,
+				04CF321E2800078F0083B5AA /* ATADFootView.h */,
+			);
+			path = BaseVc;
+			sourceTree = "<group>";
+		};
+		04CF32152800078F0083B5AA /* Automation */ = {
+			isa = PBXGroup;
+			children = (
+				04CF32162800078F0083B5AA /* ATSuspendedButton.m */,
+				04CF32172800078F0083B5AA /* ATAutomationTestViewController.m */,
+				04CF32182800078F0083B5AA /* ATAutomationTableViewCell.h */,
+				04CF32192800078F0083B5AA /* ATSuspendedButton.h */,
+				04CF321A2800078F0083B5AA /* ATAutomationTestViewController.h */,
+				04CF321B2800078F0083B5AA /* ATAutomationTableViewCell.m */,
+			);
+			path = Automation;
+			sourceTree = "<group>";
+		};
 		1BE5C78DE8928691D97412C1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -161,8 +258,12 @@
 		9BBD009624863048009EAD66 /* AnyThinkSDKDemo */ = {
 			isa = PBXGroup;
 			children = (
+				04CF320F2800078F0083B5AA /* BaseVc */,
+				04CF320A2800078F0083B5AA /* View */,
 				9BBD00B5248630C8009EAD66 /* ATBannerViewController.h */,
 				9BBD00B2248630C7009EAD66 /* ATBannerViewController.m */,
+				04CF322A280008510083B5AA /* ATRewardVideoViewController.h */,
+				04CF3229280008510083B5AA /* ATRewardVideoViewController.m */,
 				9BBD00BB248630C8009EAD66 /* ATDrawViewController.h */,
 				9BBD00BC248630C8009EAD66 /* ATDrawViewController.m */,
 				9BBD00B0248630C7009EAD66 /* ATInterstitialViewController.h */,
@@ -171,6 +272,10 @@
 				9BBD00BD248630C8009EAD66 /* ATNativeBannerViewController.m */,
 				9BBD00B1248630C7009EAD66 /* ATNativeViewController.h */,
 				9BBD00B6248630C8009EAD66 /* ATNativeViewController.m */,
+				04CF322D28000EDB0083B5AA /* ATNativeMessageStreamViewController.h */,
+				04CF323028000EDB0083B5AA /* ATNativeMessageStreamViewController.m */,
+				04CF323128000EDB0083B5AA /* ATNativeShowViewController.h */,
+				04CF322F28000EDB0083B5AA /* ATNativeShowViewController.m */,
 				9BBD00B7248630C8009EAD66 /* ATRewardedVideoVideoViewController.h */,
 				9BBD00BA248630C8009EAD66 /* ATRewardedVideoVideoViewController.m */,
 				9B6DF73B259436DD004E9FDB /* ATSplashViewController.h */,
@@ -188,6 +293,7 @@
 				9BBD00A52486304C009EAD66 /* LaunchScreen.storyboard */,
 				9BBD00A82486304C009EAD66 /* Info.plist */,
 				9BBD00A92486304C009EAD66 /* main.m */,
+				04CF3228280007DA0083B5AA /* PrefixHeader.pch */,
 			);
 			path = AnyThinkSDKDemo;
 			sourceTree = "<group>";
@@ -324,17 +430,33 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04CF3224280007900083B5AA /* ATSuspendedButton.m in Sources */,
+				04CF3221280007900083B5AA /* ATModelButton.m in Sources */,
+				04CF321F280007900083B5AA /* ATHomeTableViewCell.m in Sources */,
+				04CF323428000EDC0083B5AA /* ATNativeMessageStreamViewController.m in Sources */,
 				9BBD009F24863048009EAD66 /* ViewController.m in Sources */,
 				9BBD009924863048009EAD66 /* AppDelegate.m in Sources */,
 				9BBD00C0248630C8009EAD66 /* MTAutolayoutCategories.m in Sources */,
 				9BBD00C3248630C8009EAD66 /* ATDrawViewController.m in Sources */,
+				04CF3226280007900083B5AA /* ATAutomationTableViewCell.m in Sources */,
+				04CF3222280007900083B5AA /* ATADFootView.m in Sources */,
+				04CF3225280007900083B5AA /* ATAutomationTestViewController.m in Sources */,
 				9BBD00AA2486304C009EAD66 /* main.m in Sources */,
+				04CF323328000EDC0083B5AA /* ATNativeShowViewController.m in Sources */,
+				04CF323A28000F6D0083B5AA /* ATAutoLayout.m in Sources */,
+				04CF3220280007900083B5AA /* ATHomeFootView.m in Sources */,
 				9BBD009C24863048009EAD66 /* SceneDelegate.m in Sources */,
 				9BBD00BE248630C8009EAD66 /* ATBannerViewController.m in Sources */,
+				04CF323F28000FB70083B5AA /* ATNativeRenderView.m in Sources */,
+				04CF3223280007900083B5AA /* ATSelectViewController.m in Sources */,
 				9BBD00C1248630C8009EAD66 /* ATNativeViewController.m in Sources */,
 				9BBD00BF248630C8009EAD66 /* ATInterstitialViewController.m in Sources */,
 				9BBD00C4248630C8009EAD66 /* ATNativeBannerViewController.m in Sources */,
+				04CF322B280008520083B5AA /* ATRewardVideoViewController.m in Sources */,
+				04CF3227280007900083B5AA /* ATMenuView.m in Sources */,
 				9B6DF73D259436DD004E9FDB /* ATSplashViewController.m in Sources */,
+				04CF3243280011D50083B5AA /* MTAutolayoutCategories.m in Sources */,
+				04CF323728000F550083B5AA /* DMADView.m in Sources */,
 				9BBD00C2248630C8009EAD66 /* ATRewardedVideoVideoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -488,6 +610,7 @@
 					"$(PROJECT_DIR)/Pods/AnyThinkiOS/admob",
 					"$(PROJECT_DIR)/Pods/AnyThinkiOS/sigmob",
 				);
+				GCC_PREFIX_HEADER = "$(SRCROOT)/AnyThinkSDKDemo/PrefixHeader.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"COCOAPODS=1",
@@ -527,6 +650,7 @@
 					"$(PROJECT_DIR)/Pods/AnyThinkiOS/admob",
 					"$(PROJECT_DIR)/Pods/AnyThinkiOS/sigmob",
 				);
+				GCC_PREFIX_HEADER = "$(SRCROOT)/AnyThinkSDKDemo/PrefixHeader.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"COCOAPODS=1",
