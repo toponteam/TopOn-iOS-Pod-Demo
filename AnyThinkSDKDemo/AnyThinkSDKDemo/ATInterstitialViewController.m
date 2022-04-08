@@ -243,6 +243,9 @@ static NSString *const kDirectOfferPlacementID = @"b61bffcd9dda20";
     self.placementID = self.placementIDs.allValues.firstObject;
     [self setupUI];
     
+    [ATInterstitialAutoAdManager sharedInstance].delegate = self;
+    
+    
 }
 - (void)setupUI
 {
