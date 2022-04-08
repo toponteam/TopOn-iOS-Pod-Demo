@@ -210,7 +210,19 @@
     
     NSLog(@"ValidAds.count:%ld--- ValidAds:%@",array.count,array);
 
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:[[ATAdManager sharedManager] rewardedVideoReadyForPlacementID:self.placementID] ? @"Ready!" : @"Not Yet!" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    BOOL isready = [[ATAdManager sharedManager] rewardedVideoReadyForPlacementID:self.placementID];
+    
+    if (self.isAuto) {
+        isready   =   [[ATRewardedVideoAutoAdManager sharedInstance]autoLoadRewardedVideoReadyForPlacementID:self.placementID];
+        
+    }
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:isready ? @"Ready!" : @"Not Yet!" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    [self presentViewController:alert animated:YES completion:^{
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [alert dismissViewControllerAnimated:YES completion:nil];
+        });
+    }];
+
     [self presentViewController:alert animated:YES completion:^{
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [alert dismissViewControllerAnimated:YES completion:nil];

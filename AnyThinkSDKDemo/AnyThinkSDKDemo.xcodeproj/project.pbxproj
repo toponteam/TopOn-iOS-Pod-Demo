@@ -171,9 +171,9 @@
 				04CF323528000F550083B5AA /* DMADView.h */,
 				04CF323628000F550083B5AA /* DMADView.m */,
 				04CF320B2800078F0083B5AA /* ATHomeFootView.h */,
-				04CF320C2800078F0083B5AA /* ATHomeTableViewCell.m */,
-				04CF320D2800078F0083B5AA /* ATHomeTableViewCell.h */,
 				04CF320E2800078F0083B5AA /* ATHomeFootView.m */,
+				04CF320D2800078F0083B5AA /* ATHomeTableViewCell.h */,
+				04CF320C2800078F0083B5AA /* ATHomeTableViewCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";

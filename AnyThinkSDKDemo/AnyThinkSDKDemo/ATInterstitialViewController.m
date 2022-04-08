@@ -413,18 +413,31 @@ static NSString *const kDirectOfferPlacementID = @"b61bffcd9dda20";
     NSLog(@"ATInterstitialViewController--checkLoadModel--%ld----:%@---checkLoadModel:%@",checkArray.count,checkArray,checkLoadModel);
 
     
+    
     BOOL isReady = [[ATAdManager sharedManager] interstitialReadyForPlacementID:self.placementID];
+    
+    if (_isAuto) {
+        isReady =  [[ATInterstitialAutoAdManager sharedInstance] autoLoadInterstitialReadyForPlacementID:self.placementID];
+        
+    }
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:isReady ? @"Ready!" : @"Not Yet!" message:nil preferredStyle:UIAlertControllerStyleAlert];
     [self presentViewController:alert animated:YES completion:^{
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [alert dismissViewControllerAnimated:YES completion:nil];
         });
     }];
+    
 }
 
 - (void)showAd
 {
-    [[ATAdManager sharedManager] showInterstitialWithPlacementID:self.placementID scene:@"f5e549727efc49" inViewController:self delegate:self];
+    
+       if (self.isAuto) {
+           [ [ATInterstitialAutoAdManager sharedInstance] showAutoLoadInterstitialWithPlacementID:self.placementID scene:@"f5e549727efc49" inViewController:self delegate:self];
+       }else
+           [[ATAdManager sharedManager] showInterstitialWithPlacementID:self.placementID scene:@"f5e549727efc49" inViewController:self delegate:self];
+           
+
 }
 
 - (void)showLog:(NSString *)logStr
