@@ -133,11 +133,23 @@
 - (void)hiddenSubMenu
 {
     self.subMenu.hidden = YES;
+    
+    [self.menu mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self.mas_right).offset(kScaleW(-22));
+    }];
+   
+    
+    
 }
 
 - (void)showSubMenu
 {
     self.subMenu.hidden = NO;
+    
+    [self.menu mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self.mas_right).offset(kScaleW(-300));
+    }];
+   
 }
 
 -(void)switchChange:(UISwitch*)sender{
@@ -229,7 +241,7 @@
     if (!_autoSwitch) {
         _autoSwitch = [[ UISwitch alloc]init];
         _autoSwitch.hidden = true;
-      
+        _autoSwitch.onTintColor = kRGB(73, 109, 255);
         
     }
     return _autoSwitch;

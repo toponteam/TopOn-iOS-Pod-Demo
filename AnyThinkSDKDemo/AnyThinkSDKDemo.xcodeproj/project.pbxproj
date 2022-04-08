@@ -182,14 +182,14 @@
 			isa = PBXGroup;
 			children = (
 				04CF32102800078F0083B5AA /* ATSelectViewController.h */,
-				04CF32112800078F0083B5AA /* ATModelButton.m */,
-				04CF32122800078F0083B5AA /* ATMenuView.h */,
-				04CF32132800078F0083B5AA /* ATADFootView.m */,
 				04CF32142800078F0083B5AA /* ATSelectViewController.m */,
-				04CF32152800078F0083B5AA /* Automation */,
-				04CF321C2800078F0083B5AA /* ATMenuView.m */,
+				04CF32112800078F0083B5AA /* ATModelButton.m */,
 				04CF321D2800078F0083B5AA /* ATModelButton.h */,
+				04CF32122800078F0083B5AA /* ATMenuView.h */,
+				04CF321C2800078F0083B5AA /* ATMenuView.m */,
+				04CF32132800078F0083B5AA /* ATADFootView.m */,
 				04CF321E2800078F0083B5AA /* ATADFootView.h */,
+				04CF32152800078F0083B5AA /* Automation */,
 			);
 			path = BaseVc;
 			sourceTree = "<group>";

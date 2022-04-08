@@ -208,7 +208,7 @@ static NSString *const kCallbackKey = @"request";
 - (void)viewDidLoad {
     [super viewDidLoad];
 //    self.title = _name;
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = kRGB(245, 245, 245);
     _placementIDs = [ATNativeViewController nativePlacementIDs];
     [self setupUI];
     
@@ -335,21 +335,14 @@ static NSString *const kCallbackKey = @"request";
         self.placementIDs = self.placementIDs_native;
         [self.menuView showSubMenu];
         
-        [_footView.loadBtn setTitle:@"Load Native AD" forState:UIControlStateNormal];
-        [_footView.readyBtn setTitle:@"Is Native AD Ready" forState:UIControlStateNormal];
-        [_footView.showBtn setTitle:@"Show Native AD" forState:UIControlStateNormal];
-        
+       
     } else if (sender.tag == 1) {
         self.nativeBtn.selected = NO;
         self.drawBtn.selected = YES;
         self.preRollBtn.selected = NO;
         self.placementIDs = self.placementIDs_draw;
         [self.menuView hiddenSubMenu];
-        
-        [_footView.loadBtn setTitle:@"Load Vertical Draw Video AD" forState:UIControlStateNormal];
-        [_footView.readyBtn setTitle:@"Is Vertical Draw Video AD Ready" forState:UIControlStateNormal];
-        [_footView.showBtn setTitle:@"Show Vertical Draw Video AD" forState:UIControlStateNormal];
-        
+   
     } else {
         self.nativeBtn.selected = NO;
         self.drawBtn.selected = NO;
@@ -357,10 +350,7 @@ static NSString *const kCallbackKey = @"request";
         self.placementIDs = self.placementIDs_preRoll;
         [self.menuView hiddenSubMenu];
         
-        [_footView.loadBtn setTitle:@"Load Pre-roll AD" forState:UIControlStateNormal];
-        [_footView.readyBtn setTitle:@"Is Pre-roll AD Ready" forState:UIControlStateNormal];
-        [_footView.showBtn setTitle:@"Show Pre-roll AD" forState:UIControlStateNormal];
-        
+      
     }
     [self.nativeBtn setButtonIsSelectBoard];
     [self.drawBtn setButtonIsSelectBoard];

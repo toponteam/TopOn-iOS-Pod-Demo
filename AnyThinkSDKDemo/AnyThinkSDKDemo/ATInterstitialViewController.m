@@ -237,9 +237,9 @@ static NSString *const kDirectOfferPlacementID = @"b61bffcd9dda20";
 -(void) viewDidLoad {
     [super viewDidLoad];
     [[ATAPI sharedInstance] setCustomData:@{@"test_key":@"test_val"} forPlacementID:kGDTPlacementID];
-    
+    self.view.backgroundColor =  kRGB(245, 245, 245);
     self.title = _name;
-    self.view.backgroundColor = [UIColor whiteColor];
+  
     self.placementID = self.placementIDs.allValues.firstObject;
     [self setupUI];
     

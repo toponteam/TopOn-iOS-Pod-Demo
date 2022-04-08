@@ -83,13 +83,13 @@ static NSString *const kDirectOfferPlacementID = @"b61bffcf212e16";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-  
+    self.view.backgroundColor = kRGB(245, 245, 245);
     
     [self setupSubviews];
 }
 
 - (void)setupSubviews {
-    self.view.backgroundColor = [UIColor whiteColor];
+  
     
     UIButton *clearBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 80, 20)];
     [clearBtn setTitle:@"clear log" forState:UIControlStateNormal];
@@ -344,7 +344,7 @@ static NSString *const kDirectOfferPlacementID = @"b61bffcf212e16";
 
 - (void)didStartLoadingADSourceWithPlacementID:(NSString *)placementID extra:(NSDictionary*)extra{
     
-    NSLog(@"广告源--AD--开始--ATSplashViewController::didStartLoadingADSourceWithPlacementID:%@---extra:%@", placementID,extra);
+    NSLog(@"广告源--AD--开始--ATSplashViewController::didStartLoadingADSourceWithPlacementID:%@", placementID);
     
     //    [self showLog:[NSString stringWithFormat:@"didStartLoadingADSourceWithPlacementID:%@---extra:%@", placementID,extra]];
     
@@ -353,7 +353,7 @@ static NSString *const kDirectOfferPlacementID = @"b61bffcf212e16";
 
 - (void)didFinishLoadingADSourceWithPlacementID:(NSString *)placementID extra:(NSDictionary*)extra{
     
-    NSLog(@"广告源--AD--完成--ATSplashViewController::didFinishLoadingADSourceWithPlacementID:%@---extra:%@", placementID,extra);
+    NSLog(@"广告源--AD--完成--ATSplashViewController::didFinishLoadingADSourceWithPlacementID:%@", placementID);
     
     //    [self showLog:[NSString stringWithFormat:@"didFinishLoadingADSourceWithPlacementID:%@---extra:%@", placementID,extra]];
     
@@ -371,7 +371,7 @@ static NSString *const kDirectOfferPlacementID = @"b61bffcf212e16";
 // bidding
 - (void)didStartBiddingADSourceWithPlacementID:(NSString *)placementID extra:(NSDictionary*)extra{
     
-    NSLog(@"广告源--bid--开始--ATSplashViewController::didStartBiddingADSourceWithPlacementID:%@---extra:%@", placementID,extra);
+    NSLog(@"广告源--bid--开始--ATSplashViewController::didStartBiddingADSourceWithPlacementID:%@", placementID);
     
     //    [self showLog:[NSString stringWithFormat:@"didStartBiddingADSourceWithPlacementID:%@---extra:%@", placementID,extra]];
     
@@ -380,7 +380,7 @@ static NSString *const kDirectOfferPlacementID = @"b61bffcf212e16";
 
 - (void)didFinishBiddingADSourceWithPlacementID:(NSString *)placementID extra:(NSDictionary*)extra{
     
-    NSLog(@"广告源--bid--完成--ATSplashViewController::didFinishBiddingADSourceWithPlacementID:%@--extra:%@", placementID,extra);
+    NSLog(@"广告源--bid--完成--ATSplashViewController::didFinishBiddingADSourceWithPlacementID:%@", placementID);
     
     //    [self showLog:[NSString stringWithFormat:@"didFinishBiddingADSourceWithPlacementID:%@---extra:%@", placementID,extra]];
     
@@ -433,58 +433,58 @@ static NSString *const kDirectOfferPlacementID = @"b61bffcf212e16";
 
 - (void)splashDeepLinkOrJumpForPlacementID:(NSString *)placementID extra:(NSDictionary *)extra result:(BOOL)success
 {
-    NSLog(@"开屏ATSplashViewController:: splashDeepLinkOrJumpForPlacementID:placementID:%@ with extra: %@, success:%@", placementID,extra, success ? @"YES" : @"NO");
+    NSLog(@"开屏ATSplashViewController:: splashDeepLinkOrJumpForPlacementID:placementID:%@", placementID);
     
-    [self showLog:[NSString stringWithFormat:@"splashDeepLinkOrJumpForPlacementID:placementID:%@ with extra: %@, success:%@", placementID,extra, success ? @"YES" : @"NO"]];
+    [self showLog:[NSString stringWithFormat:@"splashDeepLinkOrJumpForPlacementID:placementID:%@ ", placementID]];
     [self.suspendedBtn recordWithPlacementId:self.placementID protocol:NSStringFromSelector(_cmd)];
 }
 
 - (void)splashDidClickForPlacementID:(NSString *)placementID extra:(NSDictionary *)extra
 {
-    NSLog(@"开屏ATSplashViewController::splashDidClickForPlacementID:%@ extra:%@",placementID,extra);
-    [self showLog:[NSString stringWithFormat:@"splashDidClickForPlacementID:%@ extra:%@",placementID,extra]];
+    NSLog(@"开屏ATSplashViewController::splashDidClickForPlacementID:%@",placementID);
+    [self showLog:[NSString stringWithFormat:@"splashDidClickForPlacementID:%@",placementID]];
     [self.suspendedBtn recordWithPlacementId:self.placementID protocol:NSStringFromSelector(_cmd)];
 }
 
 - (void)splashDidCloseForPlacementID:(NSString *)placementID extra:(NSDictionary *)extra
 {
     NSLog(@"开屏ATSplashViewController::splashDidCloseForPlacementID:%@ extra:%@",placementID,extra);
-    [self showLog:[NSString stringWithFormat:@"splashDidCloseForPlacementID:%@ extra:%@",placementID,extra]];
+    [self showLog:[NSString stringWithFormat:@"splashDidCloseForPlacementID:%@ ",placementID]];
     [self.suspendedBtn recordWithPlacementId:self.placementID protocol:NSStringFromSelector(_cmd)];
 }
 
 - (void)splashDidShowForPlacementID:(NSString *)placementID extra:(NSDictionary *)extra
 {
-    NSLog(@"开屏ATSplashViewController::splashDidShowForPlacementID:%@ extra:%@",placementID,extra);
-    [self showLog:[NSString stringWithFormat:@"splashDidShowForPlacementID:%@ extra:%@",placementID,extra]];
+    NSLog(@"开屏ATSplashViewController::splashDidShowForPlacementID:%@",placementID);
+    [self showLog:[NSString stringWithFormat:@"splashDidShowForPlacementID:%@ ",placementID]];
     [self.suspendedBtn recordWithPlacementId:self.placementID protocol:NSStringFromSelector(_cmd)];
 }
 
 -(void)splashZoomOutViewDidClickForPlacementID:(NSString*)placementID extra:(NSDictionary *) extra
 {
-    NSLog(@"开屏ATSplashViewController::splashZoomOutViewDidClickForPlacementID:%@ extra:%@",placementID,extra);
-    [self showLog:[NSString stringWithFormat:@"splashZoomOutViewDidClickForPlacementID:%@ extra:%@",placementID,extra]];
+    NSLog(@"开屏ATSplashViewController::splashZoomOutViewDidClickForPlacementID:%@",placementID);
+    [self showLog:[NSString stringWithFormat:@"splashZoomOutViewDidClickForPlacementID:%@ ",placementID]];
     [self.suspendedBtn recordWithPlacementId:self.placementID protocol:NSStringFromSelector(_cmd)];
 }
 
 -(void)splashZoomOutViewDidCloseForPlacementID:(NSString*)placementID extra:(NSDictionary *) extra
 {
-    NSLog(@"开屏ATSplashViewController::splashZoomOutViewDidCloseForPlacementID:%@ extra:%@",placementID,extra);
-    [self showLog:[NSString stringWithFormat:@"splashZoomOutViewDidCloseForPlacementID:%@ extra:%@",placementID,extra]];
+    NSLog(@"开屏ATSplashViewController::splashZoomOutViewDidCloseForPlacementID:%@",placementID);
+    [self showLog:[NSString stringWithFormat:@"splashZoomOutViewDidCloseForPlacementID:%@ ",placementID]];
     [self.suspendedBtn recordWithPlacementId:self.placementID protocol:NSStringFromSelector(_cmd)];
 }
 
 - (void)splashDetailDidClosedForPlacementID:(NSString*)placementID extra:(NSDictionary *) extra
 {
-    NSLog(@"ATSplashViewController::splashDetailDidClosedForPlacementID:%@ extra:%@",placementID,extra);
-    [self showLog:[NSString stringWithFormat:@"splashDetailDidClosedForPlacementID:%@ extra:%@",placementID,extra]];
+    NSLog(@"ATSplashViewController::splashDetailDidClosedForPlacementID:%@",placementID);
+    [self showLog:[NSString stringWithFormat:@"splashDetailDidClosedForPlacementID:%@ ",placementID]];
     [self.suspendedBtn recordWithPlacementId:self.placementID protocol:NSStringFromSelector(_cmd)];
 }
 
 - (void)splashDidShowFailedForPlacementID:(NSString*)placementID error:(NSError *)error extra:(NSDictionary *) extra
 {
-    NSLog(@"开屏ATSplashViewController::splashDidShowFailedForPlacementID:%@ error:%@ extra:%@",placementID,error,extra);
-    [self showLog:[NSString stringWithFormat:@"splashDidShowFailedForPlacementID:%@ error:%@ extra:%@",placementID,error,extra]];
+    NSLog(@"开屏ATSplashViewController::splashDidShowFailedForPlacementID:%@",placementID);
+    [self showLog:[NSString stringWithFormat:@"splashDidShowFailedForPlacementID:%@ error:%@ ",placementID,error]];
     [self.suspendedBtn recordWithPlacementId:self.placementID protocol:NSStringFromSelector(_cmd)];
 }
 

@@ -107,7 +107,7 @@ NSString *const kBannerLoadingFailedNotification = @"banner_failed_to_load";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = kRGB(245, 245, 245);
   
   
     
@@ -236,18 +236,30 @@ NSString *const kBannerLoadingFailedNotification = @"banner_failed_to_load";
             bannerView.presentingViewController = self;
             bannerView.translatesAutoresizingMaskIntoConstraints = NO;
             bannerView.tag = tag;
-            bannerView.layer.borderColor = [UIColor redColor].CGColor;
-            bannerView.layer.borderWidth = .5f;
-            bannerView.backgroundColor = [UIColor colorWithRed:.0f green:.0f blue:1.0f alpha:.4f];
-            self.adView = bannerView;
-            [self.view addSubview:bannerView];
+          
+           
+            self.adView = [[UIView alloc]init];// bannerView;
+            self.adView.backgroundColor =  [UIColor colorWithRed:73/255.f green:109/255.f blue:255/255.f alpha:0.8f];
+            [self.adView addSubview:bannerView];
+            
+            [self.view insertSubview:self.adView belowSubview:self.footView];
+           
+            
+            [self.adView mas_makeConstraints:^(MASConstraintMaker *make) {
+                
+                make.width.equalTo(self.view);
+                make.centerX.equalTo(self.view.mas_centerX);
+                make.top.equalTo(self.view);
+                make.bottom.equalTo(self.view);
+                
+            }];
             
             [bannerView mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.height.equalTo(@(_adSize.height));
-                make.width.equalTo(@(_adSize.width));
-                make.centerX.equalTo(self.view.mas_centerX);
-                make.top.equalTo(self.view).offset(100);
+                make.top.equalTo(self.adView).offset(100);
             }];
+            
+            
+            
         }else {
             NSLog(@"BannerView is nil for placementID:%@", self.placementID);
         }
