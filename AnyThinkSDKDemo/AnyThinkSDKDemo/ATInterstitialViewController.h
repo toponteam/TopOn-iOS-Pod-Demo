@@ -12,7 +12,6 @@ extern NSString *const kFacebookPlacement;
 extern NSString *const kFacebookHeaderBiddingPlacement;
 extern NSString *const kAdMobPlacement;
 extern NSString *const kApplovinPlacement;
-extern NSString *const kMopubPlacementName;
 extern NSString *const kMintegralPlacement;
 extern NSString *const kMintegralVideoPlacement;
 extern NSString *const kHeaderBiddingPlacement;

@@ -12,6 +12,60 @@
 #import "ATInterstitialViewController.h"
 #import "ATSplashViewController.h"
 
+NSString *const kTapjoyPlacementName = @"Tapjoy";
+NSString *const kChartboostPlacementName = @"Chartboost";
+NSString *const kIronsourcePlacementName = @"Ironsource";
+NSString *const kVunglePlacementName = @"Vungle";
+NSString *const kAdcolonyPlacementName = @"Adcolony";
+NSString *const kUnityAdsPlacementName = @"Unity Ads";
+NSString *const kTTPlacementName = @"TT";
+NSString *const kBaiduPlacement = @"Baidu";
+NSString *const kNendPlacement = @"Nend";
+NSString *const kMaioPlacement = @"Maio";
+NSString *const kKSPlacement = @"KS";
+NSString *const kMyOfferPlacement = @"MyOffer";
+NSString *const kOguryPlacement = @"Ogury";
+NSString *const kHeliumPlacement = @"Helium";
+NSString *const kADXPlacement = @"ADX";
+NSString *const kKidozPlacement = @"Kidoz";
+NSString *const kMyTargetPlacement = @"MyTarget";
+
+NSString *const kDirectOfferPlacement = @"DirectOffer";
+
+static NSString *const kPlacement0ID = @"b5ad9ba61dcb39";
+static NSString *const kInmobiPlacementID = @"b5b44a03522f92";
+static NSString *const kMintegralPlacementID = @"b5b44a07fc3bf6";
+static NSString *const kMintegralHeaderBiddingPlacementID = @"b5d13341598199";
+static NSString *const kFacebookPlacementID = @"b5b44a02112383";
+static NSString *const kFacebookHeaderBiddingPlacementID = @"b5d133438158c6";
+static NSString *const kAdMobPlacementID = @"b5b44a02bf08c0";
+static NSString *const kApplovinPlacementID = @"b5b44a0646e64b";
+static NSString *const kGDTPlacementID = @"b5c0f7cd196a4c";
+static NSString *const kTapjoyRVPlacementID = @"b5b44a0ac855ff";//to be modified
+static NSString *const kChartboostRVPlacementID = @"b5b44a09a5c912";//to be modified
+static NSString *const kIronsourceRVPlacementID = @"b5b44a0bf09475";//to be modified
+static NSString *const kVungleRVPlacementID = @"b5b44a0d05d707";//to be modified
+static NSString *const kAdcolonyRVPlacementID = @"b5b44a0de295ad";//to be modified
+static NSString *const kUnityAdsPlacementID = @"b5b44a0c7b9b64";//to be modified
+static NSString *const kAllPlacementID = @"b5b44a0f115321";
+static NSString *const kTTPlacementID = @"b5b72b21184aa8";
+static NSString *const kAppnextPlacementID = @"b5bc7fb4fd15e6";
+static NSString *const kBaiduPlacementID = @"b5c04dd81c1af3";
+static NSString *const kNendPlacementID = @"b5cb96d6f68fdb";
+static NSString *const kMaioPlacementID = @"b5cb96ce0b931e";
+static NSString *const kSigmobPlacementID = @"b5d771f5a3458f";
+static NSString *const kKSPlacementID = @"b5d807a31aa7dd";
+static NSString *const kMyOfferPlacementID = @"b5db6c247dbb1e";
+static NSString *const kOguryPlacementID = @"b5dde2379dc6ce";
+static NSString *const kStartAppPlacementID = @"b5e7319f619931";
+static NSString *const kFyberPlacementID = @"b5e96db106d8f2";
+static NSString *const kGAMPlacementID = @"b5f23897bba4ca";
+static NSString *const kHeliumPlacementID = @"b5f583ea323756";
+static NSString *const kKidozPlacementID = @"b5feaa2c0a6191";
+static NSString *const kMyTargetPlacementID = @"b5feaa2f32f161";
+static NSString *const kKlevinPlacementID = @"b613affe9af84c";
+static NSString *const kDirectOfferPlacementID = @"b61bffca756796";
+
 @interface ATRewardVideoViewController () <ATAdLoadingDelegate, ATRewardedVideoDelegate>
 @property (nonatomic, strong) ATModelButton *modelButton;
 @property (nonatomic, strong) UITextView *textView;
@@ -49,47 +103,41 @@
 
 - (NSDictionary<NSString *,NSString *> *)placementIDs{
     
-    return @{
-//        @"GAM":         @"b5f23897bba4ca",
-//        @"StartApp":    @"b5e7319f619931",
-        @"Mintegral":   @"b5b44a07fc3bf6",
-        @"GDT":         @"b5c0f7cd196a4c",
-        @"Sigmob":      @"b5d771f5a3458f",
-//        @"Myoffer":     @"b5db6c247dbb1e",
-//        @"Ogury":       @"b5dde2379dc6ce",
-        @"KS":          @"b5d807a31aa7dd",
-        @"HeaderBidding":@"b5d13341598199",
-        @"Nend":        @"b5cb96d6f68fdb",
-        @"Maio":        @"b5cb96ce0b931e",
-        @"Facebook":    @"b5b44a02112383",
-        @"AdMob":       @"b5b44a02bf08c0",
-        @"Inmobi":      @"b5b44a03522f92",
-        @"Applovin":    @"b5b44a0646e64b",
-   
-        @"Mopub":       @"b5b44a088ba48d",
-       
-        @"Chartboost":  @"b5b44a09a5c912",
-//        @"Tapjoy":      @"b5b44a0ac855ff",
-        @"Ironsource":  @"b5b44a0bf09475",
-        @"Vungle":      @"b5b44a0d05d707",
-        @"Adcolony":    @"b5b44a0de295ad",
-        @"Unity Ads":   @"b5b44a0c7b9b64",
-        @"TT":          @"b5b72b21184aa8",
-        @"Pangle":      @"b612f6a907a7d1",
-        @"Appnext":     @"b5bc7fb4fd15e6",
-        @"Baidu":       @"b5c04dd81c1af3",
-        @"Fyber":       @"b5e96db106d8f2",
-        @"Helium":      @"b5f583ea323756",
-        @"ADX":         @"b5fa2500639c86",
-        @"OnlineApi":   @"b5fa250b176abb",
-        @"Kidoz":       @"b5feaa2c0a6191",
-        @"MyTarget":    @"b5feaa2f32f161",
-        @"All":         @"b5b44a0f115321",
-        @"Gromore":     @"b601cac7bb1a21",
-        @"Max":         @"b603ef4c3365d8",
-        @"Klevin":      @"b613affe9af84c",
-        @"DirectOffer": @"b61bffca756796",
-    };
+    _placementIDs = @{
+                      kMintegralPlacement:kMintegralPlacementID,
+                      kHeaderBiddingPlacement:kMintegralHeaderBiddingPlacementID,
+                      kAllPlacementName:kAllPlacementID,
+                      kInmobiPlacement:kInmobiPlacementID,
+                      kFacebookPlacement:kFacebookPlacementID,
+                      kFacebookHeaderBiddingPlacement:kFacebookHeaderBiddingPlacementID,
+                      kAdMobPlacement:kAdMobPlacementID,
+                      kGDTPlacement:kGDTPlacementID,
+                      kApplovinPlacement:kApplovinPlacementID,
+                      kTapjoyPlacementName:kTapjoyRVPlacementID,
+                      kChartboostPlacementName:kChartboostRVPlacementID,
+                      kIronsourcePlacementName:kIronsourceRVPlacementID,
+                      kVunglePlacementName:kVungleRVPlacementID,
+                      kAdcolonyPlacementName:kAdcolonyRVPlacementID,
+                      kUnityAdsPlacementName:kUnityAdsPlacementID,
+                      kTTPlacementName:kTTPlacementID,
+                      kAppnextPlacement:kAppnextPlacementID,
+                      kBaiduPlacement:kBaiduPlacementID,
+                      kNendPlacement:kNendPlacementID,
+                      kMaioPlacement:kMaioPlacementID,
+                      kSigmobPlacement:kSigmobPlacementID,
+                      kKSPlacement:kKSPlacementID,
+                      kMyOfferPlacement:kMyOfferPlacementID,
+                      kOguryPlacement:kOguryPlacementID,
+                      kStartAppPlacement:kStartAppPlacementID,
+                      kFyberPlacement:kFyberPlacementID,
+                      kGAMPlacement:kGAMPlacementID,
+                      kHeliumPlacement:kHeliumPlacementID,
+                      kKidozPlacement:kKidozPlacementID,
+                      kMyTargetPlacement:kMyTargetPlacementID,
+                      kKlevinPlacement: kKlevinPlacementID,
+                      kDirectOfferPlacement:kDirectOfferPlacementID
+                      };
+    return _placementIDs;
 }
 
 - (void)setupData

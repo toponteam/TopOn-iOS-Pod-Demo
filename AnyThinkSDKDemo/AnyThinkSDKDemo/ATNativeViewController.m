@@ -26,7 +26,6 @@ NSString *const kAdMobPlacement = @"AdMob";
 NSString *const kApplovinPlacement = @"Applovin";
 NSString *const kMintegralPlacement = @"Mintegral";
 NSString *const kMintegralAdvancedPlacement = @"Mintegral(Advanced)";
-NSString *const kMopubPlacementName = @"Mopub";
 NSString *const kGDTPlacement = @"GDT";
 NSString *const kGDTTemplatePlacement = @"GDT(Template)";
 NSString *const kAppnextPlacement = @"Appnext";
@@ -51,7 +50,6 @@ static NSString *const kFacebookPlacementID = @"b5b0f551340ea9";
 static NSString *const kFacebookHeaderBiddingPlacementID = @"b5d13342d52304";
 static NSString *const kAdMobPlacementID = @"b5b0f55228375a";
 static NSString *const kApplovinPlacementID = @"b5b0f554ec9c4e";
-static NSString *const kMopubPlacementID = @"b5b0f55624527a";
 static NSString *const kGDTPlacementID = @"b5bacac5f73476";
 static NSString *const kGDTTemplatePlacementID = @"b5bacac780e03b";
 static NSString *const kAppnextPlacementID = @"b5bc7fb2787f1e";
@@ -135,7 +133,6 @@ static NSString *const kCallbackKey = @"request";
              kFacebookPlacement:kFacebookPlacementID,
              kFacebookHeaderBiddingPlacement:kFacebookHeaderBiddingPlacementID,
              kAdMobPlacement:kAdMobPlacementID,
-             kMopubPlacementName:kMopubPlacementID,
              kApplovinPlacement:kApplovinPlacementID,
              kGDTPlacement:kGDTPlacementID,
              kGDTTemplatePlacement:kGDTTemplatePlacementID,
@@ -169,7 +166,6 @@ static NSString *const kCallbackKey = @"request";
         @"AdMob":                   @"b5b0f55228375a",
         @"Inmobi":                  @"b5b0f553483724",
         @"Mintegral":               @"b5b0f555698607",
-        @"Mopub":                   @"b5b0f55624527a",
         @"GDT-(self randerer)":     @"b5bacac5f73476",
         @"GDT-(Template)":          @"b5bacac780e03b",
         @"Appnext":                 @"b5bc7fb2787f1e",

@@ -35,9 +35,7 @@
 		9BBD00BF248630C8009EAD66 /* ATInterstitialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BBD00B3248630C7009EAD66 /* ATInterstitialViewController.m */; };
 		9BBD00C0248630C8009EAD66 /* MTAutolayoutCategories.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BBD00B4248630C8009EAD66 /* MTAutolayoutCategories.m */; };
 		9BBD00C1248630C8009EAD66 /* ATNativeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BBD00B6248630C8009EAD66 /* ATNativeViewController.m */; };
-		9BBD00C2248630C8009EAD66 /* ATRewardedVideoVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BBD00BA248630C8009EAD66 /* ATRewardedVideoVideoViewController.m */; };
 		9BBD00C3248630C8009EAD66 /* ATDrawViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BBD00BC248630C8009EAD66 /* ATDrawViewController.m */; };
-		9BBD00C4248630C8009EAD66 /* ATNativeBannerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BBD00BD248630C8009EAD66 /* ATNativeBannerViewController.m */; };
 		AC498DB725EE35D600955C17 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC498DB625EE35D600955C17 /* AVFoundation.framework */; };
 		AC498DB925EE35DE00955C17 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC498DB825EE35DE00955C17 /* AdSupport.framework */; };
 		AC498DBB25EE35E500955C17 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC498DBA25EE35E500955C17 /* CoreLocation.framework */; };
@@ -111,13 +109,9 @@
 		9BBD00B4248630C8009EAD66 /* MTAutolayoutCategories.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTAutolayoutCategories.m; sourceTree = "<group>"; };
 		9BBD00B5248630C8009EAD66 /* ATBannerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATBannerViewController.h; sourceTree = "<group>"; };
 		9BBD00B6248630C8009EAD66 /* ATNativeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATNativeViewController.m; sourceTree = "<group>"; };
-		9BBD00B7248630C8009EAD66 /* ATRewardedVideoVideoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATRewardedVideoVideoViewController.h; sourceTree = "<group>"; };
 		9BBD00B8248630C8009EAD66 /* MTAutolayoutCategories.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTAutolayoutCategories.h; sourceTree = "<group>"; };
-		9BBD00B9248630C8009EAD66 /* ATNativeBannerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATNativeBannerViewController.h; sourceTree = "<group>"; };
-		9BBD00BA248630C8009EAD66 /* ATRewardedVideoVideoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATRewardedVideoVideoViewController.m; sourceTree = "<group>"; };
 		9BBD00BB248630C8009EAD66 /* ATDrawViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATDrawViewController.h; sourceTree = "<group>"; };
 		9BBD00BC248630C8009EAD66 /* ATDrawViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATDrawViewController.m; sourceTree = "<group>"; };
-		9BBD00BD248630C8009EAD66 /* ATNativeBannerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATNativeBannerViewController.m; sourceTree = "<group>"; };
 		AC498DB625EE35D600955C17 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		AC498DB825EE35DE00955C17 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		AC498DBA25EE35E500955C17 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -268,16 +262,12 @@
 				9BBD00BC248630C8009EAD66 /* ATDrawViewController.m */,
 				9BBD00B0248630C7009EAD66 /* ATInterstitialViewController.h */,
 				9BBD00B3248630C7009EAD66 /* ATInterstitialViewController.m */,
-				9BBD00B9248630C8009EAD66 /* ATNativeBannerViewController.h */,
-				9BBD00BD248630C8009EAD66 /* ATNativeBannerViewController.m */,
 				9BBD00B1248630C7009EAD66 /* ATNativeViewController.h */,
 				9BBD00B6248630C8009EAD66 /* ATNativeViewController.m */,
 				04CF322D28000EDB0083B5AA /* ATNativeMessageStreamViewController.h */,
 				04CF323028000EDB0083B5AA /* ATNativeMessageStreamViewController.m */,
 				04CF323128000EDB0083B5AA /* ATNativeShowViewController.h */,
 				04CF322F28000EDB0083B5AA /* ATNativeShowViewController.m */,
-				9BBD00B7248630C8009EAD66 /* ATRewardedVideoVideoViewController.h */,
-				9BBD00BA248630C8009EAD66 /* ATRewardedVideoVideoViewController.m */,
 				9B6DF73B259436DD004E9FDB /* ATSplashViewController.h */,
 				9B6DF73C259436DD004E9FDB /* ATSplashViewController.m */,
 				9BBD00B8248630C8009EAD66 /* MTAutolayoutCategories.h */,
@@ -451,13 +441,11 @@
 				04CF3223280007900083B5AA /* ATSelectViewController.m in Sources */,
 				9BBD00C1248630C8009EAD66 /* ATNativeViewController.m in Sources */,
 				9BBD00BF248630C8009EAD66 /* ATInterstitialViewController.m in Sources */,
-				9BBD00C4248630C8009EAD66 /* ATNativeBannerViewController.m in Sources */,
 				04CF322B280008520083B5AA /* ATRewardVideoViewController.m in Sources */,
 				04CF3227280007900083B5AA /* ATMenuView.m in Sources */,
 				9B6DF73D259436DD004E9FDB /* ATSplashViewController.m in Sources */,
 				04CF3243280011D50083B5AA /* MTAutolayoutCategories.m in Sources */,
 				04CF323728000F550083B5AA /* DMADView.m in Sources */,
-				9BBD00C2248630C8009EAD66 /* ATRewardedVideoVideoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -39,7 +39,6 @@ static NSString *const kFacebookPlacementID = @"b5baf4bf9829e4";
 static NSString *const kFacebookHeaderBiddingPlacementID = @"b5d133421525a6";
 static NSString *const kAllPlacementID = @"b5bacad26a752a";
 static NSString *const kInmobiPlacementID = @"b5baf524062aca";
-static NSString *const kMopubPlacementID = @"b5baf56f03dbe9";
 static NSString *const kChartboostPlacementID = @"b5baf5cd422553";
 static NSString *const kTapjoyPlacementID = @"b5baf5ebe8df89";
 static NSString *const kIronsourcePlacementID = @"b5baf617891a2e";
@@ -104,7 +103,6 @@ static NSString *const kDirectOfferPlacementID = @"b61bffcd9dda20";
                       kFacebookPlacement:kFacebookPlacementID,
                       kFacebookHeaderBiddingPlacement:kFacebookHeaderBiddingPlacementID,
                       kInmobiPlacement:kInmobiPlacementID,
-                      kMopubPlacementName:kMopubPlacementID,
                       kChartboostPlacementName:kChartboostPlacementID,
                       kTapjoyPlacementName:kTapjoyPlacementID,
                       kIronsourcePlacementName:kIronsourcePlacementID,
@@ -159,7 +157,6 @@ static NSString *const kDirectOfferPlacementID = @"b61bffcd9dda20";
         @"Applovin":@"b5bacad34e4294",
         @"Mintegral":@"b5bacad46a8bbb",
         @"Mintegral-(Video)":@"b5bacad5962e84",
-        @"Mopub":@"b5baf56f03dbe9",
         @"GDT":@"b5bacad8ea3036",
         @"Chartboost":@"b5baf5cd422553",
         @"Tapjoy":@"b5baf5ebe8df89",
@@ -207,7 +204,6 @@ static NSString *const kDirectOfferPlacementID = @"b61bffcd9dda20";
         @"Applovin":        @"b5bacad34e4294",
         @"Mintegral":       @"b5bacad46a8bbb",
         @"Mintegral-(Video)":@"b5bacad5962e84",
-        @"Mopub":           @"b5baf56f03dbe9",
         @"GDT":             @"b5bacad8ea3036",
         @"Chartboost":      @"b5baf5cd422553",
         @"Tapjoy":          @"b5baf5ebe8df89",

@@ -22,7 +22,7 @@ static NSString *const kTTPlacementID = @"b5bacacfc470c9";
 static NSString *const kAdmobPlacementID = @"b5bacacef17717";
 static NSString *const kApplovinPlacementID = @"b5bacace1549da";
 static NSString *const kFacebookPlacementID = @"b5baf502bb23e3";
-static NSString *const kMopubPlacementID = @"b5baf57068e0b6";
+
 static NSString *const kInmobiPlacementID = @"b5baf522891992";
 static NSString *const kAllPlacementID = @"b5bacaccb61c29";
 static NSString *const kAppnextPlacementID = @"b5bc7fb78288e9";
@@ -78,7 +78,6 @@ NSString *const kBannerLoadingFailedNotification = @"banner_failed_to_load";
                       kAdMobPlacement:kAdmobPlacementID,
                       kApplovinPlacement:kApplovinPlacementID,
                       kFacebookPlacement:kFacebookPlacementID,
-                      kMopubPlacementName:kMopubPlacementID,
                       kInmobiPlacement:kInmobiPlacementID,
                       kAllPlacementName:kAllPlacementID,
                       kAppnextPlacement:kAppnextPlacementID,
@@ -195,7 +194,8 @@ NSString *const kBannerLoadingFailedNotification = @"banner_failed_to_load";
 }
 
 -(void) clearAdButtonTapped {
-    ATBannerViewController *tVC = [[ATBannerViewController alloc] initWithPlacementName:kGDTPlacement];
+    ATBannerViewController *tVC = [[ATBannerViewController alloc]init];
+    
     [self.navigationController pushViewController:tVC animated:YES];
 }
 

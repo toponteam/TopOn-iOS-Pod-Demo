@@ -11,7 +11,7 @@ extern NSString *const kInmobiPlacement;
 extern NSString *const kFacebookPlacement;
 extern NSString *const kAdMobPlacement;
 extern NSString *const kApplovinPlacement;
-extern NSString *const kMopubPlacementName;
+
 extern NSString *const kGDTPlacement;
 extern NSString *const kMintegralPlacement;
 extern NSString *const kTapjoyPlacementName;
@@ -40,5 +40,4 @@ extern NSString *const kMyTargetPlacement;
 extern NSString *const kDirectOfferPlacement;
 
 @interface ATBannerViewController : UIViewController
--(instancetype) initWithPlacementName:(NSString*)name;
 @end
