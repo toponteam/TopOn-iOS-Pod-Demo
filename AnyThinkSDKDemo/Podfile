@@ -4,7 +4,16 @@
 platform :ios, '10.0'
 project 'AnyThinkSDKDemo.xcodeproj'
 
+def share_pods
+  
+  pod 'Masonry'
+
+end
+
 target 'AnyThinkSDKDemo' do
+  # Comment the next line if you don't want to use dynamic frameworks
+#  use_frameworks!
+  share_pods
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
 
@@ -35,6 +44,7 @@ target 'AnyThinkSDKDemo' do
 #  pod 'AnyThinkiOS/AnyThinkMopubAdapter','5.9.32'
   pod 'AnyThinkiOS/AnyThinkAdColonyAdapter','5.9.32'
 #  pod 'AnyThinkiOS/AnyThinkKlevinAdapter','5.9.32'
+
 
 
   

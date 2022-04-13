@@ -13,7 +13,8 @@ extern NSString *const kKSDrawPlacement;
 extern NSString *const kTTDrawPlacementName;
 
 @interface ATDrawViewController : UIViewController
--(instancetype) initWithPlacementName:(NSString*)name;
+
+- (instancetype)initWithAdView:(UIView *)adView;
 +(NSDictionary<NSString*, NSString*>*)nativePlacementIDs;
 @end
 

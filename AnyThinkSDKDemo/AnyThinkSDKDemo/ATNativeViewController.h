@@ -16,7 +16,6 @@ extern NSString *const kFacebookPlacement;
 extern NSString *const kFacebookHeaderBiddingPlacement;
 extern NSString *const kAdMobPlacement;
 extern NSString *const kApplovinPlacement;
-extern NSString *const kMopubPlacementName;
 extern NSString *const kMintegralPlacement;
 extern NSString *const kMintegralAdvancedPlacement;
 extern NSString *const kHeaderBiddingPlacement;
@@ -39,20 +38,6 @@ extern NSString *const kDirectOfferPlacement;
 
 //extern NSString *const kKSDrawPlacement;
 @interface ATNativeViewController : UIViewController
--(instancetype) initWithPlacementName:(NSString*)name;
+
 +(NSDictionary<NSString*, NSString*>*)nativePlacementIDs;
-@end
-
-@interface DMADView:ATNativeADView
-@property(nonatomic, readonly) UILabel *advertiserLabel;
-@property(nonatomic, readonly) UILabel *textLabel;
-@property(nonatomic, readonly) UILabel *titleLabel;
-@property(nonatomic, readonly) UILabel *ctaLabel;
-@property(nonatomic, readonly) UILabel *ratingLabel;
-@property(nonatomic, readonly) UIImageView *iconImageView;
-@property(nonatomic, readonly) UIImageView *mainImageView;
-@property(nonatomic, readonly) UIImageView *logoImageView;
-@property(nonatomic, readonly) UIImageView *sponsorImageView;
-@property(nonatomic, readonly) UIButton *dislikeButton;
-
 @end
