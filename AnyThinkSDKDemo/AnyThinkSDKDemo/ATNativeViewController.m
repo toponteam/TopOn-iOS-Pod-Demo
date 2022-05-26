@@ -189,7 +189,16 @@ static NSString *const kCallbackKey = @"request";
         [_loadingView startAnimating];
         [self.view addSubview:_loadingView];
         [self increaseLoad];
-        [[ATAdManager sharedManager] loadADWithPlacementID:_placementIDs[_name] extra:@{kATExtraInfoNativeAdTypeKey:@([@{kGDTPlacement:@(ATGDTNativeAdTypeSelfRendering), kGDTTemplatePlacement:@(ATGDTNativeAdTypeTemplate), kMintegralPlacement:@(ATGDTNativeAdTypeSelfRendering)}[_name] integerValue]), kATExtraInfoNativeAdSizeKey:[NSValue valueWithCGSize:CGSizeMake(CGRectGetWidth(self.view.bounds) - 50.0f, 350.0f)], kATExtraNativeImageSizeKey:kATExtraNativeImageSize690_388} delegate:self];
+        
+        CGSize size = CGSizeMake(kScreenW, 350);
+        
+        [[ATAdManager sharedManager] loadADWithPlacementID:_placementIDs[_name] extra:
+         @{
+            kATExtraInfoNativeAdSizeKey:[NSValue valueWithCGSize:size],
+            kATExtraNativeImageSizeKey:kATExtraNativeImageSize690_388,
+            kATNativeAdSizeToFitKey:@YES,
+        } delegate:self];
+        
     }
 }
 
@@ -232,7 +241,14 @@ static NSInteger adViewTag = 3333;
     _failureTipsLabel.hidden = YES;
     [self.view addSubview:_loadingView];
     [self increaseLoad];
-    [[ATAdManager sharedManager] loadADWithPlacementID:_placementIDs[_name] extra:@{kATExtraInfoNativeAdTypeKey:@([@{kGDTPlacement:@(ATGDTNativeAdTypeSelfRendering), kGDTTemplatePlacement:@(ATGDTNativeAdTypeTemplate)}[_name] integerValue]), kATExtraInfoNativeAdSizeKey:[NSValue valueWithCGSize:CGSizeMake(CGRectGetWidth(self.view.bounds) - 30.0f, 300.0f)], kATExtraNativeImageSizeKey:kATExtraNativeImageSize690_388} delegate:self];
+    CGSize size = CGSizeMake(kScreenW, 350);
+
+    [[ATAdManager sharedManager] loadADWithPlacementID:_placementIDs[_name] extra:
+     @{
+        kATExtraInfoNativeAdSizeKey:[NSValue valueWithCGSize:size],
+        kATExtraNativeImageSizeKey:kATExtraNativeImageSize690_388,
+        kATNativeAdSizeToFitKey:@YES,
+    } delegate:self];
 }
 
 -(void) showAD {
