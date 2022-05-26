@@ -56,12 +56,12 @@ static NSString *const kCallbackKey = @"request";
     
     self.returnBack = [[UIButton alloc]initWithFrame:CGRectMake(20, 40, 50, 50)];
     [self.returnBack addTarget:self action:@selector(returnVC) forControlEvents:UIControlEventTouchUpInside];
-    [self.returnBack setImage:[UIImage imageNamed:@"returnImage"] forState:UIControlStateNormal];
+    [self.returnBack setImage:[UIImage imageNamed:@"icon_close"] forState:UIControlStateNormal];
     [self.view addSubview:self.returnBack];
     
     self.closeButton = [[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width - 50.0f, 40, 50, 50)];
     [self.closeButton addTarget:self action:@selector(closeAD) forControlEvents:UIControlEventTouchUpInside];
-    [self.closeButton setImage:[UIImage imageNamed:@"closeImage"] forState:UIControlStateNormal];
+    [self.closeButton setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
     
     
     _reloadADButton = [UIButton buttonWithType:UIButtonTypeCustom];

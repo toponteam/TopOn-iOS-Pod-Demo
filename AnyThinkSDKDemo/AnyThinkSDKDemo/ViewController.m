@@ -160,6 +160,8 @@ static NSString *const kCellIdentifier = @"cell";
         if (_placementNames[[indexPath section]][[indexPath row]] == kKSDrawPlacement || _placementNames[[indexPath section]][[indexPath row]] == kTTDrawPlacementName) {
             ATDrawViewController *drawVC = [[ATDrawViewController alloc] initWithPlacementName:_placementNames[[indexPath section]][[indexPath row]]];
             drawVC.modalPresentationStyle = 0;
+//            [self.navigationController pushViewController:drawVC animated:YES];
+            
             [self presentViewController:drawVC animated:YES completion:nil];
         } else {
             ATNativeViewController *tVC = [[ATNativeViewController alloc] initWithPlacementName: _placementNames[[indexPath section]][[indexPath row]]];
