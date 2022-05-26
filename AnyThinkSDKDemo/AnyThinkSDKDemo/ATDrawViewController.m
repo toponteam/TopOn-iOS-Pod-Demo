@@ -12,6 +12,8 @@
 #import "ATNativeViewController.h"
 #import <AnyThinkSDK/AnyThinkSDK.h>
 #import <AnyThinkNative/AnyThinkNative.h>
+#import "ATNativeSelfRenderView.h"
+
 @class DMADView;
 
 static NSString *const kKSDrawPlacementID = @"b5e5ce042cabfb";
@@ -33,6 +35,7 @@ static NSString *const kCallbackKey = @"request";
 @property(nonatomic, readonly) UIActivityIndicatorView *loadingView;
 @property(nonatomic, readonly) NSMutableDictionary *numberOfLoadAndCallback;
 
+@property(nonatomic, strong) ATNativeADView *adView;
 @end
 
 @implementation ATDrawViewController
@@ -111,16 +114,70 @@ static NSString *const kCallbackKey = @"request";
     
 }
 - (void) showAD {
+ 
     ATNativeADConfiguration *config = [[ATNativeADConfiguration alloc] init];
-    config.ADFrame = self.view.bounds;
+    config.ADFrame = CGRectMake(0, kNavigationBarHeight, kScreenW, kScreenH - kNavigationBarHeight);;
     config.delegate = self;
-    config.renderingViewClass = [DMADView class];
+    config.mediaViewFrame = CGRectMake(0, kNavigationBarHeight + 150.0f, kScreenW, kScreenH - kNavigationBarHeight - 150);
     config.rootViewController = self;
-    UIView *adView = [[ATAdManager sharedManager] retriveAdViewWithPlacementID:_placementIDs[_name] configuration:config];
-    adView.tag = 3333;
-    [self.view addSubview:adView];
-    [adView addSubview:self.closeButton];
-    if (adView == nil) NSLog(@"retrive ad view failed");
+    
+    
+    ATNativeAdOffer *offer = [[ATAdManager sharedManager] getNativeAdOfferWithPlacementID:_placementIDs[_name]];
+    ATNativeSelfRenderView *selfRenderView = [[ATNativeSelfRenderView alloc]initWithOffer:offer];
+
+    
+    ATNativeADView *nativeADView = [[ATNativeADView alloc]initWithConfiguration:config currentOffer:offer placementID:_placementIDs[_name]];
+    
+    UIView *mediaView = [nativeADView getMediaView];
+
+    NSMutableArray *array = [@[selfRenderView.iconImageView,selfRenderView.titleLabel,selfRenderView.textLabel,selfRenderView.ctaLabel,selfRenderView.mainImageView] mutableCopy];
+    
+    if (mediaView) {
+        [array addObject:mediaView];
+    }
+    [nativeADView registerClickableViewArray:array];
+    
+    mediaView.frame = CGRectMake(0, kNavigationBarHeight + 150.0f, kScreenW, kScreenH - kNavigationBarHeight - 150);
+//    mediaView.backgroundColor = randomColor;
+    [selfRenderView addSubview:mediaView];
+    
+    [selfRenderView addSubview:nativeADView.videoAdView];
+    [selfRenderView addSubview:nativeADView.dislikeDrawButton];
+    [selfRenderView addSubview:nativeADView.adLabel];
+    [selfRenderView addSubview:nativeADView.logoImageView];
+    [selfRenderView addSubview:nativeADView.logoADImageView];
+    
+    nativeADView.videoAdView.frame = CGRectMake(0, kNavigationBarHeight + 50.0f, kScreenW, kScreenH - kNavigationBarHeight - 50);
+    
+    nativeADView.dislikeDrawButton.frame = CGRectMake(kScreenW - 50, kNavigationBarHeight + 80.0f , 50,50);
+    
+    nativeADView.adLabel.frame = CGRectMake(kScreenW - 50, kNavigationBarHeight + 150.0f, kScreenW, 50);
+    
+    nativeADView.logoImageView.frame = CGRectMake(kScreenW - 50, kNavigationBarHeight + 200.0f, 50, 50);
+    nativeADView.logoADImageView.frame = CGRectMake(kScreenW - 50, kNavigationBarHeight + 250.0f, 50, 50);
+    
+    ATNativePrepareInfo *info = [ATNativePrepareInfo loadPrepareInfo:^(ATNativePrepareInfo * _Nonnull prepareInfo) {
+        prepareInfo.textLabel = selfRenderView.textLabel;
+        prepareInfo.advertiserLabel = selfRenderView.advertiserLabel;
+        prepareInfo.titleLabel = selfRenderView.titleLabel;
+        prepareInfo.ratingLabel = selfRenderView.ratingLabel;
+        prepareInfo.iconImageView = selfRenderView.iconImageView;
+        prepareInfo.mainImageView = selfRenderView.mainImageView;
+        prepareInfo.logoImageView = selfRenderView.logoImageView;
+        prepareInfo.sponsorImageView = selfRenderView.sponsorImageView;
+        prepareInfo.dislikeButton = selfRenderView.dislikeButton;
+        prepareInfo.ctaLabel = selfRenderView.ctaLabel;
+        prepareInfo.mediaView = mediaView;
+    }];
+    [nativeADView prepareWithNativePrepareInfo:info];
+    
+    [offer rendererWithConfiguration:config selfRenderView:selfRenderView nativeADView:nativeADView];
+
+    self.adView = nativeADView;
+    nativeADView.tag = 3333;
+    [self.view addSubview:nativeADView];
+    [nativeADView addSubview:self.closeButton];
+    if (nativeADView == nil) NSLog(@"retrive ad view failed");
 }
 
 - (void) closeAD {
@@ -191,6 +248,8 @@ static NSString *const kCallbackKey = @"request";
 }
 
 -(void) didTapCloseButtonInAdView:(ATNativeADView*)adView placementID:(NSString*)placementID extra:(NSDictionary *)extra {
+    [self.adView removeFromSuperview];
+    self.adView = nil;
     NSLog(@"ATNativeDrawViewController:: didTapCloseButtonInAdView:placementID:%@ extra:%@", placementID, extra);
 }
 @end

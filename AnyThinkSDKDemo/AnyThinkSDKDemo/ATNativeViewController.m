@@ -8,6 +8,9 @@
 
 #import "ATNativeViewController.h"
 #import "MTAutolayoutCategories.h"
+#import "ATNativeSelfRenderView.h"
+
+
 
 NSString *const kMPPlacement = @"MobPower";
 NSString *const kInmobiPlacement = @"Inmobi";
@@ -63,108 +66,6 @@ static NSString *const kDirectOfferPlacementID = @"b61bfff2c812cb";
 //static NSString *const kTTDrawPlacementID = @"b5c2c6d62b9d65";
 
 #ifdef NATIVE_INTEGRATED
-
-
-@implementation DMADView
--(void) initSubviews {
-    [super initSubviews];
-    _advertiserLabel = [UILabel autolayoutLabelFont:[UIFont boldSystemFontOfSize:15.0f] textColor:[UIColor blackColor] textAlignment:NSTextAlignmentLeft];
-    [self addSubview:_advertiserLabel];
-    
-    _titleLabel = [UILabel autolayoutLabelFont:[UIFont boldSystemFontOfSize:18.0f] textColor:[UIColor blackColor] textAlignment:NSTextAlignmentLeft];
-    [self addSubview:_titleLabel];
-    
-    _textLabel = [UILabel autolayoutLabelFont:[UIFont systemFontOfSize:15.0f] textColor:[UIColor blackColor]];
-    [self addSubview:_textLabel];
-    
-    _ctaLabel = [UILabel autolayoutLabelFont:[UIFont systemFontOfSize:15.0f] textColor:[UIColor blackColor]];
-    [self addSubview:_ctaLabel];
-    
-    _ratingLabel = [UILabel autolayoutLabelFont:[UIFont systemFontOfSize:15.0f] textColor:[UIColor blackColor]];
-    [self addSubview:_ratingLabel];
-    
-    _iconImageView = [UIImageView autolayoutView];
-    _iconImageView.layer.cornerRadius = 4.0f;
-    _iconImageView.layer.masksToBounds = YES;
-    _iconImageView.contentMode = UIViewContentModeScaleAspectFit;
-    [self addSubview:_iconImageView];
-    
-    _mainImageView = [UIImageView autolayoutView];
-    _mainImageView.contentMode = UIViewContentModeScaleAspectFit;
-    [self addSubview:_mainImageView];
-    
-    _logoImageView = [UIImageView autolayoutView];
-    _logoImageView.contentMode = UIViewContentModeScaleAspectFit;
-    [self addSubview:_logoImageView];
-    
-    _sponsorImageView = [UIImageView autolayoutView];
-    _sponsorImageView.contentMode = UIViewContentModeScaleAspectFit;
-    [self addSubview:_sponsorImageView];
-    
-    _dislikeButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    _dislikeButton.translatesAutoresizingMaskIntoConstraints = NO;
-    [self addSubview:_dislikeButton];
-}
-
--(NSArray<UIView*>*)clickableViews {
-    NSMutableArray<UIView*> *clickableViews = [NSMutableArray<UIView*> arrayWithObjects:_iconImageView, _ctaLabel, _mainImageView, nil];
-    if (self.mediaView != nil) { [clickableViews addObject:self.mediaView]; }
-    return clickableViews;
-}
-
--(void) layoutMediaView {
-    self.mediaView.frame = CGRectMake(0, 120.0f, CGRectGetWidth(self.bounds), CGRectGetHeight(self.bounds) - 120.0f);
-}
-
--(void) makeConstraintsForSubviews {
-    [super makeConstraintsForSubviews];
-    NSDictionary *viewsDict = nil;
-    if (self.mediaView != nil) {
-        viewsDict = @{@"titleLabel":self.titleLabel, @"textLabel":self.textLabel, @"ctaLabel":self.ctaLabel, @"ratingLabel":self.ratingLabel, @"iconImageView":self.iconImageView, @"mainImageView":self.mainImageView, @"logoImageView":self.logoImageView, @"mediaView":self.mediaView, @"advertiserLabel":self.advertiserLabel, @"sponsorImageView":self.sponsorImageView};
-    } else {
-        viewsDict = @{@"titleLabel":self.titleLabel, @"textLabel":self.textLabel, @"ctaLabel":self.ctaLabel, @"ratingLabel":self.ratingLabel, @"iconImageView":self.iconImageView, @"logoImageView":self.logoImageView, @"mainImageView":self.mainImageView, @"advertiserLabel":self.advertiserLabel, @"sponsorImageView":self.sponsorImageView};
-    }
-    [self addConstraintsWithVisualFormat:@"|[mainImageView]|" options:0 metrics:nil views:viewsDict];
-    [self addConstraintsWithVisualFormat:@"[logoImageView(60)]-5-|" options:0 metrics:nil views:viewsDict];
-    [self addConstraintsWithVisualFormat:@"V:[logoImageView(20)]-5-|" options:0 metrics:nil views:viewsDict];
-    [self addConstraintsWithVisualFormat:@"V:[iconImageView]-20-[mainImageView]|" options:0 metrics:nil views:viewsDict];
-    
-    [self addConstraintWithItem:self.iconImageView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:self.iconImageView attribute:NSLayoutAttributeHeight multiplier:1.0f constant:.0f];
-    
-    [self.titleLabel setContentCompressionResistancePriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
-    [self addConstraintsWithVisualFormat:@"|-15-[iconImageView(90)]-8-[titleLabel]-8-[sponsorImageView]-15-|" options:NSLayoutFormatAlignAllTop metrics:nil views:viewsDict];
-    [self addConstraintsWithVisualFormat:@"V:|-15-[titleLabel]-8-[textLabel]-8-[ctaLabel]-8-[ratingLabel]-8-[advertiserLabel]" options:NSLayoutFormatAlignAllLeading | NSLayoutFormatAlignAllTrailing metrics:nil views:viewsDict];
-    
-    NSLayoutConstraint *btn_right = [NSLayoutConstraint constraintWithItem:self.dislikeButton attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeRight multiplier:1 constant:-50];
-    NSLayoutConstraint *btn_top = [NSLayoutConstraint constraintWithItem:self.dislikeButton attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeTop multiplier:1 constant:-0];
-    NSLayoutConstraint *btn_width = [NSLayoutConstraint constraintWithItem:self.dislikeButton attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:40];
-    NSLayoutConstraint *btn_height = [NSLayoutConstraint constraintWithItem:self.dislikeButton attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:40];
-    [self addConstraints:@[btn_right,btn_top,btn_width,btn_height]];
-    
-    UIImage *closeImg = [UIImage imageNamed:@"icon_webview_close" inBundle:[NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:@"AnyThinkSDK" ofType:@"bundle"]] compatibleWithTraitCollection:nil];
-    [_dislikeButton setImage:closeImg forState:0];
-}
-
--(void) makeConstraintsDrawVideoAssets {
-    NSMutableDictionary<NSString*, UIView*> *viewsDict = [NSMutableDictionary<NSString*, UIView*> dictionary];
-    if (self.dislikeButton != nil) { viewsDict[@"dislikeButton"] = self.dislikeButton; }
-    if (self.adLabel != nil) { viewsDict[@"adLabel"] = self.adLabel; }
-    if (self.logoImageView != nil) { viewsDict[@"logoImageView"] = self.logoImageView; }
-    if (self.logoADImageView != nil) { viewsDict[@"logoAdImageView"] = self.logoADImageView; }
-    if (self.videoAdView != nil) { viewsDict[@"videoView"] = self.videoAdView; }
-    
-    if ([viewsDict count] == 5) {
-        self.dislikeButton.translatesAutoresizingMaskIntoConstraints = self.adLabel.translatesAutoresizingMaskIntoConstraints = self.logoImageView.translatesAutoresizingMaskIntoConstraints = self.logoADImageView.translatesAutoresizingMaskIntoConstraints = self.videoAdView.translatesAutoresizingMaskIntoConstraints = NO;
-        [self addConstraintsWithVisualFormat:@"V:[logoAdImageView]-15-|" options:0 metrics:nil views:viewsDict];
-        [self addConstraintsWithVisualFormat:@"|-15-[dislikeButton]-5-[adLabel]-5-[logoImageView]-5-[logoAdImageView]" options:NSLayoutFormatAlignAllCenterY metrics:nil views:viewsDict];
-        [self addConstraintsWithVisualFormat:@"|[videoView]|" options:0 metrics:nil views:viewsDict];
-        [self addConstraintsWithVisualFormat:@"V:[videoView(height)]|" options:0 metrics:@{@"height":@(CGRectGetHeight(self.bounds) - 120.0f)} views:viewsDict];
-    }
-}
-@end
-#endif
-
-#ifdef NATIVE_INTEGRATED
 @interface ATNativeViewController()<ATNativeADDelegate>
 #else
 @interface ATNativeViewController()
@@ -180,7 +81,8 @@ static NSString *const kDirectOfferPlacementID = @"b61bfff2c812cb";
 @property(nonatomic, readonly) UIButton *readyButton;
 @property(nonatomic, readonly) NSMutableDictionary *numberOfLoadAndCallback;
 
-@property(nonatomic, readwrite) DMADView *adView;
+@property(nonatomic, readwrite) ATNativeADView *adView;
+
 @property(nonatomic, strong) ATNativeAdOffer *nativeAdOffer;
 @property(nonatomic, strong) ATNativeADConfiguration *config;
 
@@ -336,23 +238,69 @@ static NSInteger adViewTag = 3333;
 -(void) showAD {
     //Remove previously shown ad first.
     [self removeAdButtonTapped];
+    
     ATNativeADConfiguration *config = [[ATNativeADConfiguration alloc] init];
-    config.ADFrame = CGRectMake(.0f, 100.0f, CGRectGetWidth(self.view.bounds), 350.0f);
-    config.mediaViewFrame = CGRectMake(0, 120.0f, CGRectGetWidth(self.view.bounds), 300.0f - 120.0f);
+    config.ADFrame = CGRectMake(0, kNavigationBarHeight, kScreenW, 350);
+    config.mediaViewFrame = CGRectMake(0, kNavigationBarHeight + 150.0f, kScreenW, 350 - kNavigationBarHeight - 150);
     config.delegate = self;
-    config.renderingViewClass = [DMADView class];
+    config.sizeToFit = YES;
     config.rootViewController = self;
-    config.context = @{kATNativeAdConfigurationContextAdOptionsViewFrameKey:[NSValue valueWithCGRect:CGRectMake(CGRectGetWidth(self.view.bounds) - 43.0f, .0f, 43.0f, 18.0f)], kATNativeAdConfigurationContextAdLogoViewFrameKey:[NSValue valueWithCGRect:CGRectMake(.0f, .0f, 54.0f, 18.0f)], kATNativeAdConfigurationContextNetworkLogoViewFrameKey:[NSValue valueWithCGRect:CGRectMake(CGRectGetWidth(config.ADFrame) - 18.0f, CGRectGetHeight(config.ADFrame) - 18.0f, 18.0f, 18.0f)]};
-    
+    config.context = @{
+        kATNativeAdConfigurationContextAdOptionsViewFrameKey:[NSValue valueWithCGRect:CGRectMake(CGRectGetWidth(self.view.bounds) - 43.0f, .0f, 43.0f, 18.0f)],
+        kATNativeAdConfigurationContextAdLogoViewFrameKey:[NSValue valueWithCGRect:CGRectMake(.0f, .0f, 54.0f, 18.0f)],
+        kATNativeAdConfigurationContextNetworkLogoViewFrameKey:[NSValue valueWithCGRect:CGRectMake(CGRectGetWidth(config.ADFrame) - 54.0f, CGRectGetHeight(config.ADFrame) - 18.0f, 54.0f, 18.0f)]
+    };
+
     self.config = config;
-    
-    
     
     self.nativeAdOffer = [[ATAdManager sharedManager] getNativeAdOfferWithPlacementID:_placementIDs[_name] scene:@""];
     
-    self.adView = [self.nativeAdOffer rendererWithConfiguration:config];
+    ATNativeSelfRenderView *selfRenderView = [[ATNativeSelfRenderView alloc]initWithOffer:self.nativeAdOffer];
+    
+    ATNativeADView *nativeADView = [[ATNativeADView alloc]initWithConfiguration:config currentOffer:self.nativeAdOffer placementID:_placementIDs[_name]];
+    
+    UIView *mediaView = [nativeADView getMediaView];
 
+    NSMutableArray *array = [@[selfRenderView.iconImageView,selfRenderView.titleLabel,selfRenderView.textLabel,selfRenderView.ctaLabel,selfRenderView.mainImageView] mutableCopy];
+    
+    if (mediaView) {
+        [array addObject:mediaView];
+    }
+    
+    [nativeADView registerClickableViewArray:array];
+    
+    nativeADView.backgroundColor = randomColor;
+    
+    selfRenderView.mediaView = mediaView;
+    
+    [selfRenderView addSubview:mediaView];
+    
+    [mediaView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.left.right.bottom.equalTo(selfRenderView);
+            make.top.equalTo(selfRenderView.mainImageView.mas_top);
+    }];
 
+    self.adView = nativeADView;
+    
+    selfRenderView.backgroundColor = randomColor;
+    
+    ATNativePrepareInfo *info = [ATNativePrepareInfo loadPrepareInfo:^(ATNativePrepareInfo * _Nonnull prepareInfo) {
+        prepareInfo.textLabel = selfRenderView.textLabel;
+        prepareInfo.advertiserLabel = selfRenderView.advertiserLabel;
+        prepareInfo.titleLabel = selfRenderView.titleLabel;
+        prepareInfo.ratingLabel = selfRenderView.ratingLabel;
+        prepareInfo.iconImageView = selfRenderView.iconImageView;
+        prepareInfo.mainImageView = selfRenderView.mainImageView;
+        prepareInfo.logoImageView = selfRenderView.logoImageView;
+        prepareInfo.sponsorImageView = selfRenderView.sponsorImageView;
+        prepareInfo.dislikeButton = selfRenderView.dislikeButton;
+        prepareInfo.ctaLabel = selfRenderView.ctaLabel;
+        prepareInfo.mediaView = selfRenderView.mediaView;
+    }];
+    
+    [nativeADView prepareWithNativePrepareInfo:info];
+        
+    [self.nativeAdOffer rendererWithConfiguration:config selfRenderView:selfRenderView nativeADView:nativeADView];
     
     self.adView.tag = adViewTag;
     
@@ -434,6 +382,8 @@ static NSInteger adViewTag = 3333;
 }
 
 -(void) didTapCloseButtonInAdView:(ATNativeADView*)adView placementID:(NSString*)placementID extra:(NSDictionary *)extra {
+    [self.adView removeFromSuperview];
+    self.adView = nil;
     NSLog(@"ATNativeViewController:: didTapCloseButtonInAdView:placementID:%@ extra:%@", placementID, extra);
 }
 
