@@ -132,7 +132,6 @@ static NSString *const kKSPlacementID = @"b5e4613e50cbf2";
 }
 
 -(void) clearAdButtonTapped {
-    [[ATAdManager sharedManager] clearCache];
 }
 
 

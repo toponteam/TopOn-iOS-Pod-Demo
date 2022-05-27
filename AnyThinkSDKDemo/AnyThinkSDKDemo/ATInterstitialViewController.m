@@ -179,7 +179,6 @@ static NSString *const kDirectOfferPlacementID = @"b61bffcd9dda20";
 }
 
 -(void) clearAdButtonTapped {
-    [[ATAdManager sharedManager] clearCache];
 }
 
 -(void) dealloc {

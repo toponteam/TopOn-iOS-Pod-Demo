@@ -318,7 +318,6 @@ static NSString *const kCallbackKey = @"request";
 }
 
 -(void) clearAdButtonTapped {
-    [[ATAdManager sharedManager] clearCache];
 }
 
 -(void) dealloc {
