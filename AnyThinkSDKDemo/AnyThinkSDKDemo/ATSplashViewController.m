@@ -494,8 +494,13 @@ static NSString *const kDirectOfferPlacementID = @"b61bffcf212e16";
             [self.skipButton setTitle:title forState:UIControlStateNormal];
         }
     });
+    
 }
-
+- (void)defaultAction{
+    
+    self.modelButton.selected = !self.modelButton.isSelected;
+    self.modelButton.modelLabel.text = self.modelButton.isSelected ? @"Default Splash" : @"Splash";
+}
 
 #pragma mark - lazy
 
