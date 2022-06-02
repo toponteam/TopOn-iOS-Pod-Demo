@@ -64,6 +64,8 @@ NSString *const kBannerLoadingFailedNotification = @"banner_failed_to_load";
 
 @property(nonatomic, strong) NSString *togetherLoadAdStr;
 @property(nonatomic, readonly) CGSize adSize;
+@property (nonatomic, strong) ATBannerView *bannerView;
+
 @end
 
 @implementation ATBannerViewController
@@ -232,26 +234,24 @@ NSString *const kBannerLoadingFailedNotification = @"banner_failed_to_load";
             bannerView.presentingViewController = self;
             bannerView.translatesAutoresizingMaskIntoConstraints = NO;
             bannerView.tag = tag;
+            self.bannerView = bannerView;
+
           
            
             self.adView = [[UIView alloc]init];// bannerView;
-            self.adView.backgroundColor =  [UIColor colorWithRed:73/255.f green:109/255.f blue:255/255.f alpha:0.8f];
+            self.adView.backgroundColor =  randomColor;
             [self.adView addSubview:bannerView];
             
             [self.view insertSubview:self.adView belowSubview:self.footView];
            
-            
             [self.adView mas_makeConstraints:^(MASConstraintMaker *make) {
-                
-                make.width.equalTo(self.view);
-                make.centerX.equalTo(self.view.mas_centerX);
-                make.top.equalTo(self.view);
-                make.bottom.equalTo(self.view);
-                
+                make.height.equalTo(@(_adSize.height));
+                make.width.equalTo(@(_adSize.width));
+                make.top.equalTo(self.view).offset(100);
             }];
             
-            [bannerView mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.top.equalTo(self.adView).offset(100);
+            [self.bannerView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.edges.equalTo(self.adView);
             }];
             
             
@@ -269,6 +269,8 @@ NSString *const kBannerLoadingFailedNotification = @"banner_failed_to_load";
 {
     if (self.adView && self.adView.superview) {
         [self.adView removeFromSuperview];
+        self.bannerView = nil;
+        self.adView = nil;
     }
 }
 
