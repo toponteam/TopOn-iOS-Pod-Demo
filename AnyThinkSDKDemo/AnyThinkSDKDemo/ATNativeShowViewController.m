@@ -11,7 +11,7 @@
 
 @interface ATNativeShowViewController () <ATAdLoadingDelegate, ATNativeADDelegate>
 
-@property (nonatomic, weak) DMADView *adView;
+@property (nonatomic, weak) ATNativeADView *adView;
 
 @property (nonatomic, copy) NSString *placementID;
 
@@ -29,17 +29,20 @@
 
 @property(nonatomic, assign) BOOL isPlaying;
 
+@property(nonatomic, strong) ATNativeAdOffer *adOffer;
+
 @end
 
 @implementation ATNativeShowViewController
 
-- (instancetype)initWithAdView:(DMADView *)adView placementID:(NSString *)placementID
-{
+- (instancetype)initWithAdView:(ATNativeADView *)adView placementID:(NSString *)placementID offer:(ATNativeAdOffer *)offer{
     if (self = [super init]) {
+        _adOffer = offer;
         _adView = adView;
         _placementID = placementID;
     }
     return self;
+    
 }
 
 - (void)dealloc
@@ -94,40 +97,7 @@
     }];
 }
 
-- (void)showAd
-{
-    ATNativeADConfiguration *config = [[ATNativeADConfiguration alloc] init];
-    config.ADFrame = CGRectMake(.0f, 100.0f, CGRectGetWidth(self.view.bounds), 350.0f);
-    config.mediaViewFrame = CGRectMake(0, 120.0f, CGRectGetWidth(self.view.bounds), 350.0f - 120.0f);
-    config.delegate = self;
-    config.sizeToFit = YES;
-    // 临时,只在 demo 用.
-    config.renderingViewClass = [DMADView class];
-    config.rootViewController = self;
-    config.context = @{
-        
-        kATNativeAdConfigurationContextAdOptionsViewFrameKey:[NSValue valueWithCGRect:CGRectMake(CGRectGetWidth(self.view.bounds) - 43.0f, .0f, 43.0f, 18.0f)],
-        
-        kATNativeAdConfigurationContextAdLogoViewFrameKey:[NSValue valueWithCGRect:CGRectMake(.0f, .0f, 54.0f, 18.0f)],
-        
-        kATNativeAdConfigurationContextNetworkLogoViewFrameKey:[NSValue valueWithCGRect:CGRectMake(CGRectGetWidth(config.ADFrame) - 54.0f, CGRectGetHeight(config.ADFrame) - 18.0f, 54.0f, 18.0f)]
-        
-    };
-    
-    self.adView = [[ATAdManager sharedManager] retriveAdViewWithPlacementID:self.placementID configuration:config scene:@"f600938967feb5"];
-    if (self.adView == nil) {
-        NSLog(@"show failed");
-        return;
-    }
-//    self.adView.tag = adViewTag;
-    [self.view addSubview:self.adView];
-
-    ATNativeADView *tempView = self.adView;
-    if ([self.adView isKindOfClass:[ATNativeADView class]] == NO) {
-        tempView = self.adView.subviews.firstObject;
-    }
-    NSLog(@"获取广告平台id：%ld",tempView.networkFirmID);
-}
+- (void)showAd{}
 
 #pragma mark - delegate with extra
 -(void) didFinishLoadingADWithPlacementID:(NSString *)placementID {

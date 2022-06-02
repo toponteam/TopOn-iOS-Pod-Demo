@@ -327,7 +327,7 @@ static NSString *const kDirectOfferPlacementID = @"b61bffcf212e16";
     [mutableDict setValue:self.skipButton forKey:kATSplashExtraCustomSkipButtonKey];
     [mutableDict setValue:@500 forKey:kATSplashExtraCountdownIntervalKey];
     
-    [[ATAdManager sharedManager] showSplashWithPlacementID:self.placementID
+    [[ATAdManager sharedManager] showSplashWithPlacementID:self.placementID scene:@"f5e54970dc84e6"
                                                     window:mainWindow
                                                      extra:mutableDict
                                                   delegate:self];

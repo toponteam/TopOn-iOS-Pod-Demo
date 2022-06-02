@@ -6,13 +6,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "DMADView.h"
+@import AnyThinkNative;
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ATNativeShowViewController : UIViewController
 
-- (instancetype)initWithAdView:(DMADView *)adView placementID:(NSString *)placementID;
+- (instancetype)initWithAdView:(ATNativeADView *)adView placementID:(NSString *)placementID offer:(ATNativeAdOffer *)offer;
 
 @end
 
