@@ -432,9 +432,13 @@ static NSString *const kCallbackKey = @"request";
         
         if (nativeAdRenderType == ATNativeAdRenderExpress) {
             NSLog(@"🔥--原生模板");
+            NSLog(@"🔥--原生模板广告宽高：%lf，%lf",offer.nativeAd.nativeExpressAdViewWidth,offer.nativeAd.nativeExpressAdViewHeight);
         }else{
             NSLog(@"🔥--原生自渲染");
         }
+        
+        BOOL isVideoContents = [nativeADView isVideoContents];
+        NSLog(@"🔥--是否为原生视频广告：%d",isVideoContents);
         
         if ([offer.adOfferInfo[@"network_firm_id"] integerValue] == 67) {
             config.mediaViewFrame = CGRectMake(0, kNavigationBarHeight, kScreenW, 350);

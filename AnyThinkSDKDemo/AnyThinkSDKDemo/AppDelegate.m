@@ -71,6 +71,17 @@
         // Fallback on earlier versions
         [[ATAPI sharedInstance] startWithAppID:@"a5b0e8491845b3" appKey:@"7eae0567827cfe2b22874061763f30c9" error:nil];
     }
+    
+    // 设置系统平台信息，默认设置IOS=1
+//    ATSystemPlatformTypeIOS = 1,
+//    ATSystemPlatformTypeUnity = 2,
+//    ATSystemPlatformTypeCocos2dx = 3,
+//    ATSystemPlatformTypeCocosCreator = 4,
+//    ATSystemPlatformTypeReactNative = 5,
+//    ATSystemPlatformTypeFlutter = 6,
+//    ATSystemPlatformTypeAdobeAir = 7
+    [[ATAPI sharedInstance] setSystemPlatformType:ATSystemPlatformTypeIOS];
+    
     return YES;
 }
 
