@@ -80,7 +80,8 @@
 //    ATSystemPlatformTypeReactNative = 5,
 //    ATSystemPlatformTypeFlutter = 6,
 //    ATSystemPlatformTypeAdobeAir = 7
-    [[ATAPI sharedInstance] setSystemPlatformType:ATSystemPlatformTypeIOS];
+  //  [[ATAPI sharedInstance] setSystemPlatformType:ATSystemPlatformTypeIOS];
+    
     
     return YES;
 }

@@ -9,7 +9,7 @@
 
 @interface ATDrawViewController ()
 
-@property (nonatomic, weak) UIView *adView;
+@property (nonatomic, retain) UIView *adView;
 
 @property (nonatomic, strong) UIButton *closeBtn;
 

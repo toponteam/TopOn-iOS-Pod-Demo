@@ -11,6 +11,7 @@
 #import "ATHomeFootView.h"
 #import <AppTrackingTransparency/ATTrackingManager.h>
 
+
 @interface ViewController ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) UITableView *tableView;
