@@ -30,6 +30,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype) initWithOffer:(ATNativeAdOffer *)offer;
 
+- (void)updateUIWithoffer:(ATNativeAdOffer *)offer;
+
 @end
 
 NS_ASSUME_NONNULL_END

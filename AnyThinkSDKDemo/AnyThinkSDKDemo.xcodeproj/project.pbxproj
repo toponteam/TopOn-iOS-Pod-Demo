@@ -49,6 +49,12 @@
 		AC498DCF25EE362500955C17 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = AC498DCE25EE362200955C17 /* libz.tbd */; };
 		C36CAF42111F732953C14234 /* Pods_AnyThinkSDKDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7A388D01471A9429C81957B /* Pods_AnyThinkSDKDemo.framework */; };
 		E01F86252848AC360011900C /* ATNativeSelfRenderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E01F86242848AC360011900C /* ATNativeSelfRenderView.m */; };
+		E0F3B89E286D73E7007CF5AB /* ATNativeListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E0F3B89D286D73E6007CF5AB /* ATNativeListViewController.m */; };
+		E0F3B8A2286D7591007CF5AB /* ATNaviewListAdCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E0F3B8A0286D7591007CF5AB /* ATNaviewListAdCell.m */; };
+		E0F3B8A3286D7591007CF5AB /* ATNaviewListAdCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E0F3B8A1286D7591007CF5AB /* ATNaviewListAdCell.xib */; };
+		E0F3B8A7286D75B7007CF5AB /* ATNativeListOtherCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E0F3B8A5286D75B7007CF5AB /* ATNativeListOtherCell.m */; };
+		E0F3B8A8286D75B7007CF5AB /* ATNativeListOtherCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E0F3B8A6286D75B7007CF5AB /* ATNativeListOtherCell.xib */; };
+		E0F3B8AB286D973F007CF5AB /* ATDemoOfferAdMode.m in Sources */ = {isa = PBXBuildFile; fileRef = E0F3B8AA286D973F007CF5AB /* ATDemoOfferAdMode.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -122,6 +128,16 @@
 		AC498DCE25EE362200955C17 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		E01F86232848AC360011900C /* ATNativeSelfRenderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATNativeSelfRenderView.h; sourceTree = "<group>"; };
 		E01F86242848AC360011900C /* ATNativeSelfRenderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATNativeSelfRenderView.m; sourceTree = "<group>"; };
+		E0F3B89C286D73E6007CF5AB /* ATNativeListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ATNativeListViewController.h; sourceTree = "<group>"; };
+		E0F3B89D286D73E6007CF5AB /* ATNativeListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ATNativeListViewController.m; sourceTree = "<group>"; };
+		E0F3B89F286D7591007CF5AB /* ATNaviewListAdCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ATNaviewListAdCell.h; sourceTree = "<group>"; };
+		E0F3B8A0286D7591007CF5AB /* ATNaviewListAdCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ATNaviewListAdCell.m; sourceTree = "<group>"; };
+		E0F3B8A1286D7591007CF5AB /* ATNaviewListAdCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ATNaviewListAdCell.xib; sourceTree = "<group>"; };
+		E0F3B8A4286D75B7007CF5AB /* ATNativeListOtherCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ATNativeListOtherCell.h; sourceTree = "<group>"; };
+		E0F3B8A5286D75B7007CF5AB /* ATNativeListOtherCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ATNativeListOtherCell.m; sourceTree = "<group>"; };
+		E0F3B8A6286D75B7007CF5AB /* ATNativeListOtherCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ATNativeListOtherCell.xib; sourceTree = "<group>"; };
+		E0F3B8A9286D973F007CF5AB /* ATDemoOfferAdMode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ATDemoOfferAdMode.h; sourceTree = "<group>"; };
+		E0F3B8AA286D973F007CF5AB /* ATDemoOfferAdMode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ATDemoOfferAdMode.m; sourceTree = "<group>"; };
 		E7A388D01471A9429C81957B /* Pods_AnyThinkSDKDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AnyThinkSDKDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -263,6 +279,16 @@
 				04CF323028000EDB0083B5AA /* ATNativeMessageStreamViewController.m */,
 				04CF323128000EDB0083B5AA /* ATNativeShowViewController.h */,
 				04CF322F28000EDB0083B5AA /* ATNativeShowViewController.m */,
+				E0F3B89C286D73E6007CF5AB /* ATNativeListViewController.h */,
+				E0F3B89D286D73E6007CF5AB /* ATNativeListViewController.m */,
+				E0F3B8A9286D973F007CF5AB /* ATDemoOfferAdMode.h */,
+				E0F3B8AA286D973F007CF5AB /* ATDemoOfferAdMode.m */,
+				E0F3B8A4286D75B7007CF5AB /* ATNativeListOtherCell.h */,
+				E0F3B8A5286D75B7007CF5AB /* ATNativeListOtherCell.m */,
+				E0F3B8A6286D75B7007CF5AB /* ATNativeListOtherCell.xib */,
+				E0F3B89F286D7591007CF5AB /* ATNaviewListAdCell.h */,
+				E0F3B8A0286D7591007CF5AB /* ATNaviewListAdCell.m */,
+				E0F3B8A1286D7591007CF5AB /* ATNaviewListAdCell.xib */,
 				9B6DF73B259436DD004E9FDB /* ATSplashViewController.h */,
 				9B6DF73C259436DD004E9FDB /* ATSplashViewController.m */,
 				9BBD00B8248630C8009EAD66 /* MTAutolayoutCategories.h */,
@@ -344,8 +370,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				9BBD00A72486304C009EAD66 /* LaunchScreen.storyboard in Resources */,
+				E0F3B8A8286D75B7007CF5AB /* ATNativeListOtherCell.xib in Resources */,
 				9BBD00A42486304C009EAD66 /* Assets.xcassets in Resources */,
 				9BBD00A224863048009EAD66 /* Main.storyboard in Resources */,
+				E0F3B8A3286D7591007CF5AB /* ATNaviewListAdCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -427,18 +455,22 @@
 				04CF3222280007900083B5AA /* ATADFootView.m in Sources */,
 				04CF3225280007900083B5AA /* ATAutomationTestViewController.m in Sources */,
 				9BBD00AA2486304C009EAD66 /* main.m in Sources */,
+				E0F3B8A7286D75B7007CF5AB /* ATNativeListOtherCell.m in Sources */,
 				04CF323328000EDC0083B5AA /* ATNativeShowViewController.m in Sources */,
 				04CF323A28000F6D0083B5AA /* ATAutoLayout.m in Sources */,
+				E0F3B8AB286D973F007CF5AB /* ATDemoOfferAdMode.m in Sources */,
 				04CF3220280007900083B5AA /* ATHomeFootView.m in Sources */,
 				9BBD009C24863048009EAD66 /* SceneDelegate.m in Sources */,
 				9BBD00BE248630C8009EAD66 /* ATBannerViewController.m in Sources */,
 				04CF323F28000FB70083B5AA /* ATNativeRenderView.m in Sources */,
 				04CF3223280007900083B5AA /* ATSelectViewController.m in Sources */,
+				E0F3B8A2286D7591007CF5AB /* ATNaviewListAdCell.m in Sources */,
 				9BBD00C1248630C8009EAD66 /* ATNativeViewController.m in Sources */,
 				9BBD00BF248630C8009EAD66 /* ATInterstitialViewController.m in Sources */,
 				04CF322B280008520083B5AA /* ATRewardVideoViewController.m in Sources */,
 				04CF3227280007900083B5AA /* ATMenuView.m in Sources */,
 				9B6DF73D259436DD004E9FDB /* ATSplashViewController.m in Sources */,
+				E0F3B89E286D73E7007CF5AB /* ATNativeListViewController.m in Sources */,
 				04CF3243280011D50083B5AA /* MTAutolayoutCategories.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

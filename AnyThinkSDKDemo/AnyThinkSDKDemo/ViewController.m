@@ -86,6 +86,11 @@
             @"image":@"native",
             @"title":@"Native",
             @"des":@"Include Native,Vertical Draw Video and Pre-roll Ads.Most compatible with your native app code for video ads and graphic ads.",
+        },
+        @{
+            @"image":@"native",
+            @"title":@"NativeList",
+            @"des":@"Include Native,Vertical Draw Video and Pre-roll Ads.Most compatible with your native app code for video ads and graphic ads.",
         }
     ];
 }
