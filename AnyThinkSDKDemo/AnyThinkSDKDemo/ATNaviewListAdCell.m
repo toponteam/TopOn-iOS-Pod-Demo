@@ -21,7 +21,9 @@
 }
 
 - (void)setAdView:(ATNativeADView *)adView{
-    
+
+    [_adView removeFromSuperview];
+
     [self.contentView addSubview:adView];
     
     [adView mas_makeConstraints:^(MASConstraintMaker *make) {

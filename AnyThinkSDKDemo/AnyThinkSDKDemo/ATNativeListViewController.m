@@ -11,6 +11,7 @@
 #import "ATNativeListOtherCell.h"
 #import "ATNativeSelfRenderView.h"
 #import "ATDemoOfferAdMode.h"
+#import "MJRefresh.h""
 
 @import AnyThinkNative;
 
@@ -37,6 +38,8 @@
     [self setLayout];
     
     [self loadNative];
+    
+    [self footerRefresh];
 }
 
 #pragma mark - init
@@ -72,6 +75,17 @@
     [[ATAdManager sharedManager] loadADWithPlacementID:self.placementID extra:extra delegate:self];
 }
 
+- (void)footerRefresh{
+    
+    self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(upFreshLoadMoreData)];
+    
+    [self.tableView.mj_footer beginRefreshing];
+}
+
+- (void)upFreshLoadMoreData{
+    [self loadNative];
+}
+
 #pragma mark - data center
 
 - (void)setData{
@@ -85,23 +99,22 @@
         [array enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             ATNativeAdOffer *offer = [[ATAdManager sharedManager] getNativeAdOfferWithPlacementID:self.placementID];
             if (offer) {
+                
                 ATDemoOfferAdMode *offerModel = [[ATDemoOfferAdMode alloc]init];
                 offerModel.nativeADView = [self getNativeADView:self.placementID];
                 offerModel.offer = offer;
                 offerModel.isNativeAd = YES;
                 [tempArray addObject:offerModel];
+                
+                
+                ATDemoOfferAdMode *offerModel1 = [[ATDemoOfferAdMode alloc]init];
+                offerModel1.isNativeAd = NO;
+                [tempArray addObject:offerModel1];
             }
         }];
     }
     
-    for (int i = 0; i < 3; i ++) {
-        ATDemoOfferAdMode *offerModel = [[ATDemoOfferAdMode alloc]init];
-        offerModel.isNativeAd = NO;
-        [tempArray addObject:offerModel];
-    }
-    
-    [self.dataSourceArray addObjectsFromArray:[self sortedRandomArrayByArray:tempArray]];
-    
+    [self.dataSourceArray addObjectsFromArray:tempArray];
     [self.tableView reloadData];
 }
 
@@ -122,7 +135,10 @@
     if (offerMode.isNativeAd) {
         ATNaviewListAdCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ATNaviewListAdCellID"];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        NSLog(@"adView之前--%@",cell.adView);
         cell.adView = offerMode.nativeADView;
+        NSLog(@"adView之后--%@",cell.adView);
+
         cell.backgroundColor = randomColor;
         return cell;
     }else{
@@ -143,6 +159,9 @@
 - (void)didFinishLoadingADWithPlacementID:(NSString *)placementID {
     NSLog(@"🔥---原生加载成功");
     [self setData];
+    if (self.tableView.mj_footer.refreshing == YES) {
+        [self.tableView.mj_footer endRefreshing];        
+    }
 }
 
 - (void)didFailToLoadADWithPlacementID:(NSString*)placementID error:(NSError*)error {
@@ -321,23 +340,6 @@
     }];
     
     [nativeADView prepareWithNativePrepareInfo:info];
-}
-
-
-
-
-//对数组随机排序
-- (NSMutableArray *)sortedRandomArrayByArray:(NSMutableArray *)array{
-    
-    NSMutableArray *randomArray = [[NSMutableArray alloc]init];
-    while (randomArray.count != array.count) {
-        int x = arc4random() % array.count;
-        id obj = array[x];
-        if(![randomArray containsObject:obj]){
-            [randomArray addObject:obj];
-        }
-    }
-    return randomArray;
 }
 
 #pragma mark - lazy
