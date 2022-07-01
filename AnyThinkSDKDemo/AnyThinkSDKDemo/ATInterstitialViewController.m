@@ -219,8 +219,6 @@ static NSString *const kDirectOfferPlacementID = @"b61bffcd9dda20";
         @"Kidoz":           @"b5feaa2df0e121",
         @"MyTarget":        @"b5feaa306e483c",
         @"All":             @"b5bacad26a752a",
-        @"Gromore":         @"b601cac971d07c",
-        @"Max":             @"b603efe75ae38d",
         @"Klevin":          @"b613affb04196f",
         @"DirectOffer":     @"b61bffcd9dda20",
     };

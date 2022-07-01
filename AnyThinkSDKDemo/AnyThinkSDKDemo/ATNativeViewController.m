@@ -177,7 +177,6 @@ static NSString *const kCallbackKey = @"request";
         @"KS":                      @"b5e4613e50cbf2",
         @"OnlineApi":               @"b5fa2508579446",
         @"All":                     @"b5b0f5663c6e4a",
-        @"Gromore":                 @"b601cac6b99ead",
         @"Sigmob":                  @"b6170cda99de6d",
         @"DirectOffer":             @"b61bfff2c812cb",
         @"Klevin":                  @"b6172985f45143",
