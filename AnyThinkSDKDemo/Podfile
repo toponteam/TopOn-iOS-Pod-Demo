@@ -9,6 +9,7 @@ def share_pods
   pod 'Masonry'
   pod 'SDWebImage'
   pod 'MJRefresh'
+  pod "ZYGCDTimer"
 
 
 end

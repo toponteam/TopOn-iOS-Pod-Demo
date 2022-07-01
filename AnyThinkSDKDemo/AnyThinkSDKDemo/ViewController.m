@@ -10,7 +10,7 @@
 #import "ATHomeTableViewCell.h"
 #import "ATHomeFootView.h"
 #import <AppTrackingTransparency/ATTrackingManager.h>
-
+#import "ATTestListViewController.h"
 
 @interface ViewController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -124,6 +124,10 @@
 
     self.navigationItem.titleView = navView;
     
+    UIBarButtonItem *testitem = [[UIBarButtonItem alloc]initWithTitle:@"Test" style:UIBarButtonItemStylePlain target:self action:@selector(test)];
+    
+    self.navigationItem.leftBarButtonItem = testitem;
+    
 }
 - (IBAction)autoLoadEnable:(id)sender {
     self.autoLoadEnable = !self.autoLoadEnable;
@@ -189,6 +193,15 @@
         [_tableView registerClass:[ATHomeTableViewCell class] forCellReuseIdentifier:[ATHomeTableViewCell idString]];
     }
     return _tableView;
+}
+
+#pragma mark - test
+- (void)test{
+    ATTestListViewController *testListViewController = [[ATTestListViewController alloc]init];
+    
+    [self.navigationController pushViewController:testListViewController animated:YES];
+  
+    
 }
 
 @end

@@ -49,6 +49,16 @@
 		AC498DCF25EE362500955C17 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = AC498DCE25EE362200955C17 /* libz.tbd */; };
 		C36CAF42111F732953C14234 /* Pods_AnyThinkSDKDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7A388D01471A9429C81957B /* Pods_AnyThinkSDKDemo.framework */; };
 		E01F86252848AC360011900C /* ATNativeSelfRenderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E01F86242848AC360011900C /* ATNativeSelfRenderView.m */; };
+		E0CC96F0286E94410075BE38 /* BannerShow.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E0CC96CF286E94410075BE38 /* BannerShow.storyboard */; };
+		E0CC96F1286E94410075BE38 /* ATBannerShowController.m in Sources */ = {isa = PBXBuildFile; fileRef = E0CC96D1286E94410075BE38 /* ATBannerShowController.m */; };
+		E0CC96F5286E94410075BE38 /* NativeShow.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E0CC96DA286E94410075BE38 /* NativeShow.storyboard */; };
+		E0CC96F6286E94410075BE38 /* ATNativeShowController.m in Sources */ = {isa = PBXBuildFile; fileRef = E0CC96DB286E94410075BE38 /* ATNativeShowController.m */; };
+		E0CC96F7286E94410075BE38 /* ATTestListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E0CC96DE286E94410075BE38 /* ATTestListViewController.m */; };
+		E0CC96FB286E94410075BE38 /* ATPerformanceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E0CC96E8286E94410075BE38 /* ATPerformanceViewController.m */; };
+		E0CC96FC286E94410075BE38 /* ATPerformanceViewController+LoadShowRemove.m in Sources */ = {isa = PBXBuildFile; fileRef = E0CC96EA286E94410075BE38 /* ATPerformanceViewController+LoadShowRemove.m */; };
+		E0CC96FD286E94410075BE38 /* ATPerformanceViewController+Timer.m in Sources */ = {isa = PBXBuildFile; fileRef = E0CC96EC286E94410075BE38 /* ATPerformanceViewController+Timer.m */; };
+		E0CC96FE286E94410075BE38 /* Performance.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E0CC96ED286E94410075BE38 /* Performance.storyboard */; };
+		E0CC96FF286E94410075BE38 /* ATRuntimeTool.m in Sources */ = {isa = PBXBuildFile; fileRef = E0CC96EF286E94410075BE38 /* ATRuntimeTool.m */; };
 		E0F3B89E286D73E7007CF5AB /* ATNativeListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E0F3B89D286D73E6007CF5AB /* ATNativeListViewController.m */; };
 		E0F3B8A2286D7591007CF5AB /* ATNaviewListAdCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E0F3B8A0286D7591007CF5AB /* ATNaviewListAdCell.m */; };
 		E0F3B8A3286D7591007CF5AB /* ATNaviewListAdCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E0F3B8A1286D7591007CF5AB /* ATNaviewListAdCell.xib */; };
@@ -128,6 +138,23 @@
 		AC498DCE25EE362200955C17 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		E01F86232848AC360011900C /* ATNativeSelfRenderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATNativeSelfRenderView.h; sourceTree = "<group>"; };
 		E01F86242848AC360011900C /* ATNativeSelfRenderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATNativeSelfRenderView.m; sourceTree = "<group>"; };
+		E0CC96CF286E94410075BE38 /* BannerShow.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = BannerShow.storyboard; sourceTree = "<group>"; };
+		E0CC96D0286E94410075BE38 /* ATBannerShowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATBannerShowController.h; sourceTree = "<group>"; };
+		E0CC96D1286E94410075BE38 /* ATBannerShowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATBannerShowController.m; sourceTree = "<group>"; };
+		E0CC96DA286E94410075BE38 /* NativeShow.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = NativeShow.storyboard; sourceTree = "<group>"; };
+		E0CC96DB286E94410075BE38 /* ATNativeShowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATNativeShowController.m; sourceTree = "<group>"; };
+		E0CC96DC286E94410075BE38 /* ATNativeShowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATNativeShowController.h; sourceTree = "<group>"; };
+		E0CC96DD286E94410075BE38 /* ATRuntimeTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATRuntimeTool.h; sourceTree = "<group>"; };
+		E0CC96DE286E94410075BE38 /* ATTestListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATTestListViewController.m; sourceTree = "<group>"; };
+		E0CC96E7286E94410075BE38 /* ATPerformanceViewController+LoadShowRemove.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ATPerformanceViewController+LoadShowRemove.h"; sourceTree = "<group>"; };
+		E0CC96E8286E94410075BE38 /* ATPerformanceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATPerformanceViewController.m; sourceTree = "<group>"; };
+		E0CC96E9286E94410075BE38 /* ATPerformanceViewController+Timer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ATPerformanceViewController+Timer.h"; sourceTree = "<group>"; };
+		E0CC96EA286E94410075BE38 /* ATPerformanceViewController+LoadShowRemove.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ATPerformanceViewController+LoadShowRemove.m"; sourceTree = "<group>"; };
+		E0CC96EB286E94410075BE38 /* ATPerformanceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATPerformanceViewController.h; sourceTree = "<group>"; };
+		E0CC96EC286E94410075BE38 /* ATPerformanceViewController+Timer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ATPerformanceViewController+Timer.m"; sourceTree = "<group>"; };
+		E0CC96ED286E94410075BE38 /* Performance.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Performance.storyboard; sourceTree = "<group>"; };
+		E0CC96EE286E94410075BE38 /* ATTestListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATTestListViewController.h; sourceTree = "<group>"; };
+		E0CC96EF286E94410075BE38 /* ATRuntimeTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATRuntimeTool.m; sourceTree = "<group>"; };
 		E0F3B89C286D73E6007CF5AB /* ATNativeListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ATNativeListViewController.h; sourceTree = "<group>"; };
 		E0F3B89D286D73E6007CF5AB /* ATNativeListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ATNativeListViewController.m; sourceTree = "<group>"; };
 		E0F3B89F286D7591007CF5AB /* ATNaviewListAdCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ATNaviewListAdCell.h; sourceTree = "<group>"; };
@@ -263,6 +290,7 @@
 		9BBD009624863048009EAD66 /* AnyThinkSDKDemo */ = {
 			isa = PBXGroup;
 			children = (
+				E0CC96CD286E94410075BE38 /* Test */,
 				04CF320F2800078F0083B5AA /* BaseVc */,
 				04CF320A2800078F0083B5AA /* View */,
 				9BBD00B5248630C8009EAD66 /* ATBannerViewController.h */,
@@ -307,6 +335,54 @@
 				04CF3228280007DA0083B5AA /* PrefixHeader.pch */,
 			);
 			path = AnyThinkSDKDemo;
+			sourceTree = "<group>";
+		};
+		E0CC96CD286E94410075BE38 /* Test */ = {
+			isa = PBXGroup;
+			children = (
+				E0CC96DD286E94410075BE38 /* ATRuntimeTool.h */,
+				E0CC96EF286E94410075BE38 /* ATRuntimeTool.m */,
+				E0CC96EE286E94410075BE38 /* ATTestListViewController.h */,
+				E0CC96DE286E94410075BE38 /* ATTestListViewController.m */,
+				E0CC96CE286E94410075BE38 /* BannerShow */,
+				E0CC96D9286E94410075BE38 /* NativeShow */,
+				E0CC96E6286E94410075BE38 /* Performance */,
+			);
+			path = Test;
+			sourceTree = "<group>";
+		};
+		E0CC96CE286E94410075BE38 /* BannerShow */ = {
+			isa = PBXGroup;
+			children = (
+				E0CC96CF286E94410075BE38 /* BannerShow.storyboard */,
+				E0CC96D0286E94410075BE38 /* ATBannerShowController.h */,
+				E0CC96D1286E94410075BE38 /* ATBannerShowController.m */,
+			);
+			path = BannerShow;
+			sourceTree = "<group>";
+		};
+		E0CC96D9286E94410075BE38 /* NativeShow */ = {
+			isa = PBXGroup;
+			children = (
+				E0CC96DA286E94410075BE38 /* NativeShow.storyboard */,
+				E0CC96DB286E94410075BE38 /* ATNativeShowController.m */,
+				E0CC96DC286E94410075BE38 /* ATNativeShowController.h */,
+			);
+			path = NativeShow;
+			sourceTree = "<group>";
+		};
+		E0CC96E6286E94410075BE38 /* Performance */ = {
+			isa = PBXGroup;
+			children = (
+				E0CC96E7286E94410075BE38 /* ATPerformanceViewController+LoadShowRemove.h */,
+				E0CC96E8286E94410075BE38 /* ATPerformanceViewController.m */,
+				E0CC96E9286E94410075BE38 /* ATPerformanceViewController+Timer.h */,
+				E0CC96EA286E94410075BE38 /* ATPerformanceViewController+LoadShowRemove.m */,
+				E0CC96EB286E94410075BE38 /* ATPerformanceViewController.h */,
+				E0CC96EC286E94410075BE38 /* ATPerformanceViewController+Timer.m */,
+				E0CC96ED286E94410075BE38 /* Performance.storyboard */,
+			);
+			path = Performance;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -369,9 +445,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E0CC96FE286E94410075BE38 /* Performance.storyboard in Resources */,
 				9BBD00A72486304C009EAD66 /* LaunchScreen.storyboard in Resources */,
+				E0CC96F0286E94410075BE38 /* BannerShow.storyboard in Resources */,
 				E0F3B8A8286D75B7007CF5AB /* ATNativeListOtherCell.xib in Resources */,
 				9BBD00A42486304C009EAD66 /* Assets.xcassets in Resources */,
+				E0CC96F5286E94410075BE38 /* NativeShow.storyboard in Resources */,
 				9BBD00A224863048009EAD66 /* Main.storyboard in Resources */,
 				E0F3B8A3286D7591007CF5AB /* ATNaviewListAdCell.xib in Resources */,
 			);
@@ -447,13 +526,16 @@
 				04CF321F280007900083B5AA /* ATHomeTableViewCell.m in Sources */,
 				04CF323428000EDC0083B5AA /* ATNativeMessageStreamViewController.m in Sources */,
 				9BBD009F24863048009EAD66 /* ViewController.m in Sources */,
+				E0CC96FC286E94410075BE38 /* ATPerformanceViewController+LoadShowRemove.m in Sources */,
 				E01F86252848AC360011900C /* ATNativeSelfRenderView.m in Sources */,
 				9BBD009924863048009EAD66 /* AppDelegate.m in Sources */,
 				9BBD00C0248630C8009EAD66 /* MTAutolayoutCategories.m in Sources */,
+				E0CC96FD286E94410075BE38 /* ATPerformanceViewController+Timer.m in Sources */,
 				9BBD00C3248630C8009EAD66 /* ATDrawViewController.m in Sources */,
 				04CF3226280007900083B5AA /* ATAutomationTableViewCell.m in Sources */,
 				04CF3222280007900083B5AA /* ATADFootView.m in Sources */,
 				04CF3225280007900083B5AA /* ATAutomationTestViewController.m in Sources */,
+				E0CC96FF286E94410075BE38 /* ATRuntimeTool.m in Sources */,
 				9BBD00AA2486304C009EAD66 /* main.m in Sources */,
 				E0F3B8A7286D75B7007CF5AB /* ATNativeListOtherCell.m in Sources */,
 				04CF323328000EDC0083B5AA /* ATNativeShowViewController.m in Sources */,
@@ -462,6 +544,8 @@
 				04CF3220280007900083B5AA /* ATHomeFootView.m in Sources */,
 				9BBD009C24863048009EAD66 /* SceneDelegate.m in Sources */,
 				9BBD00BE248630C8009EAD66 /* ATBannerViewController.m in Sources */,
+				E0CC96FB286E94410075BE38 /* ATPerformanceViewController.m in Sources */,
+				E0CC96F7286E94410075BE38 /* ATTestListViewController.m in Sources */,
 				04CF323F28000FB70083B5AA /* ATNativeRenderView.m in Sources */,
 				04CF3223280007900083B5AA /* ATSelectViewController.m in Sources */,
 				E0F3B8A2286D7591007CF5AB /* ATNaviewListAdCell.m in Sources */,
@@ -469,9 +553,11 @@
 				9BBD00BF248630C8009EAD66 /* ATInterstitialViewController.m in Sources */,
 				04CF322B280008520083B5AA /* ATRewardVideoViewController.m in Sources */,
 				04CF3227280007900083B5AA /* ATMenuView.m in Sources */,
+				E0CC96F6286E94410075BE38 /* ATNativeShowController.m in Sources */,
 				9B6DF73D259436DD004E9FDB /* ATSplashViewController.m in Sources */,
 				E0F3B89E286D73E7007CF5AB /* ATNativeListViewController.m in Sources */,
 				04CF3243280011D50083B5AA /* MTAutolayoutCategories.m in Sources */,
+				E0CC96F1286E94410075BE38 /* ATBannerShowController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
