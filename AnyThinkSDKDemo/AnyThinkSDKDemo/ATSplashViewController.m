@@ -28,7 +28,7 @@ static NSString *const kKlevinPlacementID = @"b613aff35cd174";
 static NSString *const kDirectOfferPlacementID = @"b61bffcf212e16";
 
 
-@interface ATSplashViewController ()<ATSplashDelegate,ATNativeSplashDelegate>
+@interface ATSplashViewController ()<ATSplashDelegate>
 
 @property (nonatomic, strong) ATADFootView *footView;
 
