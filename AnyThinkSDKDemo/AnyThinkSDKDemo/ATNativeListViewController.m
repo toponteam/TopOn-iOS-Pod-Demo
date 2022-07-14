@@ -101,7 +101,7 @@
             if (offer) {
                 
                 ATDemoOfferAdMode *offerModel = [[ATDemoOfferAdMode alloc]init];
-                offerModel.nativeADView = [self getNativeADView:self.placementID];
+                offerModel.nativeADView = [self getNativeADView:self.placementID nativeAdOffer:offer];
                 offerModel.offer = offer;
                 offerModel.isNativeAd = YES;
                 [tempArray addObject:offerModel];
@@ -133,6 +133,7 @@
     
     
     if (offerMode.isNativeAd) {
+        
         ATNaviewListAdCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ATNaviewListAdCellID"];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         NSLog(@"adView之前--%@",cell.adView);
@@ -252,11 +253,9 @@
 }
 #pragma mark - private
 
-- (ATNativeADView *)getNativeADView:(NSString *)placementID{
+- (ATNativeADView *)getNativeADView:(NSString *)placementID nativeAdOffer:(ATNativeAdOffer *)offer{
     
     ATNativeADConfiguration *config = [self getNativeADConfiguration];
-    
-    ATNativeAdOffer *offer = [[ATAdManager sharedManager] getNativeAdOfferWithPlacementID:placementID];
     ATNativeSelfRenderView *selfRenderView = [self getSelfRenderViewOffer:offer];
     ATNativeADView *nativeADView = [self getNativeADView:config offer:offer selfRenderView:selfRenderView];
     
