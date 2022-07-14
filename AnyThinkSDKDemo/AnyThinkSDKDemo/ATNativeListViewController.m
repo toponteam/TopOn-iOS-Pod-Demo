@@ -136,6 +136,8 @@
         
         ATNaviewListAdCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ATNaviewListAdCellID"];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        
         NSLog(@"adView之前--%@",cell.adView);
         cell.adView = offerMode.nativeADView;
         NSLog(@"adView之后--%@",cell.adView);

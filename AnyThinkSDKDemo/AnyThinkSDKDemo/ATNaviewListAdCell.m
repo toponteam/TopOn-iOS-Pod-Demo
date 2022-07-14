@@ -21,7 +21,11 @@
 }
 
 - (void)setAdView:(ATNativeADView *)adView{
-
+    
+    if (_adView == adView) {
+        return;
+    }
+    
     [_adView removeFromSuperview];
 
     [self.contentView addSubview:adView];
