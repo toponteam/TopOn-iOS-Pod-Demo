@@ -20,6 +20,7 @@
 		04CF323428000EDC0083B5AA /* ATNativeMessageStreamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CF323028000EDB0083B5AA /* ATNativeMessageStreamViewController.m */; };
 		04CF323A28000F6D0083B5AA /* ATAutoLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CF323928000F6D0083B5AA /* ATAutoLayout.m */; };
 		04CF323F28000FB70083B5AA /* ATNativeRenderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CF323B28000FB70083B5AA /* ATNativeRenderView.m */; };
+		9B1A9D6C288E82C800CC16FA /* ATNativeMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B1A9D6A288E82C800CC16FA /* ATNativeMainViewController.m */; };
 		9B6DF73D259436DD004E9FDB /* ATSplashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B6DF73C259436DD004E9FDB /* ATSplashViewController.m */; };
 		9BBD009924863048009EAD66 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BBD009824863048009EAD66 /* AppDelegate.m */; };
 		9BBD009C24863048009EAD66 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BBD009B24863048009EAD66 /* SceneDelegate.m */; };
@@ -86,6 +87,8 @@
 		04CF323C28000FB70083B5AA /* ATNativeRenderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATNativeRenderView.h; sourceTree = "<group>"; };
 		44D83BDBBF3D3D426850A3E1 /* Pods-AnyThinkSDKDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AnyThinkSDKDemo.release.xcconfig"; path = "Target Support Files/Pods-AnyThinkSDKDemo/Pods-AnyThinkSDKDemo.release.xcconfig"; sourceTree = "<group>"; };
 		85EEA80B39960C835625EC2F /* Pods-AnyThinkSDKDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AnyThinkSDKDemo.debug.xcconfig"; path = "Target Support Files/Pods-AnyThinkSDKDemo/Pods-AnyThinkSDKDemo.debug.xcconfig"; sourceTree = "<group>"; };
+		9B1A9D6A288E82C800CC16FA /* ATNativeMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATNativeMainViewController.m; sourceTree = "<group>"; };
+		9B1A9D6B288E82C800CC16FA /* ATNativeMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATNativeMainViewController.h; sourceTree = "<group>"; };
 		9B6DF73B259436DD004E9FDB /* ATSplashViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATSplashViewController.h; sourceTree = "<group>"; };
 		9B6DF73C259436DD004E9FDB /* ATSplashViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATSplashViewController.m; sourceTree = "<group>"; };
 		9BBD009424863048009EAD66 /* AnyThinkSDKDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AnyThinkSDKDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -279,6 +282,8 @@
 		9B1A9D60288E485100CC16FA /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				9B1A9D6B288E82C800CC16FA /* ATNativeMainViewController.h */,
+				9B1A9D6A288E82C800CC16FA /* ATNativeMainViewController.m */,
 				9BBD00BB248630C8009EAD66 /* ATDrawViewController.h */,
 				9BBD00BC248630C8009EAD66 /* ATDrawViewController.m */,
 				E0F3B89C286D73E6007CF5AB /* ATNativeListViewController.h */,
@@ -543,6 +548,7 @@
 				9BBD00C0248630C8009EAD66 /* MTAutolayoutCategories.m in Sources */,
 				9BBD00C3248630C8009EAD66 /* ATDrawViewController.m in Sources */,
 				04CF3226280007900083B5AA /* ATAutomationTableViewCell.m in Sources */,
+				9B1A9D6C288E82C800CC16FA /* ATNativeMainViewController.m in Sources */,
 				04CF3222280007900083B5AA /* ATADFootView.m in Sources */,
 				04CF3225280007900083B5AA /* ATAutomationTestViewController.m in Sources */,
 				9BBD00AA2486304C009EAD66 /* main.m in Sources */,
