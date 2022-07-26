@@ -45,6 +45,7 @@ extern NSString *const kKidozPlacement;
 extern NSString *const kMyTargetPlacement;
 extern NSString *const kKlevinPlacement;
 extern NSString *const kDirectOfferPlacement;
+extern NSString *const kYandexPlacement;
 
 @interface ATInterstitialViewController : UIViewController
 
