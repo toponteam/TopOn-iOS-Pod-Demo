@@ -8,12 +8,16 @@
 
 #import "ATNativeListOtherCell.h"
 
+@interface ATNativeListOtherCell ()
+@property (weak, nonatomic) IBOutlet UILabel *descLabel;
+
+@end
+
 @implementation ATNativeListOtherCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-
-    
+    self.descLabel.textColor = [UIColor whiteColor];
 }
 
 @end

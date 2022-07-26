@@ -118,11 +118,7 @@ static NSString *const kCallbackKey = @"request";
 -(instancetype) initWithPlacementName:(NSString*)name {
     self = [super initWithNibName:nil bundle:nil];
     if (self != nil) {
-//        _name = name;
-       
     }
-//    _numberOfLoadAndCallback = [NSMutableDictionary dictionaryWithContentsOfFile:[ATNativeViewController numberOfLoadPath]];
-//    if (_numberOfLoadAndCallback == nil) { _numberOfLoadAndCallback = [NSMutableDictionary dictionary]; }
     return self;
 }
 
@@ -205,14 +201,12 @@ static NSString *const kCallbackKey = @"request";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    self.title = _name;
+
     self.view.backgroundColor = kRGB(245, 245, 245);
     _placementIDs = [ATNativeViewController nativePlacementIDs];
     [self setupUI];
     
     self.title = @"Native";
-    
-   
 }
 
 - (void)setupUI
@@ -284,9 +278,6 @@ static NSString *const kCallbackKey = @"request";
 {
     self.textView.text = @"";
 }
-
-
-
 
 #pragma mark - together load
 - (void)togetherLoadAd:(NSString *)togetherLoadAdStr{
@@ -360,13 +351,15 @@ static NSString *const kCallbackKey = @"request";
     self.placementID = self.togetherLoadAdStr.length ? self.placementIDs[self.togetherLoadAdStr] : self.placementIDs.allValues.firstObject;
 }
 
-
+//广告加载
 - (void)loadAd
 {
     CGSize size = CGSizeMake(kScreenW, 350);
     if ([self.placementIDs_draw.allValues containsObject:self.placementID]) {
         size = self.view.frame.size;
     }
+    
+    
     NSDictionary *extra = @{
         kATExtraInfoNativeAdSizeKey:[NSValue valueWithCGSize:size],
         kATExtraNativeImageSizeKey:kATExtraNativeImageSize690_388,
@@ -378,6 +371,7 @@ static NSString *const kCallbackKey = @"request";
     [[ATAdManager sharedManager] loadADWithPlacementID:self.placementID extra:extra delegate:self];
 }
 
+//检查广告缓存
 - (void)checkAd
 {
     // list
@@ -392,9 +386,10 @@ static NSString *const kCallbackKey = @"request";
     }];
 }
 
+//广告展示
 - (void)showAd
 {
-    
+    // 判断广告isReady状态
     BOOL ready = [[ATAdManager sharedManager] nativeAdReadyForPlacementID:self.placementID];
     if (ready == NO) {
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Not Yet!" message:nil preferredStyle:UIAlertControllerStyleAlert];
@@ -414,12 +409,13 @@ static NSString *const kCallbackKey = @"request";
     } else if (self.drawBtn.isSelected) {
         [self showDrawAd];
     } else {
+        // 初始化config配置
         ATNativeADConfiguration *config = [self getNativeADConfiguration];
-        
+        // 获取offer广告对象
         ATNativeAdOffer *offer = [[ATAdManager sharedManager] getNativeAdOfferWithPlacementID:self.placementID];
-        
+        // 创建开发者自渲染视图view，同时根据offer信息内容去赋值
         ATNativeSelfRenderView *selfRenderView = [self getSelfRenderViewOffer:offer];
-        
+        // 创建nativeADView
         ATNativeADView *nativeADView = [self getNativeADView:config offer:offer selfRenderView:selfRenderView];
         
         [self prepareWithNativePrepareInfo:selfRenderView nativeADView:nativeADView];
@@ -473,7 +469,6 @@ static NSString *const kCallbackKey = @"request";
 }
 
 #pragma mark - Show
-
 - (ATNativeADConfiguration *)getNativeADConfiguration{
     ATNativeADConfiguration *config = [[ATNativeADConfiguration alloc] init];
     config.ADFrame = CGRectMake(0, kNavigationBarHeight, kScreenW, 350);
@@ -504,7 +499,7 @@ static NSString *const kCallbackKey = @"request";
     
     ATNativeADView *nativeADView = [[ATNativeADView alloc]initWithConfiguration:config currentOffer:offer placementID:self.placementID];
     
-    
+    // 获取mediaView
     UIView *mediaView = [nativeADView getMediaView];
 
     NSMutableArray *array = [@[selfRenderView.iconImageView,selfRenderView.titleLabel,selfRenderView.textLabel,selfRenderView.ctaLabel,selfRenderView.mainImageView] mutableCopy];
@@ -513,6 +508,7 @@ static NSString *const kCallbackKey = @"request";
         [array addObject:mediaView];
     }
     
+    // 给UI控件注册点击事件
     [nativeADView registerClickableViewArray:array];
     
     nativeADView.backgroundColor = randomColor;
@@ -554,7 +550,6 @@ static NSString *const kCallbackKey = @"request";
 
 #pragma mark - draw
 - (void)showDrawAd{
-    
     // Draw
     ATNativeADConfiguration *config = [[ATNativeADConfiguration alloc] init];
     config.ADFrame = CGRectMake(0, kNavigationBarHeight, kScreenW, kScreenH - kNavigationBarHeight);;
@@ -580,7 +575,6 @@ static NSString *const kCallbackKey = @"request";
     [nativeADView registerClickableViewArray:array];
     
     mediaView.frame = CGRectMake(0, kNavigationBarHeight + 150.0f, kScreenW, kScreenH - kNavigationBarHeight - 150);
-//    mediaView.backgroundColor = randomColor;
     [selfRenderView addSubview:mediaView];
     
     [selfRenderView addSubview:nativeADView.videoAdView];
@@ -621,182 +615,88 @@ static NSString *const kCallbackKey = @"request";
 }
 #pragma mark - delegate with extra
 - (void)didStartLoadingADSourceWithPlacementID:(NSString *)placementID extra:(NSDictionary*)extra{
-    
     NSLog(@"广告源--AD--开始--ATRewardVideoViewController::didStartLoadingADSourceWithPlacementID:%@---extra:%@", placementID,extra);
-    
-//    [self showLog:[NSString stringWithFormat:@"didStartLoadingADSourceWithPlacementID:%@---extra:%@", placementID,extra]];
- 
 }
 
 - (void)didFinishLoadingADSourceWithPlacementID:(NSString *)placementID extra:(NSDictionary*)extra{
-    
     NSLog(@"广告源--AD--完成--ATRewardVideoViewController::didFinishLoadingADSourceWithPlacementID:%@---extra:%@", placementID,extra);
-    
-//    [self showLog:[NSString stringWithFormat:@"didFinishLoadingADSourceWithPlacementID:%@---extra:%@", placementID,extra]];
-  
 }
 
 - (void)didFailToLoadADSourceWithPlacementID:(NSString*)placementID extra:(NSDictionary*)extra error:(NSError*)error{
     NSLog(@"广告源--AD--失败--ATRewardVideoViewController::didFailToLoadADSourceWithPlacementID:%@---error:%@", placementID,error);
-    
-//    [self showLog:[NSString stringWithFormat:@"didFailToLoadADSourceWithPlacementID:%@--%@", placementID],error];
-    
 }
 
 // bidding
 - (void)didStartBiddingADSourceWithPlacementID:(NSString *)placementID extra:(NSDictionary*)extra{
-    
     NSLog(@"广告源--bid--开始--ATRewardVideoViewController::didStartBiddingADSourceWithPlacementID:%@---extra:%@", placementID,extra);
-    
-//    [self showLog:[NSString stringWithFormat:@"didStartBiddingADSourceWithPlacementID:%@---extra:%@", placementID,extra]];
-   
 }
 
 - (void)didFinishBiddingADSourceWithPlacementID:(NSString *)placementID extra:(NSDictionary*)extra{
-    
     NSLog(@"广告源--bid--完成--ATRewardVideoViewController::didFinishBiddingADSourceWithPlacementID:%@--extra:%@", placementID,extra);
-    
-//    [self showLog:[NSString stringWithFormat:@"didFinishBiddingADSourceWithPlacementID:%@---extra:%@", placementID,extra]];
-  
 }
 
 - (void)didFailBiddingADSourceWithPlacementID:(NSString*)placementID extra:(NSDictionary*)extra error:(NSError*)error{
-    
     NSLog(@"广告源--bid--失败--ATRewardVideoViewController::didFailBiddingADSourceWithPlacementID:%@--error:%@", placementID,error);
-    
-//    [self showLog:[NSString stringWithFormat:@"didFailBiddingADSourceWithPlacementID:%@", placementID]];
-    
 }
 
 -(void) didFinishLoadingADWithPlacementID:(NSString *)placementID {
     NSLog(@"ATNativeViewController:: didFinishLoadingADWithPlacementID:%@", placementID);
-    
     [self showLog:[NSString stringWithFormat:@"didFinishLoading:%@", placementID]];
-
 }
 
 -(void) didFailToLoadADWithPlacementID:(NSString *)placementID error:(NSError *)error {
     NSLog(@"ATNativeViewController:: didFailToLoadADWithPlacementID:%@ error:%@", placementID, error);
-    
     [self showLog:[NSString stringWithFormat:@"didFailToLoad:%@ errorCode:%ld", placementID, (long)error.code]];
-    
 }
 
 #pragma mark - delegate with extra
 -(void) didStartPlayingVideoInAdView:(ATNativeADView*)adView placementID:(NSString*)placementID extra:(NSDictionary *)extra{
     NSLog(@"ATNativeViewController:: didStartPlayingVideoInAdView:placementID:%@with extra: %@", placementID,extra);
-    
     [self showLog:[NSString stringWithFormat:@"didStartPlayingVideoInAdView:%@", placementID]];
-   
 }
 
 -(void) didEndPlayingVideoInAdView:(ATNativeADView*)adView placementID:(NSString*)placementID extra:(NSDictionary *)extra{
     NSLog(@"ATNativeViewController:: didEndPlayingVideoInAdView:placementID:%@ extra: %@", placementID,extra);
-    
     [self showLog:[NSString stringWithFormat:@"didEndPlayingVideoInAdView:%@", placementID]];
-    
 }
 
 -(void) didClickNativeAdInAdView:(ATNativeADView*)adView placementID:(NSString*)placementID extra:(NSDictionary *)extra{
     NSLog(@"ATNativeViewController:: didClickNativeAdInAdView:placementID:%@ with extra: %@", placementID,extra);
-    
     [self showLog:[NSString stringWithFormat:@"didClickNativeAdInAdView:%@", placementID]];
-  
 }
 
 - (void) didDeepLinkOrJumpInAdView:(ATNativeADView *)adView placementID:(NSString *)placementID extra:(NSDictionary *)extra result:(BOOL)success {
     NSLog(@"ATNativeViewController:: didDeepLinkOrJumpInAdView:placementID:%@ with extra: %@, success:%@", placementID,extra, success ? @"YES" : @"NO");
-    
     [self showLog:[NSString stringWithFormat:@"ATNativeViewController:: didDeepLinkOrJumpInAdView:%@, success:%@", placementID, success ? @"YES" : @"NO"]];
-   
 }
 
 -(void) didShowNativeAdInAdView:(ATNativeADView*)adView placementID:(NSString*)placementID extra:(NSDictionary *)extra{
     NSLog(@"ATNativeViewController:: didShowNativeAdInAdView:placementID:%@ with extra: %@", placementID,extra);
     adView.mainImageView.hidden = [adView isVideoContents];
-    
     [self showLog:[NSString stringWithFormat:@"didShowNativeAdInAdView:%@", placementID]];
-   
 }
 
 -(void) didEnterFullScreenVideoInAdView:(ATNativeADView*)adView placementID:(NSString*)placementID extra:(NSDictionary *)extra{
     NSLog(@"ATNativeViewController:: didEnterFullScreenVideoInAdView:placementID:%@", placementID);
-    
     [self showLog:[NSString stringWithFormat:@"didEnterFullScreenVideoInAdView:%@", placementID]];
-   
 }
 
 -(void) didExitFullScreenVideoInAdView:(ATNativeADView*)adView placementID:(NSString*)placementID extra:(NSDictionary *)extra{
     NSLog(@"ATNativeViewController:: didExitFullScreenVideoInAdView:placementID:%@", placementID);
-    
     [self showLog:[NSString stringWithFormat:@"didExitFullScreenVideoInAdView:%@", placementID]];
-    
 }
 
 -(void) didTapCloseButtonInAdView:(ATNativeADView*)adView placementID:(NSString*)placementID extra:(NSDictionary *)extra {
     NSLog(@"ATNativeViewController:: didTapCloseButtonInAdView:placementID:%@ extra:%@", placementID, extra);
-    
     [self.adView removeFromSuperview];
     self.adView = nil;
     adView = nil;
     [self showLog:[NSString stringWithFormat:@"didTapCloseButtonInAdView:placementID:%@", placementID]];
-   
 }
 
 - (void)didCloseDetailInAdView:(ATNativeADView *)adView placementID:(NSString *)placementID extra:(NSDictionary *)extra {
     NSLog(@"ATNativeViewController:: didCloseDetailInAdView:placementID:%@ extra:%@", placementID, extra);
-
     [self showLog:[NSString stringWithFormat:@"didCloseDetailInAdView:placementID:%@", placementID]];
-   
-}
-
--(void) nativeAdDidClickInAdViewForPlacementID:(NSString*)placementID extra:(NSDictionary *)extra {
-    NSLog(@"ATNativeViewController:: nativeAdDidClickInAdViewForPlacementID:placementID:%@ extra:%@", placementID, extra);
-    
-    [self showLog:[NSString stringWithFormat:@"nativeAdDidClickInAdViewForPlacementID:%@", placementID]];
- 
-}
-
--(void) nativeAdDeepLinkOrJumpForPlacementID:(NSString*)placementID extra:(NSDictionary*)extra result:(BOOL)success {
-    NSLog(@"ATNativeViewController:: nativeAdDeepLinkOrJumpForPlacementID:placementID:%@ extra:%@", placementID, extra);
-    
-    [self showLog:[NSString stringWithFormat:@"nativeAdDeepLinkOrJumpForPlacementID:placementID:%@", placementID]];
-   
-}
-
--(void) nativeAdDidStartPlayingVideoInAdViewForPlacementID:(NSString*)placementID extra:(NSDictionary *)extra {
-    NSLog(@"ATNativeViewController:: nativeAdDidStartPlayingVideoInAdViewForPlacementID:placementID:%@ extra:%@", placementID, extra);
-    
-    [self showLog:[NSString stringWithFormat:@"nativeAdDidStartPlayingVideoInAdViewForPlacementID:%@", placementID]];
-    
-}
-
--(void) nativeAdDidEndPlayingVideoInAdViewForPlacementID:(NSString*)placementID extra:(NSDictionary *)extra {
-    NSLog(@"ATNativeViewController:: nativeAdDidEndPlayingVideoInAdViewForPlacementID:placementID:%@ extra:%@", placementID, extra);
-    
-    [self showLog:[NSString stringWithFormat:@"nativeAdDidEndPlayingVideoInAdViewForPlacementID:%@", placementID]];
-    
-}
-
--(void) nativeAdDidEnterFullScreenVideoInAdViewForPlacementID:(NSString*)placementID extra:(NSDictionary *)extra {
-    NSLog(@"ATNativeViewController:: nativeAdDidEnterFullScreenVideoInAdViewForPlacementID:placementID:%@ extra:%@", placementID, extra);
-    
-    [self showLog:[NSString stringWithFormat:@"nativeAdDidEnterFullScreenVideoInAdViewForPlacementID:%@", placementID]];
-    
-}
-
--(void) nativeAdDidExitFullScreenVideoInAdViewForPlacementID:(NSString*)placementID extra:(NSDictionary *)extra {
-    NSLog(@"nativeAdDidExitFullScreenVideoInAdViewForPlacementID:%@", placementID);
-    
-    [self showLog:[NSString stringWithFormat:@"nativeAdDidExitFullScreenVideoInAdViewForPlacementID:%@", placementID]];
-   
-}
-
--(void) nativeAdDidTapCloseButtonInAdViewForPlacementID:(NSString*)placementID extra:(NSDictionary *)extra {
-    NSLog(@"ATNativeViewController:: nativeAdDidTapCloseButtonInAdViewForPlacementID:placementID:%@ extra:%@", placementID, extra);
-    
-    [self showLog:[NSString stringWithFormat:@"nativeAdDidTapCloseButtonInAdViewForPlacementID:%@", placementID]];
-  
 }
 
 
@@ -804,10 +704,6 @@ static NSString *const kCallbackKey = @"request";
 - (ATADFootView *)footView
 {
     if (!_footView) {
-//        _footView = [[ATADFootView alloc] initWithFrame:CGRectMake(0, 0, kScreenW, kScaleW(340))];
-//
-//        _footView.removeBtn.hidden = YES;
-//        _footView.showBtn.frame = CGRectMake(kScaleW(26), kScaleW(230), (kScreenW - kScaleW(52)), kScaleW(90));
         _footView = [[ATADFootView alloc] init];
 
         __weak typeof(self) weakSelf = self;

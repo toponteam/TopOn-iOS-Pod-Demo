@@ -21,7 +21,18 @@
 		04CF323A28000F6D0083B5AA /* ATAutoLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CF323928000F6D0083B5AA /* ATAutoLayout.m */; };
 		04CF323F28000FB70083B5AA /* ATNativeRenderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CF323B28000FB70083B5AA /* ATNativeRenderView.m */; };
 		9B1A9D6C288E82C800CC16FA /* ATNativeMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B1A9D6A288E82C800CC16FA /* ATNativeMainViewController.m */; };
+		9B1A9F5E288F882800CC16FA /* ATPasterVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B1A9F5D288F882800CC16FA /* ATPasterVideoViewController.m */; };
+		9B1A9F66288FC9A500CC16FA /* ATDrawListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B1A9F65288FC9A500CC16FA /* ATDrawListViewController.m */; };
+		9B1A9F6A288FCA4300CC16FA /* ATDrawListAdCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B1A9F68288FCA4200CC16FA /* ATDrawListAdCell.m */; };
+		9B1A9F6B288FCA4300CC16FA /* ATDrawListAdCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B1A9F69288FCA4200CC16FA /* ATDrawListAdCell.xib */; };
 		9B6DF73D259436DD004E9FDB /* ATSplashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B6DF73C259436DD004E9FDB /* ATSplashViewController.m */; };
+		9B9FEC0B288FE88300B905ED /* testvideo1.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 9B9FEC06288FE88200B905ED /* testvideo1.mp4 */; };
+		9B9FEC0D288FE88300B905ED /* testvideo2.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 9B9FEC08288FE88300B905ED /* testvideo2.mp4 */; };
+		9B9FEC11288FE91A00B905ED /* ATDrawListOtherCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B9FEC0F288FE91A00B905ED /* ATDrawListOtherCell.m */; };
+		9B9FEC12288FE91A00B905ED /* ATDrawListOtherCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B9FEC10288FE91A00B905ED /* ATDrawListOtherCell.xib */; };
+		9B9FEC16288FF5E000B905ED /* ATVideoPlayerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B9FEC15288FF5E000B905ED /* ATVideoPlayerManager.m */; };
+		9B9FEC182890188600B905ED /* testvideo0.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 9B9FEC172890188600B905ED /* testvideo0.mp4 */; };
+		9B9FEC1B2890199200B905ED /* ATPasterSelfRenderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B9FEC1A2890199200B905ED /* ATPasterSelfRenderView.m */; };
 		9BBD009924863048009EAD66 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BBD009824863048009EAD66 /* AppDelegate.m */; };
 		9BBD009C24863048009EAD66 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BBD009B24863048009EAD66 /* SceneDelegate.m */; };
 		9BBD009F24863048009EAD66 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BBD009E24863048009EAD66 /* ViewController.m */; };
@@ -89,8 +100,25 @@
 		85EEA80B39960C835625EC2F /* Pods-AnyThinkSDKDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AnyThinkSDKDemo.debug.xcconfig"; path = "Target Support Files/Pods-AnyThinkSDKDemo/Pods-AnyThinkSDKDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		9B1A9D6A288E82C800CC16FA /* ATNativeMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATNativeMainViewController.m; sourceTree = "<group>"; };
 		9B1A9D6B288E82C800CC16FA /* ATNativeMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATNativeMainViewController.h; sourceTree = "<group>"; };
+		9B1A9F5C288F882800CC16FA /* ATPasterVideoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ATPasterVideoViewController.h; sourceTree = "<group>"; };
+		9B1A9F5D288F882800CC16FA /* ATPasterVideoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ATPasterVideoViewController.m; sourceTree = "<group>"; };
+		9B1A9F64288FC9A500CC16FA /* ATDrawListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ATDrawListViewController.h; sourceTree = "<group>"; };
+		9B1A9F65288FC9A500CC16FA /* ATDrawListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ATDrawListViewController.m; sourceTree = "<group>"; };
+		9B1A9F67288FCA4200CC16FA /* ATDrawListAdCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ATDrawListAdCell.h; sourceTree = "<group>"; };
+		9B1A9F68288FCA4200CC16FA /* ATDrawListAdCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ATDrawListAdCell.m; sourceTree = "<group>"; };
+		9B1A9F69288FCA4200CC16FA /* ATDrawListAdCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ATDrawListAdCell.xib; sourceTree = "<group>"; };
 		9B6DF73B259436DD004E9FDB /* ATSplashViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATSplashViewController.h; sourceTree = "<group>"; };
 		9B6DF73C259436DD004E9FDB /* ATSplashViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATSplashViewController.m; sourceTree = "<group>"; };
+		9B9FEC06288FE88200B905ED /* testvideo1.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = testvideo1.mp4; sourceTree = "<group>"; };
+		9B9FEC08288FE88300B905ED /* testvideo2.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = testvideo2.mp4; sourceTree = "<group>"; };
+		9B9FEC0E288FE91A00B905ED /* ATDrawListOtherCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ATDrawListOtherCell.h; sourceTree = "<group>"; };
+		9B9FEC0F288FE91A00B905ED /* ATDrawListOtherCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ATDrawListOtherCell.m; sourceTree = "<group>"; };
+		9B9FEC10288FE91A00B905ED /* ATDrawListOtherCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ATDrawListOtherCell.xib; sourceTree = "<group>"; };
+		9B9FEC14288FF5E000B905ED /* ATVideoPlayerManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ATVideoPlayerManager.h; sourceTree = "<group>"; };
+		9B9FEC15288FF5E000B905ED /* ATVideoPlayerManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ATVideoPlayerManager.m; sourceTree = "<group>"; };
+		9B9FEC172890188600B905ED /* testvideo0.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = testvideo0.mp4; sourceTree = "<group>"; };
+		9B9FEC192890199200B905ED /* ATPasterSelfRenderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ATPasterSelfRenderView.h; sourceTree = "<group>"; };
+		9B9FEC1A2890199200B905ED /* ATPasterSelfRenderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ATPasterSelfRenderView.m; sourceTree = "<group>"; };
 		9BBD009424863048009EAD66 /* AnyThinkSDKDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AnyThinkSDKDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BBD009724863048009EAD66 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		9BBD009824863048009EAD66 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -246,6 +274,7 @@
 		9B1A9D5D288E480D00CC16FA /* Native */ = {
 			isa = PBXGroup;
 			children = (
+				9B9FEC13288FF5BC00B905ED /* Manager */,
 				9B1A9D60288E485100CC16FA /* ViewController */,
 				9B1A9D5F288E484600CC16FA /* Model */,
 				9B1A9D5E288E482300CC16FA /* View */,
@@ -266,6 +295,14 @@
 				E0F3B89F286D7591007CF5AB /* ATNaviewListAdCell.h */,
 				E0F3B8A0286D7591007CF5AB /* ATNaviewListAdCell.m */,
 				E0F3B8A1286D7591007CF5AB /* ATNaviewListAdCell.xib */,
+				9B1A9F67288FCA4200CC16FA /* ATDrawListAdCell.h */,
+				9B1A9F68288FCA4200CC16FA /* ATDrawListAdCell.m */,
+				9B1A9F69288FCA4200CC16FA /* ATDrawListAdCell.xib */,
+				9B9FEC0E288FE91A00B905ED /* ATDrawListOtherCell.h */,
+				9B9FEC0F288FE91A00B905ED /* ATDrawListOtherCell.m */,
+				9B9FEC10288FE91A00B905ED /* ATDrawListOtherCell.xib */,
+				9B9FEC192890199200B905ED /* ATPasterSelfRenderView.h */,
+				9B9FEC1A2890199200B905ED /* ATPasterSelfRenderView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -294,6 +331,10 @@
 				04CF322F28000EDB0083B5AA /* ATNativeShowViewController.m */,
 				9BBD00B1248630C7009EAD66 /* ATNativeViewController.h */,
 				9BBD00B6248630C8009EAD66 /* ATNativeViewController.m */,
+				9B1A9F5C288F882800CC16FA /* ATPasterVideoViewController.h */,
+				9B1A9F5D288F882800CC16FA /* ATPasterVideoViewController.m */,
+				9B1A9F64288FC9A500CC16FA /* ATDrawListViewController.h */,
+				9B1A9F65288FC9A500CC16FA /* ATDrawListViewController.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -350,6 +391,7 @@
 		9B1A9D66288E496D00CC16FA /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				9B9FEC03288FE80F00B905ED /* video */,
 				9BBD00A32486304C009EAD66 /* Assets.xcassets */,
 				9BBD00A82486304C009EAD66 /* Info.plist */,
 				9BBD00A52486304C009EAD66 /* LaunchScreen.storyboard */,
@@ -369,6 +411,25 @@
 				9BBD009E24863048009EAD66 /* ViewController.m */,
 			);
 			path = ViewController;
+			sourceTree = "<group>";
+		};
+		9B9FEC03288FE80F00B905ED /* video */ = {
+			isa = PBXGroup;
+			children = (
+				9B9FEC172890188600B905ED /* testvideo0.mp4 */,
+				9B9FEC06288FE88200B905ED /* testvideo1.mp4 */,
+				9B9FEC08288FE88300B905ED /* testvideo2.mp4 */,
+			);
+			path = video;
+			sourceTree = "<group>";
+		};
+		9B9FEC13288FF5BC00B905ED /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				9B9FEC14288FF5E000B905ED /* ATVideoPlayerManager.h */,
+				9B9FEC15288FF5E000B905ED /* ATVideoPlayerManager.m */,
+			);
+			path = Manager;
 			sourceTree = "<group>";
 		};
 		9BBD008B24863047009EAD66 = {
@@ -468,7 +529,12 @@
 				9BBD00A72486304C009EAD66 /* LaunchScreen.storyboard in Resources */,
 				E0F3B8A8286D75B7007CF5AB /* ATNativeListOtherCell.xib in Resources */,
 				9BBD00A42486304C009EAD66 /* Assets.xcassets in Resources */,
+				9B9FEC0D288FE88300B905ED /* testvideo2.mp4 in Resources */,
+				9B9FEC12288FE91A00B905ED /* ATDrawListOtherCell.xib in Resources */,
 				9BBD00A224863048009EAD66 /* Main.storyboard in Resources */,
+				9B9FEC0B288FE88300B905ED /* testvideo1.mp4 in Resources */,
+				9B9FEC182890188600B905ED /* testvideo0.mp4 in Resources */,
+				9B1A9F6B288FCA4300CC16FA /* ATDrawListAdCell.xib in Resources */,
 				E0F3B8A3286D7591007CF5AB /* ATNaviewListAdCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -553,14 +619,20 @@
 				04CF3225280007900083B5AA /* ATAutomationTestViewController.m in Sources */,
 				9BBD00AA2486304C009EAD66 /* main.m in Sources */,
 				E0F3B8A7286D75B7007CF5AB /* ATNativeListOtherCell.m in Sources */,
+				9B1A9F66288FC9A500CC16FA /* ATDrawListViewController.m in Sources */,
 				04CF323328000EDC0083B5AA /* ATNativeShowViewController.m in Sources */,
 				04CF323A28000F6D0083B5AA /* ATAutoLayout.m in Sources */,
+				9B9FEC1B2890199200B905ED /* ATPasterSelfRenderView.m in Sources */,
+				9B1A9F6A288FCA4300CC16FA /* ATDrawListAdCell.m in Sources */,
 				E0F3B8AB286D973F007CF5AB /* ATDemoOfferAdMode.m in Sources */,
 				04CF3220280007900083B5AA /* ATHomeFootView.m in Sources */,
 				9BBD009C24863048009EAD66 /* SceneDelegate.m in Sources */,
+				9B9FEC16288FF5E000B905ED /* ATVideoPlayerManager.m in Sources */,
 				9BBD00BE248630C8009EAD66 /* ATBannerViewController.m in Sources */,
 				04CF323F28000FB70083B5AA /* ATNativeRenderView.m in Sources */,
 				04CF3223280007900083B5AA /* ATSelectViewController.m in Sources */,
+				9B9FEC11288FE91A00B905ED /* ATDrawListOtherCell.m in Sources */,
+				9B1A9F5E288F882800CC16FA /* ATPasterVideoViewController.m in Sources */,
 				E0F3B8A2286D7591007CF5AB /* ATNaviewListAdCell.m in Sources */,
 				9BBD00C1248630C8009EAD66 /* ATNativeViewController.m in Sources */,
 				9BBD00BF248630C8009EAD66 /* ATInterstitialViewController.m in Sources */,

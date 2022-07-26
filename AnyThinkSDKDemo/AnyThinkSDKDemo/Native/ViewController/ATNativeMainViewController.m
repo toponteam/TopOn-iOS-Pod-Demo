@@ -10,7 +10,8 @@
 #import "ATHomeTableViewCell.h"
 #import "ATHomeFootView.h"
 #import <AppTrackingTransparency/ATTrackingManager.h>
-
+#import "ATDrawListViewController.h"
+#import "ATPasterVideoViewController.h"
 
 @interface ATNativeMainViewController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -49,14 +50,20 @@
         },
         @{
             @"image":@"native",
-            @"title":@"NativeList",
+            @"title":@"Native List",
             @"class":@"ATNativeListViewController",
             @"des":@"Include Native,Vertical Draw Video and Pre-roll Ads.Most compatible with your native app code for video ads and graphic ads.",
         },
         @{
             @"image":@"native",
-            @"title":@"NativeDraw",
-            @"class":@"ATDrawViewController",
+            @"title":@"Draw List",
+            @"class":@"ATDrawListViewController",
+            @"des":@"Include Native,Vertical Draw Video and Pre-roll Ads.Most compatible with your native app code for video ads and graphic ads.",
+        },
+        @{
+            @"image":@"native",
+            @"title":@"Paster Video",
+            @"class":@"ATPasterVideoViewController",
             @"des":@"Include Native,Vertical Draw Video and Pre-roll Ads.Most compatible with your native app code for video ads and graphic ads.",
         }
     ];
@@ -104,7 +111,12 @@
     Class class = NSClassFromString(classString);
   
     UIViewController *con = [class new];
-    [self.navigationController pushViewController:con animated:YES];
+    if ([con isKindOfClass:[ATDrawListViewController class]] || [con isKindOfClass:[ATPasterVideoViewController class]]) {
+        con.modalPresentationStyle = UIModalPresentationFullScreen;
+        [self presentViewController:con animated:YES completion:nil];
+    } else {
+        [self.navigationController pushViewController:con animated:YES];
+    }
 }
 
 #pragma mark - lazy

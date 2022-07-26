@@ -11,7 +11,7 @@
 #import "ATNativeListOtherCell.h"
 #import "ATNativeSelfRenderView.h"
 #import "ATDemoOfferAdMode.h"
-#import "MJRefresh.h""
+#import "MJRefresh.h"
 
 @import AnyThinkNative;
 
@@ -44,7 +44,7 @@
 
 #pragma mark - init
 - (void)setUI{
-    
+    self.title = @"Native List";
     self.placementID = @"b5b0f5663c6e4a";
 
     self.view.backgroundColor = [UIColor redColor];
@@ -106,10 +106,11 @@
                 offerModel.isNativeAd = YES;
                 [tempArray addObject:offerModel];
                 
-                
-                ATDemoOfferAdMode *offerModel1 = [[ATDemoOfferAdMode alloc]init];
-                offerModel1.isNativeAd = NO;
-                [tempArray addObject:offerModel1];
+                for (int i = 0; i < 5; i ++) {
+                    ATDemoOfferAdMode *offerModel1 = [[ATDemoOfferAdMode alloc]init];
+                    offerModel1.isNativeAd = NO;
+                    [tempArray addObject:offerModel1];
+                }
             }
         }];
     }
@@ -131,12 +132,10 @@
     
     ATDemoOfferAdMode *offerMode = self.dataSourceArray[indexPath.row];
     
-    
     if (offerMode.isNativeAd) {
         
         ATNaviewListAdCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ATNaviewListAdCellID"];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        
         
         NSLog(@"adView之前--%@",cell.adView);
         cell.adView = offerMode.nativeADView;
@@ -148,8 +147,12 @@
 
         ATNativeListOtherCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ATNativeListOtherCellID"];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.backgroundColor = [UIColor whiteColor];
         
+        if (indexPath.row%2) {
+            cell.backgroundColor = [UIColor blueColor];
+        } else {
+            cell.backgroundColor = [UIColor orangeColor];
+        }
         return cell;
     }
 }

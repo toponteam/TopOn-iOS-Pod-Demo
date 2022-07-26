@@ -17,6 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic, strong) ATNativeAdOffer *offer;
 
+@property(nonatomic, strong) NSString *drawVideoUrlStr;
+
 @property(nonatomic, assign) BOOL isNativeAd;
 
 @end
