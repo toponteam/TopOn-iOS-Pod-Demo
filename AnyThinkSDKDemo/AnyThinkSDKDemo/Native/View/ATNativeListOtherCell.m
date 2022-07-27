@@ -17,6 +17,10 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
+    self.backgroundColor = randomColor;
+    
     self.descLabel.textColor = [UIColor whiteColor];
 }
 

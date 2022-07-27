@@ -33,6 +33,7 @@
 		9B9FEC16288FF5E000B905ED /* ATVideoPlayerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B9FEC15288FF5E000B905ED /* ATVideoPlayerManager.m */; };
 		9B9FEC182890188600B905ED /* testvideo0.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 9B9FEC172890188600B905ED /* testvideo0.mp4 */; };
 		9B9FEC1B2890199200B905ED /* ATPasterSelfRenderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B9FEC1A2890199200B905ED /* ATPasterSelfRenderView.m */; };
+		9B9FEC1E2890E20800B905ED /* ATNativeRefreshListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B9FEC1C2890E20800B905ED /* ATNativeRefreshListViewController.m */; };
 		9BBD009924863048009EAD66 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BBD009824863048009EAD66 /* AppDelegate.m */; };
 		9BBD009C24863048009EAD66 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BBD009B24863048009EAD66 /* SceneDelegate.m */; };
 		9BBD009F24863048009EAD66 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BBD009E24863048009EAD66 /* ViewController.m */; };
@@ -119,6 +120,8 @@
 		9B9FEC172890188600B905ED /* testvideo0.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = testvideo0.mp4; sourceTree = "<group>"; };
 		9B9FEC192890199200B905ED /* ATPasterSelfRenderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ATPasterSelfRenderView.h; sourceTree = "<group>"; };
 		9B9FEC1A2890199200B905ED /* ATPasterSelfRenderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ATPasterSelfRenderView.m; sourceTree = "<group>"; };
+		9B9FEC1C2890E20800B905ED /* ATNativeRefreshListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATNativeRefreshListViewController.m; sourceTree = "<group>"; };
+		9B9FEC1D2890E20800B905ED /* ATNativeRefreshListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATNativeRefreshListViewController.h; sourceTree = "<group>"; };
 		9BBD009424863048009EAD66 /* AnyThinkSDKDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AnyThinkSDKDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BBD009724863048009EAD66 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		9BBD009824863048009EAD66 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -325,6 +328,8 @@
 				9BBD00BC248630C8009EAD66 /* ATDrawViewController.m */,
 				E0F3B89C286D73E6007CF5AB /* ATNativeListViewController.h */,
 				E0F3B89D286D73E6007CF5AB /* ATNativeListViewController.m */,
+				9B9FEC1D2890E20800B905ED /* ATNativeRefreshListViewController.h */,
+				9B9FEC1C2890E20800B905ED /* ATNativeRefreshListViewController.m */,
 				04CF322D28000EDB0083B5AA /* ATNativeMessageStreamViewController.h */,
 				04CF323028000EDB0083B5AA /* ATNativeMessageStreamViewController.m */,
 				04CF323128000EDB0083B5AA /* ATNativeShowViewController.h */,
@@ -633,6 +638,7 @@
 				04CF3223280007900083B5AA /* ATSelectViewController.m in Sources */,
 				9B9FEC11288FE91A00B905ED /* ATDrawListOtherCell.m in Sources */,
 				9B1A9F5E288F882800CC16FA /* ATPasterVideoViewController.m in Sources */,
+				9B9FEC1E2890E20800B905ED /* ATNativeRefreshListViewController.m in Sources */,
 				E0F3B8A2286D7591007CF5AB /* ATNaviewListAdCell.m in Sources */,
 				9BBD00C1248630C8009EAD66 /* ATNativeViewController.m in Sources */,
 				9BBD00BF248630C8009EAD66 /* ATInterstitialViewController.m in Sources */,

@@ -317,7 +317,9 @@ static NSString *const kPasterPlacementID = @"b62df87b577041";
         [self.pasterTimer invalidate];
         self.pasterTimer = nil;
         
+        // 移除广告
         [self removeAd];
+        // 播放视频
         [self playVideo];
     } else {
         self.remainingTime --;
@@ -409,6 +411,10 @@ static NSString *const kPasterPlacementID = @"b62df87b577041";
 #pragma mark - ATNativeADDelegate
 -(void) didShowNativeAdInAdView:(ATNativeADView*)adView placementID:(NSString*)placementID extra:(NSDictionary *)extra{
     NSLog(@"ATPasterVideoViewController:: didShowNativeAdInAdView:placementID:%@ with extra: %@", placementID,extra);
+    if (self.nativeAdOffer.nativeAd.videoDuration == 0) {
+        // 表示当次展示为图片广告，默认倒计时10秒关闭广告
+        [self startCountdown:10.0f];
+    }
 }
 
 -(void) didStartPlayingVideoInAdView:(ATNativeADView*)adView placementID:(NSString*)placementID extra:(NSDictionary *)extra{
@@ -419,10 +425,6 @@ static NSString *const kPasterPlacementID = @"b62df87b577041";
 
 -(void) didEndPlayingVideoInAdView:(ATNativeADView*)adView placementID:(NSString*)placementID extra:(NSDictionary *)extra{
     NSLog(@"ATPasterVideoViewController:: didEndPlayingVideoInAdView:placementID:%@ extra: %@", placementID,extra);
-    // 移除广告
-    [self removeAd];
-    // 播放视频
-    [self playVideo];
 }
 
 -(void) didClickNativeAdInAdView:(ATNativeADView*)adView placementID:(NSString*)placementID extra:(NSDictionary *)extra{

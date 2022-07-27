@@ -6,7 +6,7 @@
 //  Copyright © 2022 抽筋的灯. All rights reserved.
 //
 
-#import "ATNativeListViewController.h"
+#import "ATNativeRefreshListViewController.h"
 #import "ATNaviewListAdCell.h"
 #import "ATNativeListOtherCell.h"
 #import "ATNativeSelfRenderView.h"
@@ -15,7 +15,7 @@
 
 @import AnyThinkNative;
 
-@interface ATNativeListViewController ()<UITableViewDelegate,UITableViewDataSource,ATNativeADDelegate>
+@interface ATNativeRefreshListViewController ()<UITableViewDelegate,UITableViewDataSource,ATNativeADDelegate>
 
 @property(nonatomic, strong) UITableView *tableView;
 
@@ -24,10 +24,11 @@
 @property(nonatomic, strong) NSString *placementID;
 
 
+@property(nonatomic, assign) BOOL isRefresh;
 
 @end
 
-@implementation ATNativeListViewController
+@implementation ATNativeRefreshListViewController
 
 #pragma mark - life cycle
 - (void)viewDidLoad {
@@ -37,14 +38,14 @@
     
     [self setLayout];
     
-    [self loadNative];
+    [self upFreshLoadMoreData];
     
     [self footerRefresh];
 }
 
 #pragma mark - init
 - (void)setUI{
-    self.title = @"Native List";
+    self.title = @"Native Refresh List";
     self.placementID = @"b5b0f5663c6e4a";
 
     self.view.backgroundColor = [UIColor redColor];
@@ -83,40 +84,47 @@
 }
 
 - (void)upFreshLoadMoreData{
+    self.isRefresh = YES;
     [self loadNative];
 }
 
 #pragma mark - data center
 
 - (void)setData{
-    
-    NSArray *array = [[ATAdManager sharedManager] getNativeValidAdsForPlacementID:self.placementID];
-    
-    NSMutableArray *tempArray = [NSMutableArray array];
-    
-    if (array.count) {
+    // 首次进入页面或者上拉加载更多时刷新数据
+    if (self.isRefresh) {
+        NSArray *array = [[ATAdManager sharedManager] getNativeValidAdsForPlacementID:self.placementID];
         
-        [array enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            ATNativeAdOffer *offer = [[ATAdManager sharedManager] getNativeAdOfferWithPlacementID:self.placementID];
-            if (offer) {
-                
-                ATDemoOfferAdMode *offerModel = [[ATDemoOfferAdMode alloc]init];
-                offerModel.nativeADView = [self getNativeADView:self.placementID nativeAdOffer:offer];
-                offerModel.offer = offer;
-                offerModel.isNativeAd = YES;
-                [tempArray addObject:offerModel];
-                
-                for (int i = 0; i < 5; i ++) {
-                    ATDemoOfferAdMode *offerModel1 = [[ATDemoOfferAdMode alloc]init];
-                    offerModel1.isNativeAd = NO;
-                    [tempArray addObject:offerModel1];
+        NSMutableArray *tempArray = [NSMutableArray array];
+        
+        if (array.count) {
+            
+            [array enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                ATNativeAdOffer *offer = [[ATAdManager sharedManager] getNativeAdOfferWithPlacementID:self.placementID];
+                if (offer) {
+                    
+                    ATDemoOfferAdMode *offerModel = [[ATDemoOfferAdMode alloc]init];
+                    offerModel.nativeADView = [self getNativeADView:self.placementID nativeAdOffer:offer];
+                    offerModel.offer = offer;
+                    offerModel.isNativeAd = YES;
+                    [tempArray addObject:offerModel];
+                    
+                    for (int i = 0; i < 5; i ++) {
+                        ATDemoOfferAdMode *offerModel1 = [[ATDemoOfferAdMode alloc]init];
+                        offerModel1.isNativeAd = NO;
+                        [tempArray addObject:offerModel1];
+                    }
                 }
-            }
-        }];
-    }
+            }];
+        }
+        
+        [self.dataSourceArray addObjectsFromArray:tempArray];
+        [self.tableView reloadData];
     
-    [self.dataSourceArray addObjectsFromArray:tempArray];
-    [self.tableView reloadData];
+        self.isRefresh = NO;
+        // 继续加载新的广告
+        [self loadNative];
+    }
 }
 
 #pragma mark - UITableViewDataSource
@@ -130,20 +138,32 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    ATDemoOfferAdMode *offerMode = self.dataSourceArray[indexPath.row];
+    ATDemoOfferAdMode *offerModel = self.dataSourceArray[indexPath.row];
     
-    if (offerMode.isNativeAd) {
-        
+    if (offerModel.isNativeAd) {
+        BOOL ready = [[ATAdManager sharedManager] nativeAdReadyForPlacementID:self.placementID];
+        if (ready) {
+            // 存在新的广告，可以刷新
+            ATNativeAdOffer *offer = [[ATAdManager sharedManager] getNativeAdOfferWithPlacementID:self.placementID];
+            offerModel.nativeADView = [self getNativeADView:self.placementID nativeAdOffer:offer];
+            offerModel.offer = offer;
+        } else {
+            // 存在新的广告，不用刷新
+            self.isRefresh = NO;
+            // 继续加载新的广告
+            [self loadNative];
+        }
+
         ATNaviewListAdCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ATNaviewListAdCellID"];
         
         NSLog(@"adView之前--%@",cell.adView);
-        cell.adView = offerMode.nativeADView;
+        cell.adView = offerModel.nativeADView;
         NSLog(@"adView之后--%@",cell.adView);
         return cell;
     }else{
 
         ATNativeListOtherCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ATNativeListOtherCellID"];
-        
+
         return cell;
     }
 }

@@ -73,7 +73,11 @@
 
 
 - (void)setupUI {
-    self.countDownLabel.text = [NSString stringWithFormat:@"%ld",self.nativeAdOffer.nativeAd.videoDuration/1000];
+    if (self.nativeAdOffer.nativeAd.videoDuration == 0) {
+        self.countDownLabel.text = @"10";
+    } else {
+        self.countDownLabel.text = [NSString stringWithFormat:@"%ld",self.nativeAdOffer.nativeAd.videoDuration/1000];
+    }
     NSLog(@"🔥----videoDuration:%ld",self.nativeAdOffer.nativeAd.videoDuration);
 
     [self.mainImageView sd_setImageWithURL:[NSURL URLWithString:self.nativeAdOffer.nativeAd.imageUrl]];

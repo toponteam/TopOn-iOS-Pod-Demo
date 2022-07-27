@@ -56,6 +56,12 @@
         },
         @{
             @"image":@"native",
+            @"title":@"Native Refresh List",
+            @"class":@"ATNativeRefreshListViewController",
+            @"des":@"Include Native,Vertical Draw Video and Pre-roll Ads.Most compatible with your native app code for video ads and graphic ads.",
+        },
+        @{
+            @"image":@"native",
             @"title":@"Draw List",
             @"class":@"ATDrawListViewController",
             @"des":@"Include Native,Vertical Draw Video and Pre-roll Ads.Most compatible with your native app code for video ads and graphic ads.",

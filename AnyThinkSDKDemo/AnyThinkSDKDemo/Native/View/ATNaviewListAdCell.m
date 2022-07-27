@@ -16,8 +16,8 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    
-
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
+    self.backgroundColor = [UIColor whiteColor];
 }
 
 - (void)setAdView:(ATNativeADView *)adView{
@@ -31,9 +31,7 @@
     [self.contentView addSubview:adView];
     
     [adView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.contentView.mas_top).offset(5);
-        make.width.equalTo(@kScreenW);
-        make.height.equalTo(@350);
+        make.top.bottom.left.right.equalTo(self);
     }];
     
     _adView = adView;
