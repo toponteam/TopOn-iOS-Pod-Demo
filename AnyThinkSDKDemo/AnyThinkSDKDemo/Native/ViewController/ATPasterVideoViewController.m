@@ -44,7 +44,7 @@ static NSString *const kPasterPlacementID = @"b62df87b577041";
                                              selector:@selector(applicationWillBecomeActive:)
                                                  name:UIApplicationDidBecomeActiveNotification
                                                object:nil];
-    [self loadAd];
+    [self loadNativeAd];
     
     [self layoutAVPlayer];
     [self layoutTopView];
@@ -103,7 +103,7 @@ static NSString *const kPasterPlacementID = @"b62df87b577041";
     self.isPlaying = NO;
 }
 
-- (void)loadAd
+- (void)loadNativeAd
 {
     CGSize size = CGSizeMake(kScreenW, 350);
 
@@ -214,30 +214,26 @@ static NSString *const kPasterPlacementID = @"b62df87b577041";
 
 - (ATNativeADView *)getNativeADView:(ATNativeADConfiguration *)config offer:(ATNativeAdOffer *)offer selfRenderView:(ATPasterSelfRenderView *)selfRenderView {
     
-    ATNativeADView *nativeADView = [[ATNativeADView alloc]initWithConfiguration:config currentOffer:offer placementID:kPasterPlacementID];
-    
+    ATNativeADView *nativeADView = [[ATNativeADView alloc] initWithConfiguration:config currentOffer:offer placementID:kPasterPlacementID];
     
     UIView *mediaView = [nativeADView getMediaView];
 
     NSMutableArray *array = [@[selfRenderView.mainImageView] mutableCopy];
     
     if (mediaView) {
+        selfRenderView.mediaView = mediaView;
+        
+        [selfRenderView addSubview:mediaView];
+        
+        [mediaView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.left.right.bottom.equalTo(selfRenderView);
+            make.top.equalTo(selfRenderView.mainImageView.mas_top);
+        }];
+        
         [array addObject:mediaView];
     }
     
     [nativeADView registerClickableViewArray:array];
-    
-    nativeADView.backgroundColor = randomColor;
-
-    
-    selfRenderView.mediaView = mediaView;
-    
-    [selfRenderView addSubview:mediaView];
-    
-    [mediaView mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.left.right.bottom.equalTo(selfRenderView);
-        make.top.equalTo(selfRenderView.mainImageView.mas_top);
-    }];
     
     [selfRenderView bringSubviewToFront:selfRenderView.countDownLabel];
 
@@ -414,13 +410,14 @@ static NSString *const kPasterPlacementID = @"b62df87b577041";
     if (self.nativeAdOffer.nativeAd.videoDuration == 0) {
         // 表示当次展示为图片广告，默认倒计时10秒关闭广告
         [self startCountdown:10.0f];
+    } else {
+        // 开始倒计时
+        [self startCountdown:self.nativeAdOffer.nativeAd.videoDuration/1000.0f];
     }
 }
 
 -(void) didStartPlayingVideoInAdView:(ATNativeADView*)adView placementID:(NSString*)placementID extra:(NSDictionary *)extra{
     NSLog(@"ATPasterVideoViewController:: didStartPlayingVideoInAdView:placementID:%@with extra: %@", placementID,extra);
-    // 开始倒计时
-    [self startCountdown:self.nativeAdOffer.nativeAd.videoDuration/1000.0f];
 }
 
 -(void) didEndPlayingVideoInAdView:(ATNativeADView*)adView placementID:(NSString*)placementID extra:(NSDictionary *)extra{

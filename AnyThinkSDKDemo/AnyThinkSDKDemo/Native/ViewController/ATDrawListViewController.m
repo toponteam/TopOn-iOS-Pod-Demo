@@ -41,7 +41,7 @@
     
     [self setUI];
     [self setLayout];
-    [self loadNative];
+    [self loadNativeAd];
     [self footerRefresh];
 }
 
@@ -79,7 +79,7 @@
     }];
 }
 
-- (void)loadNative{
+- (void)loadNativeAd{
     [[ATAdManager sharedManager] loadADWithPlacementID:self.placementID extra:nil delegate:self];
 }
 
@@ -89,35 +89,38 @@
 }
 
 - (void)upFreshLoadMoreData{
-    [self loadNative];
+    [self loadNativeAd];
 }
 
 #pragma mark - data center
-- (void)setData{
+- (void)setData {
     NSMutableArray *dataSources = [self.dataSourceArray mutableCopy];
     
-    NSArray *array = [[ATAdManager sharedManager] getNativeValidAdsForPlacementID:self.placementID];
-    [array enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        ATNativeAdOffer *offer = [[ATAdManager sharedManager] getNativeAdOfferWithPlacementID:self.placementID];
-        if (offer) {
-            
-            ATDemoOfferAdMode *offerModel = [[ATDemoOfferAdMode alloc]init];
-            offerModel.nativeADView = [self getNativeADView:self.placementID nativeAdOffer:offer];
-            offerModel.offer = offer;
-            offerModel.isNativeAd = YES;
-            [dataSources addObject:offerModel];
-            
-            for (int i = 0; i < 3; i ++) {
-                ATDemoOfferAdMode *offerModel1 = [[ATDemoOfferAdMode alloc]init];
-                offerModel1.isNativeAd = NO;
-                offerModel1.drawVideoUrlStr = [NSString stringWithFormat:@"testvideo%d", i];
-                [dataSources addObject:offerModel1];
-            }
-        }
-    }];
+    ATNativeAdOffer *offer = [self getOfferAndLoadNext];
+    if (offer) {
+        ATDemoOfferAdMode *offerModel = [[ATDemoOfferAdMode alloc] init];
+        offerModel.nativeADView = [self getNativeADView:self.placementID nativeAdOffer:offer];
+        offerModel.offer = offer;
+        offerModel.isNativeAd = YES;
+        [dataSources addObject:offerModel];
+    }
+    
+    for (int i = 0; i < 3; i ++) {
+        ATDemoOfferAdMode *offerModel1 = [[ATDemoOfferAdMode alloc] init];
+        offerModel1.isNativeAd = NO;
+        offerModel1.drawVideoUrlStr = [NSString stringWithFormat:@"testvideo%d", i];
+        [dataSources addObject:offerModel1];
+    }
     
     self.dataSourceArray = [dataSources copy];
     [self.tableView reloadData];
+}
+
+- (ATNativeAdOffer *)getOfferAndLoadNext {
+    ATNativeAdOffer *offer = [[ATAdManager sharedManager] getNativeAdOfferWithPlacementID:self.placementID];
+    // load next
+    [self loadNativeAd];
+    return offer;
 }
 
 #pragma mark - UITableViewDataSource
@@ -156,9 +159,9 @@
 #pragma mark - Ad Delegate
 - (void)didFinishLoadingADWithPlacementID:(NSString *)placementID {
     NSLog(@"🔥---原生加载成功");
-    [self setData];
     if (self.tableView.mj_footer.refreshing == YES) {
         [self.tableView.mj_footer endRefreshing];
+        [self setData];
     }
 }
 
@@ -290,12 +293,11 @@
     NSMutableArray *array = [@[selfRenderView.iconImageView,selfRenderView.titleLabel,selfRenderView.textLabel,selfRenderView.ctaLabel,selfRenderView.mainImageView] mutableCopy];
     
     if (mediaView) {
+        mediaView.frame = CGRectMake(0, kNavigationBarHeight + 150.0f, kScreenW, kScreenH - 150);
+        [selfRenderView addSubview:mediaView];
         [array addObject:mediaView];
     }
     [nativeADView registerClickableViewArray:array];
-    
-    mediaView.frame = CGRectMake(0, kNavigationBarHeight + 150.0f, kScreenW, kScreenH - 150);
-    [selfRenderView addSubview:mediaView];
     
     [selfRenderView addSubview:nativeADView.videoAdView];
     [selfRenderView addSubview:nativeADView.dislikeDrawButton];

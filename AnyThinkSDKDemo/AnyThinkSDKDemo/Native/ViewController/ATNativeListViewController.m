@@ -37,7 +37,7 @@
     
     [self setLayout];
     
-    [self loadNative];
+    [self loadNativeAd];
     
     [self footerRefresh];
 }
@@ -60,7 +60,7 @@
     }];
 }
 
-- (void)loadNative{
+- (void)loadNativeAd{
     
     CGSize size = CGSizeMake(kScreenW, 350);
     
@@ -83,40 +83,37 @@
 }
 
 - (void)upFreshLoadMoreData{
-    [self loadNative];
+    [self loadNativeAd];
 }
 
 #pragma mark - data center
-
-- (void)setData{
+- (void)setData {
+    NSMutableArray *dataSources = [self.dataSourceArray mutableCopy];
     
-    NSArray *array = [[ATAdManager sharedManager] getNativeValidAdsForPlacementID:self.placementID];
-    
-    NSMutableArray *tempArray = [NSMutableArray array];
-    
-    if (array.count) {
-        
-        [array enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            ATNativeAdOffer *offer = [[ATAdManager sharedManager] getNativeAdOfferWithPlacementID:self.placementID];
-            if (offer) {
-                
-                ATDemoOfferAdMode *offerModel = [[ATDemoOfferAdMode alloc]init];
-                offerModel.nativeADView = [self getNativeADView:self.placementID nativeAdOffer:offer];
-                offerModel.offer = offer;
-                offerModel.isNativeAd = YES;
-                [tempArray addObject:offerModel];
-                
-                for (int i = 0; i < 5; i ++) {
-                    ATDemoOfferAdMode *offerModel1 = [[ATDemoOfferAdMode alloc]init];
-                    offerModel1.isNativeAd = NO;
-                    [tempArray addObject:offerModel1];
-                }
-            }
-        }];
+    ATNativeAdOffer *offer = [self getOfferAndLoadNext];
+    if (offer) {
+        ATDemoOfferAdMode *offerModel = [[ATDemoOfferAdMode alloc] init];
+        offerModel.nativeADView = [self getNativeADView:self.placementID nativeAdOffer:offer];
+        offerModel.offer = offer;
+        offerModel.isNativeAd = YES;
+        [dataSources addObject:offerModel];
     }
     
-    [self.dataSourceArray addObjectsFromArray:tempArray];
+    for (int i = 0; i < 5; i ++) {
+        ATDemoOfferAdMode *offerModel1 = [[ATDemoOfferAdMode alloc] init];
+        offerModel1.isNativeAd = NO;
+        [dataSources addObject:offerModel1];
+    }
+    
+    self.dataSourceArray = [dataSources copy];
     [self.tableView reloadData];
+}
+
+- (ATNativeAdOffer *)getOfferAndLoadNext {
+    ATNativeAdOffer *offer = [[ATAdManager sharedManager] getNativeAdOfferWithPlacementID:self.placementID];
+    // load next
+    [self loadNativeAd];
+    return offer;
 }
 
 #pragma mark - UITableViewDataSource
@@ -240,9 +237,9 @@
 #pragma mark - Ad Delegate
 - (void)didFinishLoadingADWithPlacementID:(NSString *)placementID {
     NSLog(@"🔥---原生加载成功");
-    [self setData];
     if (self.tableView.mj_footer.refreshing == YES) {
         [self.tableView.mj_footer endRefreshing];
+        [self setData];
     }
 }
 

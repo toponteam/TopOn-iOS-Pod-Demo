@@ -23,9 +23,6 @@
 
 @property(nonatomic, strong) NSString *placementID;
 
-
-@property(nonatomic, assign) BOOL isRefresh;
-
 @end
 
 @implementation ATNativeRefreshListViewController
@@ -38,7 +35,7 @@
     
     [self setLayout];
     
-    [self upFreshLoadMoreData];
+    [self loadNativeAd];
     
     [self footerRefresh];
 }
@@ -61,7 +58,7 @@
     }];
 }
 
-- (void)loadNative{
+- (void)loadNativeAd{
     
     CGSize size = CGSizeMake(kScreenW, 350);
     
@@ -84,47 +81,37 @@
 }
 
 - (void)upFreshLoadMoreData{
-    self.isRefresh = YES;
-    [self loadNative];
+    [self loadNativeAd];
 }
 
 #pragma mark - data center
-
-- (void)setData{
-    // 首次进入页面或者上拉加载更多时刷新数据
-    if (self.isRefresh) {
-        NSArray *array = [[ATAdManager sharedManager] getNativeValidAdsForPlacementID:self.placementID];
-        
-        NSMutableArray *tempArray = [NSMutableArray array];
-        
-        if (array.count) {
-            
-            [array enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                ATNativeAdOffer *offer = [[ATAdManager sharedManager] getNativeAdOfferWithPlacementID:self.placementID];
-                if (offer) {
-                    
-                    ATDemoOfferAdMode *offerModel = [[ATDemoOfferAdMode alloc]init];
-                    offerModel.nativeADView = [self getNativeADView:self.placementID nativeAdOffer:offer];
-                    offerModel.offer = offer;
-                    offerModel.isNativeAd = YES;
-                    [tempArray addObject:offerModel];
-                    
-                    for (int i = 0; i < 5; i ++) {
-                        ATDemoOfferAdMode *offerModel1 = [[ATDemoOfferAdMode alloc]init];
-                        offerModel1.isNativeAd = NO;
-                        [tempArray addObject:offerModel1];
-                    }
-                }
-            }];
-        }
-        
-        [self.dataSourceArray addObjectsFromArray:tempArray];
-        [self.tableView reloadData];
+- (void)setData {
+    NSMutableArray *dataSources = [self.dataSourceArray mutableCopy];
     
-        self.isRefresh = NO;
-        // 继续加载新的广告
-        [self loadNative];
+    ATNativeAdOffer *offer = [self getOfferAndLoadNext];
+    if (offer) {
+        ATDemoOfferAdMode *offerModel = [[ATDemoOfferAdMode alloc] init];
+        offerModel.nativeADView = [self getNativeADView:self.placementID nativeAdOffer:offer];
+        offerModel.offer = offer;
+        offerModel.isNativeAd = YES;
+        [dataSources addObject:offerModel];
     }
+    
+    for (int i = 0; i < 5; i ++) {
+        ATDemoOfferAdMode *offerModel1 = [[ATDemoOfferAdMode alloc] init];
+        offerModel1.isNativeAd = NO;
+        [dataSources addObject:offerModel1];
+    }
+    
+    self.dataSourceArray = [dataSources copy];
+    [self.tableView reloadData];
+}
+
+- (ATNativeAdOffer *)getOfferAndLoadNext {
+    ATNativeAdOffer *offer = [[ATAdManager sharedManager] getNativeAdOfferWithPlacementID:self.placementID];
+    // load next
+    [self loadNativeAd];
+    return offer;
 }
 
 #pragma mark - UITableViewDataSource
@@ -141,17 +128,11 @@
     ATDemoOfferAdMode *offerModel = self.dataSourceArray[indexPath.row];
     
     if (offerModel.isNativeAd) {
-        BOOL ready = [[ATAdManager sharedManager] nativeAdReadyForPlacementID:self.placementID];
-        if (ready) {
-            // 存在新的广告，可以刷新
-            ATNativeAdOffer *offer = [[ATAdManager sharedManager] getNativeAdOfferWithPlacementID:self.placementID];
+        // 存在新的广告，可以刷新
+        ATNativeAdOffer *offer = [self getOfferAndLoadNext];
+        if (offer) {
             offerModel.nativeADView = [self getNativeADView:self.placementID nativeAdOffer:offer];
             offerModel.offer = offer;
-        } else {
-            // 存在新的广告，不用刷新
-            self.isRefresh = NO;
-            // 继续加载新的广告
-            [self loadNative];
         }
 
         ATNaviewListAdCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ATNaviewListAdCellID"];
@@ -260,9 +241,9 @@
 #pragma mark - Ad Delegate
 - (void)didFinishLoadingADWithPlacementID:(NSString *)placementID {
     NSLog(@"🔥---原生加载成功");
-    [self setData];
     if (self.tableView.mj_footer.refreshing == YES) {
         [self.tableView.mj_footer endRefreshing];
+        [self setData];
     }
 }
 
