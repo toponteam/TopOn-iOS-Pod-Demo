@@ -128,10 +128,10 @@ static NSString *const kPasterPlacementID = @"b62df87b577041";
         }];
         return;
     }
-    
-    ATNativeADConfiguration *config = [self getNativeADConfiguration];
-    
     ATNativeAdOffer *offer = [[ATAdManager sharedManager] getNativeAdOfferWithPlacementID:kPasterPlacementID];
+    self.nativeAdOffer = offer;
+
+    ATNativeADConfiguration *config = [self getNativeADConfiguration];
     
     ATPasterSelfRenderView *selfRenderView = [self getSelfRenderViewOffer:offer];
     
@@ -155,11 +155,11 @@ static NSString *const kPasterPlacementID = @"b62df87b577041";
     NSLog(@"🔥--是否为原生视频广告：%d",isVideoContents);
     
     if ([offer.adOfferInfo[@"network_firm_id"] integerValue] == 67) {
-        config.mediaViewFrame = CGRectMake(0, kNavigationBarHeight, kScreenW, 350);
+        CGFloat adViewH = kScreenW/(16.0f/9.0f);
+        config.mediaViewFrame = CGRectMake(0, 0, adViewH, 350);
     }
     
     self.selfRenderView = selfRenderView;
-    self.nativeAdOffer = offer;
     self.adView = nativeADView;
     [self.view addSubview:self.adView];
 }
@@ -180,11 +180,18 @@ static NSString *const kPasterPlacementID = @"b62df87b577041";
 
 #pragma mark - Show
 - (ATNativeADConfiguration *)getNativeADConfiguration {
-    CGFloat adViewH = 350;
+    // 设置贴片广告比例
+    CGFloat scale = 16.0f/9.0f;
+    if (self.nativeAdOffer.nativeAd.nativeExpressAdViewHeight != 0.0f) {
+        scale = self.nativeAdOffer.nativeAd.nativeExpressAdViewWidth/self.nativeAdOffer.nativeAd.nativeExpressAdViewHeight;
+    }
+    CGFloat adViewW = kScreenW;
+    CGFloat adViewH = adViewW/scale;
     CGFloat adViewY = (kScreenH - adViewH)/2;
+    
     ATNativeADConfiguration *config = [[ATNativeADConfiguration alloc] init];
-    config.ADFrame = CGRectMake(0, adViewY, kScreenW, adViewH);
-    config.mediaViewFrame = CGRectMake(0, adViewY + 150.0f, kScreenW, adViewH - kNavigationBarHeight - 150);
+    config.ADFrame = CGRectMake(0, adViewY, adViewW, adViewH);
+    config.mediaViewFrame = CGRectMake(0, 0, adViewW, adViewH - kNavigationBarHeight - 150);
     config.delegate = self;
     config.sizeToFit = YES;
     config.rootViewController = self;
@@ -301,7 +308,7 @@ static NSString *const kPasterPlacementID = @"b62df87b577041";
 }
 
 -(void) startCountdown:(NSTimeInterval)interval {
-    self.remainingTime = interval/1000;
+    self.remainingTime = interval;
     self.pasterTimer = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(pasterTimerCountdown) userInfo:nil repeats:YES];
 }
 
@@ -407,7 +414,7 @@ static NSString *const kPasterPlacementID = @"b62df87b577041";
 -(void) didStartPlayingVideoInAdView:(ATNativeADView*)adView placementID:(NSString*)placementID extra:(NSDictionary *)extra{
     NSLog(@"ATPasterVideoViewController:: didStartPlayingVideoInAdView:placementID:%@with extra: %@", placementID,extra);
     // 开始倒计时
-    [self startCountdown:self.nativeAdOffer.nativeAd.videoDuration];
+    [self startCountdown:self.nativeAdOffer.nativeAd.videoDuration/1000.0f];
 }
 
 -(void) didEndPlayingVideoInAdView:(ATNativeADView*)adView placementID:(NSString*)placementID extra:(NSDictionary *)extra{
