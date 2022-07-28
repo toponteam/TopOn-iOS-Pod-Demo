@@ -9,8 +9,6 @@
 #import "ViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
-extern NSString *const kKSDrawPlacement;
-extern NSString *const kTTDrawPlacementName;
 
 @interface ATDrawViewController : UIViewController
 

@@ -16,32 +16,6 @@
 
 //#import <GoogleMobileAds/GoogleMobileAds.h>
 
-static NSString *const kGDTPlacementID = @"b5bacad0803fd1";
-static NSString *const kTTPlacementID = @"b5bacacfc470c9";
-static NSString *const kAdmobPlacementID = @"b5bacacef17717";
-static NSString *const kApplovinPlacementID = @"b5bacace1549da";
-static NSString *const kFacebookPlacementID = @"b5baf502bb23e3";
-
-static NSString *const kInmobiPlacementID = @"b5baf522891992";
-static NSString *const kAllPlacementID = @"b5bacaccb61c29";
-static NSString *const kAppnextPlacementID = @"b5bc7fb78288e9";
-static NSString *const kBaiduPlacementID = @"b5c04dda229f7e";
-static NSString *const kUnityAdsPlacementID = @"b5c21a04406722";
-static NSString *const kNendPlacementID = @"b5cb96d97400b3";
-static NSString *const kMintegralPlacementID = @"b5dd363166a5ea";
-static NSString *const kBannerHeaderBiddingPlacementID = @"b5d146f9483215";
-static NSString *const kFyberPlacementID = @"b5e96db4cb0682";
-static NSString *const kStartAppPlacementID = @"b5ed47a285a23a";
-static NSString *const kChartboostPlacementID = @"b5ee89f1a7eaf2";
-static NSString *const kVunglePlacementID = @"b5ee89f3e63d80";
-static NSString *const kAdColonyPlacementID = @"b5ee89f4d1791e";
-static NSString *const kGAMPlacementID = @"b5f2389932a2ec";
-static NSString *const kMyofferPlacementID = @"b5f33c3231eb91";
-static NSString *const kKidozPlacementID = @"b5feaa2cfe2959";
-static NSString *const kMyTargetPlacementID = @"b5feaa31284737";
-static NSString *const kDirectOfferPlacementID = @"b61bfff452d054";
-
-
 NSString *const kBannerShownNotification = @"banner_shown";
 NSString *const kBannerLoadingFailedNotification = @"banner_failed_to_load";
 @interface ATBannerViewController ()<ATBannerDelegate>
@@ -71,34 +45,6 @@ NSString *const kBannerLoadingFailedNotification = @"banner_failed_to_load";
 
 -(instancetype)init{
     self = [super init];
-    _placementIDs = @{
-                      kGDTPlacement:kGDTPlacementID,
-                      kTTPlacementName:kTTPlacementID,
-                      kAdMobPlacement:kAdmobPlacementID,
-                      kApplovinPlacement:kApplovinPlacementID,
-                      kFacebookPlacement:kFacebookPlacementID,
-                      kInmobiPlacement:kInmobiPlacementID,
-                      kAllPlacementName:kAllPlacementID,
-                      kAppnextPlacement:kAppnextPlacementID,
-                      kBaiduPlacement:kBaiduPlacementID,
-                      kUnityAdsPlacementName:kUnityAdsPlacementID,
-                      kNendPlacement:kNendPlacementID,
-                      kMintegralPlacement:kMintegralPlacementID,
-                      kHeaderBiddingPlacement:kBannerHeaderBiddingPlacementID,
-                      kFyberPlacement:kFyberPlacementID,
-                      kStartAppPlacement:kStartAppPlacementID,
-                      kVunglePlacementName:kVunglePlacementID,
-                      kChartboostPlacementName:kChartboostPlacementID,
-                      kAdcolonyPlacementName:kAdColonyPlacementID,
-                      kGAMPlacement:kGAMPlacementID,
-                      kMyOfferPlacement:kMyofferPlacementID,
-                      kKidozPlacement:kKidozPlacementID,
-                      kMyTargetPlacement:kMyTargetPlacementID,
-                      kDirectOfferPlacement:kDirectOfferPlacementID
-
-                      };
-    
-    _placementID = [[_placementIDs allValues]firstObject];
     
     return self;
 }
@@ -108,9 +54,51 @@ NSString *const kBannerLoadingFailedNotification = @"banner_failed_to_load";
     self.view.backgroundColor = kRGB(245, 245, 245);
   
     self.title = @"Banner";
-    
   
-    
+    [self setupData];
+    [self setupUI];
+}
+
+- (NSDictionary<NSString *,NSString *> *)placementIDs{
+    return @{
+        @"Yandex" :@"b62d8bb25cbe37",
+        @"GAM":             @"b5f2389932a2ec",
+        @"Chartboost":      @"b5ee89f1a7eaf2",
+        @"Vungle":          @"b5ee89f3e63d80",
+        @"Adcolony":        @"b5ee89f4d1791e",
+        @"StartApp":        @"b5ed47a285a23a",
+        @"HeaderBidding":   @"b5d146f9483215",
+        @"Nend":            @"b5cb96d97400b3",
+        @"Facebook":        @"b5baf502bb23e3",
+        @"Mintegral":       @"b5dd363166a5ea",
+        @"AdMob":           @"b5bacacef17717",
+        @"Inmobi":          @"b5baf522891992",
+        @"Applovin":        @"b5bacace1549da",
+        @"Baidu":           @"b5c04dda229f7e",
+        @"Fyber":           @"b5e96db4cb0682",
+        @"Unity Ads":       @"b5c21a04406722",
+        @"Myoffer":         @"b5f33c3231eb91",
+        @"ADX":             @"b5fa24ff8a7446",
+        @"OnlineApi":       @"b5fa2508fbdaf6",
+        @"Kidoz":           @"b5feaa2cfe2959",
+        @"MyTarget":        @"b5feaa31284737",
+        @"All":             @"b5bacaccb61c29",
+        @"Gromore":         @"b601cac8974c40",
+        @"Max":             @"b604080d063430",
+        @"DirectOffer":     @"b61bfff452d054",
+        @"GDT":             @"b5bacad0803fd1",
+        @"TT":              @"b5bacacfc470c9",
+        @"Pangle":          @"b612f6a9db5d5a",
+        @"DSP":             @"b628f3ca078b69",
+    };
+}
+
+- (void)setupData
+{
+    self.placementID = self.placementIDs.allValues.firstObject;
+}
+
+- (void)setupUI {
     UIButton *clearBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 80, 20)];
     [clearBtn setTitle:@"clear log" forState:UIControlStateNormal];
     [clearBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
@@ -161,8 +149,6 @@ NSString *const kBannerLoadingFailedNotification = @"banner_failed_to_load";
         make.right.equalTo(self.view.mas_right);
         make.height.mas_equalTo(kScaleW(340));
     }];
-    
-   
 }
 
 - (void)clearLog
@@ -177,24 +163,11 @@ NSString *const kBannerLoadingFailedNotification = @"banner_failed_to_load";
 }
 
 
-
 -(void) removeAdButtonTapped {
-    
-//    UIViewController *tVC = [[UIViewController alloc] init];
-//    tVC.title = @"New VC";
-//    tVC.view.backgroundColor = [UIColor redColor];
-//    [self.navigationController pushViewController:tVC animated:YES];
-//    return;
-    
     [[self.view viewWithTag:3333] removeFromSuperview];
     NSLog(@"banner removed");
 }
 
--(void) clearAdButtonTapped {
-    ATBannerViewController *tVC = [[ATBannerViewController alloc]init];
-    
-    [self.navigationController pushViewController:tVC animated:YES];
-}
 
 -(void) dealloc {
     NSLog(@"ATBannerViewController::dealloc");

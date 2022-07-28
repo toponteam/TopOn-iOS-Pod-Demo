@@ -16,55 +16,6 @@
 
 #import "ATADFootView.h"
 #import "ATMenuView.h"
-NSString *const kMintegralVideoPlacement = @"Mintegral(Video)";
-NSString *const kTTVideoPlacement = @"TT(Video)";
-NSString *const kNendInterstitialVideoPlacement = @"Nend(Video)";
-NSString *const kNendFullScreenInterstitialPlacement = @"Nend(Full Screen)";
-NSString *const kHeaderBiddingPlacement = @"Header Bidding";
-NSString *const kStartAppPlacement = @"StartApp";
-NSString *const kStartAppVideoPlacement = @"StartApp(Video)";
-NSString *const kFyberPlacement = @"Fyber";
-NSString *const kSigmobRVIntPlacement = @"Sibmob(RV)";
-NSString *const kKlevinPlacement = @"Klevin";
-
-static NSString *const kGDTPlacementID = @"b5bacad8ea3036";
-static NSString *const kTTPlacementID = @"b5bacad7373b89";
-static NSString *const kTTVideoPlacementID = @"b5bacad80a0fb1";
-static NSString *const kAdmobPlacementID = @"b5bacad6860972";
-static NSString *const kMintegralPlacementID = @"b5bacad46a8bbb";
-static NSString *const kMintegralVideoPlacementID = @"b5bacad5962e84";
-static NSString *const kMintegralHeaderBiddingPlacementID = @"b5d13340a1dd21";
-static NSString *const kApplovinPlacementID = @"b5bacad34e4294";
-static NSString *const kFacebookPlacementID = @"b5baf4bf9829e4";
-static NSString *const kFacebookHeaderBiddingPlacementID = @"b5d133421525a6";
-static NSString *const kAllPlacementID = @"b5bacad26a752a";
-static NSString *const kInmobiPlacementID = @"b5baf524062aca";
-static NSString *const kChartboostPlacementID = @"b5baf5cd422553";
-static NSString *const kTapjoyPlacementID = @"b5baf5ebe8df89";
-static NSString *const kIronsourcePlacementID = @"b5baf617891a2e";
-static NSString *const kVunglePlacementID = @"b5baf61edafdbb";
-static NSString *const kAdColonyPlacementID = @"b5baf620280a65";
-static NSString *const kAppnextPlacementID = @"b5bc7fb9cbfff1";
-static NSString *const kBaiduPlacementID = @"b5c04ddc6ba49e";
-static NSString *const kUnityAdsPlacementID = @"b5c21a055a51ab";
-static NSString *const kNendPlacementID = @"b5cb96db9b3b0f";
-static NSString *const kNendVideoPlacementID = @"b5cb96dd930c57";
-static NSString *const kNendFullScreenPlacementID = @"b5cb96df0f1914";
-static NSString *const kMaioPlacementID = @"b5cb96cf795c4b";
-static NSString *const kSigmobPlacementID = @"b5ed8ceb5a286d";
-static NSString *const kSigmobIntRVPlacementID = @"b5d771f79e4a32";
-static NSString *const kKSPlacementID = @"b5d807a4846f50";
-static NSString *const kMyOfferPlacementID = @"b5db6c26999c31";
-static NSString *const kOguryPlacementID = @"b5dde238f2d2ce";
-static NSString *const kStartAppPlacementID = @"b5e731a0acabdf";
-static NSString *const kStartAppVideoPlacementID = @"b5e732a9577182";
-static NSString *const kFyberPlacementID = @"b5e96db2198474";
-static NSString *const kGAMPlacementID = @"b5f2389ab6ee63";
-static NSString *const kHeliumPlacementID = @"b5f583ec12143f";
-static NSString *const kKidozPlacementID = @"b5feaa2df0e121";
-static NSString *const kMyTargetPlacementID = @"b5feaa306e483c";
-static NSString *const kKlevinPlacementID = @"b613affb04196f";
-static NSString *const kDirectOfferPlacementID = @"b61bffcd9dda20";
 
 
 @interface ATInterstitialViewController ()<ATInterstitialDelegate>
@@ -86,52 +37,12 @@ static NSString *const kDirectOfferPlacementID = @"b61bffcd9dda20";
 @end
 
 @implementation ATInterstitialViewController
+
 -(instancetype)init{
     self =[super init];
-
-    _placementIDs = @{
-                      kGDTPlacement:kGDTPlacementID,
-                      kTTPlacementName:kTTPlacementID,
-                      kTTVideoPlacement:kTTVideoPlacementID,
-                      kAdMobPlacement:kAdmobPlacementID,
-                      kMintegralPlacement:kMintegralPlacementID,
-                      kMintegralVideoPlacement:kMintegralVideoPlacementID,
-                      kHeaderBiddingPlacement:kMintegralHeaderBiddingPlacementID,
-                      kApplovinPlacement:kApplovinPlacementID,
-                      kFacebookPlacement:kFacebookPlacementID,
-                      kFacebookHeaderBiddingPlacement:kFacebookHeaderBiddingPlacementID,
-                      kInmobiPlacement:kInmobiPlacementID,
-                      kChartboostPlacementName:kChartboostPlacementID,
-                      kTapjoyPlacementName:kTapjoyPlacementID,
-                      kIronsourcePlacementName:kIronsourcePlacementID,
-                      kVunglePlacementName:kVunglePlacementID,
-                      kAdcolonyPlacementName:kAdColonyPlacementID,
-                      kAllPlacementName:kAllPlacementID,
-                      kAppnextPlacement:kAppnextPlacementID,
-                      kBaiduPlacement:kBaiduPlacementID,
-                      kUnityAdsPlacementName:kUnityAdsPlacementID,
-                      kNendPlacement:kNendPlacementID,
-                      kNendInterstitialVideoPlacement:kNendVideoPlacementID,
-                      kNendFullScreenInterstitialPlacement:kNendFullScreenPlacementID,
-                      kMaioPlacement:kMaioPlacementID,
-                      kSigmobPlacement:kSigmobPlacementID,
-                      kSigmobRVIntPlacement:kSigmobIntRVPlacementID,
-                      kKSPlacement:kKSPlacementID,
-                      kMyOfferPlacement:kMyOfferPlacementID,
-                      kOguryPlacement:kOguryPlacementID,
-                      kStartAppPlacement:kStartAppPlacementID,
-                      kStartAppVideoPlacement:kStartAppVideoPlacementID,
-                      kFyberPlacement:kFyberPlacementID,
-                      kGAMPlacement:kGAMPlacementID,
-                      kHeliumPlacement:kHeliumPlacementID,
-                      kKidozPlacement:kKidozPlacementID,
-                      kMyTargetPlacement:kMyTargetPlacementID,
-                      kKlevinPlacement: kKlevinPlacementID,
-                      kDirectOfferPlacement:kDirectOfferPlacementID
-
-                      };
     return  self;
 }
+
 - (NSDictionary<NSString *,NSString *> *)placementIDs_fullScreen{
     
     return  @{
@@ -226,20 +137,15 @@ static NSString *const kDirectOfferPlacementID = @"b61bffcd9dda20";
 
 -(void) viewDidLoad {
     [super viewDidLoad];
-    [[ATAPI sharedInstance] setCustomData:@{@"test_key":@"test_val"} forPlacementID:kGDTPlacementID];
     
     self.title = @"Intersitial";
-    
     self.view.backgroundColor =  kRGB(245, 245, 245);
   
-  
-    self.placementID = self.placementIDs.allValues.firstObject;
     [self setupUI];
     
     [ATInterstitialAutoAdManager sharedInstance].delegate = self;
-    
-    
 }
+
 - (void)setupUI
 {
     UIButton *clearBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 80, 20)];
@@ -292,10 +198,8 @@ static NSString *const kDirectOfferPlacementID = @"b61bffcd9dda20";
         make.height.mas_equalTo(kScaleW(340));
     }];
     
-   
     
     [self changeModel:self.fullScreenBtn];
-    
 }
 
 #pragma mark - Action
@@ -325,6 +229,7 @@ static NSString *const kDirectOfferPlacementID = @"b61bffcd9dda20";
     [self.fullScreenBtn setButtonIsSelectBoard];
     [self.interstitialBtn setButtonIsSelectBoard];
     self.placementIDs = sender.tag == 0 ? self.placementIDs_fullScreen : self.placementIDs_inter;
+    
     [self resetPlacementID];
 }
 
@@ -368,7 +273,6 @@ static NSString *const kDirectOfferPlacementID = @"b61bffcd9dda20";
     NSArray *checkArray = [[ATAdManager sharedManager] getInterstitialValidAdsForPlacementID:self.placementID];
     
     NSLog(@"ATInterstitialViewController--checkLoadModel--%ld----:%@---checkLoadModel:%@",checkArray.count,checkArray,checkLoadModel);
-
     
     
     BOOL isReady = [[ATAdManager sharedManager] interstitialReadyForPlacementID:self.placementID];
@@ -389,11 +293,11 @@ static NSString *const kDirectOfferPlacementID = @"b61bffcd9dda20";
 - (void)showAd
 {
     
-       if (self.isAuto) {
-           [ [ATInterstitialAutoAdManager sharedInstance] showAutoLoadInterstitialWithPlacementID:self.placementID scene:@"f5e549727efc49" inViewController:self delegate:self];
-       }else
-           [[ATAdManager sharedManager] showInterstitialWithPlacementID:self.placementID scene:@"f5e549727efc49" inViewController:self delegate:self];
-           
+   if (self.isAuto) {
+       [ [ATInterstitialAutoAdManager sharedInstance] showAutoLoadInterstitialWithPlacementID:self.placementID scene:@"f5e549727efc49" inViewController:self delegate:self];
+   }else {
+       [[ATAdManager sharedManager] showInterstitialWithPlacementID:self.placementID scene:@"f5e549727efc49" inViewController:self delegate:self];
+   }
 
 }
 
@@ -441,7 +345,6 @@ static NSString *const kDirectOfferPlacementID = @"b61bffcd9dda20";
     
 //    [self showLog:[NSString stringWithFormat:@"didFinishLoadingADSourceWithPlacementID:%@---extra:%@", placementID,extra]];
     
-
 }
 
 - (void)didFailToLoadADSourceWithPlacementID:(NSString*)placementID extra:(NSDictionary*)extra error:(NSError*)error{
@@ -458,7 +361,6 @@ static NSString *const kDirectOfferPlacementID = @"b61bffcd9dda20";
     
 //    [self showLog:[NSString stringWithFormat:@"didStartBiddingADSourceWithPlacementID:%@---extra:%@", placementID,extra]];
     
-   
 }
 
 - (void)didFinishBiddingADSourceWithPlacementID:(NSString *)placementID extra:(NSDictionary*)extra{
@@ -466,7 +368,6 @@ static NSString *const kDirectOfferPlacementID = @"b61bffcd9dda20";
     NSLog(@"广告源--bid--完成--ATInterstitialViewController::didFinishBiddingADSourceWithPlacementID:%@--extra:%@", placementID,extra);
     
 //    [self showLog:[NSString stringWithFormat:@"didFinishBiddingADSourceWithPlacementID:%@---extra:%@", placementID,extra]];
-    
  
 }
 
@@ -475,7 +376,6 @@ static NSString *const kDirectOfferPlacementID = @"b61bffcd9dda20";
     NSLog(@"广告源--bid--失败--ATInterstitialViewController::didFailBiddingADSourceWithPlacementID:%@--error:%@", placementID,error);
     
 //    [self showLog:[NSString stringWithFormat:@"didFailBiddingADSourceWithPlacementID:%@", placementID]];
-    
    
 }
 
@@ -561,9 +461,6 @@ static NSString *const kDirectOfferPlacementID = @"b61bffcd9dda20";
 - (ATADFootView *)footView
 {
     if (!_footView) {
-//        _footView = [[ATADFootView alloc] initWithFrame:CGRectMake(0, 0, kScreenW, kScaleW(340))];
-//        _footView.removeBtn.hidden = YES;
-//        _footView.showBtn.frame = CGRectMake(kScaleW(26), kScaleW(230), (kScreenW - kScaleW(52)), kScaleW(90));
         _footView = [[ATADFootView alloc] init];
     
         if (![NSStringFromClass([self class]) containsString:@"Auto"]) {
@@ -642,6 +539,7 @@ static NSString *const kDirectOfferPlacementID = @"b61bffcd9dda20";
     }
     return _menuView;
 }
+
 -(void)turnOnAuto:(Boolean)isOn {
     self.footView.loadBtn.hidden = isOn;
     if (isOn) {
@@ -653,6 +551,7 @@ static NSString *const kDirectOfferPlacementID = @"b61bffcd9dda20";
     }
     self.isAuto = isOn;
 }
+
 - (UITextView *)textView
 {
     if (!_textView) {

@@ -10,19 +10,6 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-extern NSString *const kMintegralPlacement;
-extern NSString *const kSigmobPlacement;
-extern NSString *const kGDTPlacement;
-extern NSString *const kGDTZoomOutPlacement;
-extern NSString *const kBaiduPlacement;
-extern NSString *const kTTPlacementName;
-extern NSString *const kAdMobPlacement;
-extern NSString *const kKSPlacement;
-extern NSString *const kMyOfferPlacement;
-extern NSString *const kAllPlacementName;
-extern NSString *const kKlevinPlacement;
-extern NSString *const kDirectOfferPlacement;
-
 @interface ATSplashViewController : UIViewController
 
 - (instancetype)initWithPlacementName:(NSString *)name;

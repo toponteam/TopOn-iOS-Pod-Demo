@@ -19,60 +19,6 @@
 #import "ATNativeSelfRenderView.h"
 
 
-
-NSString *const kMPPlacement = @"MobPower";
-NSString *const kInmobiPlacement = @"Inmobi";
-NSString *const kFacebookPlacement = @"Facebook";
-NSString *const kFacebookHeaderBiddingPlacement = @"Facebook(Header Bidding)";
-NSString *const kAdMobPlacement = @"AdMob";
-NSString *const kApplovinPlacement = @"Applovin";
-NSString *const kMintegralPlacement = @"Mintegral";
-NSString *const kMintegralAdvancedPlacement = @"Mintegral(Advanced)";
-NSString *const kGDTPlacement = @"GDT";
-NSString *const kGDTTemplatePlacement = @"GDT(Template)";
-NSString *const kAppnextPlacement = @"Appnext";
-NSString *const kTTFeedPlacementName = @"TT(Feed)";
-NSString *const kTTDrawPlacementName = @"TT(Draw)";
-NSString *const kAllPlacementName = @"All";
-NSString *const kNendVideoPlacement = @"Nend(Video)";
-NSString *const kSigmobPlacement = @"Sigmob";
-NSString *const kKSDrawPlacement = @"KS(Draw)";
-NSString *const kGAMPlacement = @"GAM";
-NSString *const kOnlineApiPlacement = @"OnlineApi";
-
-
-
-static NSString *const kMPPlacementID = @"b5c2084d12aca4";
-static NSString *const kPlacement0ID = @"b5ad9ba61dcb39";
-static NSString *const kInmobiPlacementID = @"b5b0f553483724";
-static NSString *const kMintegralAdvancedPlacementID = @"b5ee1d26cb56ee";
-static NSString *const kMintegralPlacementID = @"b5b0f555698607";
-static NSString *const kMintegralHeaderBiddingPlacementID = @"b5d1333d023691";
-static NSString *const kFacebookPlacementID = @"b5b0f551340ea9";
-static NSString *const kFacebookHeaderBiddingPlacementID = @"b5d13342d52304";
-static NSString *const kAdMobPlacementID = @"b5b0f55228375a";
-static NSString *const kApplovinPlacementID = @"b5b0f554ec9c4e";
-static NSString *const kGDTPlacementID = @"b5bacac5f73476";
-static NSString *const kGDTTemplatePlacementID = @"b5bacac780e03b";
-static NSString *const kAppnextPlacementID = @"b5bc7fb2787f1e";
-static NSString *const kAllPlacementID = @"b5b0f5663c6e4a";
-static NSString *const kTTFeedPlacementID = @"b5c2c6d50e7f44";
-static NSString *const kNendPlacementID = @"b5cb96d44c0c5f";
-static NSString *const kNendVideoPlacementID = @"b5cb96d5291e93";
-static NSString *const kBaiduPlacementID = @"b5d36c4ad68a26";
-static NSString *const kKSPlacementID = @"b5e4613e50cbf2";//@"b5e43ac9ca3fc5";
-static NSString *const kGAMPlacementID = @"b5f238964f3e6f";
-static NSString *const kMyOfferPlacementID = @"b5f33878ee0646";
-static NSString *const kSigmobPlacementID = @"b6170cda99de6d";
-static NSString *const kKlevinPlacementID = @"b6172985f45143";
-static NSString *const kDirectOfferPlacementID = @"b61bfff2c812cb";
-
-
-//static NSString *const kKSDrawPlcementID = @"b5e4613e50cbf2";
-//static NSString *const kTTDrawPlacementID = @"b5c2c6d62b9d65";
-
-
-
 @interface ATNativeViewController()<ATNativeADDelegate>
 
 @property (nonatomic, strong) ATADFootView *footView;
@@ -99,8 +45,6 @@ static NSString *const kDirectOfferPlacementID = @"b61bfff2c812cb";
 
 @property (nonatomic, copy) NSString *nativeStr;
 
-@property (nonatomic, strong) UIView *showView;
-
 @property(nonatomic, strong) ATNativeSelfRenderView *nativeSelfRenderView;
 
 @end
@@ -114,33 +58,6 @@ static NSString *const kDirectOfferPlacementID = @"b61bfff2c812cb";
     return self;
 }
 
-+(NSDictionary<NSString*, NSString*>*)nativePlacementIDs {
-    return @{
-             kMPPlacement:kMPPlacementID,
-             kMintegralPlacement:kMintegralPlacementID,
-             kMintegralAdvancedPlacement:kMintegralAdvancedPlacementID,
-             kHeaderBiddingPlacement:kMintegralHeaderBiddingPlacementID,
-             kAllPlacementName:kAllPlacementID,
-             kInmobiPlacement:kInmobiPlacementID,
-             kFacebookPlacement:kFacebookPlacementID,
-             kFacebookHeaderBiddingPlacement:kFacebookHeaderBiddingPlacementID,
-             kAdMobPlacement:kAdMobPlacementID,
-             kApplovinPlacement:kApplovinPlacementID,
-             kGDTPlacement:kGDTPlacementID,
-             kGDTTemplatePlacement:kGDTTemplatePlacementID,
-             kAppnextPlacement:kAppnextPlacementID,
-             kTTFeedPlacementName:kTTFeedPlacementID,
-             kNendPlacement:kNendPlacementID,
-             kNendVideoPlacement:kNendVideoPlacementID,
-             kBaiduPlacement:kBaiduPlacementID,
-             kKSPlacement:kKSPlacementID,
-             kGAMPlacement:kGAMPlacementID,
-             kMyOfferPlacement:kMyOfferPlacementID,
-             kSigmobPlacement:kSigmobPlacementID,
-             kKlevinPlacement:kKlevinPlacementID,
-             kDirectOfferPlacement:kDirectOfferPlacementID
-             };
-}
 - (NSDictionary<NSString *,NSString *> *)placementIDs_native{
     
     return @{
@@ -193,12 +110,11 @@ static NSString *const kDirectOfferPlacementID = @"b61bfff2c812cb";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-    self.view.backgroundColor = kRGB(245, 245, 245);
-    _placementIDs = [ATNativeViewController nativePlacementIDs];
-    [self setupUI];
     
     self.title = @"Native";
+    self.view.backgroundColor = kRGB(245, 245, 245);
+
+    [self setupUI];
 }
 
 - (void)setupUI
@@ -260,10 +176,7 @@ static NSString *const kDirectOfferPlacementID = @"b61bfff2c812cb";
         make.height.mas_equalTo(kScaleW(340));
     }];
     
-   
-    
     [self changeModel:self.nativeBtn];
-    
 }
 
 - (void)clearLog
@@ -481,8 +394,8 @@ static NSString *const kDirectOfferPlacementID = @"b61bfff2c812cb";
     [selfRenderView addSubview:mediaView];
     
     [mediaView mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.left.right.bottom.equalTo(selfRenderView);
-            make.top.equalTo(selfRenderView.mainImageView.mas_top);
+        make.left.right.bottom.equalTo(selfRenderView);
+        make.top.equalTo(selfRenderView.mainImageView.mas_top);
     }];
 
     self.adView = nativeADView;
@@ -768,13 +681,5 @@ static NSString *const kDirectOfferPlacementID = @"b61bfff2c812cb";
     return _textView;
 }
 
-- (UIView *)showView
-{
-    if (!_showView) {
-        _showView = [[UIView alloc] initWithFrame:UIScreen.mainScreen.bounds];
-        _showView.backgroundColor = [UIColor whiteColor];
-    }
-    return _showView;
-}
 
 @end

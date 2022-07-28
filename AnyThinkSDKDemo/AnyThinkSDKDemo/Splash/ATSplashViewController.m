@@ -12,21 +12,6 @@
 #import "ATADFootView.h"
 #import "ATModelButton.h"
 #import "ATMenuView.h"
-NSString *const kGDTZoomOutPlacement = @"GDT(V+)";
-
-static NSString *const kMintegralPlacementID = @"b5ee89f9859d05";
-static NSString *const kSigmobPlacementID = @"b5d771f34bc73d";
-static NSString *const kGDTPlacementID = @"b5c1b0470c7e4a";
-static NSString *const kGDTZoomOutPlacementID = @"b5fd75a304f0a4";
-static NSString *const kBaiduPlacementID = @"b5c1b047a970fe";
-static NSString *const kTTPlacementID = @"b5c1b048c498b9";
-static NSString *const kAdmobPlacementID = @"b5f842af26114c";
-static NSString *const kKSPlacementID = @"b5fb767e454cce";
-static NSString *const kAllPlacementID = @"b5c22f0e5cc7a0";
-static NSString *const kMyofferPlacementID = @"b5f33c33431ca0";
-static NSString *const kKlevinPlacementID = @"b613aff35cd174";
-static NSString *const kDirectOfferPlacementID = @"b61bffcf212e16";
-
 
 @interface ATSplashViewController ()<ATSplashDelegate>
 
@@ -56,37 +41,55 @@ static NSString *const kDirectOfferPlacementID = @"b61bffcf212e16";
 -(instancetype)init{
     self = [super init];
     
-    _placementIDs = @{
-        kMintegralPlacement:kMintegralPlacementID,
-        kSigmobPlacement:kSigmobPlacementID,
-        kGDTPlacement:kGDTPlacementID,
-        kGDTZoomOutPlacement:kGDTZoomOutPlacementID,
-        kBaiduPlacement:kBaiduPlacementID,
-        kTTPlacementName:kTTPlacementID,
-        kAdMobPlacement:kAdmobPlacementID,
-        kKSPlacement:kKSPlacementID,
-        kAllPlacementName:kAllPlacementID,
-        kMyOfferPlacement:kMyofferPlacementID,
-        kKlevinPlacement: kKlevinPlacementID,
-        kDirectOfferPlacement:kDirectOfferPlacementID
-    };
-    self.placementID = [[_placementIDs allValues]firstObject];
-    
     return  self;
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    self.title = @"Splash";
     self.view.backgroundColor = kRGB(245, 245, 245);
     
-    self.title = @"Splash";
-    
-    [self setupSubviews];
+    [self setupData];
+    [self setupUI];
 }
 
-- (void)setupSubviews {
-  
+- (NSDictionary<NSString *,NSString *> *)placementIDs{
     
+    return @{
+        @"快手":@"b62a6e4c8d027a",
+        @"Mintegral":   @"b5ee89f9859d05", //b5ee89f9859d05 默认，b621dee44d9f60 原生开屏
+        @"Sigmob":      @"b5d771f34bc73d", //b5d771f34bc73d 默认，b621dec2d592cf 原生开屏
+        @"GDT":         @"b5c1b0470c7e4a", //b5c1b0470c7e4a 默认，b621dc9b3bbb57 原生开屏
+//        @"GDT-(V+)":     @"b5fd75a304f0a4",
+        @"Baidu":       @"b5c1b047a970fe", //b5c1b047a970fe 默认，b621de65cdfb85 原生开屏
+        @"TT":          @"b5c1b048c498b9", //b5c1b048c498b9 默认，b621dec9a294b9 原生开屏
+        @"Pangle":      @"b612f6ab63befe",
+        @"AdMob":       @"b5f842af26114c",
+        @"KS":          @"b5fb767e454cce", //b5fb767e454cce 默认，b621de76dd6d7f 原生开屏
+        @"All":         @"b5c22f0e5cc7a0",
+        @"Myoffer":     @"b5f33c33431ca0",
+        @"ADX":         @"b5fa25036683d2",
+        @"OnlineApi":   @"b5fa2509a93b71",
+        @"Gromore":     @"b601a111ad6efa",
+        @"Klevin":      @"b613aff35cd174",
+        @"DirectOffer": @"b61bffcf212e16",
+        @"Default":     @"b61cd193f0defd",       // 兜底广告位
+        @"KS-splash-native": @"b62319f3a7fad6",
+        @"GDT-splash-native": @"b62319f191fb45",
+        @"TT-splash-native": @"b62319f0b030af",
+        @"Sigmob-splash-native": @"b62319ee1228c3",
+        @"Baidu-splash-native": @"b62319ec138619",
+        @"MTG-splash-native":@"b62319f2d1b028",
+        @"DSP": @"b62908bd8bdd3e"
+    };
+}
+
+- (void)setupData
+{
+    self.placementID = self.placementIDs.allValues.firstObject;
+}
+
+- (void)setupUI {
+  
     UIButton *clearBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 80, 20)];
     [clearBtn setTitle:@"clear log" forState:UIControlStateNormal];
     [clearBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
