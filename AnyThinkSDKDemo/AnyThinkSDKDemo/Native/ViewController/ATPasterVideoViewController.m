@@ -90,6 +90,7 @@ static NSString *const kPasterPlacementID = @"b62df87b577041";
 }
 
 - (void)closeVC{
+    [self invalidateTimer];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -310,8 +311,7 @@ static NSString *const kPasterPlacementID = @"b62df87b577041";
 
 - (void)pasterTimerCountdown {
     if (self.remainingTime == 0) {
-        [self.pasterTimer invalidate];
-        self.pasterTimer = nil;
+        [self invalidateTimer];
         
         // 移除广告
         [self removeAd];
@@ -324,6 +324,12 @@ static NSString *const kPasterPlacementID = @"b62df87b577041";
     NSLog(@"🔥----倒计时:%ld",self.remainingTime);
 }
 
+- (void)invalidateTimer {
+    if (self.pasterTimer) {
+        [self.pasterTimer invalidate];
+        self.pasterTimer = nil;
+    }
+}
 
 -(void)tapVideo:(UITapGestureRecognizer *)gesture {
     NSLog(@"video is click");
@@ -349,6 +355,7 @@ static NSString *const kPasterPlacementID = @"b62df87b577041";
 -(void)dealloc {
     [self.playerItem removeObserver:self forKeyPath:@"status"];
     [self.player removeTimeObserver:_playerObserver];
+    [self invalidateTimer];
     NSLog(@"ATPasterVideoViewController dealloc");
 }
 

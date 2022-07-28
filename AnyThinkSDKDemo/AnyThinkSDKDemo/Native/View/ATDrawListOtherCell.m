@@ -26,6 +26,9 @@
 }
 
 - (void)setCellData:(ATDemoOfferAdMode *)cellData {
+    if ([_cellData.drawVideoUrlStr isEqualToString:cellData.drawVideoUrlStr]) {
+        return;
+    }
     _cellData = cellData;
     [[ATVideoPlayerManager sharedManager] refreshContanerView:self withVideoUrlStr:_cellData.drawVideoUrlStr];
 }

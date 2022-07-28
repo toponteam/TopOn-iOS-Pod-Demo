@@ -62,7 +62,6 @@ NSString *const kBannerLoadingFailedNotification = @"banner_failed_to_load";
 
 @property (copy, nonatomic) NSDictionary<NSString *, NSString *> *placementIDs;
 
-@property(nonatomic, strong) NSString *togetherLoadAdStr;
 @property(nonatomic, readonly) CGSize adSize;
 @property (nonatomic, strong) ATBannerView *bannerView;
 
@@ -431,7 +430,6 @@ NSString *const kBannerLoadingFailedNotification = @"banner_failed_to_load";
 - (ATADFootView *)footView
 {
     if (!_footView) {
-//        _footView = [[ATADFootView alloc] initWithFrame:CGRectMake(0, 0, kScreenW, kScaleW(340))];
         _footView = [[ATADFootView alloc] initWithRemoveBtn];
         __weak typeof(self) weakSelf = self;
         [_footView setClickLoadBlock:^{

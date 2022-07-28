@@ -47,6 +47,11 @@
             @"title":@"Native",
             @"class":@"ATNativeViewController",
             @"des":@"Include Native,Vertical Draw Video and Pre-roll Ads.Most compatible with your native app code for video ads and graphic ads.",
+        },@{
+            @"image":@"native",
+            @"title":@"Native Express",
+            @"class":@"ATNativeExpressViewController",
+            @"des":@"Include Native,Vertical Draw Video and Pre-roll Ads.Most compatible with your native app code for video ads and graphic ads.",
         },
         @{
             @"image":@"native",

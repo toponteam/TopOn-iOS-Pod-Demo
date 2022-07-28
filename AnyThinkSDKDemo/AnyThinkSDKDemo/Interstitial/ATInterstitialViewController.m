@@ -80,7 +80,6 @@ static NSString *const kDirectOfferPlacementID = @"b61bffcd9dda20";
 @property (copy, nonatomic) NSDictionary<NSString *, NSString *> *placementIDs_fullScreen;
 @property (nonatomic, strong) ATModelButton *fullScreenBtn;
 @property (nonatomic, strong) ATModelButton *interstitialBtn;
-@property(nonatomic, strong) NSString *togetherLoadAdStr;
 @property(nonatomic,assign) BOOL isAuto;
 
 
@@ -298,40 +297,6 @@ static NSString *const kDirectOfferPlacementID = @"b61bffcd9dda20";
     [self changeModel:self.fullScreenBtn];
     
 }
-
-
-
-#pragma mark - together load
-- (void)togetherLoadAd:(NSString *)togetherLoadAdStr{
-    self.togetherLoadAdStr = togetherLoadAdStr;
-    NSLog(@"同时加载插屏广告位---%@",self.placementID);
-    if (self.placementID) {
-        [self loadAd];
-    }
-}
-
-- (NSString *)placementID{
-    if (self.togetherLoadAdStr.length) {
-        
-        
-        NSString *tempID = self.placementIDs_fullScreen[self.togetherLoadAdStr];
-        __block NSString *placementIDStr;
-        if (tempID == nil) {
-            [self.placementIDs enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, NSString * _Nonnull obj, BOOL * _Nonnull stop) {
-                if ([key containsString:self.togetherLoadAdStr]) {
-                    placementIDStr = obj;
-                    *stop = YES;
-                }
-            }];
-            return placementIDStr ? placementIDStr : _placementID;
-        }else{
-            return tempID;
-        }
-    }else{
-        return _placementID;
-    }
-}
-
 
 #pragma mark - Action
 - (void)changeModel:(UIButton *)sender

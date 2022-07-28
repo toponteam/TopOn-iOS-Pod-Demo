@@ -41,12 +41,11 @@
     
     [self setUI];
     [self setLayout];
-    [self loadNativeAd];
     [self footerRefresh];
 }
 
 #pragma mark - init
-- (void)setUI{
+- (void)setUI {
 #if defined(__IPHONE_11_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_11_0
     if ([self.tableView respondsToSelector:@selector(setContentInsetAdjustmentBehavior:)]) {
         if (@available(iOS 11.0, *)) {
@@ -68,18 +67,18 @@
     [self.view addSubview:btn];
 }
 
-- (void)closeVC{
+- (void)closeVC {
     [[ATVideoPlayerManager sharedManager] pauseVideo];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)setLayout{
+- (void)setLayout {
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view);
     }];
 }
 
-- (void)loadNativeAd{
+- (void)loadNativeAd {
     [[ATAdManager sharedManager] loadADWithPlacementID:self.placementID extra:nil delegate:self];
 }
 
@@ -88,7 +87,7 @@
     [self.tableView.mj_footer beginRefreshing];
 }
 
-- (void)upFreshLoadMoreData{
+- (void)upFreshLoadMoreData {
     [self loadNativeAd];
 }
 
@@ -116,6 +115,7 @@
     [self.tableView reloadData];
 }
 
+// 获取广告offer对象，同时请求新的广告
 - (ATNativeAdOffer *)getOfferAndLoadNext {
     ATNativeAdOffer *offer = [[ATAdManager sharedManager] getNativeAdOfferWithPlacementID:self.placementID];
     // load next
@@ -268,7 +268,7 @@
 
 - (ATNativeADConfiguration *)getNativeADConfiguration{
     ATNativeADConfiguration *config = [[ATNativeADConfiguration alloc] init];
-    config.ADFrame = CGRectMake(0, 0, kScreenW, kScreenH);;
+    config.ADFrame = CGRectMake(0, 0, kScreenW, kScreenH);
     config.delegate = self;
     config.mediaViewFrame = CGRectMake(0, 150.0f, kScreenW, kScreenH - 150);
     config.rootViewController = self;

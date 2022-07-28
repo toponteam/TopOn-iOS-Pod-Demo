@@ -75,7 +75,6 @@ static NSString *const kDirectOfferPlacementID = @"b61bffca756796";
 @property(nonatomic, strong) ATInterstitialViewController *interstitialViewController;
 
 @property(nonatomic, strong) NSString *selectMenuStr;
-@property(nonatomic, strong) NSString *togetherLoadAdStr;
 @property(nonatomic,assign) bool isAuto;
 
 @end
@@ -195,39 +194,6 @@ static NSString *const kDirectOfferPlacementID = @"b61bffca756796";
         make.right.equalTo(self.view.mas_right);
         make.height.mas_equalTo(kScaleW(340));
     }];
-    
-   
-}
-
-#pragma mark - together load
-- (void)togetherLoadAd:(NSString *)togetherLoadAdStr{
-    self.togetherLoadAdStr = togetherLoadAdStr;
-    NSLog(@"同时加载激励视频广告位---%@",self.placementID);
-
-    if (self.placementID) {
-        [self loadAd];
-    }
-}
-
-- (NSString *)placementID{
-    if (self.togetherLoadAdStr.length) {
-        
-        NSString *tempID = self.placementIDs[self.togetherLoadAdStr];
-        __block NSString *placementIDStr;
-        if (tempID == nil) {
-            [self.placementIDs enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, NSString * _Nonnull obj, BOOL * _Nonnull stop) {
-                if ([key containsString:self.togetherLoadAdStr]) {
-                    placementIDStr = obj;
-                    *stop = YES;
-                }
-            }];
-            return placementIDStr ? placementIDStr : _placementID;
-        }else{
-            return tempID;
-        }
-    }else{
-        return _placementID;
-    }
 }
 
 #pragma mark - Action

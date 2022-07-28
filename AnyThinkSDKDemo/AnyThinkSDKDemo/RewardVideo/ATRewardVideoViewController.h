@@ -20,8 +20,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) ATMenuView *menuView;
 @property (nonatomic, strong) ATADFootView *footView;
 
-- (void)togetherLoadAd:(NSString *)togetherLoadAdStr;
-
 - (void)showAd;
 
 @end

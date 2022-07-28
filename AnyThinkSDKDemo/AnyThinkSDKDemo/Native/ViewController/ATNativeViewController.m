@@ -73,11 +73,8 @@ static NSString *const kDirectOfferPlacementID = @"b61bfff2c812cb";
 
 
 
-#ifdef NATIVE_INTEGRATED
 @interface ATNativeViewController()<ATNativeADDelegate>
-#else
-@interface ATNativeViewController()
-#endif
+
 @property (nonatomic, strong) ATADFootView *footView;
 
 @property (nonatomic, strong) ATModelButton *nativeBtn;
@@ -104,17 +101,12 @@ static NSString *const kDirectOfferPlacementID = @"b61bfff2c812cb";
 
 @property (nonatomic, strong) UIView *showView;
 
-@property(nonatomic, strong) NSString *togetherLoadAdStr;
-
 @property(nonatomic, strong) ATNativeSelfRenderView *nativeSelfRenderView;
 
-
-
 @end
-static NSString *const kLoadKey = @"load";
-static NSString *const kCallbackKey = @"request";
+
 @implementation ATNativeViewController
-#ifdef NATIVE_INTEGRATED
+
 -(instancetype) initWithPlacementName:(NSString*)name {
     self = [super initWithNibName:nil bundle:nil];
     if (self != nil) {
@@ -279,36 +271,6 @@ static NSString *const kCallbackKey = @"request";
     self.textView.text = @"";
 }
 
-#pragma mark - together load
-- (void)togetherLoadAd:(NSString *)togetherLoadAdStr{
-    self.togetherLoadAdStr = togetherLoadAdStr;
-    NSLog(@"同时加载原生广告位---%@",self.placementID);
-
-    if (self.placementID) {
-        [self loadAd];
-    }
-}
-
-- (NSString *)placementID{
-    if (self.togetherLoadAdStr.length) {
-        NSString *tempID = self.placementIDs_native[self.togetherLoadAdStr];
-        __block NSString *placementIDStr;
-        if (tempID == nil) {
-            [self.placementIDs enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, NSString * _Nonnull obj, BOOL * _Nonnull stop) {
-                if ([key containsString:self.togetherLoadAdStr]) {
-                    placementIDStr = obj;
-                    *stop = YES;
-                }
-            }];
-            return placementIDStr ? placementIDStr : _placementID;
-        }else{
-            return tempID;
-        }
-    }else{
-        return _placementID;
-    }
-}
-
 #pragma mark - Action
 - (void)changeModel:(UIButton *)sender
 {
@@ -348,7 +310,7 @@ static NSString *const kCallbackKey = @"request";
 
 - (void)resetPlacementID {
     [self.menuView resetMenuList:self.placementIDs.allKeys];
-    self.placementID = self.togetherLoadAdStr.length ? self.placementIDs[self.togetherLoadAdStr] : self.placementIDs.allValues.firstObject;
+    self.placementID = self.placementIDs.allValues.firstObject;
 }
 
 //广告加载
@@ -613,6 +575,7 @@ static NSString *const kCallbackKey = @"request";
     
     [self.navigationController pushViewController:drawVc animated:YES];
 }
+
 #pragma mark - delegate with extra
 - (void)didStartLoadingADSourceWithPlacementID:(NSString *)placementID extra:(NSDictionary*)extra{
     NSLog(@"广告源--AD--开始--ATRewardVideoViewController::didStartLoadingADSourceWithPlacementID:%@---extra:%@", placementID,extra);
@@ -814,7 +777,4 @@ static NSString *const kCallbackKey = @"request";
     return _showView;
 }
 
-
-
-#endif
 @end

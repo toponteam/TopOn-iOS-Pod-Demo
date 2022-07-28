@@ -44,11 +44,7 @@ static NSString *const kDirectOfferPlacementID = @"b61bffcf212e16";
 
 @property(nonatomic, strong) UIButton *skipButton;
 
-
 @property (copy, nonatomic) NSDictionary<NSString *, NSString *> *placementIDs;
-
-@property(nonatomic, strong) NSString *togetherLoadAdStr;
-
 
 @property(nonatomic, strong) NSString *defaultAdSourceConfigStr;
 

@@ -34,6 +34,7 @@
 		9B9FEC182890188600B905ED /* testvideo0.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 9B9FEC172890188600B905ED /* testvideo0.mp4 */; };
 		9B9FEC1B2890199200B905ED /* ATPasterSelfRenderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B9FEC1A2890199200B905ED /* ATPasterSelfRenderView.m */; };
 		9B9FEC1E2890E20800B905ED /* ATNativeRefreshListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B9FEC1C2890E20800B905ED /* ATNativeRefreshListViewController.m */; };
+		9B9FEC2128925F3200B905ED /* ATNativeExpressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B9FEC2028925F3200B905ED /* ATNativeExpressViewController.m */; };
 		9BBD009924863048009EAD66 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BBD009824863048009EAD66 /* AppDelegate.m */; };
 		9BBD009C24863048009EAD66 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BBD009B24863048009EAD66 /* SceneDelegate.m */; };
 		9BBD009F24863048009EAD66 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BBD009E24863048009EAD66 /* ViewController.m */; };
@@ -122,6 +123,8 @@
 		9B9FEC1A2890199200B905ED /* ATPasterSelfRenderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ATPasterSelfRenderView.m; sourceTree = "<group>"; };
 		9B9FEC1C2890E20800B905ED /* ATNativeRefreshListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATNativeRefreshListViewController.m; sourceTree = "<group>"; };
 		9B9FEC1D2890E20800B905ED /* ATNativeRefreshListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATNativeRefreshListViewController.h; sourceTree = "<group>"; };
+		9B9FEC1F28925F3200B905ED /* ATNativeExpressViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ATNativeExpressViewController.h; sourceTree = "<group>"; };
+		9B9FEC2028925F3200B905ED /* ATNativeExpressViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ATNativeExpressViewController.m; sourceTree = "<group>"; };
 		9BBD009424863048009EAD66 /* AnyThinkSDKDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AnyThinkSDKDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BBD009724863048009EAD66 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		9BBD009824863048009EAD66 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -340,6 +343,8 @@
 				9B1A9F5D288F882800CC16FA /* ATPasterVideoViewController.m */,
 				9B1A9F64288FC9A500CC16FA /* ATDrawListViewController.h */,
 				9B1A9F65288FC9A500CC16FA /* ATDrawListViewController.m */,
+				9B9FEC1F28925F3200B905ED /* ATNativeExpressViewController.h */,
+				9B9FEC2028925F3200B905ED /* ATNativeExpressViewController.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -634,6 +639,7 @@
 				9BBD009C24863048009EAD66 /* SceneDelegate.m in Sources */,
 				9B9FEC16288FF5E000B905ED /* ATVideoPlayerManager.m in Sources */,
 				9BBD00BE248630C8009EAD66 /* ATBannerViewController.m in Sources */,
+				9B9FEC2128925F3200B905ED /* ATNativeExpressViewController.m in Sources */,
 				04CF323F28000FB70083B5AA /* ATNativeRenderView.m in Sources */,
 				04CF3223280007900083B5AA /* ATSelectViewController.m in Sources */,
 				9B9FEC11288FE91A00B905ED /* ATDrawListOtherCell.m in Sources */,
