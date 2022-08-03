@@ -61,46 +61,36 @@
 - (NSDictionary<NSString *,NSString *> *)placementIDs_native{
     
     return @{
-        @"MyOffer":                 @"b5f33878ee0646",
-        @"GAM":                     @"b5f238964f3e6f",
-        @"Mintegral-(Advanced)":    @"b5ee1d26cb56ee",
-        @"Header Bidding":          @"b5d1333d023691",
-        @"Nend":                    @"b5cb96d44c0c5f",
-        @"Nend-(Video)":            @"b5cb96d5291e93",
-        @"TT-(Feed)":               @"b5c2c6d50e7f44",
-        @"Pangle":                  @"b612f6a831fe71",
-        @"MobPower":                @"b5c2084d12aca4",
-        @"Facebook":                @"b5b0f551340ea9",
-        @"Facebook(NativeBanner)":  @"b5ee89fd60cddc",
-        @"AdMob":                   @"b5b0f55228375a",
-        @"Inmobi":                  @"b5b0f553483724",
-        @"Mintegral":               @"b5b0f555698607",
-        @"GDT-(self randerer)":     @"b5bacac5f73476",
-        @"GDT-(Template)":          @"b5bacac780e03b",
-        @"Appnext":                 @"b5bc7fb2787f1e",
-        @"Baidu":                   @"b5d36c4ad68a26",
-        @"KS":                      @"b5e4613e50cbf2",
-        @"OnlineApi":               @"b5fa2508579446",
-        @"All":                     @"b5b0f5663c6e4a",
-        @"Sigmob":                  @"b6170cda99de6d",
-        @"DirectOffer":             @"b61bfff2c812cb",
-        @"Klevin":                  @"b6172985f45143",
-        @"StartApp":                @"b6217531b46e9d",
-        @"MyTarget":                @"b623adf05c5db8",
-        @"MyTarget(Template)":      @"b623ae6973ac16"
+        @"All":                       @"b62b420bc116db",
+        @"Facebook":                  @"b62b420c00ebc4",
+        @"AdMob":                     @"b62b420bf038e3",
+        @"Inmobi":                    @"b62b420be79b6d",
+        @"Mintegral(self randerer)":  @"b62b420bd30120",
+        @"GDT(self randerer)":        @"b62b420b041609",
+        @"CSJ(self randerer)":        @"b62b41eed70150",
+        @"Header Bidding":            @"b62b41c9114d7d",
+        @"Baidu(self randerer)":      @"b62b41c8e14151",
+        @"Kuaishou(self randerer)":   @"b62b41c8340233",
+        @"Cross Promotion":           @"b62b4192c5b5bb",
+        @"Pangle":                    @"b62b41524379fe",
+        @"Sigmob":                    @"b62b4151a7b236",
+        @"Klevin(self randerer)":     @"b62b415198f735",
+        @"MyTarget(self randerer)":   @"b62b4125af318d",
+        @"Vungle":                    @"b62b41257a99ad",
+        @"Nend":                      @"b62ea207862e3c",
     };
 }
 
 - (NSDictionary<NSString *,NSString *> *)placementIDs_draw{
     
     return @{
-        @"TT(Draw)":                @"b5c2c6d62b9d65",
-        @"KS(Draw)":                @"b5e5ce042cabfb",
+        @"CSJ(Draw)":                 @"b62b41eec64f1e",
+        @"Kuaishou(Draw)":            @"b62b41c8313009",
     };
 }
 - (NSDictionary<NSString *,NSString *> *)placementIDs_preRoll{
     return @{
-        @"TT(Feed)":                @"b5c2c6d50e7f44"
+        @"CSJ":                       @"b62b41eed70150"
     };
 }
 

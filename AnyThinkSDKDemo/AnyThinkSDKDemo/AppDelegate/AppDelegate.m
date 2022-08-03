@@ -7,8 +7,8 @@
 //
 
 #import "AppDelegate.h"
-#import <AnyThinkSDK/AnyThinkSDK.h>
-#import <AppTrackingTransparency/AppTrackingTransparency.h>
+#import "TopOnAdManager.h"
+
 @interface AppDelegate ()
 
 @end
@@ -18,71 +18,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    [ATAPI setLogEnabled:YES];
-    [ATAPI integrationChecking];
     
-    [ATAPI sharedInstance].channel = @"test_channel";
-    [ATAPI sharedInstance].subchannel = @"test_subchannel";
-    [ATAPI sharedInstance].customData = @{kATCustomDataChannelKey:@"custom_data_channel",
-                                          kATCustomDataSubchannelKey:@"custom_data_subchannel",
-                                          kATCustomDataAgeKey:@18,
-                                          kATCustomDataGenderKey:@1,
-                                          kATCustomDataNumberOfIAPKey:@19,
-                                          kATCustomDataIAPAmountKey:@20.0f,
-                                          kATCustomDataIAPCurrencyKey:@"usd",
-                                          kATCustomDataSegmentIDKey:@16382351
-    };
-//        [[ATAPI sharedInstance] setDeniedUploadInfoArray:@[kATDeviceDataInfoOSVersionNameKey,
-//                                                           kATDeviceDataInfoOSVersionCodeKey,
-//                                                           kATDeviceDataInfoPackageNameKey,
-//                                                           kATDeviceDataInfoAppVersionCodeKey,
-//                                                           kATDeviceDataInfoAppVersionNameKey,
-//                                                           kATDeviceDataInfoBrandKey,
-//                                                           kATDeviceDataInfoModelKey,
-//                                                           kATDeviceDataInfoScreenKey,
-//                                                           kATDeviceDataInfoNetworkTypeKey,
-//                                                           kATDeviceDataInfoMNCKey,
-//                                                           kATDeviceDataInfoMCCKey,
-//                                                           kATDeviceDataInfoLanguageKey,
-//                                                           kATDeviceDataInfoTimeZoneKey,
-//                                                           kATDeviceDataInfoUserAgentKey,
-//                                                           kATDeviceDataInfoOrientKey,
-//                                                           kATDeviceDataInfoIDFAKey,
-//                                                           kATDeviceDataInfoIDFVKey]];
-    
-    [[ATAPI sharedInstance] getUserLocationWithCallback:^(ATUserLocation location) {
-        if (location == ATUserLocationInEU) {
-            NSLog(@"----------ATUserLocationInEU");
-            if ([ATAPI sharedInstance].dataConsentSet == ATDataConsentSetUnknown) {
-                NSLog(@"----------ATDataConsentSetUnknown");
-            }
-        }else if (location == ATUserLocationOutOfEU){
-            NSLog(@"----------ATUserLocationOutOfEU");
-        }else{
-            NSLog(@"----------ATUserLocationUnknown");
-        }
-    }];
-    if (@available(iOS 14, *)) {
-//         iOS 14
-        [ATTrackingManager requestTrackingAuthorizationWithCompletionHandler:^(ATTrackingManagerAuthorizationStatus status) {
-            [[ATAPI sharedInstance] startWithAppID:@"a5b0e8491845b3" appKey:@"7eae0567827cfe2b22874061763f30c9" error:nil];
-        }];
-    } else {
-        // Fallback on earlier versions
-        [[ATAPI sharedInstance] startWithAppID:@"a5b0e8491845b3" appKey:@"7eae0567827cfe2b22874061763f30c9" error:nil];
-    }
-    
-    // 设置系统平台信息，默认设置IOS=1
-//    ATSystemPlatformTypeIOS = 1,
-//    ATSystemPlatformTypeUnity = 2,
-//    ATSystemPlatformTypeCocos2dx = 3,
-//    ATSystemPlatformTypeCocosCreator = 4,
-//    ATSystemPlatformTypeReactNative = 5,
-//    ATSystemPlatformTypeFlutter = 6,
-//    ATSystemPlatformTypeAdobeAir = 7
-  //  [[ATAPI sharedInstance] setSystemPlatformType:ATSystemPlatformTypeIOS];
-    
-    
+    [[TopOnAdManager sharedManager] initTopOnSDK];
     return YES;
 }
 

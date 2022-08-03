@@ -99,7 +99,7 @@
     self.iconImageView.userInteractionEnabled = YES;
     [self addSubview:self.iconImageView];
     
-    
+     
     self.mainImageView = [[UIImageView alloc]init];
     self.mainImageView.contentMode = UIViewContentModeScaleAspectFit;
     self.mainImageView.userInteractionEnabled = YES;

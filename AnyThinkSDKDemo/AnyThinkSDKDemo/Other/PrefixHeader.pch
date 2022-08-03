@@ -41,4 +41,9 @@
 
 #define kStatusBarHeight [[UIApplication sharedApplication]statusBarFrame].size.height
 #define kButtonSafeHeight (IsiPhoneX ? 34.0f : .0f)
+
+
+#define kTopOnAppID @"a62b40f5778f3d"
+#define kTopOnAppKey @"c3d0d2a9a9d451b07e62b509659f7c97"
+
 #endif /* PrefixHeader_pch */

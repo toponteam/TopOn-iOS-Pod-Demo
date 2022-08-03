@@ -37,7 +37,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    self.placementID = @"b5c2c6d62b9d65";
+    // CSJ_Draw = b62b41eec64f1e
+    // Kuaishou_Draw = b62b41c8313009
+    self.placementID = @"b62b41eec64f1e";
     
     [self setUI];
     [self setLayout];
@@ -46,6 +48,8 @@
 
 #pragma mark - init
 - (void)setUI {
+    self.view.backgroundColor = [UIColor blackColor];
+
 #if defined(__IPHONE_11_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_11_0
     if ([self.tableView respondsToSelector:@selector(setContentInsetAdjustmentBehavior:)]) {
         if (@available(iOS 11.0, *)) {
@@ -56,7 +60,6 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
 #endif
     
-    self.view.backgroundColor = [UIColor blackColor];
     [self.view addSubview:self.tableView];
     
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -92,16 +95,18 @@
 }
 
 #pragma mark - data center
-- (void)setData {
+- (void)setDataWithRequest:(BOOL)isSuccess {
     NSMutableArray *dataSources = [self.dataSourceArray mutableCopy];
     
-    ATNativeAdOffer *offer = [self getOfferAndLoadNext];
-    if (offer) {
-        ATDemoOfferAdMode *offerModel = [[ATDemoOfferAdMode alloc] init];
-        offerModel.nativeADView = [self getNativeADView:self.placementID nativeAdOffer:offer];
-        offerModel.offer = offer;
-        offerModel.isNativeAd = YES;
-        [dataSources addObject:offerModel];
+    if (isSuccess) {
+        ATNativeAdOffer *offer = [self getOfferAndLoadNext];
+        if (offer) {
+            ATDemoOfferAdMode *offerModel = [[ATDemoOfferAdMode alloc] init];
+            offerModel.nativeADView = [self getNativeADView:self.placementID nativeAdOffer:offer];
+            offerModel.offer = offer;
+            offerModel.isNativeAd = YES;
+            [dataSources addObject:offerModel];
+        }
     }
     
     for (int i = 0; i < 3; i ++) {
@@ -161,12 +166,16 @@
     NSLog(@"🔥---原生加载成功");
     if (self.tableView.mj_footer.refreshing == YES) {
         [self.tableView.mj_footer endRefreshing];
-        [self setData];
+        [self setDataWithRequest:YES];
     }
 }
 
 - (void)didFailToLoadADWithPlacementID:(NSString*)placementID error:(NSError*)error {
     NSLog(@"🔥---原生加载失败");
+    if (self.tableView.mj_footer.refreshing == YES) {
+        [self.tableView.mj_footer endRefreshing];
+        [self setDataWithRequest:NO];
+    }
 }
 
 /// Native ads displayed successfully
@@ -346,8 +355,9 @@
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        [self.tableView registerNib:[UINib nibWithNibName:@"ATDrawListOtherCell" bundle:nil] forCellReuseIdentifier:@"ATDrawListOtherCellID"];
-        [self.tableView registerNib:[UINib nibWithNibName:@"ATDrawListAdCell" bundle:nil] forCellReuseIdentifier:@"ATDrawListAdCellID"];
+        _tableView.backgroundColor = [UIColor blackColor];
+        [_tableView registerNib:[UINib nibWithNibName:@"ATDrawListOtherCell" bundle:nil] forCellReuseIdentifier:@"ATDrawListOtherCellID"];
+        [_tableView registerNib:[UINib nibWithNibName:@"ATDrawListAdCell" bundle:nil] forCellReuseIdentifier:@"ATDrawListAdCellID"];
     }
     return _tableView;
 }

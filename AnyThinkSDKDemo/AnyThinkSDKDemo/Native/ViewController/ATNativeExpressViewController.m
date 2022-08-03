@@ -41,23 +41,15 @@
 
 - (NSDictionary<NSString *,NSString *> *)placementIDs{
     return @{
-        @"GAM":                     @"b5f238964f3e6f",
-        @"Mintegral-(Advanced)":    @"b5ee1d26cb56ee",
-        @"Header Bidding":          @"b5d1333d023691",
-        @"Nend":                    @"b5cb96d44c0c5f",
-        @"Nend-(Video)":            @"b5cb96d5291e93",
-        @"TT-(Feed)":               @"b5c2c6d50e7f44",
-        @"Pangle":                  @"b612f6a831fe71",
-        @"Facebook(NativeBanner)":  @"b5ee89fd60cddc",
-        @"AdMob":                   @"b5b0f55228375a",
-        @"Mintegral":               @"b5b0f555698607",
-        @"GDT-(Template)":          @"b5bacac780e03b",
-        @"Baidu":                   @"b5d36c4ad68a26",
-        @"KS":                      @"b5e4613e50cbf2",
-        @"All":                     @"b5b0f5663c6e4a",
-        @"Klevin":                  @"b6172985f45143",
-        @"MyTarget":                @"b623adf05c5db8",
-        @"MyTarget(Template)":      @"b623ae6973ac16"
+        @"All":                       @"b62e797b5727c0",
+        @"Facebook(NativeBanner)":    @"b62b41c7781130",
+        @"Mintegral(Template)":       @"b62b41c7a6ecd5",
+        @"GDT(Template)":             @"b62b420b01bcd6",
+        @"CSJ(Template)":             @"b62ea1cad196bd",
+        @"Baidu(Template)":           @"b62ea1d100d9ba",
+        @"Kuaishou(Template)":        @"b62ea1d6c5b92f",
+        @"Klevin(Template)":          @"b62ea1e3f2a62b",
+        @"MyTarget(Template)":        @"b62ea1e8da3189",
     };
 }
 

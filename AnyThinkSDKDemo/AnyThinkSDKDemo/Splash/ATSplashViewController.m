@@ -55,31 +55,18 @@
 - (NSDictionary<NSString *,NSString *> *)placementIDs{
     
     return @{
-        @"快手":@"b62a6e4c8d027a",
-        @"Mintegral":   @"b5ee89f9859d05", //b5ee89f9859d05 默认，b621dee44d9f60 原生开屏
-        @"Sigmob":      @"b5d771f34bc73d", //b5d771f34bc73d 默认，b621dec2d592cf 原生开屏
-        @"GDT":         @"b5c1b0470c7e4a", //b5c1b0470c7e4a 默认，b621dc9b3bbb57 原生开屏
-//        @"GDT-(V+)":     @"b5fd75a304f0a4",
-        @"Baidu":       @"b5c1b047a970fe", //b5c1b047a970fe 默认，b621de65cdfb85 原生开屏
-        @"TT":          @"b5c1b048c498b9", //b5c1b048c498b9 默认，b621dec9a294b9 原生开屏
-        @"Pangle":      @"b612f6ab63befe",
-        @"AdMob":       @"b5f842af26114c",
-        @"KS":          @"b5fb767e454cce", //b5fb767e454cce 默认，b621de76dd6d7f 原生开屏
-        @"All":         @"b5c22f0e5cc7a0",
-        @"Myoffer":     @"b5f33c33431ca0",
-        @"ADX":         @"b5fa25036683d2",
-        @"OnlineApi":   @"b5fa2509a93b71",
-        @"Gromore":     @"b601a111ad6efa",
-        @"Klevin":      @"b613aff35cd174",
-        @"DirectOffer": @"b61bffcf212e16",
-        @"Default":     @"b61cd193f0defd",       // 兜底广告位
-        @"KS-splash-native": @"b62319f3a7fad6",
-        @"GDT-splash-native": @"b62319f191fb45",
-        @"TT-splash-native": @"b62319f0b030af",
-        @"Sigmob-splash-native": @"b62319ee1228c3",
-        @"Baidu-splash-native": @"b62319ec138619",
-        @"MTG-splash-native":@"b62319f2d1b028",
-        @"DSP": @"b62908bd8bdd3e"
+        @"All":                   @"b62b40ff8aed6a",
+        @"AdMob":                 @"b62e9ee8eb2d0b",
+        @"Kuaishou":              @"b62b41922b6663",
+        @"GDT":                   @"b62b41ef152d42",
+        @"Baidu":                 @"b62b41ef0b0e1b",
+        @"CSJ":                   @"b62b41eefa70a8",
+        @"Sigmob":                @"b62b41c8d7ac74",
+        @"Mintegral":             @"b62b41c7818614",
+        @"Cross Promotion":       @"b62b4192b9efaa",
+        @"Pangle":                @"b62b41521d52d1",
+        @"Klevin":                @"b62b415211bd15",
+        @"HeaderBidding":         @"b62b4126caa479",
     };
 }
 

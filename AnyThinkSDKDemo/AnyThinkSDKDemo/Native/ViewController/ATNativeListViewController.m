@@ -33,7 +33,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    [self setUI];
+    [self setUI]; 
     
     [self setLayout];
     
@@ -45,7 +45,7 @@
 #pragma mark - init
 - (void)setUI{
     self.title = @"Native List";
-    self.placementID = @"b5b0f5663c6e4a";
+    self.placementID = @"b62b420bc116db";
 
     self.view.backgroundColor = [UIColor redColor];
     

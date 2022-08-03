@@ -11,8 +11,6 @@
 #import <AnyThinkNative/AnyThinkNative.h>
 #import "ATPasterSelfRenderView.h"
 
-static NSString *const kPasterPlacementID = @"b62df87b577041";
-
 @interface ATPasterVideoViewController ()<ATNativeADDelegate>
 @property (nonatomic , strong) AVPlayer *player;
 @property (nonatomic , strong) AVPlayerItem *playerItem;
@@ -25,6 +23,8 @@ static NSString *const kPasterPlacementID = @"b62df87b577041";
 @property (nonatomic) ATPasterSelfRenderView *selfRenderView;
 @property (nonatomic) ATNativeADView *adView;
 @property (nonatomic , strong) ATNativeAdOffer *nativeAdOffer;
+
+@property(nonatomic, strong) NSString *placementID;
 
 @property (nonatomic, strong) NSTimer *pasterTimer;
 @property (nonatomic, assign) NSInteger remainingTime;
@@ -44,6 +44,8 @@ static NSString *const kPasterPlacementID = @"b62df87b577041";
                                              selector:@selector(applicationWillBecomeActive:)
                                                  name:UIApplicationDidBecomeActiveNotification
                                                object:nil];
+    self.placementID = @"b62ea134005961";
+    
     [self loadNativeAd];
     
     [self layoutAVPlayer];
@@ -113,12 +115,12 @@ static NSString *const kPasterPlacementID = @"b62df87b577041";
         kATNativeAdSizeToFitKey:@YES,
     };
     
-    [[ATAdManager sharedManager] loadADWithPlacementID:kPasterPlacementID extra:extra delegate:self];
+    [[ATAdManager sharedManager] loadADWithPlacementID:self.placementID extra:extra delegate:self];
 }
 
 - (void)showAd
 {
-    BOOL ready = [[ATAdManager sharedManager] nativeAdReadyForPlacementID:kPasterPlacementID];
+    BOOL ready = [[ATAdManager sharedManager] nativeAdReadyForPlacementID:self.placementID];
     if (ready == NO) {
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Not Yet!" message:nil preferredStyle:UIAlertControllerStyleAlert];
         
@@ -129,7 +131,7 @@ static NSString *const kPasterPlacementID = @"b62df87b577041";
         }];
         return;
     }
-    ATNativeAdOffer *offer = [[ATAdManager sharedManager] getNativeAdOfferWithPlacementID:kPasterPlacementID];
+    ATNativeAdOffer *offer = [[ATAdManager sharedManager] getNativeAdOfferWithPlacementID:self.placementID];
     self.nativeAdOffer = offer;
 
     ATNativeADConfiguration *config = [self getNativeADConfiguration];
@@ -215,7 +217,7 @@ static NSString *const kPasterPlacementID = @"b62df87b577041";
 
 - (ATNativeADView *)getNativeADView:(ATNativeADConfiguration *)config offer:(ATNativeAdOffer *)offer selfRenderView:(ATPasterSelfRenderView *)selfRenderView {
     
-    ATNativeADView *nativeADView = [[ATNativeADView alloc] initWithConfiguration:config currentOffer:offer placementID:kPasterPlacementID];
+    ATNativeADView *nativeADView = [[ATNativeADView alloc] initWithConfiguration:config currentOffer:offer placementID:self.placementID];
     
     UIView *mediaView = [nativeADView getMediaView];
 
