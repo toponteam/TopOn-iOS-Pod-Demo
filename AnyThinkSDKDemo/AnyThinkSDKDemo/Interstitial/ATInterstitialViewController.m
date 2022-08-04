@@ -11,34 +11,29 @@
 #import <AnyThinkInterstitial/AnyThinkInterstitial.h>
 
 #import "ATModelButton.h"
-//#import "ATInterstitialAutoAdManager.h"
-#import <AnyThinkInterstitial/ATInterstitialAutoAdManager.h>
-
 #import "ATADFootView.h"
 #import "ATMenuView.h"
 
 
 @interface ATInterstitialViewController ()<ATInterstitialDelegate>
-@property(nonatomic, readonly) NSString *name;
-@property(nonatomic, strong) NSDictionary<NSString*, NSString*>* placementIDs;
-@property(nonatomic, readonly) UIActivityIndicatorView *loadingView;
-@property (copy, nonatomic) NSString *placementID;
-@property (nonatomic, strong) UITextView *textView;
 
+@property (nonatomic, strong) UITextView *textView;
 @property (nonatomic, strong) ATADFootView *footView;
 @property (nonatomic, strong) ATMenuView *menuView;
 @property (copy, nonatomic) NSDictionary<NSString *, NSString *> *placementIDs_inter;
 @property (copy, nonatomic) NSDictionary<NSString *, NSString *> *placementIDs_fullScreen;
+@property(nonatomic, strong) NSDictionary<NSString*, NSString*>* placementIDs;
+@property (copy, nonatomic) NSString *placementID;
+
 @property (nonatomic, strong) ATModelButton *fullScreenBtn;
 @property (nonatomic, strong) ATModelButton *interstitialBtn;
 @property(nonatomic,assign) BOOL isAuto;
-
 
 @end
 
 @implementation ATInterstitialViewController
 
--(instancetype)init{
+-(instancetype)init {
     self =[super init];
     return  self;
 }
@@ -125,7 +120,7 @@
 }
 
 
--(void) viewDidLoad {
+- (void)viewDidLoad {
     [super viewDidLoad];
     
     self.title = @"Intersitial";
@@ -136,8 +131,7 @@
     [ATInterstitialAutoAdManager sharedInstance].delegate = self;
 }
 
-- (void)setupUI
-{
+- (void)setupUI {
     UIButton *clearBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 80, 20)];
     [clearBtn setTitle:@"clear log" forState:UIControlStateNormal];
     [clearBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
@@ -188,13 +182,11 @@
         make.height.mas_equalTo(kScaleW(340));
     }];
     
-    
     [self changeModel:self.fullScreenBtn];
 }
 
 #pragma mark - Action
-- (void)changeModel:(UIButton *)sender
-{
+- (void)changeModel:(UIButton *)sender {
     if ((self.fullScreenBtn.isSelected && sender == self.fullScreenBtn) || (self.interstitialBtn.isSelected && sender == self.interstitialBtn)) {
         return;
     }
@@ -214,8 +206,8 @@
             [_footView.readyBtn setTitle:@"Is Interstitial AD Ready" forState:UIControlStateNormal];
             [_footView.showBtn setTitle:@"Show Interstitial AD" forState:UIControlStateNormal];
         }
-     
     }
+    
     [self.fullScreenBtn setButtonIsSelectBoard];
     [self.interstitialBtn setButtonIsSelectBoard];
     self.placementIDs = sender.tag == 0 ? self.placementIDs_fullScreen : self.placementIDs_inter;
@@ -223,76 +215,62 @@
     [self resetPlacementID];
 }
 
--(void)setToAutoLoadMode{
-    self.interstitialBtn.hidden = true;
-    self.fullScreenBtn.hidden = true;
-    self.textView.hidden = true;
-    self.menuView.hidden = true;
-
-    self.footView.loadBtn.hidden = true;
-    
-}
-
 - (void)resetPlacementID {
     [self.menuView resetMenuList:self.placementIDs.allKeys];
     self.placementID = self.placementIDs.allValues.firstObject;
 }
 
-
-- (void)loadAd
-{
+// 加载广告
+- (void)loadAd {
     CGSize size = CGSizeMake(CGRectGetWidth(self.view.bounds) - 30.0f, 300.0f);
     NSDictionary *extraDic = @{
+        // 设置半屏插屏广告大小，支持平台：快手、穿山甲、Pangle
         kATInterstitialExtraAdSizeKey:[NSValue valueWithCGSize:size],
     };
 
     if (_isAuto) {
-        
         [[ATInterstitialAutoAdManager sharedInstance] showAutoLoadInterstitialWithPlacementID:self.placementID scene:@"f5e549727efc49" inViewController:self delegate:self];
-        
-    }else
-    [[ATAdManager sharedManager] loadADWithPlacementID:self.placementID extra:
-     extraDic delegate:self];
+    } else {
+        [[ATAdManager sharedManager] loadADWithPlacementID:self.placementID extra:extraDic delegate:self];
+    }
 }
 
-- (void)checkAd
-{
+// 检查广告缓存，是否iReady
+- (void)checkAd {
     
+    // 获取广告位的状态对象
     ATCheckLoadModel *checkLoadModel = [[ATAdManager sharedManager] checkInterstitialLoadStatusForPlacementID:self.placementID];
+    NSLog(@"CheckLoadModel.isLoading:%d--- isReady:%d",checkLoadModel.isLoading,checkLoadModel.isReady);
+
+    // 查询该广告位的所有缓存信息
+    NSArray *array = [[ATAdManager sharedManager] getInterstitialValidAdsForPlacementID:self.placementID];
+    NSLog(@"ValidAds.count:%ld--- ValidAds:%@",array.count,array);
     
-    NSArray *checkArray = [[ATAdManager sharedManager] getInterstitialValidAdsForPlacementID:self.placementID];
-    
-    NSLog(@"ATInterstitialViewController--checkLoadModel--%ld----:%@---checkLoadModel:%@",checkArray.count,checkArray,checkLoadModel);
-    
-    
+    // 判断当前是否存在可展示的广告
     BOOL isReady = [[ATAdManager sharedManager] interstitialReadyForPlacementID:self.placementID];
     
     if (_isAuto) {
-        isReady =  [[ATInterstitialAutoAdManager sharedInstance] autoLoadInterstitialReadyForPlacementID:self.placementID];
-        
+        isReady = [[ATInterstitialAutoAdManager sharedInstance] autoLoadInterstitialReadyForPlacementID:self.placementID];
     }
+    
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:isReady ? @"Ready!" : @"Not Yet!" message:nil preferredStyle:UIAlertControllerStyleAlert];
     [self presentViewController:alert animated:YES completion:^{
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [alert dismissViewControllerAnimated:YES completion:nil];
         });
     }];
-    
 }
 
-- (void)showAd
-{
-    
+// 展示广告
+- (void)showAd {
    if (self.isAuto) {
        [ [ATInterstitialAutoAdManager sharedInstance] showAutoLoadInterstitialWithPlacementID:self.placementID scene:@"f5e549727efc49" inViewController:self delegate:self];
-   }else {
+   } else {
        [[ATAdManager sharedManager] showInterstitialWithPlacementID:self.placementID scene:@"f5e549727efc49" inViewController:self delegate:self];
    }
-
 }
 
-- (void)showLog:(NSString *)logStr
-{
+- (void)showLog:(NSString *)logStr {
     dispatch_async(dispatch_get_main_queue(), ^{
         NSString *logS = self.textView.text;
         NSString *log = nil;
@@ -306,150 +284,88 @@
     });
 }
 
--(void)checkAutoLoad{
-    Class class = NSClassFromString(@"ATInterstitialAutoAdViewController");
-    UIViewController *con = [class new];
-    [con setValue:self.placementID forKey:@"placementID"];
-    [self.navigationController pushViewController:con animated:YES];
-    
-}
-
-- (void)clearLog
-{
+- (void)clearLog {
     self.textView.text = @"";
 }
 
 #pragma mark - ATInterstitialDelegate
-
 - (void)didStartLoadingADSourceWithPlacementID:(NSString *)placementID extra:(NSDictionary*)extra{
-    
     NSLog(@"广告源--AD--开始--ATInterstitialViewController::didStartLoadingADSourceWithPlacementID:%@---extra:%@", placementID,extra);
-    
-//    [self showLog:[NSString stringWithFormat:@"didStartLoadingADSourceWithPlacementID:%@---extra:%@", placementID,extra]];
-
 }
 
 - (void)didFinishLoadingADSourceWithPlacementID:(NSString *)placementID extra:(NSDictionary*)extra{
-    
     NSLog(@"广告源--AD--完成--ATInterstitialViewController::didFinishLoadingADSourceWithPlacementID:%@---extra:%@", placementID,extra);
-    
-//    [self showLog:[NSString stringWithFormat:@"didFinishLoadingADSourceWithPlacementID:%@---extra:%@", placementID,extra]];
-    
 }
 
 - (void)didFailToLoadADSourceWithPlacementID:(NSString*)placementID extra:(NSDictionary*)extra error:(NSError*)error{
     NSLog(@"广告源--AD--失败--ATInterstitialViewController::didFailToLoadADSourceWithPlacementID:%@---error:%@", placementID,error);
-    
-//    [self showLog:[NSString stringWithFormat:@"didFailToLoadADSourceWithPlacementID:%@--%@", placementID],error];
- 
 }
 
 // bidding
 - (void)didStartBiddingADSourceWithPlacementID:(NSString *)placementID extra:(NSDictionary*)extra{
-    
     NSLog(@"广告源--bid--开始--ATInterstitialViewController::didStartBiddingADSourceWithPlacementID:%@---extra:%@", placementID,extra);
-    
-//    [self showLog:[NSString stringWithFormat:@"didStartBiddingADSourceWithPlacementID:%@---extra:%@", placementID,extra]];
-    
 }
 
 - (void)didFinishBiddingADSourceWithPlacementID:(NSString *)placementID extra:(NSDictionary*)extra{
-    
     NSLog(@"广告源--bid--完成--ATInterstitialViewController::didFinishBiddingADSourceWithPlacementID:%@--extra:%@", placementID,extra);
-    
-//    [self showLog:[NSString stringWithFormat:@"didFinishBiddingADSourceWithPlacementID:%@---extra:%@", placementID,extra]];
- 
 }
 
 - (void)didFailBiddingADSourceWithPlacementID:(NSString*)placementID extra:(NSDictionary*)extra error:(NSError*)error{
-    
     NSLog(@"广告源--bid--失败--ATInterstitialViewController::didFailBiddingADSourceWithPlacementID:%@--error:%@", placementID,error);
-    
-//    [self showLog:[NSString stringWithFormat:@"didFailBiddingADSourceWithPlacementID:%@", placementID]];
-   
 }
 
 -(void) didFinishLoadingADWithPlacementID:(NSString *)placementID {
     NSLog(@"ATInterstitialViewController::didFinishLoadingADWithPlacementID:%@", placementID);
-    
     [self showLog:[NSString stringWithFormat:@"didFinishLoadingADWithPlacementID:%@", placementID]];
-    
-
 }
 
 -(void) didFailToLoadADWithPlacementID:(NSString*)placementID error:(NSError*)error {
     NSLog(@"ATInterstitialViewController::didFailToLoadADWithPlacementID:%@ error:%@", placementID, error);
-    
     [self showLog:[NSString stringWithFormat:@"didFailToLoadADWithPlacementID:%@ errorCode:%ld", placementID, error.code]];
-    
 }
 
 -(void) interstitialDidShowForPlacementID:(NSString *)placementID extra:(NSDictionary *)extra {
     NSLog(@"ATInterstitialViewController::interstitialDidShowForPlacementID:%@ extra:%@", placementID, extra);
-    
     [self showLog:[NSString stringWithFormat:@"interstitialDidShowForPlacementID:%@", placementID]];
-    
-  
 }
 
 -(void) interstitialFailedToShowForPlacementID:(NSString*)placementID error:(NSError*)error extra:(NSDictionary *)extra {
     NSLog(@"ATInterstitialViewController::interstitialFailedToShowForPlacementID:%@ error:%@ extra:%@", placementID, error, extra);
-    
     [self showLog:[NSString stringWithFormat:@"interstitialFailedToShowForPlacementID:%@ error:%@", placementID, error]];
-    
-  
 }
 
 -(void) interstitialDidFailToPlayVideoForPlacementID:(NSString*)placementID error:(NSError*)error extra:(NSDictionary*)extra {
     NSLog(@"ATInterstitialViewController::interstitialDidFailToPlayVideoForPlacementID:%@ error:%@ extra:%@", placementID, error, extra);
-    
     [self showLog:[NSString stringWithFormat:@"interstitialDidFailToPlayVideoForPlacementID:%@ errorCode:%ld", placementID, error.code]];
-    
-
 }
 
 -(void) interstitialDidStartPlayingVideoForPlacementID:(NSString*)placementID extra:(NSDictionary *)extra {
     NSLog(@"ATInterstitialViewController::interstitialDidStartPlayingVideoForPlacementID:%@ extra:%@", placementID, extra);
-    
     [self showLog:[NSString stringWithFormat:@"ATInterstitialViewController::interstitialDidStartPlayingVideoForPlacementID:%@", placementID]];
-    
- 
 }
 
 -(void) interstitialDidEndPlayingVideoForPlacementID:(NSString*)placementID extra:(NSDictionary *)extra {
     NSLog(@"ATInterstitialViewController::interstitialDidEndPlayingVideoForPlacementID:%@ extra:%@", placementID, extra);
-    
     [self showLog:[NSString stringWithFormat:@"interstitialDidEndPlayingVideoForPlacementID:%@", placementID]];
-
 }
 
 -(void) interstitialDidCloseForPlacementID:(NSString*)placementID extra:(NSDictionary *)extra {
     NSLog(@"ATInterstitialViewController::interstitialDidCloseForPlacementID:%@ extra:%@", placementID, extra);
-    
     [self showLog:[NSString stringWithFormat:@"interstitialDidCloseForPlacementID:%@", placementID]];
-    
-  
 }
 
 -(void) interstitialDidClickForPlacementID:(NSString*)placementID extra:(NSDictionary *)extra {
     NSLog(@"ATInterstitialViewController::interstitialDidClickForPlacementID:%@ extra:%@", placementID, extra);
-    
     [self showLog:[NSString stringWithFormat:@"interstitialDidClickForPlacementID:%@", placementID]];
-    
-  
 }
 
 - (void)interstitialDeepLinkOrJumpForPlacementID:(NSString *)placementID extra:(NSDictionary *)extra result:(BOOL)success {
     NSLog(@"ATInterstitialViewController:: interstitialDeepLinkOrJumpForPlacementID:placementID:%@ with extra: %@, success:%@", placementID,extra, success ? @"YES" : @"NO");
-    
     [self showLog:[NSString stringWithFormat:@"interstitialDeepLinkOrJumpForPlacementID:placementID:%@, success:%@", placementID, success ? @"YES" : @"NO"]];
-
 }
 
-
 #pragma mark - lazy
-- (ATADFootView *)footView
-{
+- (ATADFootView *)footView {
     if (!_footView) {
         _footView = [[ATADFootView alloc] init];
     
@@ -476,8 +392,7 @@
     return _footView;
 }
 
-- (ATModelButton *)fullScreenBtn
-{
+- (ATModelButton *)fullScreenBtn {
     if (!_fullScreenBtn) {
         _fullScreenBtn = [[ATModelButton alloc] initWithFrame:CGRectMake(0, 0, kScreenW, kScaleW(532))];
         _fullScreenBtn.tag = 0;
@@ -490,8 +405,7 @@
     return _fullScreenBtn;
 }
 
-- (ATModelButton *)interstitialBtn
-{
+- (ATModelButton *)interstitialBtn {
     if (!_interstitialBtn) {
         _interstitialBtn = [[ATModelButton alloc] initWithFrame:CGRectMake(0, 0, kScreenW, kScaleW(532))];
         _interstitialBtn.tag = 1;
@@ -504,8 +418,7 @@
     return _interstitialBtn;
 }
 
-- (ATMenuView *)menuView
-{
+- (ATMenuView *)menuView {
     if (!_menuView) {
         _menuView = [[ATMenuView alloc] initWithMenuList:self.placementIDs.allKeys subMenuList:nil];
         _menuView.turnAuto = true;
@@ -519,21 +432,18 @@
             if (weakSelf.isAuto) {
                 [[ATInterstitialAutoAdManager sharedInstance]addAutoLoadAdPlacementIDArray:@[weakSelf.placementID]];
             }
-     
         }];
         
         [_menuView setTurnOnAuto:^(Boolean isOn) {
             [weakSelf turnOnAuto:isOn];
         }];
-        
     }
     return _menuView;
 }
 
--(void)turnOnAuto:(Boolean)isOn {
+- (void)turnOnAuto:(Boolean)isOn {
     self.footView.loadBtn.hidden = isOn;
     if (isOn) {
-       
         [[ATInterstitialAutoAdManager sharedInstance]addAutoLoadAdPlacementIDArray:@[self.placementID]];
     }
     else{
@@ -542,8 +452,7 @@
     self.isAuto = isOn;
 }
 
-- (UITextView *)textView
-{
+- (UITextView *)textView {
     if (!_textView) {
         _textView = [[UITextView alloc] init];
         _textView.backgroundColor = [UIColor whiteColor];
@@ -554,7 +463,6 @@
     }
     return _textView;
 }
-
 
 
 

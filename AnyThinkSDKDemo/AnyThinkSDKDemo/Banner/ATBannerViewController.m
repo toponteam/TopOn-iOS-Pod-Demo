@@ -7,7 +7,6 @@
 //
 
 #import "ATBannerViewController.h"
-#import <AnyThinkSDK/AnyThinkSDK.h>
 #import <AnyThinkBanner/AnyThinkBanner.h>
 
 #import "ATADFootView.h"
@@ -16,9 +15,9 @@
 
 //#import <GoogleMobileAds/GoogleMobileAds.h>
 
-NSString *const kBannerShownNotification = @"banner_shown";
-NSString *const kBannerLoadingFailedNotification = @"banner_failed_to_load";
+
 @interface ATBannerViewController ()<ATBannerDelegate>
+
 @property (nonatomic, strong) ATADFootView *footView;
 
 @property (nonatomic, strong) UIView *modelBackView;
@@ -29,25 +28,20 @@ NSString *const kBannerLoadingFailedNotification = @"banner_failed_to_load";
 
 @property (nonatomic, strong) UITextView *textView;
 
-@property (copy, nonatomic) NSString *placementID;
-
 @property (nonatomic, strong) UIView *adView;
-
 
 @property (copy, nonatomic) NSDictionary<NSString *, NSString *> *placementIDs;
 
+@property (copy, nonatomic) NSString *placementID;
+
 @property(nonatomic, readonly) CGSize adSize;
+
 @property (nonatomic, strong) ATBannerView *bannerView;
 
 @end
 
 @implementation ATBannerViewController
 
--(instancetype)init{
-    self = [super init];
-    
-    return self;
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -59,7 +53,7 @@ NSString *const kBannerLoadingFailedNotification = @"banner_failed_to_load";
     [self setupUI];
 }
 
-- (NSDictionary<NSString *,NSString *> *)placementIDs{
+- (NSDictionary<NSString *,NSString *> *)placementIDs {
     return @{
         @"All":               @"b62b420af2495a",
         @"Applovin":          @"b62b420ae88f2d",
@@ -86,8 +80,7 @@ NSString *const kBannerLoadingFailedNotification = @"banner_failed_to_load";
     };
 }
 
-- (void)setupData
-{
+- (void)setupData {
     self.placementID = self.placementIDs.allValues.firstObject;
 }
 
@@ -104,7 +97,6 @@ NSString *const kBannerLoadingFailedNotification = @"banner_failed_to_load";
     [self.view addSubview:self.menuView];
     [self.view addSubview:self.textView];
     [self.view addSubview:self.footView];
-
     
     _adSize = CGSizeMake(CGRectGetWidth(self.view.bounds), 250.0f);
     
@@ -144,43 +136,60 @@ NSString *const kBannerLoadingFailedNotification = @"banner_failed_to_load";
     }];
 }
 
-- (void)clearLog
-{
+- (void)clearLog {
     self.textView.text = @"";
 }
-
 
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
     [self removeAdButtonTapped];
 }
 
-
--(void) removeAdButtonTapped {
+- (void)removeAdButtonTapped {
     [[self.view viewWithTag:3333] removeFromSuperview];
     NSLog(@"banner removed");
 }
 
-
--(void) dealloc {
+- (void)dealloc {
     NSLog(@"ATBannerViewController::dealloc");
 }
 
 #pragma mark - Action
-- (void)loadAd
-{
-    [[ATAdManager sharedManager] loadADWithPlacementID:self.placementID extra:@{kATAdLoadingExtraBannerAdSizeKey:[NSValue valueWithCGSize:_adSize], kATAdLoadingExtraBannerSizeAdjustKey:@NO} delegate:self];
+// 加载广告
+- (void)loadAd {
+    /* Admob自适应横幅设置，需要先引入头文件：#import <GoogleMobileAds/GoogleMobileAds.h>
+    //GADCurrentOrientationAnchoredAdaptiveBannerAdSizeWithWidth 自适应
+    //GADPortraitAnchoredAdaptiveBannerAdSizeWithWidth 竖屏
+    //GADLandscapeAnchoredAdaptiveBannerAdSizeWithWidth 横屏
+    GADAdSize admobSize = GADCurrentOrientationAnchoredAdaptiveBannerAdSizeWithWidth(CGRectGetWidth(self.view.bounds));
+    */
+    
+    NSDictionary *dict = @{
+        // 设置请求的广告尺寸大小
+        kATAdLoadingExtraBannerAdSizeKey:[NSValue valueWithCGSize:_adSize],
+        // 仅Nend平台支持
+//        kATAdLoadingExtraBannerSizeAdjustKey:@NO,
+//        // 仅Admob平台支持，自适应横幅大小
+//        kATAdLoadingExtraAdmobBannerSizeKey:[NSValue valueWithCGSize:admobSize.size],
+//        kATAdLoadingExtraAdmobAdSizeFlagsKey:@(admobSize.flags)
+    };
+    [[ATAdManager sharedManager] loadADWithPlacementID:self.placementID extra:dict delegate:self];
 }
 
-- (void)checkAd
-{
-    // list
+// 检查广告缓存，是否iReady
+- (void)checkAd {
+    // 获取广告位的状态对象
+    ATCheckLoadModel *checkLoadModel = [[ATAdManager sharedManager] checkBannerLoadStatusForPlacementID:self.placementID];
+    NSLog(@"CheckLoadModel.isLoading:%d--- isReady:%d",checkLoadModel.isLoading,checkLoadModel.isReady);
+
+    // 查询该广告位的所有缓存信息
     NSArray *array = [[ATAdManager sharedManager] getBannerValidAdsForPlacementID:self.placementID];
     NSLog(@"ValidAds.count:%ld--- ValidAds:%@",array.count,array);
 
-//    ATCheckLoadModel *model = [[ATAdManager sharedManager] checkBannerLoadStatusForPlacementID:self.placementID];
-
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:[[ATAdManager sharedManager] bannerAdReadyForPlacementID:self.placementID] ? @"Ready!" : @"Not Yet!" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    // 判断当前是否存在可展示的广告
+    BOOL isReady = [[ATAdManager sharedManager] bannerAdReadyForPlacementID:self.placementID];
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:isReady ? @"Ready!" : @"Not Yet!" message:nil preferredStyle:UIAlertControllerStyleAlert];
     [self presentViewController:alert animated:YES completion:^{
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [alert dismissViewControllerAnimated:YES completion:nil];
@@ -188,11 +197,14 @@ NSString *const kBannerLoadingFailedNotification = @"banner_failed_to_load";
     }];
 }
 
-- (void)showAd
-{
+// 展示广告
+- (void)showAd {
+    // 判断广告ready状态
     if ([[ATAdManager sharedManager] bannerAdReadyForPlacementID:self.placementID]) {
+        // 移除可能存在的旧BannerView
         NSInteger tag = 3333;
         [[self.view viewWithTag:tag] removeFromSuperview];
+        
         ATBannerView *bannerView = [[ATAdManager sharedManager] retrieveBannerViewForPlacementID:self.placementID scene:@"f600938d045dd3"];
         if (bannerView != nil) {
             bannerView.delegate = self;
@@ -200,10 +212,8 @@ NSString *const kBannerLoadingFailedNotification = @"banner_failed_to_load";
             bannerView.translatesAutoresizingMaskIntoConstraints = NO;
             bannerView.tag = tag;
             self.bannerView = bannerView;
-
-          
            
-            self.adView = [[UIView alloc]init];// bannerView;
+            self.adView = [[UIView alloc]init];
             self.adView.backgroundColor =  randomColor;
             [self.adView addSubview:bannerView];
             
@@ -219,8 +229,6 @@ NSString *const kBannerLoadingFailedNotification = @"banner_failed_to_load";
                 make.edges.equalTo(self.adView);
             }];
             
-            
-            
         }else {
             NSLog(@"BannerView is nil for placementID:%@", self.placementID);
         }
@@ -229,9 +237,8 @@ NSString *const kBannerLoadingFailedNotification = @"banner_failed_to_load";
     }
 }
 
-
-- (void)removeAd
-{
+// 移除广告BannerView
+- (void)removeAd {
     if (self.adView && self.adView.superview) {
         [self.adView removeFromSuperview];
         self.bannerView = nil;
@@ -239,8 +246,7 @@ NSString *const kBannerLoadingFailedNotification = @"banner_failed_to_load";
     }
 }
 
-- (void)showLog:(NSString *)logStr
-{
+- (void)showLog:(NSString *)logStr {
     dispatch_async(dispatch_get_main_queue(), ^{
         NSString *logS = self.textView.text;
         NSString *log = nil;
@@ -254,147 +260,78 @@ NSString *const kBannerLoadingFailedNotification = @"banner_failed_to_load";
     });
 }
 
-
 #pragma mark - delegate method(s)
-- (void)didStartLoadingADSourceWithPlacementID:(NSString *)placementID extra:(NSDictionary*)extra{
-    
+- (void)didStartLoadingADSourceWithPlacementID:(NSString *)placementID extra:(NSDictionary*)extra {
     NSLog(@"广告源--AD--开始--ATBannerViewController::didStartLoadingADSourceWithPlacementID:%@---extra:%@", placementID,extra);
-    
-//    [self showLog:[NSString stringWithFormat:@"didStartLoadingADSourceWithPlacementID:%@---extra:%@", placementID,extra]];
-
 }
 
-- (void)didFinishLoadingADSourceWithPlacementID:(NSString *)placementID extra:(NSDictionary*)extra{
-    
+- (void)didFinishLoadingADSourceWithPlacementID:(NSString *)placementID extra:(NSDictionary*)extra {
     NSLog(@"广告源--AD--完成--ATBannerViewController::didFinishLoadingADSourceWithPlacementID:%@---extra:%@", placementID,extra);
-    
-//    [self showLog:[NSString stringWithFormat:@"didFinishLoadingADSourceWithPlacementID:%@---extra:%@", placementID,extra]];
-
 }
 
-- (void)didFailToLoadADSourceWithPlacementID:(NSString*)placementID extra:(NSDictionary*)extra error:(NSError*)error{
+- (void)didFailToLoadADSourceWithPlacementID:(NSString*)placementID extra:(NSDictionary*)extra error:(NSError*)error {
     NSLog(@"广告源--AD--失败--ATBannerViewController::didFailToLoadADSourceWithPlacementID:%@---error:%@", placementID,error);
-    
-//    [self showLog:[NSString stringWithFormat:@"didFailToLoadADSourceWithPlacementID:%@--%@", placementID],error];
-
 }
 
 // bidding
-- (void)didStartBiddingADSourceWithPlacementID:(NSString *)placementID extra:(NSDictionary*)extra{
-    
+- (void)didStartBiddingADSourceWithPlacementID:(NSString *)placementID extra:(NSDictionary*)extra {
     NSLog(@"广告源--bid--开始--ATBannerViewController::didStartBiddingADSourceWithPlacementID:%@---extra:%@", placementID,extra);
-    
-//    [self showLog:[NSString stringWithFormat:@"didStartBiddingADSourceWithPlacementID:%@---extra:%@", placementID,extra]];
-  
 }
 
-- (void)didFinishBiddingADSourceWithPlacementID:(NSString *)placementID extra:(NSDictionary*)extra{
-    
+- (void)didFinishBiddingADSourceWithPlacementID:(NSString *)placementID extra:(NSDictionary*)extra {
     NSLog(@"广告源--bid--完成--ATBannerViewController::didFinishBiddingADSourceWithPlacementID:%@--extra:%@", placementID,extra);
-    
-//    [self showLog:[NSString stringWithFormat:@"didFinishBiddingADSourceWithPlacementID:%@---extra:%@", placementID,extra]];
- 
 }
 
-- (void)didFailBiddingADSourceWithPlacementID:(NSString*)placementID extra:(NSDictionary*)extra error:(NSError*)error{
-    
+- (void)didFailBiddingADSourceWithPlacementID:(NSString*)placementID extra:(NSDictionary*)extra error:(NSError*)error {
     NSLog(@"广告源--bid--失败--ATBannerViewController::didFailBiddingADSourceWithPlacementID:%@--error:%@", placementID,error);
-    
-//    [self showLog:[NSString stringWithFormat:@"didFailBiddingADSourceWithPlacementID:%@", placementID]];
-  
 }
 
--(void) didFinishLoadingADWithPlacementID:(NSString *)placementID {
+- (void) didFinishLoadingADWithPlacementID:(NSString *)placementID {
     NSLog(@"ATBannerViewController::didFinishLoadingADWithPlacementID:%@", placementID);
-    
     [self showLog:[NSString stringWithFormat:@"didFinishLoadingADWithPlacementID:%@", placementID]];
-  
 }
 
 -(void) didFailToLoadADWithPlacementID:(NSString*)placementID error:(NSError*)error {
     NSLog(@"ATBannerViewController::didFailToLoadADWithPlacementID:%@ error:%@", placementID, error);
-    
     [self showLog:[NSString stringWithFormat:@"ATBannerViewController::didFailToLoadADWithPlacementID:%@ errorCode:%ld", placementID, error.code]];
-
-}
-
--(void) bannerView:(ATBannerView *)bannerView failedToAutoRefreshWithPlacementID:(NSString *)placementID error:(NSError *)error {
-    NSLog(@"ATBannerViewController::bannerView:failedToAutoRefreshWithPlacementID:%@ error:%@", placementID, error);
-    
-    [self showLog:[NSString stringWithFormat:@"bannerView:failedToAutoRefreshWithPlacementID:%@ errorCode:%ld", placementID, error.code]];
-    
 }
 
 #pragma mark - add networkID and adsourceID delegate
-- (void)bannerView:(ATBannerView *)bannerView didDeepLinkOrJumpForPlacementID:(NSString *)placementID extra:(NSDictionary *)extra result:(BOOL)success {
-    NSLog(@"ATBannerViewController:: didDeepLinkOrJumpForPlacementID:placementID:%@ with extra: %@, success:%@", placementID,extra, success ? @"YES" : @"NO");
-    
-    [self showLog:[NSString stringWithFormat:@"didDeepLinkOrJumpForPlacementID:%@, success:%@", placementID, success ? @"YES" : @"NO"]];
- 
-}
-
--(void) bannerView:(ATBannerView*)bannerView didShowAdWithPlacementID:(NSString*)placementID extra:(NSDictionary *)extra{
+- (void)bannerView:(ATBannerView*)bannerView didShowAdWithPlacementID:(NSString*)placementID extra:(NSDictionary *)extra {
     NSLog(@"ATBannerViewController::bannerView:didShowAdWithPlacementID:%@ with extra: %@", placementID,extra);
-    
     [self showLog:[NSString stringWithFormat:@"bannerView:didShowAdWithPlacementID:%@", placementID]];
-    
 }
 
--(void) bannerView:(ATBannerView*)bannerView didClickWithPlacementID:(NSString*)placementID extra:(NSDictionary *)extra{
+- (void)bannerView:(ATBannerView*)bannerView didClickWithPlacementID:(NSString*)placementID extra:(NSDictionary *)extra{
     NSLog(@"ATBannerViewController::bannerView:didClickWithPlacementID:%@ with extra: %@", placementID,extra);
-    
     [self showLog:[NSString stringWithFormat:@"bannerView:didClickWithPlacementID:%@", placementID]];
-   
 }
 
--(void) bannerView:(ATBannerView*)bannerView didAutoRefreshWithPlacement:(NSString*)placementID extra:(NSDictionary *)extra{
+- (void)bannerView:(ATBannerView*)bannerView didAutoRefreshWithPlacement:(NSString*)placementID extra:(NSDictionary *)extra {
     NSLog(@"ATBannerViewController::bannerView:didAutoRefreshWithPlacement:%@ with extra: %@", placementID,extra);
-    
     [self showLog:[NSString stringWithFormat:@"bannerView:didAutoRefreshWithPlacement:%@", placementID]];
-  
 }
 
--(void) bannerView:(ATBannerView*)bannerView didTapCloseButtonWithPlacementID:(NSString*)placementID extra:(NSDictionary*)extra {
+- (void) bannerView:(ATBannerView *)bannerView failedToAutoRefreshWithPlacementID:(NSString *)placementID error:(NSError *)error {
+    NSLog(@"ATBannerViewController::bannerView:failedToAutoRefreshWithPlacementID:%@ error:%@", placementID, error);
+    [self showLog:[NSString stringWithFormat:@"bannerView:failedToAutoRefreshWithPlacementID:%@ errorCode:%ld", placementID, error.code]];
+}
+
+- (void)bannerView:(ATBannerView*)bannerView didTapCloseButtonWithPlacementID:(NSString*)placementID extra:(NSDictionary*)extra {
     NSLog(@"ATBannerViewController::bannerView:didTapCloseButtonWithPlacementID:%@ extra: %@", placementID,extra);
-    
-    [self.adView removeFromSuperview];
-    self.adView = nil;
-    
     [self showLog:[NSString stringWithFormat:@"bannerView:didTapCloseButtonWithPlacementID:%@", placementID]];
 
+    // 收到点击关闭按钮回调,需要自行移除bannerView
+    [self removeAd];
 }
 
--(void) bannerDidShowForPlacementID:(NSString*)placementID extra:(NSDictionary*)extra {
-    NSLog(@"ATBannerViewController::bannerDidShowForPlacementID:%@ with extra: %@", placementID,extra);
-    
-    [self showLog:[NSString stringWithFormat:@"bannerDidShowForPlacementID:%@", placementID]];
- 
-}
-
--(void) bannerDidCloseForPlacementID:(NSString*)placementID extra:(NSDictionary*)extra {
-    NSLog(@"ATBannerViewController::bannerView:bannerDidCloseForPlacementID:%@ extra: %@", placementID,extra);
-    
-    [self showLog:[NSString stringWithFormat:@"bannerView:bannerDidCloseForPlacementID:%@", placementID]];
- 
-}
-
--(void) bannerDidClickForPlacementID:(NSString*)placementID extra:(NSDictionary*)extra {
-    NSLog(@"ATBannerViewController::bannerDidClickForPlacementID:%@ with extra: %@", placementID,extra);
-    
-    [self showLog:[NSString stringWithFormat:@"bannerDidClickForPlacementID:%@", placementID]];
-    
-}
-
--(void) bannerDeepLinkOrJumpForPlacementID:(NSString*)placementID extra:(NSDictionary*)extra result:(BOOL)success {
-    NSLog(@"ATBannerViewController:: bannerDeepLinkOrJumpForPlacementID:placementID:%@ with extra: %@, success:%@", placementID,extra, success ? @"YES" : @"NO");
-    
-    [self showLog:[NSString stringWithFormat:@"bannerDeepLinkOrJumpForPlacementID:placementID:%@, success:%@", placementID, success ? @"YES" : @"NO"]];
- 
+- (void)bannerView:(ATBannerView *)bannerView didDeepLinkOrJumpForPlacementID:(NSString *)placementID extra:(NSDictionary *)extra result:(BOOL)success {
+    NSLog(@"ATBannerViewController:: didDeepLinkOrJumpForPlacementID:placementID:%@ with extra: %@, success:%@", placementID,extra, success ? @"YES" : @"NO");
+    [self showLog:[NSString stringWithFormat:@"didDeepLinkOrJumpForPlacementID:%@, success:%@", placementID, success ? @"YES" : @"NO"]];
 }
 
 #pragma mark - lazy
-- (ATADFootView *)footView
-{
+- (ATADFootView *)footView {
     if (!_footView) {
         _footView = [[ATADFootView alloc] initWithRemoveBtn];
         __weak typeof(self) weakSelf = self;
@@ -425,8 +362,7 @@ NSString *const kBannerLoadingFailedNotification = @"banner_failed_to_load";
     return _footView;
 }
 
-- (UIView *)modelBackView
-{
+- (UIView *)modelBackView {
     if (!_modelBackView) {
         _modelBackView = [[UIView alloc] init];
         _modelBackView.backgroundColor = [UIColor whiteColor];
@@ -436,8 +372,7 @@ NSString *const kBannerLoadingFailedNotification = @"banner_failed_to_load";
     return _modelBackView;
 }
 
-- (ATModelButton *)modelButton
-{
+- (ATModelButton *)modelButton {
     if (!_modelButton) {
         _modelButton = [[ATModelButton alloc] initWithFrame:CGRectMake(0, 0, kScreenW, kScaleW(532))];
         _modelButton.backgroundColor = [UIColor whiteColor];
@@ -447,8 +382,7 @@ NSString *const kBannerLoadingFailedNotification = @"banner_failed_to_load";
     return _modelButton;
 }
 
-- (ATMenuView *)menuView
-{
+- (ATMenuView *)menuView {
     if (!_menuView) {
         _menuView = [[ATMenuView alloc] initWithMenuList:self.placementIDs.allKeys subMenuList:nil];
         _menuView.layer.masksToBounds = YES;
@@ -462,8 +396,7 @@ NSString *const kBannerLoadingFailedNotification = @"banner_failed_to_load";
     return _menuView;
 }
 
-- (UITextView *)textView
-{
+- (UITextView *)textView {
     if (!_textView) {
         _textView = [[UITextView alloc] init];
         _textView.backgroundColor = [UIColor whiteColor];

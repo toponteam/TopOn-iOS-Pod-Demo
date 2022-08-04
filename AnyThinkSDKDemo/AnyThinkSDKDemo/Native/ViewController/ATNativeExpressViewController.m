@@ -32,14 +32,7 @@
 
 @implementation ATNativeExpressViewController
 
--(instancetype) initWithPlacementName:(NSString*)name {
-    self = [super initWithNibName:nil bundle:nil];
-    if (self != nil) {
-    }
-    return self;
-}
-
-- (NSDictionary<NSString *,NSString *> *)placementIDs{
+- (NSDictionary<NSString *,NSString *> *)placementIDs {
     return @{
         @"All":                       @"b62e797b5727c0",
         @"Facebook(NativeBanner)":    @"b62b41c7781130",
@@ -54,10 +47,6 @@
 }
 
 
-+(NSString*)numberOfLoadPath {
-    return [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0] stringByAppendingPathComponent:@"native_load"];
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -68,8 +57,7 @@
     [self setupUI];
 }
 
-- (void)setupUI
-{
+- (void)setupUI {
     UIButton *clearBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 80, 20)];
     [clearBtn setTitle:@"clear log" forState:UIControlStateNormal];
     [clearBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
@@ -111,33 +99,35 @@
     }];
 }
 
-- (void)clearLog
-{
+- (void)clearLog {
     self.textView.text = @"";
 }
 
 #pragma mark - Action
 //广告加载
-- (void)loadAd
-{
+- (void)loadAd {
     CGSize size = CGSizeMake(kScreenW, 350);
-    
-    // kATExtraInfoNativeAdSizeKey 模板广告size，透传给广告平台，广告平台会返回相近尺寸的最优模板广告
-    // kATNativeAdSizeToFitKey 是否开启自适应高度，默认关闭，设置为yes时打开
+
     NSDictionary *extra = @{
+        // 模板广告size，透传给广告平台，广告平台会返回相近尺寸的最优模板广告
         kATExtraInfoNativeAdSizeKey:[NSValue valueWithCGSize:size],
+        // 是否开启自适应高度，默认关闭，设置为yes时打开
         kATNativeAdSizeToFitKey:@YES,
     };
     [[ATAdManager sharedManager] loadADWithPlacementID:self.placementID extra:extra delegate:self];
 }
 
 //检查广告缓存
-- (void)checkAd
-{
-    // list
+- (void)checkAd {
+    // 获取广告位的状态对象
+    ATCheckLoadModel *checkLoadModel = [[ATAdManager sharedManager] checkNativeLoadStatusForPlacementID:self.placementID];
+    NSLog(@"CheckLoadModel.isLoading:%d--- isReady:%d",checkLoadModel.isLoading,checkLoadModel.isReady);
+    
+    // 查询该广告位的所有缓存信息
     NSArray *array = [[ATAdManager sharedManager] getNativeValidAdsForPlacementID:self.placementID];
     NSLog(@"ValidAds.count:%ld--- ValidAds:%@",array.count,array);
 
+    // 判断当前是否存在可展示的广告
     BOOL isReady = [[ATAdManager sharedManager] nativeAdReadyForPlacementID:self.placementID];
     
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:isReady ? @"Ready!" : @"Not Yet!" message:nil preferredStyle:UIAlertControllerStyleAlert];
@@ -149,8 +139,7 @@
 }
 
 //广告展示
-- (void)showAd
-{
+- (void)showAd {
     // 判断广告isReady状态
     BOOL ready = [[ATAdManager sharedManager] nativeAdReadyForPlacementID:self.placementID];
     if (ready == NO) {
@@ -179,15 +168,12 @@
     ATNativeADView *nativeADView = [[ATNativeADView alloc] initWithConfiguration:config currentOffer:offer placementID:self.placementID];
     // 获取mediaView，模板广告目前是返回nil，但还是需要确保调用
     [nativeADView getMediaView];
-    
     self.adView = nativeADView;
     
     // 渲染广告
     [offer rendererWithConfiguration:config selfRenderView:nil nativeADView:nativeADView];
             
-    
     ATNativeAdRenderType nativeAdRenderType = [nativeADView getCurrentNativeAdRenderType];
-    
     if (nativeAdRenderType == ATNativeAdRenderExpress) {
         NSLog(@"🔥--原生模板");
         NSLog(@"🔥--原生模板广告宽高：%lf，%lf",offer.nativeAd.nativeExpressAdViewWidth,offer.nativeAd.nativeExpressAdViewHeight);
@@ -198,15 +184,13 @@
     BOOL isVideoContents = [nativeADView isVideoContents];
     NSLog(@"🔥--是否为原生视频广告：%d",isVideoContents);
     
-    
+    // 展示广告
     ATNativeShowViewController *showVc = [[ATNativeShowViewController alloc] initWithAdView:nativeADView placementID:self.placementID offer:offer];
-    
     [self.navigationController pushViewController:showVc animated:YES];
 }
 
 
-- (void)showLog:(NSString *)logStr
-{
+- (void)showLog:(NSString *)logStr {
     dispatch_async(dispatch_get_main_queue(), ^{
         NSString *logS = self.textView.text;
         NSString *log = nil;
@@ -309,8 +293,7 @@
 
 
 #pragma mark - lazy
-- (ATADFootView *)footView
-{
+- (ATADFootView *)footView {
     if (!_footView) {
         _footView = [[ATADFootView alloc] init];
 
@@ -338,8 +321,7 @@
     return _footView;
 }
 
-- (ATModelButton *)nativeBtn
-{
+- (ATModelButton *)nativeBtn {
     if (!_nativeBtn) {
         _nativeBtn = [[ATModelButton alloc] initWithFrame:CGRectMake(0, 0, kScreenW, kScaleW(532))];
         _nativeBtn.backgroundColor = [UIColor whiteColor];
@@ -349,8 +331,7 @@
     return _nativeBtn;
 }
 
-- (ATMenuView *)menuView
-{
+- (ATMenuView *)menuView {
     if (!_menuView) {
         _menuView = [[ATMenuView alloc] initWithMenuList:self.placementIDs.allKeys subMenuList:nil];
         _menuView.layer.masksToBounds = YES;
@@ -364,8 +345,7 @@
     return _menuView;
 }
 
-- (UITextView *)textView
-{
+- (UITextView *)textView {
     if (!_textView) {
         _textView = [[UITextView alloc] init];
         _textView.backgroundColor = [UIColor whiteColor];

@@ -41,7 +41,7 @@
 		9BBD00BE248630C8009EAD66 /* ATBannerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BBD00B2248630C7009EAD66 /* ATBannerViewController.m */; };
 		9BBD00BF248630C8009EAD66 /* ATInterstitialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BBD00B3248630C7009EAD66 /* ATInterstitialViewController.m */; };
 		9BBD00C0248630C8009EAD66 /* MTAutolayoutCategories.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BBD00B4248630C8009EAD66 /* MTAutolayoutCategories.m */; };
-		9BBD00C1248630C8009EAD66 /* ATNativeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BBD00B6248630C8009EAD66 /* ATNativeViewController.m */; };
+		9BBD00C1248630C8009EAD66 /* ATNativeSelfRenderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BBD00B6248630C8009EAD66 /* ATNativeSelfRenderViewController.m */; };
 		9BBD00C3248630C8009EAD66 /* ATDrawViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BBD00BC248630C8009EAD66 /* ATDrawViewController.m */; };
 		9BF5E506289A13BB0085A76E /* TopOnAdManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BF5E504289A13BB0085A76E /* TopOnAdManager.m */; };
 		9BF5E509289A14770085A76E /* ATBaiduTemplateRenderingAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BF5E508289A14770085A76E /* ATBaiduTemplateRenderingAttribute.m */; };
@@ -130,12 +130,12 @@
 		9BBD00A82486304C009EAD66 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9BBD00A92486304C009EAD66 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		9BBD00B0248630C7009EAD66 /* ATInterstitialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATInterstitialViewController.h; sourceTree = "<group>"; };
-		9BBD00B1248630C7009EAD66 /* ATNativeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATNativeViewController.h; sourceTree = "<group>"; };
+		9BBD00B1248630C7009EAD66 /* ATNativeSelfRenderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATNativeSelfRenderViewController.h; sourceTree = "<group>"; };
 		9BBD00B2248630C7009EAD66 /* ATBannerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATBannerViewController.m; sourceTree = "<group>"; };
 		9BBD00B3248630C7009EAD66 /* ATInterstitialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATInterstitialViewController.m; sourceTree = "<group>"; };
 		9BBD00B4248630C8009EAD66 /* MTAutolayoutCategories.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTAutolayoutCategories.m; sourceTree = "<group>"; };
 		9BBD00B5248630C8009EAD66 /* ATBannerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATBannerViewController.h; sourceTree = "<group>"; };
-		9BBD00B6248630C8009EAD66 /* ATNativeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATNativeViewController.m; sourceTree = "<group>"; };
+		9BBD00B6248630C8009EAD66 /* ATNativeSelfRenderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATNativeSelfRenderViewController.m; sourceTree = "<group>"; };
 		9BBD00B8248630C8009EAD66 /* MTAutolayoutCategories.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTAutolayoutCategories.h; sourceTree = "<group>"; };
 		9BBD00BB248630C8009EAD66 /* ATDrawViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATDrawViewController.h; sourceTree = "<group>"; };
 		9BBD00BC248630C8009EAD66 /* ATDrawViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATDrawViewController.m; sourceTree = "<group>"; };
@@ -322,22 +322,22 @@
 			children = (
 				9B1A9D6B288E82C800CC16FA /* ATNativeMainViewController.h */,
 				9B1A9D6A288E82C800CC16FA /* ATNativeMainViewController.m */,
-				9BBD00BB248630C8009EAD66 /* ATDrawViewController.h */,
-				9BBD00BC248630C8009EAD66 /* ATDrawViewController.m */,
-				E0F3B89C286D73E6007CF5AB /* ATNativeListViewController.h */,
-				E0F3B89D286D73E6007CF5AB /* ATNativeListViewController.m */,
-				04CF322D28000EDB0083B5AA /* ATNativeMessageStreamViewController.h */,
-				04CF323028000EDB0083B5AA /* ATNativeMessageStreamViewController.m */,
-				04CF323128000EDB0083B5AA /* ATNativeShowViewController.h */,
-				04CF322F28000EDB0083B5AA /* ATNativeShowViewController.m */,
-				9BBD00B1248630C7009EAD66 /* ATNativeViewController.h */,
-				9BBD00B6248630C8009EAD66 /* ATNativeViewController.m */,
-				9B1A9F5C288F882800CC16FA /* ATPasterVideoViewController.h */,
-				9B1A9F5D288F882800CC16FA /* ATPasterVideoViewController.m */,
-				9B1A9F64288FC9A500CC16FA /* ATDrawListViewController.h */,
-				9B1A9F65288FC9A500CC16FA /* ATDrawListViewController.m */,
+				9BBD00B1248630C7009EAD66 /* ATNativeSelfRenderViewController.h */,
+				9BBD00B6248630C8009EAD66 /* ATNativeSelfRenderViewController.m */,
 				9B9FEC1F28925F3200B905ED /* ATNativeExpressViewController.h */,
 				9B9FEC2028925F3200B905ED /* ATNativeExpressViewController.m */,
+				04CF323128000EDB0083B5AA /* ATNativeShowViewController.h */,
+				04CF322F28000EDB0083B5AA /* ATNativeShowViewController.m */,
+				9BBD00BB248630C8009EAD66 /* ATDrawViewController.h */,
+				9BBD00BC248630C8009EAD66 /* ATDrawViewController.m */,
+				9B1A9F64288FC9A500CC16FA /* ATDrawListViewController.h */,
+				9B1A9F65288FC9A500CC16FA /* ATDrawListViewController.m */,
+				E0F3B89C286D73E6007CF5AB /* ATNativeListViewController.h */,
+				E0F3B89D286D73E6007CF5AB /* ATNativeListViewController.m */,
+				9B1A9F5C288F882800CC16FA /* ATPasterVideoViewController.h */,
+				9B1A9F5D288F882800CC16FA /* ATPasterVideoViewController.m */,
+				04CF322D28000EDB0083B5AA /* ATNativeMessageStreamViewController.h */,
+				04CF323028000EDB0083B5AA /* ATNativeMessageStreamViewController.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -638,7 +638,7 @@
 				9B9FEC11288FE91A00B905ED /* ATDrawListOtherCell.m in Sources */,
 				9B1A9F5E288F882800CC16FA /* ATPasterVideoViewController.m in Sources */,
 				E0F3B8A2286D7591007CF5AB /* ATNaviewListAdCell.m in Sources */,
-				9BBD00C1248630C8009EAD66 /* ATNativeViewController.m in Sources */,
+				9BBD00C1248630C8009EAD66 /* ATNativeSelfRenderViewController.m in Sources */,
 				9BBD00BF248630C8009EAD66 /* ATInterstitialViewController.m in Sources */,
 				04CF322B280008520083B5AA /* ATRewardVideoViewController.m in Sources */,
 				04CF3227280007900083B5AA /* ATMenuView.m in Sources */,

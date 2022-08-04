@@ -12,7 +12,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ATSplashViewController : UIViewController
 
-- (instancetype)initWithPlacementName:(NSString *)name;
 @end
 
 NS_ASSUME_NONNULL_END

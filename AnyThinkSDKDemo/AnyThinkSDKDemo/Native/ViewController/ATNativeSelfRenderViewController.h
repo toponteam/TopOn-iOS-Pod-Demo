@@ -1,5 +1,5 @@
 //
-//  ATNativeViewController.h
+//  ATNativeSelfRenderViewController.h
 //  AnyThinkSDKDemo
 //
 //  Created by Martin Lau on 17/04/2018.
@@ -10,6 +10,6 @@
 #import <AnyThinkSDK/AnyThinkSDK.h>
 #import <AnyThinkNative/AnyThinkNative.h>
 
-@interface ATNativeViewController : UIViewController
+@interface ATNativeSelfRenderViewController : UIViewController
 
 @end

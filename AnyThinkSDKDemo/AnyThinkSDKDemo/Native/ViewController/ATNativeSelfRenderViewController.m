@@ -1,12 +1,12 @@
 //
-//  ATNativeViewController.m
+//  ATNativeSelfRenderViewController.m
 //  AnyThinkSDKDemo
 //
 //  Created by Martin Lau on 17/04/2018.
 //  Copyright © 2018 Martin Lau. All rights reserved.
 //
 
-#import "ATNativeViewController.h"
+#import "ATNativeSelfRenderViewController.h"
 #import "MTAutolayoutCategories.h"
 #import "ATADFootView.h"
 #import "ATModelButton.h"
@@ -19,7 +19,7 @@
 #import "ATNativeSelfRenderView.h"
 
 
-@interface ATNativeViewController()<ATNativeADDelegate>
+@interface ATNativeSelfRenderViewController()<ATNativeADDelegate>
 
 @property (nonatomic, strong) ATADFootView *footView;
 
@@ -35,13 +35,11 @@
 
 @property(nonatomic) ATNativeADView *adView;
 
-
-@property (copy, nonatomic) NSString *placementID;
-
 @property (copy, nonatomic) NSDictionary<NSString *, NSString *> *placementIDs_native;
 @property (copy, nonatomic) NSDictionary<NSString *, NSString *> *placementIDs_draw;
 @property (copy, nonatomic) NSDictionary<NSString *, NSString *> *placementIDs_preRoll;
 @property (copy, nonatomic) NSDictionary<NSString *, NSString *> *placementIDs;
+@property (copy, nonatomic) NSString *placementID;
 
 @property (nonatomic, copy) NSString *nativeStr;
 
@@ -49,66 +47,53 @@
 
 @end
 
-@implementation ATNativeViewController
+@implementation ATNativeSelfRenderViewController
 
--(instancetype) initWithPlacementName:(NSString*)name {
-    self = [super initWithNibName:nil bundle:nil];
-    if (self != nil) {
-    }
-    return self;
-}
 
-- (NSDictionary<NSString *,NSString *> *)placementIDs_native{
-    
+- (NSDictionary<NSString *,NSString *> *)placementIDs_native {
     return @{
         @"All":                       @"b62b420bc116db",
         @"Facebook":                  @"b62b420c00ebc4",
         @"AdMob":                     @"b62b420bf038e3",
         @"Inmobi":                    @"b62b420be79b6d",
-        @"Mintegral(self randerer)":  @"b62b420bd30120",
-        @"GDT(self randerer)":        @"b62b420b041609",
-        @"CSJ(self randerer)":        @"b62b41eed70150",
+        @"Mintegral":                 @"b62b420bd30120",
+        @"GDT":                       @"b62b420b041609",
+        @"CSJ":                       @"b62b41eed70150",
         @"Header Bidding":            @"b62b41c9114d7d",
-        @"Baidu(self randerer)":      @"b62b41c8e14151",
-        @"Kuaishou(self randerer)":   @"b62b41c8340233",
+        @"Baidu":                     @"b62b41c8e14151",
+        @"Kuaishou":                  @"b62b41c8340233",
         @"Cross Promotion":           @"b62b4192c5b5bb",
         @"Pangle":                    @"b62b41524379fe",
         @"Sigmob":                    @"b62b4151a7b236",
-        @"Klevin(self randerer)":     @"b62b415198f735",
-        @"MyTarget(self randerer)":   @"b62b4125af318d",
+        @"Klevin":                    @"b62b415198f735",
+        @"MyTarget":                  @"b62b4125af318d",
         @"Vungle":                    @"b62b41257a99ad",
         @"Nend":                      @"b62ea207862e3c",
     };
 }
 
-- (NSDictionary<NSString *,NSString *> *)placementIDs_draw{
-    
+- (NSDictionary<NSString *,NSString *> *)placementIDs_draw {
     return @{
         @"CSJ(Draw)":                 @"b62b41eec64f1e",
         @"Kuaishou(Draw)":            @"b62b41c8313009",
     };
 }
-- (NSDictionary<NSString *,NSString *> *)placementIDs_preRoll{
+- (NSDictionary<NSString *,NSString *> *)placementIDs_preRoll {
     return @{
         @"CSJ":                       @"b62b41eed70150"
     };
 }
 
-+(NSString*)numberOfLoadPath {
-    return [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0] stringByAppendingPathComponent:@"native_load"];
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = @"Native";
+    self.title = @"Native SelfRender";
     self.view.backgroundColor = kRGB(245, 245, 245);
 
     [self setupUI];
 }
 
-- (void)setupUI
-{
+- (void)setupUI {
     UIButton *clearBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 80, 20)];
     [clearBtn setTitle:@"clear log" forState:UIControlStateNormal];
     [clearBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
@@ -169,24 +154,22 @@
     [self changeModel:self.nativeBtn];
 }
 
-- (void)clearLog
-{
+- (void)clearLog {
     self.textView.text = @"";
 }
 
 #pragma mark - Action
-- (void)changeModel:(UIButton *)sender
-{
+- (void)changeModel:(UIButton *)sender {
     if ((self.nativeBtn.isSelected && sender == self.nativeBtn) || (self.drawBtn.isSelected && sender == self.drawBtn) || (self.preRollBtn.isSelected && sender == self.preRollBtn)) {
         return;
     }
+    
     if (sender.tag == 0) {
         self.nativeBtn.selected = YES;
         self.drawBtn.selected = NO;
         self.preRollBtn.selected = NO;
         self.placementIDs = self.placementIDs_native;
         [self.menuView showSubMenu];
-        
        
     } else if (sender.tag == 1) {
         self.nativeBtn.selected = NO;
@@ -201,9 +184,8 @@
         self.preRollBtn.selected = YES;
         self.placementIDs = self.placementIDs_preRoll;
         [self.menuView hiddenSubMenu];
-        
-      
     }
+    
     [self.nativeBtn setButtonIsSelectBoard];
     [self.drawBtn setButtonIsSelectBoard];
     [self.preRollBtn setButtonIsSelectBoard];
@@ -217,17 +199,17 @@
 }
 
 //广告加载
-- (void)loadAd
-{
+- (void)loadAd {
     CGSize size = CGSizeMake(kScreenW, 350);
     if ([self.placementIDs_draw.allValues containsObject:self.placementID]) {
         size = self.view.frame.size;
     }
     
-    
     NSDictionary *extra = @{
+        // 模板广告size，透传给广告平台，广告平台会返回相近尺寸的最优模板广告
         kATExtraInfoNativeAdSizeKey:[NSValue valueWithCGSize:size],
         kATExtraNativeImageSizeKey:kATExtraNativeImageSize690_388,
+        // 是否开启自适应高度，默认关闭，设置为yes时打开
         kATNativeAdSizeToFitKey:@YES,
         // Start APP
         kATExtraNativeIconImageSizeKey: @(AT_SIZE_72X72),
@@ -237,13 +219,19 @@
 }
 
 //检查广告缓存
-- (void)checkAd
-{
-    // list
+- (void)checkAd {
+    // 获取广告位的状态对象
+    ATCheckLoadModel *checkLoadModel = [[ATAdManager sharedManager] checkNativeLoadStatusForPlacementID:self.placementID];
+    NSLog(@"CheckLoadModel.isLoading:%d--- isReady:%d",checkLoadModel.isLoading,checkLoadModel.isReady);
+    
+    // 查询该广告位的所有缓存信息
     NSArray *array = [[ATAdManager sharedManager] getNativeValidAdsForPlacementID:self.placementID];
     NSLog(@"ValidAds.count:%ld--- ValidAds:%@",array.count,array);
 
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:[[ATAdManager sharedManager] nativeAdReadyForPlacementID:self.placementID] ? @"Ready!" : @"Not Yet!" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    // 判断当前是否存在可展示的广告
+    BOOL isReady = [[ATAdManager sharedManager] nativeAdReadyForPlacementID:self.placementID];
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:isReady ? @"Ready!" : @"Not Yet!" message:nil preferredStyle:UIAlertControllerStyleAlert];
     [self presentViewController:alert animated:YES completion:^{
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [alert dismissViewControllerAnimated:YES completion:nil];
@@ -252,8 +240,7 @@
 }
 
 //广告展示
-- (void)showAd
-{
+- (void)showAd {
     // 判断广告isReady状态
     BOOL ready = [[ATAdManager sharedManager] nativeAdReadyForPlacementID:self.placementID];
     if (ready == NO) {
@@ -278,18 +265,16 @@
         ATNativeADConfiguration *config = [self getNativeADConfiguration];
         // 获取offer广告对象
         ATNativeAdOffer *offer = [[ATAdManager sharedManager] getNativeAdOfferWithPlacementID:self.placementID];
-        // 创建开发者自渲染视图view，同时根据offer信息内容去赋值
+        // 创建自渲染视图view，同时根据offer信息内容去赋值
         ATNativeSelfRenderView *selfRenderView = [self getSelfRenderViewOffer:offer];
         // 创建nativeADView
         ATNativeADView *nativeADView = [self getNativeADView:config offer:offer selfRenderView:selfRenderView];
-        
+        // 绑定自渲染视图控件
         [self prepareWithNativePrepareInfo:selfRenderView nativeADView:nativeADView];
-        
+        // 渲染广告
         [offer rendererWithConfiguration:config selfRenderView:selfRenderView nativeADView:nativeADView];
                 
-        
         ATNativeAdRenderType nativeAdRenderType = [nativeADView getCurrentNativeAdRenderType];
-        
         if (nativeAdRenderType == ATNativeAdRenderExpress) {
             NSLog(@"🔥--原生模板");
             NSLog(@"🔥--原生模板广告宽高：%lf，%lf",offer.nativeAd.nativeExpressAdViewWidth,offer.nativeAd.nativeExpressAdViewHeight);
@@ -304,22 +289,14 @@
             config.mediaViewFrame = CGRectMake(0, kNavigationBarHeight, kScreenW, 350);
         }
         
+        // 展示广告
         ATNativeShowViewController *showVc = [[ATNativeShowViewController alloc] initWithAdView:nativeADView placementID:self.placementID offer:offer];
         
         [self.navigationController pushViewController:showVc animated:YES];
     }
 }
 
-
-- (void)removeAd
-{
-    if (self.adView && self.adView.superview) {
-        [self.adView removeFromSuperview];
-    }
-}
-
-- (void)showLog:(NSString *)logStr
-{
+- (void)showLog:(NSString *)logStr {
     dispatch_async(dispatch_get_main_queue(), ^{
         NSString *logS = self.textView.text;
         NSString *log = nil;
@@ -334,66 +311,60 @@
 }
 
 #pragma mark - Show
-- (ATNativeADConfiguration *)getNativeADConfiguration{
+- (ATNativeADConfiguration *)getNativeADConfiguration {
     ATNativeADConfiguration *config = [[ATNativeADConfiguration alloc] init];
     config.ADFrame = CGRectMake(0, kNavigationBarHeight, kScreenW, 350);
     config.mediaViewFrame = CGRectMake(0, kNavigationBarHeight + 150.0f, kScreenW, 350 - kNavigationBarHeight - 150);
     config.delegate = self;
+    // 开启模板广告自适应高度
     config.sizeToFit = YES;
     config.rootViewController = self;
-    config.context = @{
-        kATNativeAdConfigurationContextAdOptionsViewFrameKey:[NSValue valueWithCGRect:CGRectMake(CGRectGetWidth(self.view.bounds) - 43.0f, .0f, 43.0f, 18.0f)],
-        kATNativeAdConfigurationContextAdLogoViewFrameKey:[NSValue valueWithCGRect:CGRectMake(.0f, .0f, 54.0f, 18.0f)],
-        kATNativeAdConfigurationContextNetworkLogoViewFrameKey:[NSValue valueWithCGRect:CGRectMake(CGRectGetWidth(config.ADFrame) - 54.0f, CGRectGetHeight(config.ADFrame) - 18.0f, 54.0f, 18.0f)]
-    };
     return config;
 }
 
-- (ATNativeSelfRenderView *)getSelfRenderViewOffer:(ATNativeAdOffer *)offer{
-    
+- (ATNativeSelfRenderView *)getSelfRenderViewOffer:(ATNativeAdOffer *)offer {
     ATNativeSelfRenderView *selfRenderView = [[ATNativeSelfRenderView alloc]initWithOffer:offer];
-            
     self.nativeSelfRenderView = selfRenderView;
-    
     selfRenderView.backgroundColor = randomColor;
-    
     return selfRenderView;
 }
 
-- (ATNativeADView *)getNativeADView:(ATNativeADConfiguration *)config offer:(ATNativeAdOffer *)offer selfRenderView:(ATNativeSelfRenderView *)selfRenderView{
+- (ATNativeADView *)getNativeADView:(ATNativeADConfiguration *)config offer:(ATNativeAdOffer *)offer selfRenderView:(ATNativeSelfRenderView *)selfRenderView {
     
-    ATNativeADView *nativeADView = [[ATNativeADView alloc]initWithConfiguration:config currentOffer:offer placementID:self.placementID];
+    // 获取原生广告展示容器视图
+    ATNativeADView *nativeADView = [[ATNativeADView alloc] initWithConfiguration:config currentOffer:offer placementID:self.placementID];
     
-    // 获取mediaView
+    // 获取mediaView，需要自行添加到自渲染视图上
     UIView *mediaView = [nativeADView getMediaView];
 
-    NSMutableArray *array = [@[selfRenderView.iconImageView,selfRenderView.titleLabel,selfRenderView.textLabel,selfRenderView.ctaLabel,selfRenderView.mainImageView] mutableCopy];
+    // 设置需要注册点击事件的UI控件
+    NSMutableArray *clickableViewArray = [@[selfRenderView.iconImageView,
+                                            selfRenderView.titleLabel,
+                                            selfRenderView.textLabel,
+                                            selfRenderView.ctaLabel,
+                                            selfRenderView.mainImageView] mutableCopy];
     
     if (mediaView) {
-        [array addObject:mediaView];
+        [clickableViewArray addObject:mediaView];
+        
+        // 将mediaView添加到自渲染视图上
+        selfRenderView.mediaView = mediaView;
+        [selfRenderView addSubview:mediaView];
+        [mediaView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.left.right.bottom.equalTo(selfRenderView);
+            make.top.equalTo(selfRenderView.mainImageView.mas_top);
+        }];
     }
     
     // 给UI控件注册点击事件
-    [nativeADView registerClickableViewArray:array];
+    [nativeADView registerClickableViewArray:clickableViewArray];
     
     nativeADView.backgroundColor = randomColor;
-
-    
-    selfRenderView.mediaView = mediaView;
-    
-    [selfRenderView addSubview:mediaView];
-    
-    [mediaView mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.left.right.bottom.equalTo(selfRenderView);
-        make.top.equalTo(selfRenderView.mainImageView.mas_top);
-    }];
-
     self.adView = nativeADView;
-    
     return nativeADView;
 }
 
-- (void)prepareWithNativePrepareInfo:(ATNativeSelfRenderView *)selfRenderView nativeADView:(ATNativeADView *)nativeADView{
+- (void)prepareWithNativePrepareInfo:(ATNativeSelfRenderView *)selfRenderView nativeADView:(ATNativeADView *)nativeADView {
     
     ATNativePrepareInfo *info = [ATNativePrepareInfo loadPrepareInfo:^(ATNativePrepareInfo * _Nonnull prepareInfo) {
         prepareInfo.textLabel = selfRenderView.textLabel;
@@ -414,7 +385,7 @@
 
 
 #pragma mark - draw
-- (void)showDrawAd{
+- (void)showDrawAd {
     // Draw
     ATNativeADConfiguration *config = [[ATNativeADConfiguration alloc] init];
     config.ADFrame = CGRectMake(0, kNavigationBarHeight, kScreenW, kScreenH - kNavigationBarHeight);;
@@ -432,15 +403,20 @@
     
     UIView *mediaView = [nativeADView getMediaView];
 
-    NSMutableArray *array = [@[selfRenderView.iconImageView,selfRenderView.titleLabel,selfRenderView.textLabel,selfRenderView.ctaLabel,selfRenderView.mainImageView] mutableCopy];
+    // 设置需要注册点击事件的UI控件
+    NSMutableArray *clickableViewArray = [@[selfRenderView.iconImageView,
+                               selfRenderView.titleLabel,
+                               selfRenderView.textLabel,
+                               selfRenderView.ctaLabel,
+                               selfRenderView.mainImageView] mutableCopy];
     
     if (mediaView) {
-        [array addObject:mediaView];
+        [clickableViewArray addObject:mediaView];
+        
+        mediaView.frame = CGRectMake(0, kNavigationBarHeight + 150.0f, kScreenW, kScreenH - kNavigationBarHeight - 150);
+        [selfRenderView addSubview:mediaView];
     }
-    [nativeADView registerClickableViewArray:array];
-    
-    mediaView.frame = CGRectMake(0, kNavigationBarHeight + 150.0f, kScreenW, kScreenH - kNavigationBarHeight - 150);
-    [selfRenderView addSubview:mediaView];
+    [nativeADView registerClickableViewArray:clickableViewArray];
     
     [selfRenderView addSubview:nativeADView.videoAdView];
     [selfRenderView addSubview:nativeADView.dislikeDrawButton];
@@ -449,14 +425,12 @@
     [selfRenderView addSubview:nativeADView.logoADImageView];
     
     nativeADView.videoAdView.frame = CGRectMake(0, kNavigationBarHeight + 50.0f, kScreenW, kScreenH - kNavigationBarHeight - 50);
-    
     nativeADView.dislikeDrawButton.frame = CGRectMake(kScreenW - 50, kNavigationBarHeight + 80.0f , 50,50);
-    
     nativeADView.adLabel.frame = CGRectMake(kScreenW - 50, kNavigationBarHeight + 150.0f, kScreenW, 50);
-    
     nativeADView.logoImageView.frame = CGRectMake(kScreenW - 50, kNavigationBarHeight + 200.0f, 50, 50);
     nativeADView.logoADImageView.frame = CGRectMake(kScreenW - 50, kNavigationBarHeight + 250.0f, 50, 50);
     
+    // 绑定自渲染视图控件
     ATNativePrepareInfo *info = [ATNativePrepareInfo loadPrepareInfo:^(ATNativePrepareInfo * _Nonnull prepareInfo) {
         prepareInfo.textLabel = selfRenderView.textLabel;
         prepareInfo.advertiserLabel = selfRenderView.advertiserLabel;
@@ -472,10 +446,11 @@
     }];
     [nativeADView prepareWithNativePrepareInfo:info];
     
+    // 渲染广告
     [offer rendererWithConfiguration:config selfRenderView:selfRenderView nativeADView:nativeADView];
     
+    // 展示广告
     ATDrawViewController *drawVc = [[ATDrawViewController alloc] initWithAdView:nativeADView];
-    
     [self.navigationController pushViewController:drawVc animated:YES];
 }
 

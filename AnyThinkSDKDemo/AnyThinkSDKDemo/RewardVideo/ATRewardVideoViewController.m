@@ -9,27 +9,21 @@
 #import <AnyThinkRewardedVideo/AnyThinkRewardedVideo.h>
 #import "ATModelButton.h"
 
-#import "ATInterstitialViewController.h"
-#import "ATSplashViewController.h"
-
-
-@interface ATRewardVideoViewController () <ATAdLoadingDelegate, ATRewardedVideoDelegate>
+@interface ATRewardVideoViewController () <ATRewardedVideoDelegate>
 @property (nonatomic, strong) ATModelButton *modelButton;
 @property (nonatomic, strong) UITextView *textView;
 
 @property (nonatomic, strong) UIView *modelBackView;
 
-@property(nonatomic, strong) ATInterstitialViewController *interstitialViewController;
-
 @property(nonatomic, strong) NSString *selectMenuStr;
+
 @property(nonatomic,assign) bool isAuto;
 
 @end
 
 @implementation ATRewardVideoViewController
 
-- (void)dealloc
-{
+- (void)dealloc {
     NSLog(@"%s", __func__);
 }
 
@@ -42,10 +36,9 @@
     [self setupUI];
     
     [ATRewardedVideoAutoAdManager sharedInstance].delegate = self;
-    self.interstitialViewController = [[ATInterstitialViewController alloc]init];
 }
 
-- (NSDictionary<NSString *,NSString *> *)placementIDs{
+- (NSDictionary<NSString *,NSString *> *)placementIDs {
     
     return @{
         @"All":                 @"b62b41255c3e2c",
@@ -81,13 +74,11 @@
     };
 }
 
-- (void)setupData
-{
+- (void)setupData {
     self.placementID = self.placementIDs.allValues.firstObject;
 }
 
-- (void)setupUI
-{
+- (void)setupUI {
     UIButton *clearBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 80, 20)];
     [clearBtn setTitle:@"clear log" forState:UIControlStateNormal];
     [clearBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
@@ -140,53 +131,62 @@
 }
 
 #pragma mark - Action
-- (void)loadAd
-{
+// 加载广告
+- (void)loadAd {
     NSDictionary *dict = @{
-        kATAdLoadingExtraMediaExtraKey:@"media_val", kATAdLoadingExtraUserIDKey:@"rv_test_user_id",kATAdLoadingExtraRewardNameKey:@"reward_Name",kATAdLoadingExtraRewardAmountKey:@(3),
-        kATExtraInfoRootViewControllerKey:self,
+        /// 以下几个key参数适用于广告平台的服务端激励验证，将被透传
+        kATAdLoadingExtraMediaExtraKey:@"media_val",
+        kATAdLoadingExtraUserIDKey:@"rv_test_user_id",
+        kATAdLoadingExtraRewardNameKey:@"reward_Name",
+        kATAdLoadingExtraRewardAmountKey:@(3),
+        
+        /// 仅游可赢平台可用，当前准备展示广告的rootVC
+//        kATExtraInfoRootViewControllerKey:self,
+        /// 仅游可赢平台可用， 触发的激励类型，1：复活；2：签到；3：道具；4：虚拟货币；5：其他；不设置，则默认为5
 //        kATRewardedVideoKlevinRewardTriggerKey : @1,
+        /// 仅游可赢平台可用， 激励卡秒时长
 //        kATRewardedVideoKlevinRewardTimeKey : @3,
     };
+    
     [[ATAdManager sharedManager] loadADWithPlacementID:self.placementID extra:dict delegate:self];
 }
 
-
-
-- (void)checkAd
-{
-    [[ATAdManager sharedManager] checkRewardedVideoLoadStatusForPlacementID:self.placementID];
-    // list
-    NSArray *array = [[ATAdManager sharedManager] getRewardedVideoValidAdsForPlacementID:self.placementID];
+// 检查广告缓存，是否iReady
+- (void)checkAd {
     
+    // 获取广告位的状态对象
+    ATCheckLoadModel *checkLoadModel = [[ATAdManager sharedManager] checkRewardedVideoLoadStatusForPlacementID:self.placementID];
+    NSLog(@"CheckLoadModel.isLoading:%d--- isReady:%d",checkLoadModel.isLoading,checkLoadModel.isReady);
+
+    // 查询该广告位的所有缓存信息
+    NSArray *array = [[ATAdManager sharedManager] getRewardedVideoValidAdsForPlacementID:self.placementID];
     NSLog(@"ValidAds.count:%ld--- ValidAds:%@",array.count,array);
 
+    // 判断当前是否存在可展示的广告
     BOOL isready = [[ATAdManager sharedManager] rewardedVideoReadyForPlacementID:self.placementID];
     
     if (self.isAuto) {
-        isready   =   [[ATRewardedVideoAutoAdManager sharedInstance]autoLoadRewardedVideoReadyForPlacementID:self.placementID];
-        
+        isready = [[ATRewardedVideoAutoAdManager sharedInstance] autoLoadRewardedVideoReadyForPlacementID:self.placementID];
     }
+    
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:isready ? @"Ready!" : @"Not Yet!" message:nil preferredStyle:UIAlertControllerStyleAlert];
     [self presentViewController:alert animated:YES completion:^{
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [alert dismissViewControllerAnimated:YES completion:nil];
         });
     }];
-
 }
 
-- (void)showAd
-{
-    
+// 展示广告
+- (void)showAd {
     if (self.isAuto) {
-        [[ATRewardedVideoAutoAdManager sharedInstance]  showAutoLoadRewardedVideoWithPlacementID:self.placementID scene:@"f5e549727efc49" inViewController:self delegate:self];
-    }else
-    [[ATAdManager sharedManager] showRewardedVideoWithPlacementID:self.placementID scene:@"f5e54970dc84e6" inViewController:self delegate:self];
+        [[ATRewardedVideoAutoAdManager sharedInstance] showAutoLoadRewardedVideoWithPlacementID:self.placementID scene:@"f5e549727efc49" inViewController:self delegate:self];
+    }else {
+        [[ATAdManager sharedManager] showRewardedVideoWithPlacementID:self.placementID scene:@"f5e54970dc84e6" inViewController:self delegate:self];
+    }
 }
 
-- (void)showLog:(NSString *)logStr
-{
+- (void)showLog:(NSString *)logStr {
     dispatch_async(dispatch_get_main_queue(), ^{
         NSString *logS = self.textView.text;
         NSString *log = nil;
@@ -200,191 +200,111 @@
     });
 }
 
-- (void)clearLog
-{
+- (void)clearLog {
     self.textView.text = @"";
 }
 
--(void)setToAutoLoadMode{
-  
-    self.textView.hidden = true;
-    self.menuView.hidden = true;
-
-    self.footView.loadBtn.hidden = true;
-}
-
--(void)checkAutoLoad{
-    
-    Class class = NSClassFromString(@"ATRewardVideoAutoAdViewController");
-    UIViewController *con = [class new];
-    [con setValue:self.placementID forKey:@"placementID"];
-    [self.navigationController pushViewController:con animated:YES];
-    
-}
 
 #pragma mark - loading delegate
-- (void)didStartLoadingADSourceWithPlacementID:(NSString *)placementID extra:(NSDictionary*)extra{
-    
+- (void)didStartLoadingADSourceWithPlacementID:(NSString *)placementID extra:(NSDictionary*)extra {
     NSLog(@"广告源--AD--开始--ATRewardVideoViewController::didStartLoadingADSourceWithPlacementID:%@---extra:%@", placementID,extra);
- 
-//    [self showLog:[NSString stringWithFormat:@"didStartLoadingADSourceWithPlacementID:%@---extra:%@", placementID,extra]];
 }
 
-- (void)didFinishLoadingADSourceWithPlacementID:(NSString *)placementID extra:(NSDictionary*)extra{
-    
+- (void)didFinishLoadingADSourceWithPlacementID:(NSString *)placementID extra:(NSDictionary*)extra {
     NSLog(@"广告源--AD--完成--ATRewardVideoViewController::didFinishLoadingADSourceWithPlacementID:%@---extra:%@", placementID,extra);
-    
-   
-    
-//    [self showLog:[NSString stringWithFormat:@"didFinishLoadingADSourceWithPlacementID:%@---extra:%@", placementID,extra]];
-    
 }
 
-- (void)didFailToLoadADSourceWithPlacementID:(NSString*)placementID extra:(NSDictionary*)extra error:(NSError*)error{
+- (void)didFailToLoadADSourceWithPlacementID:(NSString*)placementID extra:(NSDictionary*)extra error:(NSError*)error {
     NSLog(@"广告源--AD--失败--ATRewardVideoViewController::didFailToLoadADSourceWithPlacementID:%@---error:%@", placementID,error);
-    
-
-    
-//    [self showLog:[NSString stringWithFormat:@"didFailToLoadADSourceWithPlacementID:%@--%@", placementID],error];
-    
 }
 
 // bidding
-- (void)didStartBiddingADSourceWithPlacementID:(NSString *)placementID extra:(NSDictionary*)extra{
-    
+- (void)didStartBiddingADSourceWithPlacementID:(NSString *)placementID extra:(NSDictionary*)extra {
     NSLog(@"广告源--bid--开始--ATRewardVideoViewController::didStartBiddingADSourceWithPlacementID:%@---extra:%@", placementID,extra);
-    
-
-//    [self showLog:[NSString stringWithFormat:@"didStartBiddingADSourceWithPlacementID:%@---extra:%@", placementID,extra]];
-    
 }
 
-- (void)didFinishBiddingADSourceWithPlacementID:(NSString *)placementID extra:(NSDictionary*)extra{
-    
+- (void)didFinishBiddingADSourceWithPlacementID:(NSString *)placementID extra:(NSDictionary*)extra {
     NSLog(@"广告源--bid--完成--ATRewardVideoViewController::didFinishBiddingADSourceWithPlacementID:%@--extra:%@", placementID,extra);
-
-    
-//    [self showLog:[NSString stringWithFormat:@"didFinishBiddingADSourceWithPlacementID:%@---extra:%@", placementID,extra]];
-    
 }
 
-- (void)didFailBiddingADSourceWithPlacementID:(NSString*)placementID extra:(NSDictionary*)extra error:(NSError*)error{
-    
+- (void)didFailBiddingADSourceWithPlacementID:(NSString*)placementID extra:(NSDictionary*)extra error:(NSError*)error {
     NSLog(@"广告源--bid--失败--ATRewardVideoViewController::didFailBiddingADSourceWithPlacementID:%@--error:%@", placementID,error);
-
-    
-//    [self showLog:[NSString stringWithFormat:@"didFailBiddingADSourceWithPlacementID:%@", placementID]];
 }
-
 
 -(void) didFinishLoadingADWithPlacementID:(NSString *)placementID {
     NSLog(@"ATRewardedVideoViewController::didFinishLoadingADWithPlacementID:%@", placementID);
-    
     [self showLog:[NSString stringWithFormat:@"didFinishLoading:%@", placementID]];
-    
 }
 
 -(void) didFailToLoadADWithPlacementID:(NSString*)placementID error:(NSError*)error {
-    
     NSLog(@"ATRewardedVideoViewController::didFailToLoadADWithPlacementID:%@ error:%@", placementID, error);
-    
     [self showLog:[NSString stringWithFormat:@"didFailToLoad:%@ errorCode:%ld", placementID, (long)error.code]];
-    
-
 }
 
 #pragma mark - showing delegate
 -(void) rewardedVideoDidRewardSuccessForPlacemenID:(NSString *)placementID extra:(NSDictionary *)extra{
     NSLog(@"ATRewardedVideoViewController::rewardedVideoDidRewardSuccessForPlacemenID:%@ extra:%@",placementID,extra);
-    
     [self showLog:[NSString stringWithFormat:@"rewardedVideoDidRewardSuccess:%@", placementID]];
-    
- 
 }
 
 -(void) rewardedVideoDidStartPlayingForPlacementID:(NSString *)placementID extra:(NSDictionary *)extra {
     NSLog(@"ATRewardedVideoViewController::rewardedVideoDidStartPlayingForPlacementID:%@ extra:%@", placementID, extra);
-    UIViewController *vc = self.presentedViewController;
-    vc = nil;
-    
     [self showLog:[NSString stringWithFormat:@"rewardedVideoDidStartPlaying:%@", placementID]];
-    
-    
 }
-
 
 -(void) rewardedVideoDidEndPlayingForPlacementID:(NSString*)placementID extra:(NSDictionary *)extra {
     NSLog(@"ATRewardedVideoViewController::rewardedVideoDidEndPlayingForPlacementID:%@ extra:%@", placementID, extra);
-    
     [self showLog:[NSString stringWithFormat:@"rewardedVideoDidEndPlaying:%@", placementID]];
-    
-   
 }
 
 -(void) rewardedVideoDidFailToPlayForPlacementID:(NSString*)placementID error:(NSError*)error extra:(NSDictionary *)extra {
     NSLog(@"ATRewardedVideoViewController::rewardedVideoDidFailToPlayForPlacementID:%@ error:%@ extra:%@", placementID, error, extra);
-    
     [self showLog:[NSString stringWithFormat:@"rewardedVideoDidFailToPlay:%@ errorCode:%ld", placementID, (long)error.code]];
-    
-    
 }
 
 -(void) rewardedVideoDidCloseForPlacementID:(NSString*)placementID rewarded:(BOOL)rewarded extra:(NSDictionary *)extra {
     NSLog(@"ATRewardedVideoViewController::rewardedVideoDidCloseForPlacementID:%@, rewarded:%@ extra:%@", placementID, rewarded ? @"yes" : @"no", extra);
-    
     [self showLog:[NSString stringWithFormat:@"rewardedVideoDidClose:%@, rewarded:%@", placementID, rewarded ? @"yes" : @"no"]];
 }
 
-
 -(void) rewardedVideoDidClickForPlacementID:(NSString*)placementID extra:(NSDictionary *)extra {
     NSLog(@"ATRewardedVideoViewController::rewardedVideoDidClickForPlacementID:%@ extra:%@", placementID, extra);
-    
     [self showLog:[NSString stringWithFormat:@"rewardedVideoDidClick:%@", placementID]];
-    
-  
 }
 
 - (void)rewardedVideoDidDeepLinkOrJumpForPlacementID:(NSString *)placementID extra:(NSDictionary *)extra result:(BOOL)success {
     NSLog(@"ATRewardedVideoViewController:: rewardedVideoDidDeepLinkOrJumpForPlacementID:placementID:%@ with extra: %@, success:%@", placementID,extra, success ? @"YES" : @"NO");
-    
     [self showLog:[NSString stringWithFormat:@"rewardedVideoDidDeepLinkOrJump:%@, success:%@", placementID, success ? @"YES" : @"NO"]];
- 
 }
 
 // rewarded video again
 -(void) rewardedVideoAgainDidStartPlayingForPlacementID:(NSString*)placementID extra:(NSDictionary*)extra {
     NSLog(@"ATRewardedVideoViewController::rewardedVideoAgainDidStartPlayingForPlacementID:%@ extra:%@", placementID, extra);
-    
     [self showLog:[NSString stringWithFormat:@"rewardedVideoAgainDidStartPlaying:%@", placementID]];
 }
 
 -(void) rewardedVideoAgainDidEndPlayingForPlacementID:(NSString*)placementID extra:(NSDictionary*)extra {
     NSLog(@"ATRewardedVideoViewController::rewardedVideoAgainDidEndPlayingForPlacementID:%@ extra:%@", placementID, extra);
-    
     [self showLog:[NSString stringWithFormat:@"rewardedVideoAgainDidEndPlaying:%@", placementID]];
 }
 
 -(void) rewardedVideoAgainDidFailToPlayForPlacementID:(NSString*)placementID error:(NSError*)error extra:(NSDictionary*)extra {
     NSLog(@"ATRewardedVideoViewController::rewardedVideoAgainDidFailToPlayForPlacementID:%@ extra:%@", placementID, extra);
-    
     [self showLog:[NSString stringWithFormat:@"rewardedVideoAgainDidFailToPlay:%@ errorCode:%ld", placementID, (long)error.code]];
 }
 
 -(void) rewardedVideoAgainDidClickForPlacementID:(NSString*)placementID extra:(NSDictionary*)extra {
     NSLog(@"ATRewardedVideoViewController::rewardedVideoAgainDidClickForPlacementID:%@ extra:%@", placementID, extra);
-    
     [self showLog:[NSString stringWithFormat:@"rewardedVideoAgainDidClick:%@", placementID]];
 }
 
 -(void) rewardedVideoAgainDidRewardSuccessForPlacemenID:(NSString*)placementID extra:(NSDictionary*)extra {
     NSLog(@"ATRewardedVideoViewController::rewardedVideoAgainDidRewardSuccessForPlacemenID:%@ extra:%@", placementID, extra);
-    
     [self showLog:[NSString stringWithFormat:@"rewardedVideoAgainDidRewardSuccess:%@", placementID]];
 }
 
 #pragma mark - lazy
-- (ATADFootView *)footView
-{
+- (ATADFootView *)footView {
     if (!_footView) {
         _footView = [[ATADFootView alloc] init];
         if (![NSStringFromClass([self class]) containsString:@"Auto"]) {
@@ -392,7 +312,6 @@
             [_footView.readyBtn setTitle:@"Is Rewarded Video AD Ready" forState:UIControlStateNormal];
             [_footView.showBtn setTitle:@"Show Rewarded Video AD" forState:UIControlStateNormal];
         }
-      
         
         __weak typeof(self) weakSelf = self;
         [_footView setClickLoadBlock:^{
@@ -411,8 +330,7 @@
     return _footView;
 }
 
-- (UIView *)modelBackView
-{
+- (UIView *)modelBackView {
     if (!_modelBackView) {
         _modelBackView = [[UIView alloc] init];
         _modelBackView.backgroundColor = [UIColor whiteColor];
@@ -422,8 +340,7 @@
     return _modelBackView;
 }
 
-- (ATModelButton *)modelButton
-{
+- (ATModelButton *)modelButton {
     if (!_modelButton) {
         _modelButton = [[ATModelButton alloc] init];
         _modelButton.backgroundColor = [UIColor whiteColor];
@@ -433,8 +350,7 @@
     return _modelButton;
 }
 
-- (ATMenuView *)menuView
-{
+- (ATMenuView *)menuView {
     if (!_menuView) {
         _menuView = [[ATMenuView alloc] initWithMenuList:self.placementIDs.allKeys subMenuList:nil];
         _menuView.turnAuto = true;
@@ -461,7 +377,7 @@
     return _menuView;
 }
 
--(void)turnOnAuto:(Boolean)isOn {
+- (void)turnOnAuto:(Boolean)isOn {
     self.footView.loadBtn.hidden = isOn;
     if (isOn) {
         [[ATRewardedVideoAutoAdManager sharedInstance] addAutoLoadAdPlacementIDArray:@[self.placementID]];
@@ -472,8 +388,7 @@
     self.isAuto = isOn;
 }
 
-- (UITextView *)textView
-{
+- (UITextView *)textView {
     if (!_textView) {
         _textView = [[UITextView alloc] init];
         _textView.backgroundColor = [UIColor whiteColor];

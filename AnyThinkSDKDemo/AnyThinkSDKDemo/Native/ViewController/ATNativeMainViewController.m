@@ -45,7 +45,7 @@
         @{
             @"image":@"native",
             @"title":@"Native SelfRender",
-            @"class":@"ATNativeViewController",
+            @"class":@"ATNativeSelfRenderViewController",
         },@{
             @"image":@"native",
             @"title":@"Native Express",
