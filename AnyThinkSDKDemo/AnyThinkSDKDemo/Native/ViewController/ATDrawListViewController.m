@@ -13,7 +13,6 @@
 #import "ATNativeSelfRenderView.h"
 #import "ATDemoOfferAdMode.h"
 #import "MJRefresh.h"
-#import "ATVideoPlayerManager.h"
 
 @interface ATDrawListViewController ()<UITableViewDelegate,UITableViewDataSource,ATNativeADDelegate>
 
@@ -32,7 +31,6 @@
     NSLog(@"ATDrawListViewController dealloc");
 }
 
-
 #pragma mark - life cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -42,7 +40,6 @@
     self.placementID = @"b62b41eec64f1e";
     
     [self setUI];
-    [self setLayout];
     [self footerRefresh];
 }
 
@@ -53,6 +50,9 @@
 #if defined(__IPHONE_11_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_11_0
     if ([self.tableView respondsToSelector:@selector(setContentInsetAdjustmentBehavior:)]) {
         if (@available(iOS 11.0, *)) {
+            self.tableView.estimatedRowHeight = 0;
+            self.tableView.estimatedSectionFooterHeight = 0;
+            self.tableView.estimatedSectionHeaderHeight = 0;
             self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
         }
     }
@@ -61,24 +61,20 @@
 #endif
     
     [self.view addSubview:self.tableView];
+    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.view);
+    }];
     
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     btn.frame = CGRectMake(20, kNavigationBarHeight, 50, 50);
     [btn setImage:[UIImage imageNamed:@"returnImage"] forState:UIControlStateNormal];
     [btn addTarget:self action:@selector(closeVC) forControlEvents:UIControlEventTouchUpInside];
-    [self.view bringSubviewToFront:btn];
     [self.view addSubview:btn];
+    [self.view bringSubviewToFront:btn];
 }
 
 - (void)closeVC {
-    [[ATVideoPlayerManager sharedManager] pauseVideo];
     [self dismissViewControllerAnimated:YES completion:nil];
-}
-
-- (void)setLayout {
-    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.view);
-    }];
 }
 
 - (void)loadNativeAd {
@@ -128,6 +124,89 @@
     return offer;
 }
 
+#pragma mark - private
+- (ATNativeADView *)getNativeADView:(NSString *)placementID nativeAdOffer:(ATNativeAdOffer *)offer{
+    
+    ATNativeADConfiguration *config = [self getNativeADConfiguration];
+    ATNativeSelfRenderView *selfRenderView = [self getSelfRenderViewOffer:offer];
+    ATNativeADView *nativeADView = [self getNativeADView:config offer:offer selfRenderView:selfRenderView];
+    
+    [self prepareWithNativePrepareInfo:selfRenderView nativeADView:nativeADView];
+
+    [offer rendererWithConfiguration:config selfRenderView:selfRenderView nativeADView:nativeADView];
+    
+    return nativeADView;
+}
+
+- (ATNativeADConfiguration *)getNativeADConfiguration{
+    ATNativeADConfiguration *config = [[ATNativeADConfiguration alloc] init];
+    config.ADFrame = CGRectMake(0, 0, kScreenW, kScreenH);
+    config.delegate = self;
+    config.rootViewController = self;
+    return config;
+}
+
+- (ATNativeSelfRenderView *)getSelfRenderViewOffer:(ATNativeAdOffer *)offer{
+    
+    ATNativeSelfRenderView *selfRenderView = [[ATNativeSelfRenderView alloc] initWithOffer:offer];
+ 
+    selfRenderView.backgroundColor = randomColor;
+    
+    return selfRenderView;
+}
+
+- (ATNativeADView *)getNativeADView:(ATNativeADConfiguration *)config offer:(ATNativeAdOffer *)offer selfRenderView:(ATNativeSelfRenderView *)selfRenderView{
+    
+    ATNativeADView *nativeADView = [[ATNativeADView alloc]initWithConfiguration:config currentOffer:offer placementID:self.placementID];
+    
+    UIView *mediaView = [nativeADView getMediaView];
+
+    NSMutableArray *array = [@[selfRenderView.iconImageView,selfRenderView.titleLabel,selfRenderView.textLabel,selfRenderView.ctaLabel,selfRenderView.mainImageView] mutableCopy];
+    
+    if (mediaView) {
+        mediaView.frame = CGRectMake(0, kNavigationBarHeight + 150.0f, kScreenW, kScreenH - 150);
+        [selfRenderView addSubview:mediaView];
+        [array addObject:mediaView];
+    }
+    [nativeADView registerClickableViewArray:array];
+    
+    [selfRenderView addSubview:nativeADView.videoAdView];
+    [selfRenderView addSubview:nativeADView.dislikeDrawButton];
+    [selfRenderView addSubview:nativeADView.adLabel];
+    [selfRenderView addSubview:nativeADView.logoImageView];
+    [selfRenderView addSubview:nativeADView.logoADImageView];
+    
+    nativeADView.videoAdView.frame = CGRectMake(0, 0, kScreenW, kScreenH);
+    
+    nativeADView.dislikeDrawButton.frame = CGRectMake(kScreenW - 50, kNavigationBarHeight + 80.0f, 50,50);
+    
+    nativeADView.adLabel.frame = CGRectMake(kScreenW - 50, kNavigationBarHeight + 150.0f, 50, 50);
+    
+    nativeADView.logoImageView.frame = CGRectMake(kScreenW - 50, kNavigationBarHeight + 200.0f, 50, 50);
+    nativeADView.logoADImageView.frame = CGRectMake(kScreenW - 50, kNavigationBarHeight + 250.0f, 50, 50);
+    
+    return nativeADView;
+}
+
+- (void)prepareWithNativePrepareInfo:(ATNativeSelfRenderView *)selfRenderView nativeADView:(ATNativeADView *)nativeADView{
+    
+    ATNativePrepareInfo *info = [ATNativePrepareInfo loadPrepareInfo:^(ATNativePrepareInfo * _Nonnull prepareInfo) {
+        prepareInfo.textLabel = selfRenderView.textLabel;
+        prepareInfo.advertiserLabel = selfRenderView.advertiserLabel;
+        prepareInfo.titleLabel = selfRenderView.titleLabel;
+        prepareInfo.ratingLabel = selfRenderView.ratingLabel;
+        prepareInfo.iconImageView = selfRenderView.iconImageView;
+        prepareInfo.mainImageView = selfRenderView.mainImageView;
+        prepareInfo.logoImageView = selfRenderView.logoImageView;
+        prepareInfo.sponsorImageView = selfRenderView.sponsorImageView;
+        prepareInfo.dislikeButton = selfRenderView.dislikeButton;
+        prepareInfo.ctaLabel = selfRenderView.ctaLabel;
+        prepareInfo.mediaView = selfRenderView.mediaView;
+    }];
+    
+    [nativeADView prepareWithNativePrepareInfo:info];
+}
+
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return self.dataSourceArray.count;
@@ -147,19 +226,16 @@
         if (cell == nil) {
             cell = [[ATDrawListAdCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"ATDrawListAdCellID"];
         }
-        NSLog(@"adView之前--%@",cell.drawAdView);
+
         cell.drawAdView = offerMode.nativeADView;
-        NSLog(@"adView之后--%@",cell.drawAdView);
 
         cell.backgroundColor = randomColor;
         return cell;
     }else{
         ATDrawListOtherCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ATDrawListOtherCellID"];
-        cell.cellData = offerMode;
         return cell;
     }
 }
-
 
 #pragma mark - Ad Delegate
 - (void)didFinishLoadingADWithPlacementID:(NSString *)placementID {
@@ -259,90 +335,6 @@
                    placementID:(NSString *)placementID
                          extra:(NSDictionary *)extra{
     NSLog(@"🔥---原生--关闭详情页");
-}
-
-#pragma mark - private
-- (ATNativeADView *)getNativeADView:(NSString *)placementID nativeAdOffer:(ATNativeAdOffer *)offer{
-    
-    ATNativeADConfiguration *config = [self getNativeADConfiguration];
-    ATNativeSelfRenderView *selfRenderView = [self getSelfRenderViewOffer:offer];
-    ATNativeADView *nativeADView = [self getNativeADView:config offer:offer selfRenderView:selfRenderView];
-    
-    [self prepareWithNativePrepareInfo:selfRenderView nativeADView:nativeADView];
-
-    [offer rendererWithConfiguration:config selfRenderView:selfRenderView nativeADView:nativeADView];
-    
-    return nativeADView;
-}
-
-- (ATNativeADConfiguration *)getNativeADConfiguration{
-    ATNativeADConfiguration *config = [[ATNativeADConfiguration alloc] init];
-    config.ADFrame = CGRectMake(0, 0, kScreenW, kScreenH);
-    config.delegate = self;
-    config.mediaViewFrame = CGRectMake(0, 150.0f, kScreenW, kScreenH - 150);
-    config.rootViewController = self;
-    return config;
-}
-
-- (ATNativeSelfRenderView *)getSelfRenderViewOffer:(ATNativeAdOffer *)offer{
-    
-    ATNativeSelfRenderView *selfRenderView = [[ATNativeSelfRenderView alloc]initWithOffer:offer];
- 
-    selfRenderView.backgroundColor = randomColor;
-    
-    return selfRenderView;
-}
-
-- (ATNativeADView *)getNativeADView:(ATNativeADConfiguration *)config offer:(ATNativeAdOffer *)offer selfRenderView:(ATNativeSelfRenderView *)selfRenderView{
-    
-    ATNativeADView *nativeADView = [[ATNativeADView alloc]initWithConfiguration:config currentOffer:offer placementID:self.placementID];
-    
-    UIView *mediaView = [nativeADView getMediaView];
-
-    NSMutableArray *array = [@[selfRenderView.iconImageView,selfRenderView.titleLabel,selfRenderView.textLabel,selfRenderView.ctaLabel,selfRenderView.mainImageView] mutableCopy];
-    
-    if (mediaView) {
-        mediaView.frame = CGRectMake(0, kNavigationBarHeight + 150.0f, kScreenW, kScreenH - 150);
-        [selfRenderView addSubview:mediaView];
-        [array addObject:mediaView];
-    }
-    [nativeADView registerClickableViewArray:array];
-    
-    [selfRenderView addSubview:nativeADView.videoAdView];
-    [selfRenderView addSubview:nativeADView.dislikeDrawButton];
-    [selfRenderView addSubview:nativeADView.adLabel];
-    [selfRenderView addSubview:nativeADView.logoImageView];
-    [selfRenderView addSubview:nativeADView.logoADImageView];
-    
-    nativeADView.videoAdView.frame = CGRectMake(0, 0, kScreenW, kScreenH);
-    
-    nativeADView.dislikeDrawButton.frame = CGRectMake(kScreenW - 50, kNavigationBarHeight + 80.0f, 50,50);
-    
-    nativeADView.adLabel.frame = CGRectMake(kScreenW - 50, kNavigationBarHeight + 150.0f, 50, 50);
-    
-    nativeADView.logoImageView.frame = CGRectMake(kScreenW - 50, kNavigationBarHeight + 200.0f, 50, 50);
-    nativeADView.logoADImageView.frame = CGRectMake(kScreenW - 50, kNavigationBarHeight + 250.0f, 50, 50);
-    
-    return nativeADView;
-}
-
-- (void)prepareWithNativePrepareInfo:(ATNativeSelfRenderView *)selfRenderView nativeADView:(ATNativeADView *)nativeADView{
-    
-    ATNativePrepareInfo *info = [ATNativePrepareInfo loadPrepareInfo:^(ATNativePrepareInfo * _Nonnull prepareInfo) {
-        prepareInfo.textLabel = selfRenderView.textLabel;
-        prepareInfo.advertiserLabel = selfRenderView.advertiserLabel;
-        prepareInfo.titleLabel = selfRenderView.titleLabel;
-        prepareInfo.ratingLabel = selfRenderView.ratingLabel;
-        prepareInfo.iconImageView = selfRenderView.iconImageView;
-        prepareInfo.mainImageView = selfRenderView.mainImageView;
-        prepareInfo.logoImageView = selfRenderView.logoImageView;
-        prepareInfo.sponsorImageView = selfRenderView.sponsorImageView;
-        prepareInfo.dislikeButton = selfRenderView.dislikeButton;
-        prepareInfo.ctaLabel = selfRenderView.ctaLabel;
-        prepareInfo.mediaView = selfRenderView.mediaView;
-    }];
-    
-    [nativeADView prepareWithNativePrepareInfo:info];
 }
 
 #pragma mark - lazy

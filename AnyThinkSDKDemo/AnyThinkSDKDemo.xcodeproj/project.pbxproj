@@ -26,11 +26,8 @@
 		9B1A9F6A288FCA4300CC16FA /* ATDrawListAdCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B1A9F68288FCA4200CC16FA /* ATDrawListAdCell.m */; };
 		9B1A9F6B288FCA4300CC16FA /* ATDrawListAdCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B1A9F69288FCA4200CC16FA /* ATDrawListAdCell.xib */; };
 		9B6DF73D259436DD004E9FDB /* ATSplashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B6DF73C259436DD004E9FDB /* ATSplashViewController.m */; };
-		9B9FEC0B288FE88300B905ED /* testvideo1.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 9B9FEC06288FE88200B905ED /* testvideo1.mp4 */; };
-		9B9FEC0D288FE88300B905ED /* testvideo2.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 9B9FEC08288FE88300B905ED /* testvideo2.mp4 */; };
 		9B9FEC11288FE91A00B905ED /* ATDrawListOtherCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B9FEC0F288FE91A00B905ED /* ATDrawListOtherCell.m */; };
 		9B9FEC12288FE91A00B905ED /* ATDrawListOtherCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B9FEC10288FE91A00B905ED /* ATDrawListOtherCell.xib */; };
-		9B9FEC16288FF5E000B905ED /* ATVideoPlayerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B9FEC15288FF5E000B905ED /* ATVideoPlayerManager.m */; };
 		9B9FEC182890188600B905ED /* testvideo0.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 9B9FEC172890188600B905ED /* testvideo0.mp4 */; };
 		9B9FEC1B2890199200B905ED /* ATPasterSelfRenderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B9FEC1A2890199200B905ED /* ATPasterSelfRenderView.m */; };
 		9B9FEC2128925F3200B905ED /* ATNativeExpressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B9FEC2028925F3200B905ED /* ATNativeExpressViewController.m */; };
@@ -112,13 +109,9 @@
 		9B1A9F69288FCA4200CC16FA /* ATDrawListAdCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ATDrawListAdCell.xib; sourceTree = "<group>"; };
 		9B6DF73B259436DD004E9FDB /* ATSplashViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATSplashViewController.h; sourceTree = "<group>"; };
 		9B6DF73C259436DD004E9FDB /* ATSplashViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATSplashViewController.m; sourceTree = "<group>"; };
-		9B9FEC06288FE88200B905ED /* testvideo1.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = testvideo1.mp4; sourceTree = "<group>"; };
-		9B9FEC08288FE88300B905ED /* testvideo2.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = testvideo2.mp4; sourceTree = "<group>"; };
 		9B9FEC0E288FE91A00B905ED /* ATDrawListOtherCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ATDrawListOtherCell.h; sourceTree = "<group>"; };
 		9B9FEC0F288FE91A00B905ED /* ATDrawListOtherCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ATDrawListOtherCell.m; sourceTree = "<group>"; };
 		9B9FEC10288FE91A00B905ED /* ATDrawListOtherCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ATDrawListOtherCell.xib; sourceTree = "<group>"; };
-		9B9FEC14288FF5E000B905ED /* ATVideoPlayerManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ATVideoPlayerManager.h; sourceTree = "<group>"; };
-		9B9FEC15288FF5E000B905ED /* ATVideoPlayerManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ATVideoPlayerManager.m; sourceTree = "<group>"; };
 		9B9FEC172890188600B905ED /* testvideo0.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = testvideo0.mp4; sourceTree = "<group>"; };
 		9B9FEC192890199200B905ED /* ATPasterSelfRenderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ATPasterSelfRenderView.h; sourceTree = "<group>"; };
 		9B9FEC1A2890199200B905ED /* ATPasterSelfRenderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ATPasterSelfRenderView.m; sourceTree = "<group>"; };
@@ -283,7 +276,6 @@
 		9B1A9D5D288E480D00CC16FA /* Native */ = {
 			isa = PBXGroup;
 			children = (
-				9B9FEC13288FF5BC00B905ED /* Manager */,
 				9B1A9D60288E485100CC16FA /* ViewController */,
 				9B1A9D5F288E484600CC16FA /* Model */,
 				9B1A9D5E288E482300CC16FA /* View */,
@@ -428,19 +420,8 @@
 			isa = PBXGroup;
 			children = (
 				9B9FEC172890188600B905ED /* testvideo0.mp4 */,
-				9B9FEC06288FE88200B905ED /* testvideo1.mp4 */,
-				9B9FEC08288FE88300B905ED /* testvideo2.mp4 */,
 			);
 			path = video;
-			sourceTree = "<group>";
-		};
-		9B9FEC13288FF5BC00B905ED /* Manager */ = {
-			isa = PBXGroup;
-			children = (
-				9B9FEC14288FF5E000B905ED /* ATVideoPlayerManager.h */,
-				9B9FEC15288FF5E000B905ED /* ATVideoPlayerManager.m */,
-			);
-			path = Manager;
 			sourceTree = "<group>";
 		};
 		9BBD008B24863047009EAD66 = {
@@ -552,10 +533,8 @@
 				9BBD00A72486304C009EAD66 /* LaunchScreen.storyboard in Resources */,
 				E0F3B8A8286D75B7007CF5AB /* ATNativeListOtherCell.xib in Resources */,
 				9BBD00A42486304C009EAD66 /* Assets.xcassets in Resources */,
-				9B9FEC0D288FE88300B905ED /* testvideo2.mp4 in Resources */,
 				9B9FEC12288FE91A00B905ED /* ATDrawListOtherCell.xib in Resources */,
 				9BBD00A224863048009EAD66 /* Main.storyboard in Resources */,
-				9B9FEC0B288FE88300B905ED /* testvideo1.mp4 in Resources */,
 				9B9FEC182890188600B905ED /* testvideo0.mp4 in Resources */,
 				9B1A9F6B288FCA4300CC16FA /* ATDrawListAdCell.xib in Resources */,
 				E0F3B8A3286D7591007CF5AB /* ATNaviewListAdCell.xib in Resources */,
@@ -652,7 +631,6 @@
 				E0F3B8AB286D973F007CF5AB /* ATDemoOfferAdMode.m in Sources */,
 				04CF3220280007900083B5AA /* ATHomeFootView.m in Sources */,
 				9BBD009C24863048009EAD66 /* SceneDelegate.m in Sources */,
-				9B9FEC16288FF5E000B905ED /* ATVideoPlayerManager.m in Sources */,
 				9BBD00BE248630C8009EAD66 /* ATBannerViewController.m in Sources */,
 				9B9FEC2128925F3200B905ED /* ATNativeExpressViewController.m in Sources */,
 				04CF323F28000FB70083B5AA /* ATNativeRenderView.m in Sources */,

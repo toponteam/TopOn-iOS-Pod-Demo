@@ -10,9 +10,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class ATDemoOfferAdMode;
 @interface ATDrawListOtherCell : UITableViewCell
-@property (nonatomic, strong) ATDemoOfferAdMode *cellData;
+
 @end
 
 NS_ASSUME_NONNULL_END

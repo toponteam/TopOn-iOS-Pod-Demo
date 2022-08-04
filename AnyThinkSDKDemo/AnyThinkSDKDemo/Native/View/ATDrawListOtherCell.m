@@ -7,12 +7,9 @@
 //
 
 #import "ATDrawListOtherCell.h"
-#import <AVFoundation/AVFoundation.h>
-#import "ATDemoOfferAdMode.h"
-#import "ATVideoPlayerManager.h"
 
 @interface ATDrawListOtherCell ()
-@property (weak, nonatomic) IBOutlet UIView *contanerView;
+@property (weak, nonatomic) IBOutlet UIImageView *logoImageView;
 @end
 
 @implementation ATDrawListOtherCell
@@ -20,35 +17,12 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     self.selectionStyle = UITableViewCellSelectionStyleNone;
-    self.backgroundColor = [UIColor blackColor];
     
-    [self layoutTopView];
+    self.backgroundColor = randomColor;
+    
+    self.logoImageView.layer.cornerRadius = 10.0f;
+    self.logoImageView.layer.masksToBounds = YES;
 }
-
-- (void)setCellData:(ATDemoOfferAdMode *)cellData {
-    if ([_cellData.drawVideoUrlStr isEqualToString:cellData.drawVideoUrlStr]) {
-        return;
-    }
-    _cellData = cellData;
-    [[ATVideoPlayerManager sharedManager] refreshContanerView:self withVideoUrlStr:_cellData.drawVideoUrlStr];
-}
-
-#pragma mark - layout
--(void)layoutTopView {
-    UITapGestureRecognizer *tapsVideo = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapVideo:)];
-    tapsVideo.numberOfTapsRequired = 1;
-    [self.contentView addGestureRecognizer:tapsVideo];
-}
-
--(void)tapVideo:(UITapGestureRecognizer *)gesture {
-    NSLog(@"video is click");
-    if ([ATVideoPlayerManager sharedManager].isPlaying) {
-        [[ATVideoPlayerManager sharedManager] pauseVideo];
-    } else {
-        [[ATVideoPlayerManager sharedManager] playVideo];
-    }
-}
-
 
 #pragma mark - dealloc
 -(void)dealloc {
