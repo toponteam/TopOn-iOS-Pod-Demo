@@ -38,6 +38,9 @@ extern NSString *const kMyOfferPlacement;
 extern NSString *const kKidozPlacement;
 extern NSString *const kMyTargetPlacement;
 extern NSString *const kDirectOfferPlacement;
+extern NSString *const kYandexPlacement;
+
+
 
 @interface ATBannerViewController : UIViewController
 @end

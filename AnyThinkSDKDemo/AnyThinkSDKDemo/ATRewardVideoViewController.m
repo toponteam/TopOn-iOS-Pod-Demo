@@ -30,6 +30,7 @@ NSString *const kADXPlacement = @"ADX";
 NSString *const kKidozPlacement = @"Kidoz";
 NSString *const kMyTargetPlacement = @"MyTarget";
 
+
 NSString *const kDirectOfferPlacement = @"DirectOffer";
 
 static NSString *const kPlacement0ID = @"b5ad9ba61dcb39";
@@ -65,6 +66,7 @@ static NSString *const kKidozPlacementID = @"b5feaa2c0a6191";
 static NSString *const kMyTargetPlacementID = @"b5feaa2f32f161";
 static NSString *const kKlevinPlacementID = @"b613affe9af84c";
 static NSString *const kDirectOfferPlacementID = @"b61bffca756796";
+static NSString *const kYandexPlacementID = @"b62d8baa342db2";
 
 @interface ATRewardVideoViewController () <ATAdLoadingDelegate, ATRewardedVideoDelegate>
 @property (nonatomic, strong) ATModelButton *modelButton;
@@ -134,7 +136,8 @@ static NSString *const kDirectOfferPlacementID = @"b61bffca756796";
                       kKidozPlacement:kKidozPlacementID,
                       kMyTargetPlacement:kMyTargetPlacementID,
                       kKlevinPlacement: kKlevinPlacementID,
-                      kDirectOfferPlacement:kDirectOfferPlacementID
+                      kDirectOfferPlacement:kDirectOfferPlacementID,
+                      kYandexPlacement:kYandexPlacementID
                       };
     return _placementIDs;
 }

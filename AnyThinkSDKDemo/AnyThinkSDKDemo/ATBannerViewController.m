@@ -40,6 +40,7 @@ static NSString *const kMyofferPlacementID = @"b5f33c3231eb91";
 static NSString *const kKidozPlacementID = @"b5feaa2cfe2959";
 static NSString *const kMyTargetPlacementID = @"b5feaa31284737";
 static NSString *const kDirectOfferPlacementID = @"b61bfff452d054";
+static NSString *const kYandexPlacementID = @"b62d8bb25cbe37";
 
 
 NSString *const kBannerShownNotification = @"banner_shown";
@@ -95,8 +96,8 @@ NSString *const kBannerLoadingFailedNotification = @"banner_failed_to_load";
                       kMyOfferPlacement:kMyofferPlacementID,
                       kKidozPlacement:kKidozPlacementID,
                       kMyTargetPlacement:kMyTargetPlacementID,
-                      kDirectOfferPlacement:kDirectOfferPlacementID
-
+                      kDirectOfferPlacement:kDirectOfferPlacementID,
+                      kYandexPlacement:kYandexPlacementID,
                       };
     
     _placementID = [[_placementIDs allValues]firstObject];
