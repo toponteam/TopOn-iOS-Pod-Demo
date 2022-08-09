@@ -9,6 +9,18 @@
 #import "AppDelegate.h"
 #import <AnyThinkSDK/AnyThinkSDK.h>
 #import <AppTrackingTransparency/AppTrackingTransparency.h>
+
+//#import <AnyThinkMintegralAdapter/ATMintegralConfigure.h>
+//#import <AnyThinkGDTAdapter/ATGDTConfigure.h>
+//#import <AnyThinkPangleAdapter/ATPangleConfigure.h>
+//#import <AnyThinkVungleAdapter/ATVungleConfigure.h>
+//#import <AnyThinkAdColonyAdapter/ATAdColonyConfigure.h>
+//#import <AnyThinkMyTargetAdapter/ATMyTargetConfigure.h>
+//#import <AnyThinkFacebookAdapter/ATFacebookConfigure.h>
+
+#define kTopOnAppID @"a5b0e8491845b3"
+#define kTopOnAppKey @"7eae0567827cfe2b22874061763f30c9"
+
 @interface AppDelegate ()
 
 @end
@@ -65,11 +77,13 @@
     if (@available(iOS 14, *)) {
 //         iOS 14
         [ATTrackingManager requestTrackingAuthorizationWithCompletionHandler:^(ATTrackingManagerAuthorizationStatus status) {
-            [[ATAPI sharedInstance] startWithAppID:@"a5b0e8491845b3" appKey:@"7eae0567827cfe2b22874061763f30c9" error:nil];
+            [[ATAPI sharedInstance] startWithAppID:kTopOnAppID appKey:kTopOnAppKey error:nil];
+//            [self startInitToponSDK];
         }];
     } else {
         // Fallback on earlier versions
-        [[ATAPI sharedInstance] startWithAppID:@"a5b0e8491845b3" appKey:@"7eae0567827cfe2b22874061763f30c9" error:nil];
+        [[ATAPI sharedInstance] startWithAppID:kTopOnAppID appKey:kTopOnAppKey error:nil];
+//        [self startInitToponSDK];
     }
     
     // 设置系统平台信息，默认设置IOS=1
@@ -84,6 +98,21 @@
     
     
     return YES;
+}
+
+- (void)startInitToponSDK {
+//    ATMintegralConfigure *mtgConfigure = [[ATMintegralConfigure alloc] initWithAppid:@"104036" appkey:@"ef13ef712aeb0f6eb3d698c4c08add96"];
+//    ATGDTConfigure *gdtConfigure = [[ATGDTConfigure alloc] initWithAppid:@"1200028506"];
+//    ATPangleConfigure *pangleConfigure = [[ATPangleConfigure alloc] initWithAppid:@"8025677"];
+//    ATVungleConfigure *vungleConfigure = [[ATVungleConfigure alloc] initWithAppid:@"5b3f4ff774d9832229c3ccf1"];
+//    ATAdColonyConfigure *adcolonyConfigure = [[ATAdColonyConfigure alloc] initWithAppid:@"app9a5dc24248154b78ae" zoneIds:@[@"vza4636998f5314890bf",@"vza7010879fc6349da91",@"vzee3feb3b007d4fb8a2"]];
+//    ATMyTargetConfigure *mytargetConfigure = [[ATMyTargetConfigure alloc] init];
+//    ATFacebookConfigure *facebookConfigure = [[ATFacebookConfigure alloc] init];
+//
+//    ATSDKConfiguration *configuration = [[ATSDKConfiguration alloc] init];
+//    configuration.preInitArray = @[mtgConfigure, gdtConfigure,vungleConfigure, adcolonyConfigure, mytargetConfigure, facebookConfigure];
+//
+//    [[ATAPI sharedInstance] startWithAppID:kTopOnAppID appKey:kTopOnAppKey sdkConfigures:configuration error:nil];
 }
 
 
