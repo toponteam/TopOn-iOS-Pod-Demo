@@ -22,8 +22,8 @@ target 'AnyThinkSDKDemo' do
 
   pod 'AnyThinkiOS','5.9.95'
   pod 'AnyThinkiOS/AnyThinkAdmobAdapter','5.9.95'
-#  pod 'AnyThinkiOS/AnyThinkPangleAdapter','5.9.95'
-  pod 'AnyThinkiOS/AnyThinkTTAdapter','5.9.95'
+  pod 'AnyThinkiOS/AnyThinkPangleAdapter','5.9.95'
+#  pod 'AnyThinkiOS/AnyThinkTTAdapter','5.9.95'
   pod 'AnyThinkiOS/AnyThinkFacebookAdapter','5.9.95'
   pod 'AnyThinkiOS/AnyThinkGDTAdapter','5.9.95'
   pod 'AnyThinkiOS/AnyThinkMintegralAdapter','5.9.95'
