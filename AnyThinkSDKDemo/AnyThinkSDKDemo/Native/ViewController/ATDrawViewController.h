@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface ATDrawViewController : UIViewController
 
 - (instancetype)initWithAdView:(UIView *)adView;
-+(NSDictionary<NSString*, NSString*>*)nativePlacementIDs;
+
 @end
 
 NS_ASSUME_NONNULL_END

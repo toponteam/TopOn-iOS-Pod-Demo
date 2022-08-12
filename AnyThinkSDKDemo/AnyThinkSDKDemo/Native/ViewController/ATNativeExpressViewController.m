@@ -12,6 +12,7 @@
 #import "ATADFootView.h"
 #import "ATModelButton.h"
 #import "ATMenuView.h"
+#import "ATUtilitiesTool.h"
 
 @interface ATNativeExpressViewController()<ATNativeADDelegate>
 
@@ -155,6 +156,8 @@
     
     // 获取广告offer对象
     ATNativeAdOffer *offer = [[ATAdManager sharedManager] getNativeAdOfferWithPlacementID:self.placementID];
+    NSDictionary *offerDict = [ATUtilitiesTool getNativeAdOfferExtraDic:offer];
+    NSLog(@"🔥--原生广告素材：%@",offerDict);
     
     // 初始化config配置
     ATNativeADConfiguration *config = [[ATNativeADConfiguration alloc] init];
@@ -168,7 +171,6 @@
     ATNativeADView *nativeADView = [[ATNativeADView alloc] initWithConfiguration:config currentOffer:offer placementID:self.placementID];
     // 获取mediaView，模板广告目前是返回nil，但还是需要确保调用
     [nativeADView getMediaView];
-    self.adView = nativeADView;
     
     // 渲染广告
     [offer rendererWithConfiguration:config selfRenderView:nil nativeADView:nativeADView];

@@ -10,6 +10,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import <AnyThinkNative/AnyThinkNative.h>
 #import "ATPasterSelfRenderView.h"
+#import "ATUtilitiesTool.h"
 
 @interface ATPasterVideoViewController ()<ATNativeADDelegate>
 @property (nonatomic , strong) AVPlayer *player;
@@ -132,6 +133,8 @@
         return;
     }
     ATNativeAdOffer *offer = [[ATAdManager sharedManager] getNativeAdOfferWithPlacementID:self.placementID];
+    NSDictionary *offerDict = [ATUtilitiesTool getNativeAdOfferExtraDic:offer];
+    NSLog(@"🔥--原生广告素材：%@",offerDict);
     self.nativeAdOffer = offer;
 
     ATNativeADConfiguration *config = [self getNativeADConfiguration];

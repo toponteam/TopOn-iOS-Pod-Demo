@@ -17,7 +17,7 @@
 
 #import "ATMenuView.h"
 #import "ATNativeSelfRenderView.h"
-
+#import "ATUtilitiesTool.h"
 
 @interface ATNativeSelfRenderViewController()<ATNativeADDelegate>
 
@@ -265,6 +265,9 @@
         ATNativeADConfiguration *config = [self getNativeADConfiguration];
         // 获取offer广告对象
         ATNativeAdOffer *offer = [[ATAdManager sharedManager] getNativeAdOfferWithPlacementID:self.placementID];
+        NSDictionary *offerDict = [ATUtilitiesTool getNativeAdOfferExtraDic:offer];
+        NSLog(@"🔥--原生广告素材：%@",offerDict);
+        
         // 创建自渲染视图view，同时根据offer信息内容去赋值
         ATNativeSelfRenderView *selfRenderView = [self getSelfRenderViewOffer:offer];
         // 创建nativeADView
@@ -395,6 +398,9 @@
 
     
     ATNativeAdOffer *offer = [[ATAdManager sharedManager] getNativeAdOfferWithPlacementID:self.placementID];
+    NSDictionary *offerDict = [ATUtilitiesTool getNativeAdOfferExtraDic:offer];
+    NSLog(@"🔥--原生广告素材：%@",offerDict);
+    
     ATNativeSelfRenderView *selfRenderView = [[ATNativeSelfRenderView alloc]initWithOffer:offer];
     self.nativeSelfRenderView = selfRenderView;
     selfRenderView.backgroundColor = [UIColor redColor];

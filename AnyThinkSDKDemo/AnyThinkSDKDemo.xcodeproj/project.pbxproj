@@ -43,6 +43,7 @@
 		9BBD00C0248630C8009EAD66 /* MTAutolayoutCategories.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BBD00B4248630C8009EAD66 /* MTAutolayoutCategories.m */; };
 		9BBD00C1248630C8009EAD66 /* ATNativeSelfRenderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BBD00B6248630C8009EAD66 /* ATNativeSelfRenderViewController.m */; };
 		9BBD00C3248630C8009EAD66 /* ATDrawViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BBD00BC248630C8009EAD66 /* ATDrawViewController.m */; };
+		9BC80A44289D0F930074D1E6 /* ATUtilitiesTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BC80A42289D0F930074D1E6 /* ATUtilitiesTool.m */; };
 		9BF5E506289A13BB0085A76E /* TopOnAdManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BF5E504289A13BB0085A76E /* TopOnAdManager.m */; };
 		9BF5E509289A14770085A76E /* ATBaiduTemplateRenderingAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BF5E508289A14770085A76E /* ATBaiduTemplateRenderingAttribute.m */; };
 		AC498DB725EE35D600955C17 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC498DB625EE35D600955C17 /* AVFoundation.framework */; };
@@ -139,6 +140,8 @@
 		9BBD00B8248630C8009EAD66 /* MTAutolayoutCategories.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTAutolayoutCategories.h; sourceTree = "<group>"; };
 		9BBD00BB248630C8009EAD66 /* ATDrawViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATDrawViewController.h; sourceTree = "<group>"; };
 		9BBD00BC248630C8009EAD66 /* ATDrawViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATDrawViewController.m; sourceTree = "<group>"; };
+		9BC80A42289D0F930074D1E6 /* ATUtilitiesTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATUtilitiesTool.m; sourceTree = "<group>"; };
+		9BC80A43289D0F930074D1E6 /* ATUtilitiesTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATUtilitiesTool.h; sourceTree = "<group>"; };
 		9BF5E504289A13BB0085A76E /* TopOnAdManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopOnAdManager.m; sourceTree = "<group>"; };
 		9BF5E505289A13BB0085A76E /* TopOnAdManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopOnAdManager.h; sourceTree = "<group>"; };
 		9BF5E507289A14770085A76E /* ATBaiduTemplateRenderingAttribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATBaiduTemplateRenderingAttribute.h; sourceTree = "<group>"; };
@@ -372,6 +375,8 @@
 		9B1A9D64288E48A600CC16FA /* Categorie */ = {
 			isa = PBXGroup;
 			children = (
+				9BC80A43289D0F930074D1E6 /* ATUtilitiesTool.h */,
+				9BC80A42289D0F930074D1E6 /* ATUtilitiesTool.m */,
 				9BBD00B8248630C8009EAD66 /* MTAutolayoutCategories.h */,
 				9BBD00B4248630C8009EAD66 /* MTAutolayoutCategories.m */,
 				04CF323828000F6D0083B5AA /* ATAutoLayout.h */,
@@ -622,6 +627,7 @@
 				04CF3225280007900083B5AA /* ATAutomationTestViewController.m in Sources */,
 				9BBD00AA2486304C009EAD66 /* main.m in Sources */,
 				E0F3B8A7286D75B7007CF5AB /* ATNativeListOtherCell.m in Sources */,
+				9BC80A44289D0F930074D1E6 /* ATUtilitiesTool.m in Sources */,
 				9B1A9F66288FC9A500CC16FA /* ATDrawListViewController.m in Sources */,
 				04CF323328000EDC0083B5AA /* ATNativeShowViewController.m in Sources */,
 				04CF323A28000F6D0083B5AA /* ATAutoLayout.m in Sources */,
