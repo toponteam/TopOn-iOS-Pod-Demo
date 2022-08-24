@@ -146,7 +146,7 @@
     
     NSLog(@"🔥----logoUrl:%@",self.nativeAdOffer.nativeAd.logoUrl);
     
-    self.sponsorImageView.image = self.nativeAdOffer.nativeAd.sponsorImage;
+//    self.sponsorImageView.image = self.nativeAdOffer.nativeAd.sponsorImage;
     
     self.advertiserLabel.text = self.nativeAdOffer.nativeAd.advertiser;
 
