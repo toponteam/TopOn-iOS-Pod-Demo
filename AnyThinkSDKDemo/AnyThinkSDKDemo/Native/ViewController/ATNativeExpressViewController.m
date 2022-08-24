@@ -33,6 +33,12 @@
 
 @implementation ATNativeExpressViewController
 
+
+- (void)dealloc {
+    NSLog(@"🔥----ATNativeExpressViewController销毁%@", NSStringFromSelector(_cmd));
+    [self removeAd];
+}
+
 - (NSDictionary<NSString *,NSString *> *)placementIDs {
     return @{
         @"All":                       @"b62e797b5727c0",
@@ -169,8 +175,7 @@
     
     // 创建nativeADView
     ATNativeADView *nativeADView = [[ATNativeADView alloc] initWithConfiguration:config currentOffer:offer placementID:self.placementID];
-    // 获取mediaView，模板广告目前是返回nil，但还是需要确保调用
-    [nativeADView getMediaView];
+    self.adView = nativeADView;
     
     // 渲染广告
     [offer rendererWithConfiguration:config selfRenderView:nil nativeADView:nativeADView];
@@ -191,6 +196,13 @@
     [self.navigationController pushViewController:showVc animated:YES];
 }
 
+- (void)removeAd {
+    if (self.adView && self.adView.superview) {
+        [self.adView removeFromSuperview];
+    }
+    
+    self.adView = nil;
+}
 
 - (void)showLog:(NSString *)logStr {
     dispatch_async(dispatch_get_main_queue(), ^{
