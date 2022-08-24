@@ -23,6 +23,43 @@
 }
 
 -(void) initTopOnSDK {
+    
+//    [ATAPI setDebuggerConfig:^(ATDebuggerConfig *debuggerConfig) {
+//
+//        debuggerConfig.deviceIdfaStr = @"56A0A11B-D6D9-482D-83AD-AA8513E0D34C";
+//
+//        debuggerConfig.netWorkType = ATAdNetWorkMetaType;
+//
+//        // GDT
+//        debuggerConfig.gdt_nativeAdType = ATGDTNativeAdVideoTemplateType;
+//        debuggerConfig.gdt_interstitialAdType = ATGDTInterstitialAdFullScreenVideoType;
+//
+//        // Meta
+//        debuggerConfig.meta_nativeAdType = ATMetaNativeAdNativeBannerSelfRenderType;
+//
+//        // 快手
+//        debuggerConfig.kuaiShou_nativeAdType = ATKuaiShouNativeAdDrawFeedType;
+//
+//        // Nend
+//        debuggerConfig.nend_interstitialAdType = ATNendInterstitialAdFullScreenType;
+//
+//        // 穿山甲
+//        debuggerConfig.csj_nativeAdType = ATCSJNativeAdFeedSelfRenderType;
+//
+//        // MTG
+//        debuggerConfig.mintegral_nativeAdType = ATAdMobNativeAdTemplateType;
+//        debuggerConfig.mintegral_interstitialAdType = ATMintegralInterstitialAdVideoType;
+//
+//        // 百度
+//        debuggerConfig.baidu_nativeAdType = ATBaiduNativeAdTemplateType;
+//        debuggerConfig.baidu_interstitialAdType = ATBaiduInterstitialAdFullScreenVideoType;
+//
+//        // admob
+//        debuggerConfig.adMob_nativeAdType = ATAdMobNativeAdPictureType;
+//        debuggerConfig.adMob_interstitialAdType = ATAdMobInterstitialAdPictureType;
+//
+//    }];
+    
     [ATAPI setLogEnabled:YES];
         
     [ATAPI integrationChecking];
