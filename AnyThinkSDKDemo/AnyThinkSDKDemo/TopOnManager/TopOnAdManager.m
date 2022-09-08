@@ -11,6 +11,26 @@
 #import <AppTrackingTransparency/AppTrackingTransparency.h>
 #import "ATBaiduTemplateRenderingAttribute.h"
 
+#import <AnyThinkMintegralAdapter/ATMintegralConfigure.h>
+#import <AnyThinkVungleAdapter/AnyThinkVungleAdapter.h>
+#import <AnyThinkAdColonyAdapter/ATAdColonyConfigure.h>
+#import <AnyThinkMyTargetAdapter/ATMyTargetConfigure.h>
+#import <AnyThinkFacebookAdapter/ATFacebookConfigure.h>
+#import <AnyThinkKuaiShouAdapter/ATKSExtraConfig.h>
+
+#import <AnyThinkKlevinAdapter/AnyThinkKlevinAdapter.h>
+#import <AnyThinkTTAdapter/AnyThinkTTAdapter.h>
+#import <AnyThinkBaiduAdapter/AnyThinkBaiduAdapter.h>
+#import <AnyThinkGDTAdapter/AnyThinkGDTAdapter.h>
+
+
+#import <BaiduMobAdSDK/BaiduMobAdSetting.h>
+#import <KlevinAdSDK/KlevinAdSDK.h>
+#import <GDTSDKConfig.h>
+#import <VungleSDK/VungleSDK.h>
+
+
+
 @implementation TopOnAdManager
 +(instancetype) sharedManager {
     static TopOnAdManager *sharedManager = nil;
@@ -23,6 +43,8 @@
 }
 
 -(void) initTopOnSDK {
+    
+    [self setNetworkDeviceInfo];
     
 //    [ATAPI setDebuggerConfig:^(ATDebuggerConfig *debuggerConfig) {
 //
@@ -154,6 +176,43 @@
     }
 }
 
+- (void)setNetworkDeviceInfo{
+    
+    [ATVungleExtraConfig setExtraConfig:^(VungleSDK * _Nullable configuration) {
+        [VungleSDK setPublishIDFV:YES];
+    }];
+    
+    [ATGDTExtraConfig setExtraConfig:^(GDTSDKConfig * _Nullable configuration) {
+        [GDTSDKConfig forbiddenIDFA:YES];
+    }];
+    
+    [ATBaiduExtraConfig setExtraConfig:^(BaiduMobAdSetting * _Nullable configuration) {
+        [configuration setBDPermissionEnable:YES];
+    }];
+    
+    [ATKSExtraConfig setExtraConfig:^(KSAdSDKManager * _Nullable configuration) {
+        
+        [KSAdSDKManager setIdfaBlock:^NSString * _Nullable{
+            
+            return @"";
+        }];
+    }];
+    
+    [ATKlevinExtraConfig setExtraConfig:^(KlevinAdSDKConfiguration * _Nullable configuration) {
+        configuration.mediaIDFA = @"";
+    }];
+    
+    
+    [ATCSJExtraConfig setExtraConfig:^(BUAdSDKConfiguration * _Nullable configuration) {
+        configuration.customIdfa = @"";
+    }];
+    
+    [ATAPI setDeviceInfoConfig:^(ATDeviceInfoConfig * _Nullable deviceInfoConfig) {
+        deviceInfoConfig.idfaStr = @"56A0A11B-D6D9-482D-83AD-AA8513E0D34C";
+    }];
+    
+
+}
 
 
 @end
