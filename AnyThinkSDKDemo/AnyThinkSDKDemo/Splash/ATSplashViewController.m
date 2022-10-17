@@ -233,11 +233,28 @@
     // 自定义跳过按钮倒计时回调间隔
     [mutableDict setValue:@500 forKey:kATSplashExtraCountdownIntervalKey];
     
-    [[ATAdManager sharedManager] showSplashWithPlacementID:self.placementID
-                                                     scene:@"f5e54970dc84e6"
-                                                    window:mainWindow
-                                                     extra:mutableDict
-                                                  delegate:self];
+    /*
+     To collect scene arrival rate statistics, you can view related information https://docs.toponad.com/#/zh-cn/ios/NetworkAccess/scenario/scenario
+     Call the "Enter AD scene" method when an AD trigger condition is met, such as:
+     ** The scenario is a pop-up AD after the cleanup, which is called at the end of the cleanup.
+     * 1、Call entryXXX to report the arrival of the scene.
+     * 2、Call splashReadyForPlacementID:.
+     * 3、Call showSplashWithPlacementID: to show AD view.
+     * (Note the difference between auto and manual)
+     */
+    [[ATAdManager sharedManager] entrySplashScenarioWithPlacementID:self.placementID scene:@"f5e54970dc84e6"];
+    
+    if ([[ATAdManager sharedManager] splashReadyForPlacementID:self.placementID]) {
+        
+        [[ATAdManager sharedManager] showSplashWithPlacementID:self.placementID
+                                                         scene:@"f5e54970dc84e6"
+                                                        window:mainWindow
+                                                         extra:mutableDict
+                                                      delegate:self];
+    } else {
+//        do else 
+    }
+    
 }
 
 

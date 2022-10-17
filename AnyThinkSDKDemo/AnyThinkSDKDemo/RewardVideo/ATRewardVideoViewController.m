@@ -179,10 +179,36 @@
 
 // 展示广告
 - (void)showAd {
-    if (self.isAuto) {
-        [[ATRewardedVideoAutoAdManager sharedInstance] showAutoLoadRewardedVideoWithPlacementID:self.placementID scene:@"f5e549727efc49" inViewController:self delegate:self];
-    }else {
-        [[ATAdManager sharedManager] showRewardedVideoWithPlacementID:self.placementID scene:@"f5e54970dc84e6" inViewController:self delegate:self];
+    /*
+     To collect scene arrival rate statistics, you can view related information https://docs.toponad.com/#/zh-cn/ios/NetworkAccess/scenario/scenario
+     Call the "Enter AD scene" method when an AD trigger condition is met, such as:
+     ** The scenario is a pop-up AD after the cleanup, which is called at the end of the cleanup.
+     * 1、Call entryXXX to report the arrival of the scene.
+     * 2、Call xxRewardedVideoReadyForPlacementID.
+     * 3、Call showXX to show AD view.
+     * (Note the difference between auto and manual)
+     */
+    
+    if (self.isAuto) { //Auto loading mode
+        
+        [[ATRewardedVideoAutoAdManager sharedInstance] entryAdScenarioWithPlacementID:self.placementID scenarioID:@"f5e549727efc49"];
+        
+        if ([[ATRewardedVideoAutoAdManager sharedInstance] autoLoadRewardedVideoReadyForPlacementID:self.placementID]) {
+            
+            [[ATRewardedVideoAutoAdManager sharedInstance] showAutoLoadRewardedVideoWithPlacementID:self.placementID scene:@"f5e549727efc49" inViewController:self delegate:self];
+        }
+    }else { //Manual loading mode
+        
+        [[ATAdManager sharedManager] entryRewardedVideoScenarioWithPlacementID:self.placementID scene:@"f5e549727efc49"];
+        
+        if ([[ATAdManager sharedManager] rewardedVideoReadyForPlacementID:self.placementID]) {
+            
+            [[ATAdManager sharedManager] showRewardedVideoWithPlacementID:self.placementID scene:@"f5e54970dc84e6" inViewController:self delegate:self];
+        } else {
+//            reload Ads
+//            [self loadAd];
+            
+        }
     }
 }
 
