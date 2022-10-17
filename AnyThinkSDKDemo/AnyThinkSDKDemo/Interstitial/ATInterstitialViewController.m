@@ -263,10 +263,37 @@
 
 // 展示广告
 - (void)showAd {
-   if (self.isAuto) {
-       [ [ATInterstitialAutoAdManager sharedInstance] showAutoLoadInterstitialWithPlacementID:self.placementID scene:@"f5e549727efc49" inViewController:self delegate:self];
-   } else {
-       [[ATAdManager sharedManager] showInterstitialWithPlacementID:self.placementID scene:@"f5e549727efc49" inViewController:self delegate:self];
+    
+    /*
+     To collect scene arrival rate statistics, you can view related information https://docs.toponad.com/#/zh-cn/ios/NetworkAccess/scenario/scenario
+     Call the "Enter AD scene" method when an AD trigger condition is met, such as:
+     ** The scenario is a pop-up AD after the cleanup, which is called at the end of the cleanup.
+     * 1、Call entryXXX to report the arrival of the scene.
+     * 2、Call xxInterstitialWithPlacementID.
+     * 3、Call showXX to show AD view.
+     * (Note the difference between auto and manual)
+     */
+    
+   if (self.isAuto) { //Auto loading mode
+
+       [[ATInterstitialAutoAdManager sharedInstance] entryAdScenarioWithPlacementID:self.placementID scenarioID:@"f5e549727efc49"];
+       
+       if ([[ATInterstitialAutoAdManager sharedInstance] autoLoadInterstitialReadyForPlacementID:self.placementID]) {
+           
+           [ [ATInterstitialAutoAdManager sharedInstance] showAutoLoadInterstitialWithPlacementID:self.placementID scene:@"f5e549727efc49" inViewController:self delegate:self];
+       }
+       
+   } else { //Manual loading mode
+
+       [[ATAdManager sharedManager] entryInterstitialScenarioWithPlacementID:self.placementID scene:@"f5e549727efc49"];
+       
+       if ([[ATAdManager sharedManager] interstitialReadyForPlacementID:self.placementID]) {
+           
+           [[ATAdManager sharedManager] showInterstitialWithPlacementID:self.placementID scene:@"f5e549727efc49" inViewController:self delegate:self];
+       } else {
+//           reload AD
+//           [self loadAd];
+       }
    }
 }
 
