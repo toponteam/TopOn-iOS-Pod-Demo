@@ -20,6 +20,7 @@
 		04CF323428000EDC0083B5AA /* ATNativeMessageStreamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CF323028000EDB0083B5AA /* ATNativeMessageStreamViewController.m */; };
 		04CF323A28000F6D0083B5AA /* ATAutoLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CF323928000F6D0083B5AA /* ATAutoLayout.m */; };
 		04CF323F28000FB70083B5AA /* ATNativeRenderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CF323B28000FB70083B5AA /* ATNativeRenderView.m */; };
+		56152C532902B5FB00530FF6 /* ATTMCustomSplashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 56152C4C2902B5FB00530FF6 /* ATTMCustomSplashViewController.m */; };
 		9B1A9D6C288E82C800CC16FA /* ATNativeMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B1A9D6A288E82C800CC16FA /* ATNativeMainViewController.m */; };
 		9B1A9F5E288F882800CC16FA /* ATPasterVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B1A9F5D288F882800CC16FA /* ATPasterVideoViewController.m */; };
 		9B1A9F66288FC9A500CC16FA /* ATDrawListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B1A9F65288FC9A500CC16FA /* ATDrawListViewController.m */; };
@@ -98,6 +99,18 @@
 		04CF323B28000FB70083B5AA /* ATNativeRenderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATNativeRenderView.m; sourceTree = "<group>"; };
 		04CF323C28000FB70083B5AA /* ATNativeRenderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATNativeRenderView.h; sourceTree = "<group>"; };
 		44D83BDBBF3D3D426850A3E1 /* Pods-AnyThinkSDKDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AnyThinkSDKDemo.release.xcconfig"; path = "Target Support Files/Pods-AnyThinkSDKDemo/Pods-AnyThinkSDKDemo.release.xcconfig"; sourceTree = "<group>"; };
+		56152C422902B5FB00530FF6 /* ATTMBiddingRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATTMBiddingRequest.m; sourceTree = "<group>"; };
+		56152C432902B5FB00530FF6 /* ATTMSplashCustomEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATTMSplashCustomEvent.m; sourceTree = "<group>"; };
+		56152C442902B5FB00530FF6 /* ATTMBiddingDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATTMBiddingDelegate.h; sourceTree = "<group>"; };
+		56152C452902B5FB00530FF6 /* ATTMBiddingManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATTMBiddingManager.h; sourceTree = "<group>"; };
+		56152C462902B5FB00530FF6 /* ATTMSplashAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATTMSplashAdapter.h; sourceTree = "<group>"; };
+		56152C472902B5FB00530FF6 /* ATTMBiddingDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATTMBiddingDelegate.m; sourceTree = "<group>"; };
+		56152C482902B5FB00530FF6 /* ATTMSplashCustomEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATTMSplashCustomEvent.h; sourceTree = "<group>"; };
+		56152C492902B5FB00530FF6 /* ATTMBiddingRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATTMBiddingRequest.h; sourceTree = "<group>"; };
+		56152C4A2902B5FB00530FF6 /* ATTMSplashAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATTMSplashAdapter.m; sourceTree = "<group>"; };
+		56152C4B2902B5FB00530FF6 /* ATTMBiddingManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATTMBiddingManager.m; sourceTree = "<group>"; };
+		56152C4C2902B5FB00530FF6 /* ATTMCustomSplashViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATTMCustomSplashViewController.m; sourceTree = "<group>"; };
+		56152C4D2902B5FB00530FF6 /* ATTMCustomSplashViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATTMCustomSplashViewController.h; sourceTree = "<group>"; };
 		85EEA80B39960C835625EC2F /* Pods-AnyThinkSDKDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AnyThinkSDKDemo.debug.xcconfig"; path = "Target Support Files/Pods-AnyThinkSDKDemo/Pods-AnyThinkSDKDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		9B1A9D6A288E82C800CC16FA /* ATNativeMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATNativeMainViewController.m; sourceTree = "<group>"; };
 		9B1A9D6B288E82C800CC16FA /* ATNativeMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATNativeMainViewController.h; sourceTree = "<group>"; };
@@ -265,6 +278,33 @@
 				44D83BDBBF3D3D426850A3E1 /* Pods-AnyThinkSDKDemo.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		56152C402902B5FB00530FF6 /* CustomAdapter */ = {
+			isa = PBXGroup;
+			children = (
+				56152C412902B5FB00530FF6 /* CustomSplash */,
+				56152C4C2902B5FB00530FF6 /* ATTMCustomSplashViewController.m */,
+				56152C4D2902B5FB00530FF6 /* ATTMCustomSplashViewController.h */,
+			);
+			path = CustomAdapter;
+			sourceTree = "<group>";
+		};
+		56152C412902B5FB00530FF6 /* CustomSplash */ = {
+			isa = PBXGroup;
+			children = (
+				56152C422902B5FB00530FF6 /* ATTMBiddingRequest.m */,
+				56152C432902B5FB00530FF6 /* ATTMSplashCustomEvent.m */,
+				56152C442902B5FB00530FF6 /* ATTMBiddingDelegate.h */,
+				56152C452902B5FB00530FF6 /* ATTMBiddingManager.h */,
+				56152C462902B5FB00530FF6 /* ATTMSplashAdapter.h */,
+				56152C472902B5FB00530FF6 /* ATTMBiddingDelegate.m */,
+				56152C482902B5FB00530FF6 /* ATTMSplashCustomEvent.h */,
+				56152C492902B5FB00530FF6 /* ATTMBiddingRequest.h */,
+				56152C4A2902B5FB00530FF6 /* ATTMSplashAdapter.m */,
+				56152C4B2902B5FB00530FF6 /* ATTMBiddingManager.m */,
+			);
+			path = CustomSplash;
 			sourceTree = "<group>";
 		};
 		9B1A9D5C288E47FC00CC16FA /* Banner */ = {
@@ -450,6 +490,7 @@
 		9BBD009624863048009EAD66 /* AnyThinkSDKDemo */ = {
 			isa = PBXGroup;
 			children = (
+				56152C402902B5FB00530FF6 /* CustomAdapter */,
 				9BF5E50A289A1A830085A76E /* TopOnManager */,
 				9B1A9D65288E495700CC16FA /* AppDelegate */,
 				9B1A9D5C288E47FC00CC16FA /* Banner */,
@@ -615,6 +656,7 @@
 				04CF3221280007900083B5AA /* ATModelButton.m in Sources */,
 				04CF321F280007900083B5AA /* ATHomeTableViewCell.m in Sources */,
 				04CF323428000EDC0083B5AA /* ATNativeMessageStreamViewController.m in Sources */,
+				56152C532902B5FB00530FF6 /* ATTMCustomSplashViewController.m in Sources */,
 				9BBD009F24863048009EAD66 /* ViewController.m in Sources */,
 				E01F86252848AC360011900C /* ATNativeSelfRenderView.m in Sources */,
 				9BF5E509289A14770085A76E /* ATBaiduTemplateRenderingAttribute.m in Sources */,
