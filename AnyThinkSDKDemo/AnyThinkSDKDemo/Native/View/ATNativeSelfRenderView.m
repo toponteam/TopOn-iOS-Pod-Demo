@@ -37,23 +37,6 @@
     return self;
 }
 
-- (instancetype)initWithFrame:(CGRect)frame{
-    
-    if (self = [super initWithFrame:frame]) {
-        [self addView];
-        [self makeConstraintsForSubviews];
-    }
-    return self;
-}
-
-- (void)updateUIWithoffer:(ATNativeAdOffer *)offer{
-    
-    self.nativeAdOffer = offer;
-    
-    [self setupUI];
-
-
-}
 - (void)addView{
     
     self.advertiserLabel = [[UILabel alloc]init];
@@ -92,6 +75,20 @@
 
     [self addSubview:self.ratingLabel];
     
+    self.domainLabel = [[UILabel alloc]init];
+    self.domainLabel.font = [UIFont systemFontOfSize:15.0f];
+    self.domainLabel.textColor = [UIColor blackColor];
+    self.domainLabel.userInteractionEnabled = YES;
+
+    [self addSubview:self.domainLabel];
+    
+    self.warningLabel = [[UILabel alloc]init];
+    self.warningLabel.font = [UIFont systemFontOfSize:15.0f];
+    self.warningLabel.textColor = [UIColor blackColor];
+    self.warningLabel.userInteractionEnabled = YES;
+
+    [self addSubview:self.warningLabel];
+    
     self.iconImageView = [[UIImageView alloc]init];
     self.iconImageView.layer.cornerRadius = 4.0f;
     self.iconImageView.layer.masksToBounds = YES;
@@ -99,7 +96,7 @@
     self.iconImageView.userInteractionEnabled = YES;
     [self addSubview:self.iconImageView];
     
-     
+    
     self.mainImageView = [[UIImageView alloc]init];
     self.mainImageView.contentMode = UIViewContentModeScaleAspectFit;
     self.mainImageView.userInteractionEnabled = YES;
@@ -110,12 +107,6 @@
     self.logoImageView.userInteractionEnabled = YES;
 
     [self addSubview:self.logoImageView];
-    
-    self.sponsorImageView = [[UIImageView alloc]init];
-    self.sponsorImageView.contentMode = UIViewContentModeScaleAspectFit;
-    self.sponsorImageView.userInteractionEnabled = YES;
-
-    [self addSubview:self.sponsorImageView];
     
     self.dislikeButton = [UIButton buttonWithType:UIButtonTypeCustom];
     
@@ -131,26 +122,28 @@
 - (void)setupUI{
     
 
-    [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:self.nativeAdOffer.nativeAd.iconUrl]];
-    
-    
-    NSLog(@"🔥----iconUrl:%@",self.nativeAdOffer.nativeAd.iconUrl);
+    if (self.nativeAdOffer.nativeAd.icon) {
+        self.iconImageView.image = self.nativeAdOffer.nativeAd.icon;
+    } else {
+        [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:self.nativeAdOffer.nativeAd.iconUrl]];
+        NSLog(@"🔥AnyThinkDemo::iconUrl:%@",self.nativeAdOffer.nativeAd.iconUrl);
+    }
 
-
-    [self.mainImageView sd_setImageWithURL:[NSURL URLWithString:self.nativeAdOffer.nativeAd.imageUrl]];
-   
+    if (self.nativeAdOffer.nativeAd.mainImage) {
+        self.mainImageView.image = self.nativeAdOffer.nativeAd.mainImage;
+    } else {
+        [self.mainImageView sd_setImageWithURL:[NSURL URLWithString:self.nativeAdOffer.nativeAd.imageUrl]];
+        NSLog(@"🔥AnyThinkDemo::imageUrl:%@",self.nativeAdOffer.nativeAd.imageUrl);
+    }
     
-    NSLog(@"🔥----imageUrl:%@",self.nativeAdOffer.nativeAd.imageUrl);
+    
     [self.logoImageView sd_setImageWithURL:[NSURL URLWithString:self.nativeAdOffer.nativeAd.logoUrl]];
-   
     
     NSLog(@"🔥----logoUrl:%@",self.nativeAdOffer.nativeAd.logoUrl);
-    
-//    self.sponsorImageView.image = self.nativeAdOffer.nativeAd.sponsorImage;
-    
+        
     self.advertiserLabel.text = self.nativeAdOffer.nativeAd.advertiser;
 
-    
+
     self.titleLabel.text = self.nativeAdOffer.nativeAd.title;
   
     self.textLabel.text = self.nativeAdOffer.nativeAd.mainText;
@@ -158,6 +151,12 @@
     self.ctaLabel.text = self.nativeAdOffer.nativeAd.ctaText;
   
     self.ratingLabel.text = [NSString stringWithFormat:@"%@", self.nativeAdOffer.nativeAd.rating ? self.nativeAdOffer.nativeAd.rating : @""];
+    
+    self.domainLabel.text = self.nativeAdOffer.nativeAd.domain;
+    
+    self.warningLabel.text = self.nativeAdOffer.nativeAd.warning;
+    
+    NSLog(@"🔥AnythinkDemo::native文本内容title:%@ ; text:%@ ; cta:%@ ",self.nativeAdOffer.nativeAd.title,self.nativeAdOffer.nativeAd.mainText,self.nativeAdOffer.nativeAd.ctaText);
 }
 
 -(void) makeConstraintsForSubviews {
@@ -167,13 +166,6 @@
     self.titleLabel.backgroundColor = randomColor;
     
     self.textLabel.backgroundColor = randomColor;
-    
-    [self.sponsorImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.height.width.equalTo(@25);
-        make.bottom.equalTo(self).equalTo(@-5);
-        make.right.equalTo(self.logoImageView.mas_left).equalTo(@-5);
-    }];
-    
   
     
     [self.logoImageView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -211,6 +203,13 @@
         make.width.equalTo(@20);
     }];
     
+    [self.domainLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.ratingLabel.mas_right).offset(20);
+        make.right.equalTo(self).offset(-40);
+        make.top.equalTo(self.ctaLabel.mas_top).offset(0);
+        make.height.equalTo(@40);
+    }];
+    
     [self.advertiserLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.equalTo(@30);
         make.right.equalTo(self).equalTo(@-5);
@@ -231,6 +230,12 @@
         make.bottom.equalTo(self).offset(-5);
     }];
 
+    [self.warningLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self).offset(5);
+        make.right.equalTo(self.mas_right).equalTo(@-5);
+        make.bottom.equalTo(self).offset(-5);
+        make.height.equalTo(@40);
+    }];
 
     [self.dislikeButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.width.equalTo(@30);

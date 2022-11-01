@@ -19,7 +19,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, readonly) UIImageView *iconImageView;
 @property(nonatomic, readonly) UIImageView *mainImageView;
 @property(nonatomic, readonly) UIImageView *logoImageView;
-@property(nonatomic, readonly) UIImageView *sponsorImageView;
 @property(nonatomic, readonly) UIButton *dislikeButton;
 
 @end

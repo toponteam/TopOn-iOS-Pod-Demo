@@ -22,15 +22,15 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, strong) UIImageView *iconImageView;
 @property(nonatomic, strong) UIImageView *mainImageView;
 @property(nonatomic, strong) UIImageView *logoImageView;
-@property(nonatomic, strong) UIImageView *sponsorImageView;
 @property(nonatomic, strong) UIButton *dislikeButton;
 
 @property(nonatomic, strong) UIView *mediaView;
 
+// only for yandex native
+@property(nonatomic, strong) UILabel *domainLabel;
+@property(nonatomic, strong) UILabel *warningLabel;
 
 - (instancetype) initWithOffer:(ATNativeAdOffer *)offer;
-
-- (void)updateUIWithoffer:(ATNativeAdOffer *)offer;
 
 @end
 
