@@ -41,11 +41,6 @@
     _logoImageView.contentMode = UIViewContentModeScaleAspectFit;
     [self addSubview:_logoImageView];
     
-    _sponsorImageView = [UIImageView autolayoutView];
-    _sponsorImageView.contentMode = UIViewContentModeScaleAspectFit;
-        
-    [self addSubview:_sponsorImageView];
-    
     _dislikeButton = [UIButton buttonWithType:UIButtonTypeCustom];
     _dislikeButton.translatesAutoresizingMaskIntoConstraints = NO;
     [self addSubview:_dislikeButton];

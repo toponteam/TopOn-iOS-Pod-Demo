@@ -198,7 +198,6 @@
         prepareInfo.iconImageView = selfRenderView.iconImageView;
         prepareInfo.mainImageView = selfRenderView.mainImageView;
         prepareInfo.logoImageView = selfRenderView.logoImageView;
-//        prepareInfo.sponsorImageView = selfRenderView.sponsorImageView;
         prepareInfo.dislikeButton = selfRenderView.dislikeButton;
         prepareInfo.ctaLabel = selfRenderView.ctaLabel;
         prepareInfo.mediaView = selfRenderView.mediaView;

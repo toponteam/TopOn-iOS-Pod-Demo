@@ -36,20 +36,6 @@
     return self;
 }
 
-- (instancetype)initWithFrame:(CGRect)frame{
-    if (self = [super initWithFrame:frame]) {
-        [self addView];
-        [self makeConstraintsForSubviews];
-    }
-    return self;
-}
-
-- (void)updateUIWithoffer:(ATNativeAdOffer *)offer{
-    self.nativeAdOffer = offer;
-    
-    [self setupUI];
-}
-
 - (void)addView{
     self.countDownLabel = [[UILabel alloc]init];
     self.countDownLabel.font = [UIFont boldSystemFontOfSize:15.0f];
