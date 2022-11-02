@@ -37,23 +37,6 @@
     return self;
 }
 
-- (instancetype)initWithFrame:(CGRect)frame{
-    
-    if (self = [super initWithFrame:frame]) {
-        [self addView];
-        [self makeConstraintsForSubviews];
-    }
-    return self;
-}
-
-- (void)updateUIWithoffer:(ATNativeAdOffer *)offer{
-    
-    self.nativeAdOffer = offer;
-    
-    [self setupUI];
-
-
-}
 - (void)addView{
     
     self.advertiserLabel = [[UILabel alloc]init];
