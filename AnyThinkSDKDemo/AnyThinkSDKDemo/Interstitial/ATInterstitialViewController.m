@@ -224,7 +224,7 @@
 - (void)loadAd {
     CGSize size = CGSizeMake(CGRectGetWidth(self.view.bounds) - 30.0f, 300.0f);
     NSDictionary *extraDic = @{
-        // 设置半屏插屏广告大小，支持平台：快手、穿山甲、Pangle
+        // 设置半屏插屏广告大小，支持平台：快手，可能会影响展示效果
         kATInterstitialExtraAdSizeKey:[NSValue valueWithCGSize:size],
     };
 

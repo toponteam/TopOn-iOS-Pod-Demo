@@ -94,8 +94,6 @@
     [ATAPI setNetworkTerritory:ATNetworkTerritory_CN];
 
     //channel&subchannle -> customData.channel&subchannel
-    [ATAPI sharedInstance].channel = @"test_channel";
-    [ATAPI sharedInstance].subchannel = @"test_subchannel";
     [ATAPI sharedInstance].customData = @{kATCustomDataUserIDKey:@"test_custom_user_id",
                                           kATCustomDataChannelKey:@"custom_data_channel",
                                           kATCustomDataSubchannelKey:@"custom_data_subchannel",
@@ -104,7 +102,6 @@
                                           kATCustomDataNumberOfIAPKey:@19,
                                           kATCustomDataIAPAmountKey:@20.0f,
                                           kATCustomDataIAPCurrencyKey:@"usd",
-                                          kATCustomDataSegmentIDKey:@16382351
     };
     
     [[ATAPI sharedInstance] setCustomData:@{
