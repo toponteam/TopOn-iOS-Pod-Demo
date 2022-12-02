@@ -160,6 +160,8 @@
     NSMutableDictionary *mutableDict = [NSMutableDictionary dictionary];
     // 设置开屏广告超时时间
     [mutableDict setValue:@5.5 forKey:kATSplashExtraTolerateTimeoutKey];
+    [mutableDict setValue:[UIImage imageNamed:@"topon_logo"] forKey:kATSplashExtraAppLogoImageKey];
+    
     
     [[ATAdManager sharedManager] loadADWithPlacementID:self.placementID
                                                  extra:mutableDict
@@ -226,12 +228,15 @@
     self.skipButton.titleLabel.font = [UIFont systemFontOfSize:14];
     
     NSMutableDictionary *mutableDict = [NSMutableDictionary dictionary];
+    
+    /* 多数平台已经不支持自定义跳过按钮，实际请看展示效果
     // 自定义跳过按钮倒计时时长，毫秒单位
     [mutableDict setValue:@50000 forKey:kATSplashExtraCountdownKey];
     // 自定义跳过按钮
     [mutableDict setValue:self.skipButton forKey:kATSplashExtraCustomSkipButtonKey];
     // 自定义跳过按钮倒计时回调间隔
     [mutableDict setValue:@500 forKey:kATSplashExtraCountdownIntervalKey];
+    */
     
     /*
      To collect scene arrival rate statistics, you can view related information https://docs.toponad.com/#/zh-cn/ios/NetworkAccess/scenario/scenario
