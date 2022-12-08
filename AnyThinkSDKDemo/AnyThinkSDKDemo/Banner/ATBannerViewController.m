@@ -77,6 +77,7 @@
         @"MyTarget":          @"b62b4191d37ee7",
         @"GDT":               @"b62ea19b2d10b7",
         @"Yandex":            @"b62ea19cb6e482",
+        @"Bigo":                @"b63909d6ca2269",
     };
 }
 

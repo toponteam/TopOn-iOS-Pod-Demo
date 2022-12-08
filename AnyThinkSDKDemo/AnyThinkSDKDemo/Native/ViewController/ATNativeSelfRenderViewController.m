@@ -69,6 +69,7 @@
         @"MyTarget":                  @"b62b4125af318d",
         @"Vungle":                    @"b62b41257a99ad",
         @"Nend":                      @"b62ea207862e3c",
+        @"Bigo":                @"b63909d9a254cd",
     };
 }
 

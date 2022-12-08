@@ -66,6 +66,7 @@
         @"Pangle":                @"b62b41521d52d1",
         @"Klevin":                @"b62b415211bd15",
         @"HeaderBidding":         @"b62b4126caa479",
+        @"Bigo":                @"b63909d7b39cac",
     };
 }
 

@@ -71,6 +71,7 @@
         @"Mintegral":           @"b62ea26d71bc99",
         @"Yandex":              @"b62ea26f1b377f",
         @"Nend":                @"b62ea27069e21c",
+        @"Bigo":                @"b63909d8be8c86",
     };
 }
 

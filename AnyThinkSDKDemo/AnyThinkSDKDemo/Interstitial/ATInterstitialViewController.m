@@ -76,6 +76,7 @@
         @"Klevin":                @"b62b4151fb009a",
         @"GDT":                   @"b62ea0e42354d1",
         @"Applovin":              @"b62b40f9335d25",
+        @"Bigo":                   @"b63909d52edaa2",
     };
 }
 
@@ -116,6 +117,7 @@
         @"Klevin":                @"b62b4151fb009a",
         @"GDT":                   @"b62ea0e42354d1",
         @"Applovin":              @"b62b40f9335d25",
+        @"Bigo":                   @"b63909d52edaa2",
     };
 }
 
