@@ -164,6 +164,12 @@
     GADAdSize admobSize = GADCurrentOrientationAnchoredAdaptiveBannerAdSizeWithWidth(CGRectGetWidth(self.view.bounds));
     */
     
+    /*
+     注意不同平台的横幅广告有一定限制，例如配置的穿山甲横幅广告640*100，为了能填充完屏幕宽，计算高度H = (屏幕宽 *100)/640；那么在load的extra的size为（屏幕宽：H）。
+     
+     Note that banner ads on different platforms have certain restrictions. For example, the configured CSJ(TT) banner AD is 640*100. In order to fill the screen width, the height H = (screen width *100)/640 is calculated. Then the extra size of the load is (screen width: H).
+     */
+    
     NSDictionary *dict = @{
         // 设置请求的广告尺寸大小
         kATAdLoadingExtraBannerAdSizeKey:[NSValue valueWithCGSize:_adSize],
