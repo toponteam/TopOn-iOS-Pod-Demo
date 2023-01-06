@@ -125,13 +125,13 @@
 }
 
 
-+ (void)sendWinnerNotifyWithCustomObject:(id)customObject secondPrice:(NSString*)price{
++ (void) sendWinnerNotifyWithCustomObject:(id)customObject secondPrice:(NSString*)price userInfo:(NSDictionary<NSString *, NSString *> *)userInfo {
     NSLog(@"%s", __FUNCTION__);
     TianmuSplashAd *splashAd = (TianmuSplashAd *)customObject;
     [splashAd sendWinNotificationWithPrice:[price integerValue]];
 }
 
-+ (void)sendLossNotifyWithCustomObject:(nonnull id)customObject lossType:(ATBiddingLossType)lossType winPrice:(nonnull NSString *)price{
++ (void)sendLossNotifyWithCustomObject:(nonnull id)customObject lossType:(ATBiddingLossType)lossType winPrice:(nonnull NSString *)price userInfo:(NSDictionary *)userInfo {
     NSLog(@"%s", __FUNCTION__);
     TianmuSplashAd *splashAd = (TianmuSplashAd *)customObject;
     TianmuAdBiddingLossReason reason = TianmuAdBiddingLossReasonOther;
