@@ -136,10 +136,21 @@
         NSLog(@"🔥AnyThinkDemo::imageUrl:%@",self.nativeAdOffer.nativeAd.imageUrl);
     }
     
+    if (self.nativeAdOffer.nativeAd.logoUrl.length) {
+        
+        NSLog(@"🔥----logoUrl:%@",self.nativeAdOffer.nativeAd.logoUrl);
+        [self.logoImageView sd_setImageWithURL:[NSURL URLWithString:self.nativeAdOffer.nativeAd.logoUrl]];
+    } else if (self.nativeAdOffer.nativeAd.logo) {
+        
+        NSLog(@"🔥----logo:%@",self.nativeAdOffer.nativeAd.logo);
+        self.logoImageView.image = self.nativeAdOffer.nativeAd.logo;
+    } else { // All of these are nil, set the default platform logo using networkFirmID.
+        
+        if (self.nativeAdOffer.networkFirmID == 15) {//CSJ
+            self.logoImageView.image = [UIImage imageNamed:@"tt_ad_logo_new"];
+        }
+    }
     
-    [self.logoImageView sd_setImageWithURL:[NSURL URLWithString:self.nativeAdOffer.nativeAd.logoUrl]];
-    
-    NSLog(@"🔥----logoUrl:%@",self.nativeAdOffer.nativeAd.logoUrl);
         
     self.advertiserLabel.text = self.nativeAdOffer.nativeAd.advertiser;
 
