@@ -127,6 +127,44 @@
     }];
 }
 
+- (UIWindow *)getKeyWindowMethodOne {
+    if (@available(iOS 13.0, *)) {
+        for (UIWindowScene* windowScene in [UIApplication sharedApplication].connectedScenes) {
+            if (windowScene.activationState == UISceneActivationStateForegroundActive)
+            {
+                for (UIWindow *window in windowScene.windows)
+                {
+                    if (window.isKeyWindow)
+                    {
+                        return window;
+                    }
+                }
+            }
+        }
+    } else {
+        // 添加到当前window上，并置顶到最上层
+        UIWindow * window = [UIApplication sharedApplication].delegate.window;
+        if (window) {
+            return window;
+        }
+        return [UIApplication sharedApplication].keyWindow;
+    }
+    return nil;
+}
+
+- (UIWindow *)getKeyWindowMethodTwo {
+    
+    if ( @available(iOS 13.0, *) ) {
+        UIWindow *mainWindow = [UIApplication sharedApplication].windows.firstObject;
+        [mainWindow makeKeyWindow];
+        return mainWindow;
+    }else {
+        UIWindow *mainWindow = [UIApplication sharedApplication].keyWindow;
+        return mainWindow;
+    }
+    
+}
+
 - (void)clearLog {
     self.textView.text = @"";
 }
@@ -213,14 +251,9 @@
 
 // show展示开屏广告
 - (void)showAd {
-    
-    UIWindow *mainWindow = nil;
-    if ( @available(iOS 13.0, *) ) {
-        mainWindow = [UIApplication sharedApplication].windows.firstObject;
-        [mainWindow makeKeyWindow];
-    }else {
-        mainWindow = [UIApplication sharedApplication].keyWindow;
-    }
+
+    // 根据实际情况选择获取到的keyWindow的方法 getKeyWindowMethodOne 和 getKeyWindowMethodTwo
+    UIWindow *mainWindow = [self getKeyWindowMethodOne];
     
     // 自定义跳过按钮，注意需要在广告倒计时 splashCountdownTime: 回调中实现按钮文本的变化处理
     self.skipButton = [UIButton buttonWithType:UIButtonTypeCustom];
