@@ -199,9 +199,7 @@
     
     NSMutableDictionary *mutableDict = [NSMutableDictionary dictionary];
     // 设置开屏广告超时时间
-    [mutableDict setValue:@5.5 forKey:kATSplashExtraTolerateTimeoutKey];
-    [mutableDict setValue:[UIImage imageNamed:@"topon_logo"] forKey:kATSplashExtraAppLogoImageKey];
-    
+//    [mutableDict setValue:@5.5 forKey:kATSplashExtraTolerateTimeoutKey];
     
     [[ATAdManager sharedManager] loadADWithPlacementID:self.placementID
                                                  extra:mutableDict
@@ -256,11 +254,11 @@
     UIWindow *mainWindow = [self getKeyWindowMethodOne];
     
     // 自定义跳过按钮，注意需要在广告倒计时 splashCountdownTime: 回调中实现按钮文本的变化处理
-    self.skipButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.skipButton.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.3];
-    self.skipButton.frame = CGRectMake([UIScreen mainScreen].bounds.size.width - 80 - 20, 50, 80, 21);
-    self.skipButton.layer.cornerRadius = 10.5;
-    self.skipButton.titleLabel.font = [UIFont systemFontOfSize:14];
+//    self.skipButton = [UIButton buttonWithType:UIButtonTypeCustom];
+//    self.skipButton.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.3];
+//    self.skipButton.frame = CGRectMake([UIScreen mainScreen].bounds.size.width - 80 - 20, 50, 80, 21);
+//    self.skipButton.layer.cornerRadius = 10.5;
+//    self.skipButton.titleLabel.font = [UIFont systemFontOfSize:14];
     
     NSMutableDictionary *mutableDict = [NSMutableDictionary dictionary];
     
