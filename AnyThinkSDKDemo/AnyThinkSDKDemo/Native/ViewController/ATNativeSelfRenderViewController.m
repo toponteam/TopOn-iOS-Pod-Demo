@@ -340,8 +340,13 @@
     
     // 获取mediaView，需要自行添加到自渲染视图上
     UIView *mediaView = [nativeADView getMediaView];
+    
+//     假设不需要大图或者视频的信息流，当广告平台中含有优量汇时，需要添加一下getMediaView
+//    if (offer.networkFirmID ==8) {
+//        [nativeADView getMediaView];
+//    }
 
-    // 设置需要注册点击事件的UI控件
+    // 设置需要注册点击事件的UI控件，最好不要把信息流的父视图整体添加到点击事件中，不然可能会出现点击关闭按钮，还触发了点击信息流事件。
     NSMutableArray *clickableViewArray = [@[selfRenderView.iconImageView,
                                             selfRenderView.titleLabel,
                                             selfRenderView.textLabel,
@@ -370,6 +375,7 @@
 
 - (void)prepareWithNativePrepareInfo:(ATNativeSelfRenderView *)selfRenderView nativeADView:(ATNativeADView *)nativeADView {
     
+    // 假设不需要大图或者视频的信息流，loadPrepareInfo不需要给mediaView和mainImageView赋值。
     ATNativePrepareInfo *info = [ATNativePrepareInfo loadPrepareInfo:^(ATNativePrepareInfo * _Nonnull prepareInfo) {
         prepareInfo.textLabel = selfRenderView.textLabel;
         prepareInfo.advertiserLabel = selfRenderView.advertiserLabel;
