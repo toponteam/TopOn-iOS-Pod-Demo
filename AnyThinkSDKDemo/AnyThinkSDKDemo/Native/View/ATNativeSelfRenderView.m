@@ -150,6 +150,7 @@
             self.logoImageView.image = [UIImage imageNamed:@"tt_ad_logo_new"];
         }
     }
+
     
         
     self.advertiserLabel.text = self.nativeAdOffer.nativeAd.advertiser;
