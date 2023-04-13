@@ -198,7 +198,7 @@
     label.textAlignment = NSTextAlignmentCenter;
     
     NSMutableDictionary *mutableDict = [NSMutableDictionary dictionary];
-    // 设置开屏广告超时时间
+    // 设置开屏广告中支持广告源设置加载超时时间，并不是整个广告位请求的时间
 //    [mutableDict setValue:@5.5 forKey:kATSplashExtraTolerateTimeoutKey];
     
     [[ATAdManager sharedManager] loadADWithPlacementID:self.placementID
