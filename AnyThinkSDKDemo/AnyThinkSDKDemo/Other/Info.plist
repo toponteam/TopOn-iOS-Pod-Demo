@@ -19,7 +19,7 @@
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>GADApplicationIdentifier</key>
-	<string>ca-app-pub-9488501426181082/7319780494</string>
+	<string>ca-app-pub-9488501426181082~7319780494</string>
 	<key>GADIsAdManagerApp</key>
 	<true/>
 	<key>LSRequiresIPhoneOS</key>
@@ -29,27 +29,8 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
-	<key>UILaunchStoryboardName</key>
-	<string>LaunchScreen</string>
-	<key>UIMainStoryboardFile</key>
-	<string>Main</string>
-	<key>UIRequiredDeviceCapabilities</key>
-	<array>
-		<string>armv7</string>
-	</array>
-	<key>UISupportedInterfaceOrientations</key>
-	<array>
-		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-	</array>
-	<key>UISupportedInterfaceOrientations~ipad</key>
-	<array>
-		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationPortraitUpsideDown</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
-	</array>
+	<key>NSUserTrackingUsageDescription</key>
+	<string>This identifier will be used to deliver personalized ads to you.</string>
 	<key>SKAdNetworkItems</key>
 	<array>
 		<dict>
@@ -233,7 +214,26 @@
 			<string>SU67R6K2V3.skadnetwork</string>
 		</dict>
 	</array>
-	<key>NSUserTrackingUsageDescription</key>
-	<string>This identifier will be used to deliver personalized ads to you.</string>
+	<key>UILaunchStoryboardName</key>
+	<string>LaunchScreen</string>
+	<key>UIMainStoryboardFile</key>
+	<string>Main</string>
+	<key>UIRequiredDeviceCapabilities</key>
+	<array>
+		<string>armv7</string>
+	</array>
+	<key>UISupportedInterfaceOrientations</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+	</array>
+	<key>UISupportedInterfaceOrientations~ipad</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationPortraitUpsideDown</string>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
 </dict>
 </plist>
