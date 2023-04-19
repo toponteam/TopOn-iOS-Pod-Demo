@@ -205,7 +205,6 @@
     if ([self.placementIDs_draw.allValues containsObject:self.placementID]) {
         size = self.view.frame.size;
     }
-    
     NSDictionary *extra = @{
         // 模板广告size，透传给广告平台，广告平台会返回相近尺寸的最优模板广告
         kATExtraInfoNativeAdSizeKey:[NSValue valueWithCGSize:size],
@@ -353,7 +352,8 @@
                                             selfRenderView.ctaLabel,
                                             selfRenderView.mainImageView] mutableCopy];
     
-    if (mediaView) {
+    // 有mediaView并且该广告位视频流广告
+    if (mediaView && nativeADView.isVideoContents==YES ) {
         [clickableViewArray addObject:mediaView];
         
         // 将mediaView添加到自渲染视图上
@@ -386,6 +386,7 @@
         prepareInfo.logoImageView = selfRenderView.logoImageView;
         prepareInfo.ctaLabel = selfRenderView.ctaLabel;
         prepareInfo.mediaView = selfRenderView.mediaView;
+        prepareInfo.dislikeButton = selfRenderView.dislikeButton;
     }];
     
     [nativeADView prepareWithNativePrepareInfo:info];
