@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <AnyThinkNative/AnyThinkNative.h>>
+#import <AnyThinkNative/AnyThinkNative.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
