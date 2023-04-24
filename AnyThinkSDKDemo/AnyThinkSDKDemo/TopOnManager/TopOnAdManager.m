@@ -90,8 +90,6 @@
     // set personaliz state
     [[ATAPI sharedInstance] setPersonalizedAdState:ATPersonalizedAdStateType];
 
-    // only for pangle
-    [ATAPI setNetworkTerritory:ATNetworkTerritory_CN];
 
     //channel&subchannle -> customData.channel&subchannel
     [ATAPI sharedInstance].customData = @{kATCustomDataUserIDKey:@"test_custom_user_id",
