@@ -69,9 +69,9 @@
 //        debuggerConfig.csj_nativeAdType = ATCSJNativeAdFeedSelfRenderType;
 //
 //        // MTG
-//        debuggerConfig.mintegral_nativeAdType = ATAdMobNativeAdTemplateType;
+//        debuggerConfig.mintegral_nativeAdType = ATMintegralNativeAdSelfRenderType;
 //        debuggerConfig.mintegral_interstitialAdType = ATMintegralInterstitialAdVideoType;
-//
+
 //        // 百度
 //        debuggerConfig.baidu_nativeAdType = ATBaiduNativeAdTemplateType;
 //        debuggerConfig.baidu_interstitialAdType = ATBaiduInterstitialAdFullScreenVideoType;
