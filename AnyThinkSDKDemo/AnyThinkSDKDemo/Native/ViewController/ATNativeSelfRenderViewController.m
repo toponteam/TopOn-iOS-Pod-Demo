@@ -340,11 +340,6 @@
     
     // 获取mediaView，需要自行添加到自渲染视图上
     UIView *mediaView = [nativeADView getMediaView];
-    
-//     假设不需要大图或者视频的信息流，当广告平台中含有优量汇时，需要添加一下getMediaView
-//    if (offer.networkFirmID ==8) {
-//        [nativeADView getMediaView];
-//    }
 
     // 设置需要注册点击事件的UI控件，最好不要把信息流的父视图整体添加到点击事件中，不然可能会出现点击关闭按钮，还触发了点击信息流事件。
     NSMutableArray *clickableViewArray = [@[selfRenderView.iconImageView,
@@ -358,7 +353,7 @@
         
         // 将mediaView添加到自渲染视图上
         selfRenderView.mediaView = mediaView;
-        if (offer.networkFirmID ==8 && offer.nativeAd.isVideoContents==NO) {
+        if (offer.networkFirmID ==8 && offer.nativeAd.isVideoContents==NO) {//当为优量汇且为图片广告时，将mediaView置于自渲染底层接受点击事件，
             [selfRenderView insertSubview:mediaView atIndex:0];
         } else {
             [selfRenderView addSubview:mediaView];
