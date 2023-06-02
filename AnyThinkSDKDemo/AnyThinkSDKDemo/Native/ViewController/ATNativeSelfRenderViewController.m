@@ -358,7 +358,11 @@
         
         // 将mediaView添加到自渲染视图上
         selfRenderView.mediaView = mediaView;
-        [selfRenderView addSubview:mediaView];
+        if (offer.networkFirmID ==8 && offer.nativeAd.isVideoContents==NO) {
+            [selfRenderView insertSubview:mediaView atIndex:0];
+        } else {
+            [selfRenderView addSubview:mediaView];
+        }
         [mediaView mas_updateConstraints:^(MASConstraintMaker *make) {
             make.left.right.bottom.equalTo(selfRenderView);
             make.top.equalTo(selfRenderView.mainImageView.mas_top);
