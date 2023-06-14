@@ -43,13 +43,10 @@
         _customEvent.requestCompletionBlock = completion;
         _customEvent.delegate = self.delegateToBePassed;
         
-       
-        NSString *bidId = serverInfo[kATAdapterCustomInfoBuyeruIdKey];
-        if (bidId.length) {
+        ATTMBiddingRequest *request = [[ATTMBiddingManager sharedInstance] getRequestItemWithUnitID:serverInfo[@"unitid"]];
+        if (request) {
             
-            ATTMBiddingRequest *request = [[ATTMBiddingManager sharedInstance] getRequestItemWithUnitID:serverInfo[@"unitid"]];
-            
-            if (request.customObject!=nil) { // load secced
+            if (request.customObject != nil) { // load secced
                 self.splashView = request.customObject;
                 self.splashView.delegate = _customEvent;
                 [_customEvent trackSplashAdLoaded:self.splashView];
@@ -64,11 +61,9 @@
                 self.splashView = [[TianmuSplashAd alloc] init];
                 self.splashView.delegate = self.customEvent;
                 self.splashView.posId = serverInfo[@"unitid"];
-//                UIView *containerView = extra[kATSplashExtraContainerViewKey];
-//                self.customEvent.containerView = containerView;
                 if (extra[kATSplashExtraHideSkipButtonFlagKey]) { self.splashView.hiddenSkipView = [extra[kATSplashExtraHideSkipButtonFlagKey] boolValue];
                 }
-                [self.splashView loadAd];
+                [self.splashView loadAdWithBottomView:nil];
                 
             });
         }
@@ -82,7 +77,7 @@
     TianmuSplashAd *splashView = splash.customObject;
     if (splashView) {
         UIWindow *window = localInfo[kATSplashExtraWindowKey];
-        [splashView showInWindow:window withBottomView:nil];
+        [splashView showInWindow:window];
     }
 }
 
@@ -118,7 +113,7 @@
             request.customObject = splash;
             [biddingManage startWithRequestItem:request];
             splash.posId = info[@"unitid"];
-            [splash loadAd];
+            [splash loadAdWithBottomView:nil];
             
         }
     }];
@@ -141,16 +136,5 @@
     [splashAd sendWinFailNotificationReason:reason winnerPirce:[price integerValue]];
 }
 
-/*
- 说明：
- 将TianmuSDK 以自定义适配器方式接入topon
- 平台已经配置了适配器和广告位。
- 1.当广告位没有开启头部竞价功能，ESCAdmobileSplashAdapter 会走初始化方法-(instancetype) initWithNetworkCustomInfo:(NSDictionary*)serverInfo localInfo:(NSDictionary*)localInfo
- 和 - (void)loadADWithInfo:(NSDictionary*)serverInfo localInfo:(NSDictionary*)localInfo completion:(void (^)(NSArray<NSDictionary *> *, NSError *))completion 加载广告，三方广告回调也能正常加载展示。
- 2.将topon 广告源开启head bidding 功能后 适配器触发+(void)bidRequestWithPlacementModel:(ATPlacementModel*)placementModel unitGroupModel:(ATUnitGroupModel*)unitGroupModel info:(NSDictionary*)info completion:(void(^)(ATBidInfo *bidInfo, NSError *error))completion 方法。上面初始化和加载广告的就不走了。
- 
-3.自定义适配器的 head bidding 逻辑按文档描述大致对接如上，广告加载触发不了。因文档介绍不详，麻烦看下还有哪些需要补充的逻辑
- 
- */
 
 @end

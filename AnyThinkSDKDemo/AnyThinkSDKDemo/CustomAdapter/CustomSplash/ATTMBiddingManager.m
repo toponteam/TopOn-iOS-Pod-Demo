@@ -30,25 +30,30 @@
 }
 
 - (ATTMBiddingRequest *)getRequestItemWithUnitID:(NSString *)unitID {
-    
-    return [self.bidingAdStorageAccessor objectForKey:unitID];
+    @synchronized (self) {
+        return [self.bidingAdStorageAccessor objectForKey:unitID];
+    }
     
 }
 
 - (void)removeRequestItmeWithUnitID:(NSString *)unitID {
-    [self.bidingAdStorageAccessor removeObjectForKey:unitID];
+    @synchronized (self) {
+        [self.bidingAdStorageAccessor removeObjectForKey:unitID];
+    }
 }
 
 - (void)savaBiddingDelegate:(ATTMBiddingDelegate *)delegate withUnitID:(NSString *)unitID {
-    [self.bidingAdDelegate setObject:delegate forKey:unitID];
+    @synchronized (self) {
+        [self.bidingAdDelegate setObject:delegate forKey:unitID];
+    }
 }
 
 - (void)removeBiddingDelegateWithUnitID:(NSString *)unitID {
-    
-    if (unitID.length) {
-        [self.bidingAdDelegate removeObjectForKey:unitID];
+    @synchronized (self) {
+        if (unitID.length) {
+            [self.bidingAdDelegate removeObjectForKey:unitID];
+        }
     }
-    
 }
 
 - (void)startWithRequestItem:(ATTMBiddingRequest *)request {

@@ -35,14 +35,7 @@
     ATTMBiddingRequest *request = [[ATTMBiddingManager sharedInstance] getRequestItemWithUnitID:self.unitID];
     
     if (request.bidCompletion) {
-        ATBidInfo *bidInfo = [ATBidInfo bidInfoWithPlacementID:request.placementID
-                                               unitGroupUnitID:request.unitGroup.unitID
-                                            adapterClassString:request.unitGroup.adapterClassString
-                                                         token:request.unitGroup.content[@"unitid"]
-                                                         price:@(splashAd.bidPrice/100.0f).stringValue
-                                                  currencyType:ATBiddingCurrencyTypeCNY
-                                            expirationInterval:request.unitGroup.networkTimeout
-                                                  customObject:splashAd];
+        ATBidInfo *bidInfo = [ATBidInfo bidInfoC2SWithPlacementID:request.placementID unitGroupUnitID:request.unitGroup.unitID adapterClassString:request.unitGroup.adapterClassString price:@(splashAd.bidPrice/100.0f).stringValue currencyType:ATBiddingCurrencyTypeCNY expirationInterval:request.unitGroup.networkTimeout customObject:splashAd];
         request.bidCompletion(bidInfo, nil);
     }
     
