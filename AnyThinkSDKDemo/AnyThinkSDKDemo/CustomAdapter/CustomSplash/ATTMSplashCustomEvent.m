@@ -16,6 +16,17 @@
     return self.serverInfo[@"unitid"];
 }
 
+- (void)removeCustomViewAndsplashAd:(TianmuSplashAd *)splashAd {
+    
+    if (self.containerView) {
+        [self.containerView removeFromSuperview];
+    }
+    
+    if (splashAd) {
+        splashAd = nil;
+    }
+}
+
 #pragma mark - TianmuSplashAdDelegate
 /**
  *  开屏广告请求成功
@@ -30,7 +41,6 @@
  */
 - (void)tianmuSplashAdDidLoad:(TianmuSplashAd *)splashAd{
     NSLog(@"%s", __FUNCTION__);
-    [_backgroundImageView removeFromSuperview];
 
     [self trackSplashAdLoaded:splashAd adExtra:nil];
     
@@ -42,8 +52,7 @@
 - (void)tianmuSplashAdFailLoad:(TianmuSplashAd *)splashAd withError:(NSError *)error{
     NSLog(@"%s %@", __FUNCTION__ ,error);
     
-    [_backgroundImageView removeFromSuperview];
-    [_containerView removeFromSuperview];
+    [self removeCustomViewAndsplashAd:splashAd];
     
     [self trackSplashAdLoadFailed:error];
 }
@@ -52,7 +61,7 @@
  */
 - (void)tianmuSplashAdRenderFaild:(TianmuSplashAd *)splashAd withError:(NSError *)error{
     NSLog(@"%s %@", __FUNCTION__ ,error);
-    [_backgroundImageView removeFromSuperview];
+    
     [self trackSplashAdShowFailed:error];
 }
 
@@ -92,8 +101,7 @@
  */
 - (void)tianmuSplashAdClosed:(TianmuSplashAd *)splashAd{
     NSLog(@"%s", __FUNCTION__);
-    [_containerView removeFromSuperview];
-    [_backgroundImageView removeFromSuperview];
+    [self removeCustomViewAndsplashAd:splashAd];
     [self trackSplashAdClosed:nil];
 }
 
@@ -102,8 +110,6 @@
  */
 - (void)tianmuSplashAdCloseLandingPage:(TianmuSplashAd *)splashAd{
     NSLog(@"%s", __FUNCTION__);
-    [_containerView removeFromSuperview];
-    [_backgroundImageView removeFromSuperview];
     [self trackSplashAdDetailClosed];
 }
 
@@ -112,7 +118,7 @@
  */
 - (void)tianmuSplashAdFailToShow:(TianmuSplashAd *)splashAd error:(NSError *)error{
     NSLog(@"%s %@", __FUNCTION__ ,error);
-    [_backgroundImageView removeFromSuperview];
+    [self removeCustomViewAndsplashAd:splashAd];
     [self trackSplashAdShowFailed:error];
 }
 
