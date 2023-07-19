@@ -54,6 +54,7 @@
 - (NSDictionary<NSString *,NSString *> *)placementIDs {
     
     return @{
+        @"ADX":                   @"b62b419273e429",
         @"All":                   @"b62b40ff8aed6a",
         @"AdMob":                 @"b62e9ee8eb2d0b",
         @"Kuaishou":              @"b62b41922b6663",

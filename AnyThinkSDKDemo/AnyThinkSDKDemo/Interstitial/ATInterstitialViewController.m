@@ -41,6 +41,7 @@
 - (NSDictionary<NSString *,NSString *> *)placementIDs_fullScreen {
     
     return  @{
+        @"ADX":                   @"b62b419284c817",
         @"All":                   @"b62ea0f6f852d5",
         @"AdMob":                 @"b62b41f080cfc5",
         @"Mintegral":             @"b62ea0e75a82b1",

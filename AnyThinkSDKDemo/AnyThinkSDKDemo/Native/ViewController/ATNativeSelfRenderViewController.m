@@ -52,6 +52,8 @@
 
 - (NSDictionary<NSString *,NSString *> *)placementIDs_native {
     return @{
+        @"ADX模板":                   @"b6329582f88dcb",
+        @"ADX自渲染":                   @"b62b41927c34b6",
         @"All":                       @"b62b420bc116db",
         @"Facebook":                  @"b62b420c00ebc4",
         @"AdMob":                     @"b62b420bf038e3",
