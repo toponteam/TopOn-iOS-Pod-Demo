@@ -33,7 +33,9 @@
 
 @property (nonatomic, strong) UITextView *textView;
 
-@property(nonatomic) ATNativeADView *adView;
+@property (nonatomic) ATNativeADView *adView;
+
+@property (nonatomic, strong) ATNativeSelfRenderView *nativeSelfRenderView;
 
 @property (copy, nonatomic) NSDictionary<NSString *, NSString *> *placementIDs_native;
 @property (copy, nonatomic) NSDictionary<NSString *, NSString *> *placementIDs_draw;
@@ -42,8 +44,6 @@
 @property (copy, nonatomic) NSString *placementID;
 
 @property (nonatomic, copy) NSString *nativeStr;
-
-@property(nonatomic, strong) ATNativeSelfRenderView *nativeSelfRenderView;
 
 @end
 
@@ -111,7 +111,6 @@
     [self.view addSubview:self.textView];
     [self.view addSubview:self.footView];
    
-    
     [self.nativeBtn mas_updateConstraints:^(MASConstraintMaker *make) {
         make.width.mas_equalTo((kScreenW - kScaleW(26) * 4) / 3);
         make.height.mas_equalTo(kScaleW(360));
@@ -201,6 +200,7 @@
     self.placementID = self.placementIDs.allValues.firstObject;
 }
 
+
 //广告加载
 - (void)loadAd {
     CGSize size = CGSizeMake(kScreenW, 350);
@@ -209,14 +209,11 @@
     }
     
     NSDictionary *extra = @{
-        // 模板广告size，透传给广告平台，广告平台会返回相近尺寸的最优模板广告
-        kATExtraInfoNativeAdSizeKey:[NSValue valueWithCGSize:size],
-        kATExtraNativeImageSizeKey:kATExtraNativeImageSize690_388,
-        // 是否开启自适应高度，默认关闭，设置为yes时打开
-        kATNativeAdSizeToFitKey:@YES,
-        // Start APP
-        kATExtraNativeIconImageSizeKey: @(AT_SIZE_72X72),
-        kATExtraStartAPPNativeMainImageSizeKey:@(AT_SIZE_1200X628),
+        /*
+            模板广告size，透传给广告平台，广告平台会返回相近尺寸的最优模板广告
+            如没有特定size要求，可传入高度 0，由平台适配宽度返回合适的高度
+        */
+        kATExtraInfoNativeAdSizeKey:[NSValue valueWithCGSize:size]
     };
     [[ATAdManager sharedManager] loadADWithPlacementID:self.placementID extra:extra delegate:self];
 }
@@ -242,8 +239,20 @@
     }];
 }
 
+- (void)entryAdScenario {
+    /* 为了统计场景到达率，相关信息可查阅 iOS高级设置说明 -> 广告场景 在满足广告触发条件时调用“进入广告场景”方法，
+    比如： ** 广告场景是在清理结束后弹出广告，则在清理结束时调用；
+    * 1、先调用 entryxxx
+    * 2、在判断 Ready的状态是否可展示
+    * 3、最后调用 show 展示 */
+    [[ATAdManager sharedManager] entryNativeScenarioWithPlacementID:self.placementID scene:KTopOnNativeSceneID];
+}
+
 //广告展示
 - (void)showAd {
+    // 到达场景
+    [self entryAdScenario];
+    
     // 判断广告isReady状态
     BOOL ready = [[ATAdManager sharedManager] nativeAdReadyForPlacementID:self.placementID];
     if (ready == NO) {
@@ -284,7 +293,7 @@
         if (nativeAdRenderType == ATNativeAdRenderExpress) {
             NSLog(@"🔥--原生模板");
             NSLog(@"🔥--原生模板广告宽高：%lf，%lf",offer.nativeAd.nativeExpressAdViewWidth,offer.nativeAd.nativeExpressAdViewHeight);
-        }else{
+        } else {
             NSLog(@"🔥--原生自渲染");
         }
         
@@ -297,7 +306,6 @@
         
         // 展示广告
         ATNativeShowViewController *showVc = [[ATNativeShowViewController alloc] initWithAdView:nativeADView placementID:self.placementID offer:offer];
-        
         [self.navigationController pushViewController:showVc animated:YES];
     }
 }
@@ -336,7 +344,6 @@
 }
 
 - (ATNativeADView *)getNativeADView:(ATNativeADConfiguration *)config offer:(ATNativeAdOffer *)offer selfRenderView:(ATNativeSelfRenderView *)selfRenderView {
-    
     // 获取原生广告展示容器视图
     ATNativeADView *nativeADView = [[ATNativeADView alloc] initWithConfiguration:config currentOffer:offer placementID:self.placementID];
     
@@ -375,7 +382,6 @@
 }
 
 - (void)prepareWithNativePrepareInfo:(ATNativeSelfRenderView *)selfRenderView nativeADView:(ATNativeADView *)nativeADView {
-    
     // 假设不需要大图或者视频的信息流，loadPrepareInfo不需要给mediaView和mainImageView赋值。
     ATNativePrepareInfo *info = [ATNativePrepareInfo loadPrepareInfo:^(ATNativePrepareInfo * _Nonnull prepareInfo) {
         prepareInfo.textLabel = selfRenderView.textLabel;
@@ -386,12 +392,12 @@
         prepareInfo.mainImageView = selfRenderView.mainImageView;
         prepareInfo.logoImageView = selfRenderView.logoImageView;
         prepareInfo.ctaLabel = selfRenderView.ctaLabel;
+        prepareInfo.dislikeButton = selfRenderView.dislikeButton;
         prepareInfo.mediaView = selfRenderView.mediaView;
     }];
     
     [nativeADView prepareWithNativePrepareInfo:info];
 }
-
 
 #pragma mark - draw
 - (void)showDrawAd {

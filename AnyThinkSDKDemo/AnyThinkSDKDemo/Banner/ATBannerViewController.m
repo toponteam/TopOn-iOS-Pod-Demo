@@ -158,7 +158,7 @@
 
 #pragma mark - Action
 // 加载广告
-- (void)loadAd {
+- (void)loadBannerAdView {
     /* Admob自适应横幅设置，需要先引入头文件：#import <GoogleMobileAds/GoogleMobileAds.h>
     //GADCurrentOrientationAnchoredAdaptiveBannerAdSizeWithWidth 自适应
     //GADPortraitAnchoredAdaptiveBannerAdSizeWithWidth 竖屏
@@ -205,15 +205,26 @@
     }];
 }
 
-// 展示广告
-- (void)showAd {
+- (void)entryAdScenario {
+    /* 为了统计场景到达率，相关信息可查阅 iOS高级设置说明 -> 广告场景 在满足广告触发条件时调用“进入广告场景”方法，
+    比如： ** 广告场景是在清理结束后弹出广告，则在清理结束时调用；
+    * 1、先调用 entryxxx
+    * 2、在判断 Ready的状态是否可展示
+    * 3、最后调用 show 展示 */
+    [[ATAdManager sharedManager] entryBannerScenarioWithPlacementID:self.placementID scene:KTopOnBannerSceneID];
+}
+
+-(void) showBanner {
+    // 到达场景
+    [self entryAdScenario];
+    
     // 判断广告ready状态
     if ([[ATAdManager sharedManager] bannerAdReadyForPlacementID:self.placementID]) {
         // 移除可能存在的旧BannerView
         NSInteger tag = 3333;
         [[self.view viewWithTag:tag] removeFromSuperview];
         
-        ATBannerView *bannerView = [[ATAdManager sharedManager] retrieveBannerViewForPlacementID:self.placementID scene:@"f600938d045dd3"];
+        ATBannerView *bannerView = [[ATAdManager sharedManager] retrieveBannerViewForPlacementID:self.placementID scene:KTopOnBannerSceneID];
         if (bannerView != nil) {
             bannerView.delegate = self;
             bannerView.presentingViewController = self;
@@ -236,8 +247,7 @@
             [self.bannerView mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.edges.equalTo(self.adView);
             }];
-            
-        }else {
+        } else {
             NSLog(@"BannerView is nil for placementID:%@", self.placementID);
         }
     } else {
@@ -345,7 +355,7 @@
         __weak typeof(self) weakSelf = self;
         [_footView setClickLoadBlock:^{
             NSLog(@"点击加载");
-            [weakSelf loadAd];
+            [weakSelf loadBannerAdView];
         }];
         [_footView setClickReadyBlock:^{
             NSLog(@"点击准备");
@@ -353,7 +363,7 @@
         }];
         [_footView setClickShowBlock:^{
             NSLog(@"点击展示");
-            [weakSelf showAd];
+            [weakSelf showBanner];
         }];
         [_footView setClickRemoveBlock:^{
             NSLog(@"点击移除");

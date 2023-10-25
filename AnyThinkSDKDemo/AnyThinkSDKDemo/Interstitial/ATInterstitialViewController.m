@@ -232,7 +232,7 @@
     };
 
     if (_isAuto) {
-        [[ATInterstitialAutoAdManager sharedInstance] showAutoLoadInterstitialWithPlacementID:self.placementID scene:@"f5e549727efc49" inViewController:self delegate:self];
+        [[ATInterstitialAutoAdManager sharedInstance] showAutoLoadInterstitialWithPlacementID:self.placementID scene:KTopOnInterstitialSceneID inViewController:self delegate:self];
     } else {
         [[ATAdManager sharedManager] loadADWithPlacementID:self.placementID extra:extraDic delegate:self];
     }
@@ -240,7 +240,6 @@
 
 // 检查广告缓存，是否iReady
 - (void)checkAd {
-    
     // 获取广告位的状态对象
     ATCheckLoadModel *checkLoadModel = [[ATAdManager sharedManager] checkInterstitialLoadStatusForPlacementID:self.placementID];
     NSLog(@"CheckLoadModel.isLoading:%d--- isReady:%d",checkLoadModel.isLoading,checkLoadModel.isReady);
@@ -264,40 +263,36 @@
     }];
 }
 
+// 统计到达场景
+- (void)entryAdScenario {
+    /* 为了统计场景到达率，相关信息可查阅 iOS高级设置说明 -> 广告场景 在满足广告触发条件时调用“进入广告场景”方法，https://docs.toponad.com/#/zh-cn/ios/NetworkAccess/scenario/scenario
+    比如： ** 广告场景是在清理结束后弹出广告，则在清理结束时调用；
+    * 1、先调用 entryxxx
+    * 2、在判断 Ready的状态是否可展示
+    * 3、最后调用 show 展示 */
+    if (self.isAuto) { //Auto loading mode
+        [[ATInterstitialAutoAdManager sharedInstance] entryAdScenarioWithPlacementID:self.placementID scenarioID:KTopOnInterstitialSceneID];
+    }else { //Manual loading mode
+        [[ATAdManager sharedManager] entryInterstitialScenarioWithPlacementID:self.placementID scene:KTopOnInterstitialSceneID];
+    }
+}
+
 // 展示广告
 - (void)showAd {
-    
-    /*
-     To collect scene arrival rate statistics, you can view related information https://docs.toponad.com/#/zh-cn/ios/NetworkAccess/scenario/scenario
-     Call the "Enter AD scene" method when an AD trigger condition is met, such as:
-     ** The scenario is a pop-up AD after the cleanup, which is called at the end of the cleanup.
-     * 1、Call entryXXX to report the arrival of the scene.
-     * 2、Call xxInterstitialWithPlacementID.
-     * 3、Call showXX to show AD view.
-     * (Note the difference between auto and manual)
-     */
-    
-   if (self.isAuto) { //Auto loading mode
-
-       [[ATInterstitialAutoAdManager sharedInstance] entryAdScenarioWithPlacementID:self.placementID scenarioID:@"f5e549727efc49"];
-       
+    // 到达场景
+    [self entryAdScenario];
+    if (self.isAuto) { //Auto loading mode
        if ([[ATInterstitialAutoAdManager sharedInstance] autoLoadInterstitialReadyForPlacementID:self.placementID]) {
-           
-           [ [ATInterstitialAutoAdManager sharedInstance] showAutoLoadInterstitialWithPlacementID:self.placementID scene:@"f5e549727efc49" inViewController:self delegate:self];
+           [ [ATInterstitialAutoAdManager sharedInstance] showAutoLoadInterstitialWithPlacementID:self.placementID scene:KTopOnInterstitialSceneID inViewController:self delegate:self];
        }
-       
-   } else { //Manual loading mode
-
-       [[ATAdManager sharedManager] entryInterstitialScenarioWithPlacementID:self.placementID scene:@"f5e549727efc49"];
-       
+    } else { //Manual loading mode
        if ([[ATAdManager sharedManager] interstitialReadyForPlacementID:self.placementID]) {
-           
-           [[ATAdManager sharedManager] showInterstitialWithPlacementID:self.placementID scene:@"f5e549727efc49" inViewController:self delegate:self];
+           [[ATAdManager sharedManager] showInterstitialWithPlacementID:self.placementID scene:KTopOnInterstitialSceneID inViewController:self delegate:self];
        } else {
-//           reload AD
+           // reload AD
 //           [self loadAd];
        }
-   }
+    }
 }
 
 - (void)showLog:(NSString *)logStr {

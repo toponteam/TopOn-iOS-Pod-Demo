@@ -155,7 +155,6 @@
 
 // 检查广告缓存，是否iReady
 - (void)checkAd {
-    
     // 获取广告位的状态对象
     ATCheckLoadModel *checkLoadModel = [[ATAdManager sharedManager] checkRewardedVideoLoadStatusForPlacementID:self.placementID];
     NSLog(@"CheckLoadModel.isLoading:%d--- isReady:%d",checkLoadModel.isLoading,checkLoadModel.isReady);
@@ -166,7 +165,6 @@
 
     // 判断当前是否存在可展示的广告
     BOOL isready = [[ATAdManager sharedManager] rewardedVideoReadyForPlacementID:self.placementID];
-    
     if (self.isAuto) {
         isready = [[ATRewardedVideoAutoAdManager sharedInstance] autoLoadRewardedVideoReadyForPlacementID:self.placementID];
     }
@@ -179,40 +177,40 @@
     }];
 }
 
+// 统计到达场景
+- (void)entryAdScenario {
+    /* 为了统计场景到达率，相关信息可查阅 iOS高级设置说明 -> 广告场景 在满足广告触发条件时调用“进入广告场景”方法，https://docs.toponad.com/#/zh-cn/ios/NetworkAccess/scenario/scenario
+    比如： ** 广告场景是在清理结束后弹出广告，则在清理结束时调用；
+    * 1、先调用 entryxxx
+    * 2、在判断 Ready的状态是否可展示
+    * 3、最后调用 show 展示 */
+    if (self.isAuto) { //Auto loading mode
+        [[ATRewardedVideoAutoAdManager sharedInstance] entryAdScenarioWithPlacementID:self.placementID scenarioID:KTopOnRewardedVideoSceneID];
+    }else { //Manual loading mode
+        [[ATAdManager sharedManager] entryRewardedVideoScenarioWithPlacementID:self.placementID scene:KTopOnRewardedVideoSceneID];
+    }
+}
+
 // 展示广告
 - (void)showAd {
-    /*
-     To collect scene arrival rate statistics, you can view related information https://docs.toponad.com/#/zh-cn/ios/NetworkAccess/scenario/scenario
-     Call the "Enter AD scene" method when an AD trigger condition is met, such as:
-     ** The scenario is a pop-up AD after the cleanup, which is called at the end of the cleanup.
-     * 1、Call entryXXX to report the arrival of the scene.
-     * 2、Call xxRewardedVideoReadyForPlacementID.
-     * 3、Call showXX to show AD view.
-     * (Note the difference between auto and manual)
-     */
+    // 到达场景
+    [self entryAdScenario];
     
     if (self.isAuto) { //Auto loading mode
-        
-        [[ATRewardedVideoAutoAdManager sharedInstance] entryAdScenarioWithPlacementID:self.placementID scenarioID:@"f5e549727efc49"];
-        
         if ([[ATRewardedVideoAutoAdManager sharedInstance] autoLoadRewardedVideoReadyForPlacementID:self.placementID]) {
-            
-            [[ATRewardedVideoAutoAdManager sharedInstance] showAutoLoadRewardedVideoWithPlacementID:self.placementID scene:@"f5e549727efc49" inViewController:self delegate:self];
+            [[ATRewardedVideoAutoAdManager sharedInstance] showAutoLoadRewardedVideoWithPlacementID:self.placementID scene:KTopOnRewardedVideoSceneID inViewController:self delegate:self];
         }
     }else { //Manual loading mode
-        
-        [[ATAdManager sharedManager] entryRewardedVideoScenarioWithPlacementID:self.placementID scene:@"f5e549727efc49"];
-        
         if ([[ATAdManager sharedManager] rewardedVideoReadyForPlacementID:self.placementID]) {
-            
-            [[ATAdManager sharedManager] showRewardedVideoWithPlacementID:self.placementID scene:@"f5e54970dc84e6" inViewController:self delegate:self];
+            [[ATAdManager sharedManager] showRewardedVideoWithPlacementID:self.placementID scene:KTopOnRewardedVideoSceneID inViewController:self delegate:self];
         } else {
 //            reload Ads
 //            [self loadAd];
-            
         }
     }
 }
+
+
 
 - (void)showLog:(NSString *)logStr {
     dispatch_async(dispatch_get_main_queue(), ^{
