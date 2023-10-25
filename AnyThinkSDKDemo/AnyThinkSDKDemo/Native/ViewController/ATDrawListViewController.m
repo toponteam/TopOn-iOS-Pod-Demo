@@ -116,9 +116,22 @@
     [self.tableView reloadData];
 }
 
+- (void)entryAdScenario {
+    /* 为了统计场景到达率，相关信息可查阅 iOS高级设置说明 -> 广告场景 在满足广告触发条件时调用“进入广告场景”方法，
+    比如： ** 广告场景是在清理结束后弹出广告，则在清理结束时调用；
+    * 1、先调用 entryxxx
+    * 2、在判断 Ready的状态是否可展示
+    * 3、最后调用 show 展示 */
+    [[ATAdManager sharedManager] entryNativeScenarioWithPlacementID:self.placementID scene:KTopOnNativeSceneID];
+}
+
+
 // 获取广告offer对象，同时请求新的广告
 - (ATNativeAdOffer *)getOfferAndLoadNext {
-    ATNativeAdOffer *offer = [[ATAdManager sharedManager] getNativeAdOfferWithPlacementID:self.placementID];
+    // 到达场景
+    [self entryAdScenario];
+    
+    ATNativeAdOffer *offer = [[ATAdManager sharedManager] getNativeAdOfferWithPlacementID:self.placementID scene:KTopOnNativeSceneID];
     // load next
     [self loadNativeAd];
     return offer;

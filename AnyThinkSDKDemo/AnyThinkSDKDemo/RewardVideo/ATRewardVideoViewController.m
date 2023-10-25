@@ -135,7 +135,7 @@
 #pragma mark - Action
 // 加载广告
 - (void)loadAd {
-    NSDictionary *dict = @{
+    NSDictionary *extra = @{
         /// 以下几个key参数适用于广告平台的服务端激励验证，将被透传
         kATAdLoadingExtraMediaExtraKey:@"media_val",
         kATAdLoadingExtraUserIDKey:@"rv_test_user_id",
@@ -150,7 +150,7 @@
 //        kATRewardedVideoKlevinRewardTimeKey : @3,
     };
     
-    [[ATAdManager sharedManager] loadADWithPlacementID:self.placementID extra:dict delegate:self];
+    [[ATAdManager sharedManager] loadADWithPlacementID:self.placementID extra:extra delegate:self];
 }
 
 // 检查广告缓存，是否iReady
@@ -192,7 +192,7 @@
 }
 
 // 展示广告
-- (void)showAd {
+- (void)showRewardVideoAd {
     // 到达场景
     [self entryAdScenario];
     
@@ -350,7 +350,7 @@
         }];
         [_footView setClickShowBlock:^{
             NSLog(@"点击展示");
-            [weakSelf showAd];
+            [weakSelf showRewardVideoAd];
         }];
     }
     return _footView;

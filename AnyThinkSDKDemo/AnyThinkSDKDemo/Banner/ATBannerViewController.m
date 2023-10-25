@@ -214,7 +214,7 @@
     [[ATAdManager sharedManager] entryBannerScenarioWithPlacementID:self.placementID scene:KTopOnBannerSceneID];
 }
 
--(void) showBanner {
+- (void)showBanner {
     // 到达场景
     [self entryAdScenario];
     

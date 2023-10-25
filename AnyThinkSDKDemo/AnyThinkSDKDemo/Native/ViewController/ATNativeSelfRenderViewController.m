@@ -276,7 +276,7 @@
         // 初始化config配置
         ATNativeADConfiguration *config = [self getNativeADConfiguration];
         // 获取offer广告对象
-        ATNativeAdOffer *offer = [[ATAdManager sharedManager] getNativeAdOfferWithPlacementID:self.placementID];
+        ATNativeAdOffer *offer = [[ATAdManager sharedManager] getNativeAdOfferWithPlacementID:self.placementID scene:KTopOnNativeSceneID];
         NSDictionary *offerDict = [ATUtilitiesTool getNativeAdOfferExtraDic:offer];
         NSLog(@"🔥--原生广告素材：%@",offerDict);
         

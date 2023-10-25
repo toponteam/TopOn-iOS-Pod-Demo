@@ -278,7 +278,7 @@
 }
 
 // 展示广告
-- (void)showAd {
+- (void)showInterstitialAd {
     // 到达场景
     [self entryAdScenario];
     if (self.isAuto) { //Auto loading mode
@@ -411,7 +411,7 @@
         }];
         [_footView setClickShowBlock:^{
             NSLog(@"点击展示");
-            [weakSelf showAd];
+            [weakSelf showInterstitialAd];
         }];
     }
     return _footView;
