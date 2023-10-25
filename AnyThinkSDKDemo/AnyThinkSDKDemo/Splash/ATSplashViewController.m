@@ -128,6 +128,42 @@
     }];
 }
 
+- (void)clearLog {
+    self.textView.text = @"";
+}
+
+- (void)showLog:(NSString *)logStr {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        NSString *logS = self.textView.text;
+        NSString *log = nil;
+        if (![logS isEqualToString:@""]) {
+            log = [NSString stringWithFormat:@"%@\n%@", logS, logStr];
+        } else {
+            log = [NSString stringWithFormat:@"%@", logStr];
+        }
+        self.textView.text = log;
+        [self.textView scrollRangeToVisible:NSMakeRange(self.textView.text.length, 1)];
+    });
+}
+
+- (UIInterfaceOrientation)currentInterfaceOrientation {
+    if (@available(iOS 13.0, *)) {
+        UIWindow *firstWindow = [[[UIApplication sharedApplication] windows] firstObject];
+        if (firstWindow == nil) { return UIInterfaceOrientationUnknown; }
+        
+        UIWindowScene *windowScene = firstWindow.windowScene;
+        if (windowScene == nil){ return UIInterfaceOrientationUnknown; }
+        
+        return windowScene.interfaceOrientation;
+    } else {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+        return UIApplication.sharedApplication.statusBarOrientation;
+#pragma clang diagnostic pop
+    }
+}
+
+// 由于系统的变动，提供两个获取 keyWindow的方法，选择一个适合来
 - (UIWindow *)getKeyWindowMethodOne {
     if (@available(iOS 13.0, *)) {
         for (UIWindowScene* windowScene in [UIApplication sharedApplication].connectedScenes) {
@@ -154,39 +190,19 @@
 }
 
 - (UIWindow *)getKeyWindowMethodTwo {
-    
     if ( @available(iOS 13.0, *) ) {
         UIWindow *mainWindow = [UIApplication sharedApplication].windows.firstObject;
         [mainWindow makeKeyWindow];
         return mainWindow;
-    }else {
+    } else {
         UIWindow *mainWindow = [UIApplication sharedApplication].keyWindow;
         return mainWindow;
     }
-    
-}
-
-- (void)clearLog {
-    self.textView.text = @"";
-}
-
-- (void)showLog:(NSString *)logStr {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        NSString *logS = self.textView.text;
-        NSString *log = nil;
-        if (![logS isEqualToString:@""]) {
-            log = [NSString stringWithFormat:@"%@\n%@", logS, logStr];
-        } else {
-            log = [NSString stringWithFormat:@"%@", logStr];
-        }
-        self.textView.text = log;
-        [self.textView scrollRangeToVisible:NSMakeRange(self.textView.text.length, 1)];
-    });
 }
 
 #pragma mark - Action
 // 加载广告
-- (void)loadAd {
+- (void)loadSplashAd {
     UIInterfaceOrientation deviceOrientaion = [self currentInterfaceOrientation];
     BOOL landscape = UIInterfaceOrientationIsLandscape(deviceOrientaion);
     
@@ -200,35 +216,20 @@
     
     NSMutableDictionary *mutableDict = [NSMutableDictionary dictionary];
     // 设置开屏广告中支持广告源设置加载超时时间，并不是整个广告位请求的时间
-//    [mutableDict setValue:@5.5 forKey:kATSplashExtraTolerateTimeoutKey];
+    [mutableDict setValue:@5.5 forKey:kATSplashExtraTolerateTimeoutKey];
     
     [[ATAdManager sharedManager] loadADWithPlacementID:self.placementID
                                                  extra:mutableDict
                                               delegate:self
-                                         containerView:label
-                                 defaultAdSourceConfig:self.modelButton.isSelected ? self.defaultAdSourceConfigStr : nil];
-}
-
-- (UIInterfaceOrientation)currentInterfaceOrientation {
-    if (@available(iOS 13.0, *)) {
-        UIWindow *firstWindow = [[[UIApplication sharedApplication] windows] firstObject];
-        if (firstWindow == nil) { return UIInterfaceOrientationUnknown; }
-        
-        UIWindowScene *windowScene = firstWindow.windowScene;
-        if (windowScene == nil){ return UIInterfaceOrientationUnknown; }
-        
-        return windowScene.interfaceOrientation;
-    } else {
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-        return UIApplication.sharedApplication.statusBarOrientation;
-#pragma clang diagnostic pop
-    }
+                                         containerView:label];
+    
+    // 从你们的TopOn后台导出的兜底广告源进行设置
+    //导出格式如：{\"unit_id\":1331013,\"nw_firm_id\":22,\"adapter_class\":\"ATBaiduSplashAdapter\",\"content\":\"{\\\"button_type\\\":\\\"0\\\",\\\"ad_place_id\\\":\\\"7852632\\\",\\\"app_id\\\":\\\"e232e8e6\\\"}\"}
+    // [[ATAdManager sharedManager] loadADWithPlacementID:self.placementID extra:extra delegate:self containerView:label defaultAdSourceConfig:self.defaultAdSourceConfigStr];
 }
 
 // 检查广告缓存，是否iReady
 - (void)checkAd {
-    
     // 获取广告位的状态对象
     ATCheckLoadModel *checkLoadModel = [[ATAdManager sharedManager] checkSplashLoadStatusForPlacementID:self.placementID];
     NSLog(@"CheckLoadModel.isLoading:%d--- isReady:%d",checkLoadModel.isLoading,checkLoadModel.isReady);
@@ -248,54 +249,48 @@
     }];
 }
 
-// show展示开屏广告
-- (void)showAd {
+- (void)entryAdScenario {
+    /* 为了统计场景到达率，相关信息可查阅 iOS高级设置说明 -> 广告场景 在满足广告触发条件时调用“进入广告场景”方法，
+    比如： ** 广告场景是在清理结束后弹出广告，则在清理结束时调用；
+    * 1、先调用 entryxxx
+    * 2、在判断 Ready的状态是否可展示
+    * 3、最后调用 show 展示 */
+    [[ATAdManager sharedManager] entrySplashScenarioWithPlacementID:self.placementID scene:KTopOnSplashSceneID];
+}
 
-    // 根据实际情况选择获取到的keyWindow的方法 getKeyWindowMethodOne 和 getKeyWindowMethodTwo
-    UIWindow *mainWindow = [self getKeyWindowMethodOne];
-    
-    // 自定义跳过按钮，注意需要在广告倒计时 splashCountdownTime: 回调中实现按钮文本的变化处理
-//    self.skipButton = [UIButton buttonWithType:UIButtonTypeCustom];
-//    self.skipButton.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.3];
-//    self.skipButton.frame = CGRectMake([UIScreen mainScreen].bounds.size.width - 80 - 20, 50, 80, 21);
-//    self.skipButton.layer.cornerRadius = 10.5;
-//    self.skipButton.titleLabel.font = [UIFont systemFontOfSize:14];
-    
-    NSMutableDictionary *mutableDict = [NSMutableDictionary dictionary];
-    
-    /* 多数平台已经不支持自定义跳过按钮，实际请看展示效果
-    // 自定义跳过按钮倒计时时长，毫秒单位
-    [mutableDict setValue:@50000 forKey:kATSplashExtraCountdownKey];
-    // 自定义跳过按钮
-    [mutableDict setValue:self.skipButton forKey:kATSplashExtraCustomSkipButtonKey];
-    // 自定义跳过按钮倒计时回调间隔
-    [mutableDict setValue:@500 forKey:kATSplashExtraCountdownIntervalKey];
-    */
-    
-    /*
-     To collect scene arrival rate statistics, you can view related information https://docs.toponad.com/#/zh-cn/ios/NetworkAccess/scenario/scenario
-     Call the "Enter AD scene" method when an AD trigger condition is met, such as:
-     ** The scenario is a pop-up AD after the cleanup, which is called at the end of the cleanup.
-     * 1、Call entryXXX to report the arrival of the scene.
-     * 2、Call splashReadyForPlacementID:.
-     * 3、Call showSplashWithPlacementID: to show AD view.
-     * (Note the difference between auto and manual)
-     */
-    [[ATAdManager sharedManager] entrySplashScenarioWithPlacementID:self.placementID scene:@"f5e54970dc84e6"];
-    
+// show展示开屏广告
+- (void)showSplashAd {
+    // 到达场景
+    [self entryAdScenario];
+
     if ([[ATAdManager sharedManager] splashReadyForPlacementID:self.placementID]) {
+        // 根据实际情况选择获取到的keyWindow的方法 getKeyWindowMethodOne 和 getKeyWindowMethodTwo
+        UIWindow *mainWindow = [self getKeyWindowMethodOne];
+        // 自定义跳过按钮，注意需要在广告倒计时 splashCountdownTime: 回调中实现按钮文本的变化处理
+    //    self.skipButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    //    self.skipButton.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.3];
+    //    self.skipButton.frame = CGRectMake([UIScreen mainScreen].bounds.size.width - 80 - 20, 50, 80, 21);
+    //    self.skipButton.layer.cornerRadius = 10.5;
+    //    self.skipButton.titleLabel.font = [UIFont systemFontOfSize:14];
+        
+        NSMutableDictionary *mutableDict = [NSMutableDictionary dictionary];
+        
+        /* 多数平台已经不支持自定义跳过按钮，目前支持更改自定义跳过按钮有穿山甲(TT)，直投、ADX、原生作开屏和游可盈，具体需要运行看实际效果
+        // 自定义跳过按钮倒计时时长，毫秒单位
+        [mutableDict setValue:@50000 forKey:kATSplashExtraCountdownKey];
+        // 自定义跳过按钮
+        [mutableDict setValue:self.skipButton forKey:kATSplashExtraCustomSkipButtonKey];
+        // 自定义跳过按钮倒计时回调间隔
+        [mutableDict setValue:@500 forKey:kATSplashExtraCountdownIntervalKey];
+        */
         
         [[ATAdManager sharedManager] showSplashWithPlacementID:self.placementID
-                                                         scene:@"f5e54970dc84e6"
+                                                         scene:KTopOnSplashSceneID
                                                         window:mainWindow
                                                          extra:mutableDict
                                                       delegate:self];
-    } else {
-//        do else 
     }
-    
 }
-
 
 // MARK:- splash delegate
 #pragma mark - ATSplashDelegate
@@ -418,7 +413,7 @@
         __weak typeof(self) weakSelf = self;
         [_footView setClickLoadBlock:^{
             NSLog(@"点击加载");
-            [weakSelf loadAd];
+            [weakSelf loadSplashAd];
         }];
         [_footView setClickReadyBlock:^{
             NSLog(@"点击准备");
@@ -426,7 +421,7 @@
         }];
         [_footView setClickShowBlock:^{
             NSLog(@"点击展示");
-            [weakSelf showAd];
+            [weakSelf showSplashAd];
         }];
         
         if (![NSStringFromClass([self class]) containsString:@"Auto"]) {

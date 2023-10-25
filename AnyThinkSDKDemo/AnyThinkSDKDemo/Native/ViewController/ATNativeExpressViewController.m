@@ -145,8 +145,20 @@
     }];
 }
 
+- (void)entryAdScenario {
+    /* 为了统计场景到达率，相关信息可查阅 iOS高级设置说明 -> 广告场景 在满足广告触发条件时调用“进入广告场景”方法，
+    比如： ** 广告场景是在清理结束后弹出广告，则在清理结束时调用；
+    * 1、先调用 entryxxx
+    * 2、在判断 Ready的状态是否可展示
+    * 3、最后调用 show 展示 */
+    [[ATAdManager sharedManager] entryNativeScenarioWithPlacementID:self.placementID scene:KTopOnNativeSceneID];
+}
+
 //广告展示
 - (void)showAd {
+    // 到达场景
+    [self entryAdScenario];
+    
     // 判断广告isReady状态
     BOOL ready = [[ATAdManager sharedManager] nativeAdReadyForPlacementID:self.placementID];
     if (ready == NO) {
@@ -165,9 +177,20 @@
     NSDictionary *offerDict = [ATUtilitiesTool getNativeAdOfferExtraDic:offer];
     NSLog(@"🔥--原生广告素材：%@",offerDict);
     
+    CGFloat adViewWidth = offer.nativeAd.nativeExpressAdViewWidth;
+    CGFloat adViewHeight = offer.nativeAd.nativeExpressAdViewHeight;
+    // 因部分平台模板广告宽高可能返回0，需要兼容兜底处理
+    if (adViewWidth == 0) {
+        adViewWidth = kScreenW;
+    }
+    if (adViewHeight == 0) {
+        adViewHeight = 350;
+    }
+    CGRect adFrame = CGRectMake(.0f, kNavigationBarHeight, adViewWidth, adViewHeight);
+    
     // 初始化config配置
     ATNativeADConfiguration *config = [[ATNativeADConfiguration alloc] init];
-    config.ADFrame = CGRectMake(0, kNavigationBarHeight, kScreenW, 350);
+    config.ADFrame = adFrame;
     config.delegate = self;
     // 开启自适应高度
     config.sizeToFit = YES;

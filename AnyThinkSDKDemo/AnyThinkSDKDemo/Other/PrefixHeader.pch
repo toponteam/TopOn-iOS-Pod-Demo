@@ -46,4 +46,10 @@
 #define kTopOnAppID @"a62b40f5778f3d"
 #define kTopOnAppKey @"c3d0d2a9a9d451b07e62b509659f7c97"
 
+#define KTopOnSplashSceneID @"f5e549727efc49"
+#define KTopOnBannerSceneID @"f5e549727efc49"
+#define KTopOnInterstitialSceneID @"f5e549727efc49"
+#define KTopOnNativeSceneID @"f5e549727efc49"
+#define KTopOnRewardedVideoSceneID @"f5e549727efc49"
+
 #endif /* PrefixHeader_pch */
