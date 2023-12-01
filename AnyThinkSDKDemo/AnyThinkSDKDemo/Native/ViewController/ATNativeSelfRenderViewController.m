@@ -328,6 +328,7 @@
 - (ATNativeADConfiguration *)getNativeADConfiguration {
     ATNativeADConfiguration *config = [[ATNativeADConfiguration alloc] init];
     config.ADFrame = CGRectMake(0, kNavigationBarHeight, kScreenW, 350);
+    // 给视频播放器进行预约束，建议在后面添加到自定义视图的时候，再次进行一次约束
     config.mediaViewFrame = CGRectMake(0, kNavigationBarHeight + 150.0f, kScreenW, 350 - kNavigationBarHeight - 150);
     config.delegate = self;
     // 开启模板广告自适应高度
@@ -362,11 +363,9 @@
         
         // 将mediaView添加到自渲染视图上
         selfRenderView.mediaView = mediaView;
-        if (offer.networkFirmID ==8 && offer.nativeAd.isVideoContents==NO) {//当为优量汇且为图片广告时，将mediaView置于自渲染底层接受点击事件，
-            [selfRenderView insertSubview:mediaView atIndex:0];
-        } else {
-            [selfRenderView addSubview:mediaView];
-        }
+        [selfRenderView addSubview:mediaView];
+        
+        // 给mediaView设置约束
         [mediaView mas_updateConstraints:^(MASConstraintMaker *make) {
             make.left.right.bottom.equalTo(selfRenderView);
             make.top.equalTo(selfRenderView.mainImageView.mas_top);
