@@ -94,6 +94,12 @@
             @"title":@"CustomAdapterSplash",
             @"class":@"ATTMCustomSplashViewController",
             @"des":@"Displayed immediately after the application is launched.",
+        },
+        @{
+            @"image":@"rewarded video",
+            @"title":@"Media Video",
+            @"class":@"ATMediaVideoViewController",
+            @"des":@"Displayed immediately after the application is launched.",
         }
     ];
 }

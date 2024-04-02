@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -20,6 +20,7 @@
 		04CF323428000EDC0083B5AA /* ATNativeMessageStreamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CF323028000EDB0083B5AA /* ATNativeMessageStreamViewController.m */; };
 		04CF323A28000F6D0083B5AA /* ATAutoLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CF323928000F6D0083B5AA /* ATAutoLayout.m */; };
 		04CF323F28000FB70083B5AA /* ATNativeRenderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CF323B28000FB70083B5AA /* ATNativeRenderView.m */; };
+		4B8C3E162BBADE1500D290AB /* ATMediaVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B8C3E142BBADE1500D290AB /* ATMediaVideoViewController.m */; };
 		56152C3F2902B59A00530FF6 /* ATTMCustomSplashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 56152C382902B59A00530FF6 /* ATTMCustomSplashViewController.m */; };
 		9B1A9D6C288E82C800CC16FA /* ATNativeMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B1A9D6A288E82C800CC16FA /* ATNativeMainViewController.m */; };
 		9B1A9F5E288F882800CC16FA /* ATPasterVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B1A9F5D288F882800CC16FA /* ATPasterVideoViewController.m */; };
@@ -99,6 +100,8 @@
 		04CF323B28000FB70083B5AA /* ATNativeRenderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATNativeRenderView.m; sourceTree = "<group>"; };
 		04CF323C28000FB70083B5AA /* ATNativeRenderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATNativeRenderView.h; sourceTree = "<group>"; };
 		44D83BDBBF3D3D426850A3E1 /* Pods-AnyThinkSDKDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AnyThinkSDKDemo.release.xcconfig"; path = "Target Support Files/Pods-AnyThinkSDKDemo/Pods-AnyThinkSDKDemo.release.xcconfig"; sourceTree = "<group>"; };
+		4B8C3E142BBADE1500D290AB /* ATMediaVideoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATMediaVideoViewController.m; sourceTree = "<group>"; };
+		4B8C3E152BBADE1500D290AB /* ATMediaVideoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATMediaVideoViewController.h; sourceTree = "<group>"; };
 		56152C2E2902B59A00530FF6 /* ATTMBiddingRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATTMBiddingRequest.m; sourceTree = "<group>"; };
 		56152C2F2902B59A00530FF6 /* ATTMSplashCustomEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATTMSplashCustomEvent.m; sourceTree = "<group>"; };
 		56152C302902B59A00530FF6 /* ATTMBiddingDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATTMBiddingDelegate.h; sourceTree = "<group>"; };
@@ -278,6 +281,15 @@
 				44D83BDBBF3D3D426850A3E1 /* Pods-AnyThinkSDKDemo.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		4B8C3E132BBADE1500D290AB /* MediaVideo */ = {
+			isa = PBXGroup;
+			children = (
+				4B8C3E142BBADE1500D290AB /* ATMediaVideoViewController.m */,
+				4B8C3E152BBADE1500D290AB /* ATMediaVideoViewController.h */,
+			);
+			path = MediaVideo;
 			sourceTree = "<group>";
 		};
 		56152C2C2902B59A00530FF6 /* CustomAdapter */ = {
@@ -497,6 +509,7 @@
 				9B1A9D61288E487400CC16FA /* Interstitial */,
 				9B1A9D5D288E480D00CC16FA /* Native */,
 				9B1A9D62288E488100CC16FA /* RewardVideo */,
+				4B8C3E132BBADE1500D290AB /* MediaVideo */,
 				9B1A9D63288E488B00CC16FA /* Splash */,
 				04CF320F2800078F0083B5AA /* BaseVc */,
 				9B1A9D64288E48A600CC16FA /* Categorie */,
@@ -655,6 +668,7 @@
 			files = (
 				04CF3221280007900083B5AA /* ATModelButton.m in Sources */,
 				04CF321F280007900083B5AA /* ATHomeTableViewCell.m in Sources */,
+				4B8C3E162BBADE1500D290AB /* ATMediaVideoViewController.m in Sources */,
 				04CF323428000EDC0083B5AA /* ATNativeMessageStreamViewController.m in Sources */,
 				56152C3F2902B59A00530FF6 /* ATTMCustomSplashViewController.m in Sources */,
 				9BBD009F24863048009EAD66 /* ViewController.m in Sources */,
