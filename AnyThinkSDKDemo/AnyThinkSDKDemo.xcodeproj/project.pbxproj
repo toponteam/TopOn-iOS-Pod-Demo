@@ -305,16 +305,16 @@
 		56152C2D2902B59A00530FF6 /* CustomSplash */ = {
 			isa = PBXGroup;
 			children = (
-				56152C2E2902B59A00530FF6 /* ATTMBiddingRequest.m */,
-				56152C2F2902B59A00530FF6 /* ATTMSplashCustomEvent.m */,
 				56152C302902B59A00530FF6 /* ATTMBiddingDelegate.h */,
-				56152C312902B59A00530FF6 /* ATTMBiddingManager.h */,
-				56152C322902B59A00530FF6 /* ATTMSplashAdapter.h */,
 				56152C332902B59A00530FF6 /* ATTMBiddingDelegate.m */,
-				56152C342902B59A00530FF6 /* ATTMSplashCustomEvent.h */,
-				56152C352902B59A00530FF6 /* ATTMBiddingRequest.h */,
-				56152C362902B59A00530FF6 /* ATTMSplashAdapter.m */,
+				56152C312902B59A00530FF6 /* ATTMBiddingManager.h */,
 				56152C372902B59A00530FF6 /* ATTMBiddingManager.m */,
+				56152C352902B59A00530FF6 /* ATTMBiddingRequest.h */,
+				56152C2E2902B59A00530FF6 /* ATTMBiddingRequest.m */,
+				56152C322902B59A00530FF6 /* ATTMSplashAdapter.h */,
+				56152C362902B59A00530FF6 /* ATTMSplashAdapter.m */,
+				56152C342902B59A00530FF6 /* ATTMSplashCustomEvent.h */,
+				56152C2F2902B59A00530FF6 /* ATTMSplashCustomEvent.m */,
 			);
 			path = CustomSplash;
 			sourceTree = "<group>";
