@@ -106,7 +106,6 @@
         kATCustomDataSubchannelKey:@"placement_custom_data_subchannel"
     } forPlacementID:@"b5c1b048c498b9"];
 
-    [ATAPI sharedInstance].networkConsentInfo = @{kATNetworkNameUnityAds : @(0)};
 
 //    [[ATAPI sharedInstance] setDeniedUploadInfoArray:@[kATDeviceDataInfoOSVersionNameKey,
 //                                                       kATDeviceDataInfoOSVersionCodeKey,
