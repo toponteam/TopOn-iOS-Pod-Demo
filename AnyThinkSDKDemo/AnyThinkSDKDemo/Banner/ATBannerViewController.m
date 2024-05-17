@@ -214,6 +214,76 @@
     [[ATAdManager sharedManager] entryBannerScenarioWithPlacementID:self.placementID scene:KTopOnBannerSceneID];
 }
 
+- (void)developerSlefRender:(ATNativeBannerView *)nativeBannerView {
+    
+    [nativeBannerView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.width.mas_equalTo(350);
+        make.height.mas_equalTo(150);
+        make.center.mas_equalTo(nativeBannerView.superview);
+    }];
+    
+    [nativeBannerView.iconImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.width.height.mas_equalTo(100);
+        make.right.mas_equalTo(nativeBannerView.mas_right).offset(-10);
+        make.bottom.mas_equalTo(nativeBannerView);
+    }];
+    
+    [nativeBannerView.netWorkMediaView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.mas_equalTo(nativeBannerView);
+        make.width.mas_equalTo(200);
+        make.height.mas_equalTo(80);
+    }];
+    
+    [nativeBannerView.mainImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.mas_equalTo(nativeBannerView);
+        make.width.mas_equalTo(200);
+        make.height.mas_equalTo(80);
+    }];
+    
+    [nativeBannerView.textLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(nativeBannerView);
+        make.right.mas_equalTo(nativeBannerView);
+        make.height.mas_equalTo(30);
+        make.bottom.mas_equalTo(nativeBannerView.mas_bottom).offset(-5);
+    }];
+
+    [nativeBannerView.titleLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(nativeBannerView);
+        make.right.mas_equalTo(nativeBannerView);
+        make.height.mas_equalTo(30);
+        make.bottom.mas_equalTo(nativeBannerView.textLabel.mas_top).offset(-5);
+    }];
+
+    NSMutableArray *regisArray = [NSMutableArray array];
+    
+    if (nativeBannerView.iconImageView) {
+        [regisArray addObject:nativeBannerView.iconImageView];
+    }
+    
+    if (nativeBannerView.ctaLabel) {
+        [regisArray addObject:nativeBannerView.ctaLabel];
+    }
+    
+    if (nativeBannerView) {
+        [regisArray addObject:nativeBannerView];
+    }
+    if (nativeBannerView.mainImageView) {
+        [regisArray addObject:nativeBannerView.mainImageView];
+    }
+    
+    if (nativeBannerView.textLabel) {
+        [regisArray addObject:nativeBannerView.textLabel];
+    }
+    
+    if (nativeBannerView.titleLabel) {
+        [regisArray addObject:nativeBannerView.titleLabel];
+    }
+    [nativeBannerView registerClickableViewArray:regisArray];
+}
+
+
+#define kTopOnDemoNativeBannerSwitch NO
+
 - (void)showBanner {
     // 到达场景
     [self entryAdScenario];
@@ -224,7 +294,20 @@
         NSInteger tag = 3333;
         [[self.view viewWithTag:tag] removeFromSuperview];
         
-        ATBannerView *bannerView = [[ATAdManager sharedManager] retrieveBannerViewForPlacementID:self.placementID scene:KTopOnBannerSceneID];
+        ATShowConfig *showConfig = ATShowConfig.new;
+        showConfig.scene = KTopOnBannerSceneID;
+        showConfig.showCustomExt = @"testShowCustomExt";
+        __weak __typeof(self)weakSelf = self;
+        ATBannerView *bannerView;
+        if (kTopOnDemoNativeBannerSwitch) {
+            bannerView = [[ATAdManager sharedManager] retrieveBannerViewForPlacementID:self.placementID config:showConfig nativeMixBannerViewBlock:^(ATNativeBannerView * _Nonnull nativeBannerView) {
+                [weakSelf developerSlefRender:nativeBannerView];
+            }];
+        } else {
+            bannerView = [[ATAdManager sharedManager] retrieveBannerViewForPlacementID:self.placementID config:showConfig];
+        }
+        
+        
         if (bannerView != nil) {
             bannerView.delegate = self;
             bannerView.presentingViewController = self;
