@@ -32,6 +32,7 @@ target 'AnyThinkSDKDemo' do
   use_frameworks!
 
   pod 'AnyThinkiOS','6.3.20'
+  
   pod 'AnyThinkiOS/AnyThinkAdmobAdapter','6.3.20'
   pod 'AnyThinkiOS/AnyThinkPangleAdapter','6.3.20'
   pod 'AnyThinkiOS/AnyThinkTTAdapter','6.3.20'
