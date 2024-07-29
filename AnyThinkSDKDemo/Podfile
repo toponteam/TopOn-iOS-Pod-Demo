@@ -51,7 +51,7 @@ target 'AnyThinkSDKDemo' do
   pod 'AnyThinkStartAppSDKAdapter','6.3.61'
   pod 'AnyThinkKidozSDKAdapter','6.3.61'
   pod 'AnyThinkFyberSDKAdapter','6.3.61'
-  pod 'AnyThinkMyTargetSDKAdapter','6.3.61'
+#  pod 'AnyThinkMyTargetSDKAdapter','6.3.61'
   pod 'AnyThinkKuaiShouSDKAdapter','6.3.61'
   pod 'AnyThinkBaiduSDKAdapter','6.3.61'
   pod 'AnyThinkOgurySDKAdapter','6.3.61'
@@ -60,7 +60,7 @@ target 'AnyThinkSDKDemo' do
   pod 'AnyThinkBigoSDKAdapter','6.3.61'
   pod 'AnyThinkPubNativeSDKAdapter','6.3.61'
   pod 'AnyThinkKlevinSDKAdapter','6.3.61'
-
+  pod 'GoogleAds-IMA-iOS-SDK', '3.20.0'
 
 #https://topon-sdk-release.oss-cn-hangzhou.aliyuncs.com/SDK_Release/v6.3.61/iOS/AnyThink_mediation/AnyThinkiOS.zip
   
