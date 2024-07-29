@@ -10,6 +10,7 @@
 #import "ATHomeTableViewCell.h"
 #import "ATHomeFootView.h"
 #import <AppTrackingTransparency/ATTrackingManager.h>
+#import <AnyThinkDebuggerUISDK/ATDebuggerAPI.h>
 
 
 @interface ViewController ()<UITableViewDelegate, UITableViewDataSource>
@@ -100,6 +101,12 @@
             @"title":@"Media Video",
             @"class":@"ATMediaVideoViewController",
             @"des":@"Displayed immediately after the application is launched.",
+        },
+        @{
+            @"image":@"Debuger",
+            @"title":@"Debuger",
+            @"class":@"",
+            @"des":@"Debuger.",
         }
     ];
 }
@@ -173,6 +180,11 @@
     NSDictionary *dic = self.dataSource[indexPath.row];
     
     NSString *classString = [NSString stringWithFormat:@"%@", dic[@"class"]];
+    if (classString.length <= 0) {
+        [[ATDebuggerAPI sharedInstance] showDebuggerInViewController:self showType:ATShowDebugUIPush debugkey:@"99117a5bf26ca7a1923b3fed8e5371d3ab68c25c"];
+
+        return;
+    }
     Class class = NSClassFromString(classString);
 
     UIViewController *con = [class new];
