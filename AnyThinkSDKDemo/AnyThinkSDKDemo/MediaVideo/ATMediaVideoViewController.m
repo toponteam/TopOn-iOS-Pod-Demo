@@ -35,7 +35,6 @@ typedef NS_ENUM(NSUInteger, ATMediaVideoViewControllerType) {
 @property (nonatomic, assign) BOOL isContentPlayerPlaying;
 
 @property (nonatomic, assign) ATMediaVideoViewControllerType type;
-@property (nonatomic, assign) BOOL isTapPlay;
 
 @end
 
@@ -186,7 +185,6 @@ typedef NS_ENUM(NSUInteger, ATMediaVideoViewControllerType) {
     _offer = nil;
     [self.videoView removeFromSuperview];
     self.videoView = nil;
-    self.isTapPlay = NO;
     
     [[ATAPI sharedInstance] setCustomData:@{@"type": @"vmap"} forPlacementID:self.placementID];
 //    [[ATAPI sharedInstance] setCustomData:@{@"type": @"vast"} forPlacementID:self.placementID];
@@ -208,7 +206,7 @@ typedef NS_ENUM(NSUInteger, ATMediaVideoViewControllerType) {
     //关闭当前播放信息
     extra[kATAdMediaVideoExtraKeyDisableNowPlayingInfo] = @YES;
     
-    [[ATAdManager sharedManager] loadADWithPlacementID:self.placementID extra:extra controlDataParam:@{@"description_url":@"description_url"} playhead:self.contentPlayhead delegate:self mediaVideoContainerView:self.videoView viewController:self];
+    [[ATAdManager sharedManager] loadADWithPlacementID:self.placementID extra:extra controlDataParam:@{@"description_url":@"description_url"} delegate:self mediaVideoContainerView:self.videoView viewController:self];
 }
 
 
@@ -224,18 +222,47 @@ typedef NS_ENUM(NSUInteger, ATMediaVideoViewControllerType) {
     }];
 }
 
+
 - (void)showAd {
     if (![[ATAdManager sharedManager] adReadyForPlacementID:self.placementID]) {
         return;
     }
-    [_offer destory];
-    _offer = nil;
     
-    ATShowConfig *showConfig = ATShowConfig.new;
-    showConfig.showCustomExt = @"testShowCustomExt";
-    self.offer = [[ATAdManager sharedManager] mediaVideoObjectWithPlacementID:self.placementID showConfig:showConfig];
-    [self.offer showWithPlacementID:self.placementID];
-    self.isTapPlay = YES;
+    ATShowConfig *showConfig = [[ATShowConfig alloc] initWithScene:nil showCustomExt:@"testShowCustomExt"];
+    self.offer = [[ATAdManager sharedManager] mediaVideoObjectWithPlacementID:self.placementID showConfig:showConfig delegate:self];
+    
+    [[ATAdManager sharedManager] entryMediaVideoScenarioWithPlacementID:self.placementID scene:@"11"];
+    
+    id customNetworkObj = [self.offer customNetworkObj];
+    id adsManager = [self.offer adsManager];
+    
+    [self.contentPlayer seekToTime:kCMTimeZero completionHandler:^(BOOL finished) {
+        
+    }];
+    
+    UIView *myTransparentTapOverlay = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 300, 250)];
+    myTransparentTapOverlay.backgroundColor = [UIColor yellowColor];
+    UIButton *myPauseButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 10)];
+    // Substitute "myTransparentTapOverlay" and "myPauseButton" with the elements
+    // you want to register as video controls overlays.
+    // Make sure to register before ad playback starts.
+    IMAFriendlyObstruction *overlayObstruction =
+          [[IMAFriendlyObstruction alloc] initWithView:myTransparentTapOverlay
+                                               purpose:IMAFriendlyObstructionPurposeNotVisible
+                                        detailedReason:@"This overlay is transparent"];
+    IMAFriendlyObstruction *pauseButtonObstruction =
+          [[IMAFriendlyObstruction alloc] initWithView:myPauseButton
+                                               purpose:IMAFriendlyObstructionPurposeMediaControls
+                                        detailedReason:@"This is the video player pause button"];
+    
+    [self.offer registerFriendlyObstruction:overlayObstruction];
+    [self.offer registerFriendlyObstruction:pauseButtonObstruction];
+    [self.offer unregisterAllFriendlyObstructions];
+    if (self.offer.type == ATMediaVideoOfferTypeVMAP) {
+        [self.offer contentPlayhead:self.contentPlayhead];
+    } else if (self.offer.type == ATMediaVideoOfferTypeVAST) {
+        [self.offer start];
+    }
 }
 
 #pragma mark - lazy
@@ -441,9 +468,6 @@ typedef NS_ENUM(NSUInteger, ATMediaVideoViewControllerType) {
     NSLog(@"ATMediaVideoMainViewController::mediaVideoAdRequestContentPauseForPlacementID:%@ extra:%@", placementID, extra);
     [self showLog:[NSString stringWithFormat:@"mediaVideoAdRequestContentPauseForPlacementID:%@", placementID]];
     
-    if (!self.isTapPlay) {
-        return;
-    }
     
     [self.contentPlayer pause];
     self.isContentPlayerPlaying = NO;
@@ -454,9 +478,6 @@ typedef NS_ENUM(NSUInteger, ATMediaVideoViewControllerType) {
     NSLog(@"ATMediaVideoMainViewController::mediaVideoAdRequestContentResumeForPlacementID:%@ extra:%@", placementID, extra);
     [self showLog:[NSString stringWithFormat:@"mediaVideoAdRequestContentResumeForPlacementID:%@", placementID]];
     
-    if (!self.isTapPlay) {
-        return;
-    }
     
     [self.contentPlayer play];
     self.isContentPlayerPlaying = YES;
@@ -468,15 +489,6 @@ typedef NS_ENUM(NSUInteger, ATMediaVideoViewControllerType) {
     NSLog(@"ATMediaVideoMainViewController::mediaVideoAdBreakReadyForPlacementID:%@ extra:%@", placementID, extra);
     [self showLog:[NSString stringWithFormat:@"mediaVideoAdBreakReadyForPlacementID:%@", placementID]];
     
-    if (!self.isTapPlay && self.type == ATMediaVideoViewControllerTypeVMAP) {
-        return;
-    }
-    
-    if (!self.offer) {
-        ATShowConfig *showConfig = ATShowConfig.new;
-        showConfig.showCustomExt = @"testShowCustomExt";
-        self.offer = [[ATAdManager sharedManager] mediaVideoObjectWithPlacementID:self.placementID showConfig:showConfig];
-    }
     [self.offer start];
 }
 

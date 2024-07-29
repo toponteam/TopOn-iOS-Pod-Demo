@@ -289,9 +289,7 @@
     } else { //Manual loading mode
        if ([[ATAdManager sharedManager] interstitialReadyForPlacementID:self.placementID]) {
            
-           ATShowConfig *config = [ATShowConfig new];
-           config.scene = KTopOnInterstitialSceneID;
-           config.showCustomExt = @"testShowCustomExt";
+           ATShowConfig *config = [[ATShowConfig alloc] initWithScene:KTopOnInterstitialSceneID showCustomExt:@"testShowCustomExt"];
            __weak typeof (self) weakSelf = self;
            [[ATAdManager sharedManager] showInterstitialWithPlacementID:self.placementID
                                                              showConfig:config

@@ -294,9 +294,7 @@
         NSInteger tag = 3333;
         [[self.view viewWithTag:tag] removeFromSuperview];
         
-        ATShowConfig *showConfig = ATShowConfig.new;
-        showConfig.scene = KTopOnBannerSceneID;
-        showConfig.showCustomExt = @"testShowCustomExt";
+        ATShowConfig *showConfig = [[ATShowConfig alloc] initWithScene:KTopOnBannerSceneID showCustomExt:@"testShowCustomExt"];
         __weak __typeof(self)weakSelf = self;
         ATBannerView *bannerView;
         if (kTopOnDemoNativeBannerSwitch) {
