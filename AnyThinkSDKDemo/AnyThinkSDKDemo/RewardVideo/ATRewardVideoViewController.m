@@ -149,7 +149,7 @@
         /// 仅游可赢平台可用， 激励卡秒时长
 //        kATRewardedVideoKlevinRewardTimeKey : @3,
     };
-    
+    [[ATAdManager sharedManager] setMultipleLoadingDelegate:self placementId:self.placementID];
     [[ATAdManager sharedManager] loadADWithPlacementID:self.placementID extra:extra delegate:self];
 }
 
@@ -232,6 +232,18 @@
 
 
 #pragma mark - loading delegate
+- (void)didRevenueForPlacementID:(NSString *)placementID extra:(NSDictionary *)extra {
+    NSLog(@"ATRewardVideoViewController::didRevenueForPlacementID:%@ with extra: %@", placementID,extra);
+    [self showLog:[NSString stringWithFormat:@"didRevenueForPlacementID:%@", placementID]];
+}
+
+- (void)didFinishMultipleLoadingADWithPlacementID:(NSString *)placementID
+                                   requestingInfo:(ATAdRequestingInfo *)requestingInfo {
+    
+    NSLog(@"ATRewardVideoViewController::didFinishMultipleLoadingADWithPlacementID:%@", placementID);
+              
+    [self showLog:[NSString stringWithFormat:@"didFinishMultipleLoadingADWithPlacementID:%@", placementID]];
+}
 - (void)didStartLoadingADSourceWithPlacementID:(NSString *)placementID extra:(NSDictionary*)extra {
     NSLog(@"广告源--AD--开始--ATRewardVideoViewController::didStartLoadingADSourceWithPlacementID:%@---extra:%@", placementID,extra);
 }
