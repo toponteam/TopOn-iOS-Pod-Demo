@@ -149,6 +149,8 @@
     
     NSLog(@"%@",[NSString stringWithFormat:@"Qumeng::meta.getECPM:price:%@",priceStr] );
 
+    //currencyType，第三方SDK返回的价格单位需要和currencyType枚举值匹配。也建议您将第三方SDK的价值转换为美元传入
+    
     ATBidInfo *bidInfo = [ATBidInfo bidInfoC2SWithPlacementID:request.placementID unitGroupUnitID:request.unitGroup.unitID adapterClassString:request.unitGroup.adapterClassString price:priceStr currencyType:ATBiddingCurrencyTypeCNYCents expirationInterval:request.unitGroup.bidTokenTime customObject:customObject];
 //    bidInfo.networkFirmID = request.unitGroup.networkFirmID;
 //    bidInfo.curRate = [ATGeneralTool handleRateForBidInfo:bidInfo];
