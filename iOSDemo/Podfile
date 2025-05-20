@@ -1,0 +1,45 @@
+#建议使用github源，pod install前请检查终端代理网络是否通畅，如遇失败可尝试使用pod install --repo-update命令
+source 'https://github.com/CocoaPods/Specs.git'
+
+platform :ios, '13.0'
+
+post_install do |installer|
+  installer.generated_projects.each do |project|
+    project.targets.each do |target|
+        target.build_configurations.each do |config|
+            config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '13.0'
+         end
+    end
+  end
+end
+
+target 'iOSDemo' do
+  use_frameworks!
+  
+  #TopOn SDK
+  pod 'TPNiOS','6.4.76'
+
+  #DebugUI,调试时建议接入,上线后去掉
+  pod 'TPNDebugUISDK'
+  
+  #为了降低Demo首次pod安装时间，Demo并未完整列举所有Adapter适配器的安装，若您需要使用自己的AppID/AppKey进行测试，请替换您选用的Adapter适配器后，重新执行pod install --repo-update安装
+  
+  #Demo所用适配器，若想使用更多广告平台，请前往SDK下载中心获取:https://portal.toponad.net/m/sdk/download?type=iOS
+  pod 'TPNAdmobSDKAdapter','6.4.76'
+  pod 'TPNMintegralSDKAdapter','6.4.76'
+  pod 'TPNYandexSDKAdapter','6.4.76'
+  
+  #Admob Interactive-media-ads广告类型,iOS13+
+  pod 'TPNIMASDKAdapter','6.4.76'
+ 
+  #第三方数据统计SDK
+#  pod 'AppsFlyerFramework'
+#  pod 'Adjust'
+#  pod 'FirebaseAnalytics'
+ 
+ #Demo UI依赖的第三库
+  pod 'Masonry'
+  pod 'SDWebImage'
+  pod 'MJRefresh'
+ 
+end
