@@ -198,6 +198,9 @@
 - (void)splashDidShowForPlacementID:(NSString *)placementID extra:(NSDictionary *)extra {
     ATDemoLog(@"splashDidShowForPlacementID:%@",placementID);
     [self showLog:[NSString stringWithFormat:@"splashDidShowForPlacementID:%@ ",placementID]];
+    
+    //展示广告后可以隐藏，避免遮挡
+    [self.launchLoadingView dismiss];
 }
 
 /// 开屏广告已关闭
