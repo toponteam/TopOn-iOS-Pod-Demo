@@ -343,10 +343,6 @@
     [self addNormalBarWithTitle:self.title];
     [self addLogTextView];
     [self addFootView];
-}
-
-- (void)dealloc {
-    NSLog(@"SelfRenderVC dealloc");
-}
+} 
    
 @end 
