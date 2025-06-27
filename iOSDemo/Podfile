@@ -34,8 +34,8 @@ target 'iOSDemo' do
  
   #第三方数据统计SDK
 #  pod 'AppsFlyerFramework'
-#  pod 'Adjust'
-  pod 'FirebaseAnalytics'
+#  pod 'Adjus#t'
+#  pod 'FirebaseAnalytics'
  
  #Demo UI依赖的第三库
   pod 'Masonry'
