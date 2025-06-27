@@ -31,38 +31,38 @@
     } else {
         //布局demoUI,无需接入
         [self setupDemoUI];
+        
+        //开屏广告展示启动图
+        [[AdSDKManager sharedManager] addLaunchLoadingView];
+        //初始化SDK，在非欧盟地区发行的应用，需要用此方法初始化SDK接入，欧盟地区初始化替换为[[AdSDKManager sharedManager] initSDK_EU:];
+        [[AdSDKManager sharedManager] initSDK];
+        //初始化广告SDK完成
+        
+        //加载开屏广告
+        [[AdSDKManager sharedManager] loadSplashAdWithPlacementID:FirstAppOpen_PlacementID result:^(BOOL isSuccess) {
+            //加载成功
+            if (isSuccess) {
+                //展示开屏广告
+                [[AdSDKManager sharedManager] showSplashWithPlacementID:FirstAppOpen_PlacementID];
+            }
+        }];
+        
+        //含欧盟地区初始化流程
+    //    //欧盟地区初始化替换为[[AdSDKManager sharedManager] initSDK_EU:];
+    //    [[AdSDKManager sharedManager] initSDK_EU:^{
+    //        //初始化广告SDK完成
+    //
+    //        //加载开屏广告
+    //        [[AdSDKManager sharedManager] loadSplashAdWithPlacementID:FirstAppOpen_PlacementID result:^(BOOL isSuccess) {
+    //            //加载成功
+    //            if (isSuccess) {
+    //                //展示开屏广告
+    //                [[AdSDKManager sharedManager] showSplashWithPlacementID:FirstAppOpen_PlacementID];
+    //            }
+    //        }];
+    //    }];
     }
-      
-    //开屏广告展示启动图
-    [[AdSDKManager sharedManager] addLaunchLoadingView];
-    //初始化SDK，在非欧盟地区发行的应用，需要用此方法初始化SDK接入，欧盟地区初始化替换为[[AdSDKManager sharedManager] initSDK_EU:];
-    [[AdSDKManager sharedManager] initSDK];
-    //初始化广告SDK完成
-    
-    //加载开屏广告
-    [[AdSDKManager sharedManager] loadSplashAdWithPlacementID:FirstAppOpen_PlacementID result:^(BOOL isSuccess) {
-        //加载成功
-        if (isSuccess) {
-            //展示开屏广告
-            [[AdSDKManager sharedManager] showSplashWithPlacementID:FirstAppOpen_PlacementID];
-        }
-    }];
-    
-    //含欧盟地区初始化流程
-//    //欧盟地区初始化替换为[[AdSDKManager sharedManager] initSDK_EU:];
-//    [[AdSDKManager sharedManager] initSDK_EU:^{
-//        //初始化广告SDK完成
-//        
-//        //加载开屏广告
-//        [[AdSDKManager sharedManager] loadSplashAdWithPlacementID:FirstAppOpen_PlacementID result:^(BOOL isSuccess) {
-//            //加载成功
-//            if (isSuccess) {
-//                //展示开屏广告
-//                [[AdSDKManager sharedManager] showSplashWithPlacementID:FirstAppOpen_PlacementID];
-//            }
-//        }];
-//    }];
- 
+       
     return YES;
 }
  
