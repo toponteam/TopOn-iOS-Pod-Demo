@@ -1,6 +1,7 @@
 #建议使用github源，pod install前请检查终端代理网络是否通畅，如遇失败可尝试使用pod install --repo-update命令
 source 'https://github.com/CocoaPods/Specs.git'
 
+#需要根据具体选择的第三方广告平台SDK版本来确定最低支持的iOS版本
 platform :ios, '13.0'
 
 post_install do |installer|
@@ -34,7 +35,7 @@ target 'iOSDemo' do
  
   #第三方数据统计SDK
 #  pod 'AppsFlyerFramework'
-#  pod 'Adjus#t'
+#  pod 'Adjust'
 #  pod 'FirebaseAnalytics'
  
  #Demo UI依赖的第三库
