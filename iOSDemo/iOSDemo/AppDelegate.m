@@ -27,7 +27,6 @@
     // iOS 13以下版本仍使用传统方式
     if (@available(iOS 13.0, *)) {
         // iOS 13及以上版本使用Scene Delegate
-        // 在这里只进行SDK初始化，UI创建交给SceneDelegate处理
     } else {
         //布局demoUI,无需接入
         [self setupDemoUI];

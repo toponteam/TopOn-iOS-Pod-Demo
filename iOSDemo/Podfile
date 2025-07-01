@@ -29,6 +29,7 @@ target 'iOSDemo' do
   pod 'TPNAdmobSDKAdapter','6.4.87'
   pod 'TPNMintegralSDKAdapter','6.4.87'
   pod 'TPNYandexSDKAdapter','6.4.87'
+  pod 'TPNVungleSDKAdapter','6.4.87.1'
   
   #Admob Interactive-media-ads广告类型,iOS13+
   pod 'TPNIMASDKAdapter','6.4.87'
