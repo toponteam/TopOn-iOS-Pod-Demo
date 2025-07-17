@@ -199,6 +199,12 @@
     self.selfRenderView = nil;
 }
  
+- (void)dealloc {
+    
+    //目的是正确释放:[self.adView destroyNative];
+    [self removeAd];
+}
+
 #pragma mark - 广告位代理回调
 /// 广告位加载完成
 /// - Parameter placementID: 广告位ID
@@ -337,10 +343,6 @@
     [self addNormalBarWithTitle:self.title];
     [self addLogTextView];
     [self addFootView];
-}
-
-- (void)dealloc {
-    NSLog(@"SelfRenderVC dealloc");
-}
+} 
    
 @end 
