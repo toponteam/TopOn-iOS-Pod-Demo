@@ -217,21 +217,4 @@
     [self showLog:[NSString stringWithFormat:@"didDeepLinkOrJumpForPlacementID:%@, success:%@", placementID, success ? @"YES" : @"NO"]];
 }
  
-#pragma mark - Demo Needed 不用接入
-- (void)viewDidLoad {
-    [super viewDidLoad];
-     
-    [self setupDemoUI];
-}
-
-- (void)setupDemoUI {
-    [self addNormalBarWithTitle:self.title];
-    [self addLogTextView];
-    [self addFootView];
-}
-
-- (void)dealloc {
-    NSLog(@"BannerVC dealloc");
-}
-
 @end
