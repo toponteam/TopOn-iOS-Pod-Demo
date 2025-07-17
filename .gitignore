@@ -3,3 +3,10 @@ iOSDemo/Podfile.lock
 iOSDemo/Pods
 iOSDemo/iOSDemo.xcworkspace
 iOSDemo/build
+AnyThinkSDKDemo/Podfile.lock
+AnyThinkSDKDemo/Pods
+AnyThinkSDKDemo/AnyThinkSDKDemo.xcworkspace
+AnyThinkSDKDemo/SDK
+AnyThinkSDKDemo/Build
+AnyThinkSDKDemo/DerivedData
+JoyPacSDKDemo
