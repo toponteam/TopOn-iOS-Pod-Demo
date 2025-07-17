@@ -18,6 +18,9 @@
 @property (strong, nonatomic) ATNativeADView  * adView;
 @property (strong, nonatomic) SelfRenderView  * selfRenderView;
 @property (nonatomic, strong) ATNativeAdOffer * nativeAdOffer;
+// 重试次数计数器
+@property (nonatomic, assign) NSInteger         retryAttempt;
+
 @end
 
 @implementation SelfRenderVC
@@ -29,8 +32,8 @@
 #define Native_SelfRender_SceneID @""
  
 #pragma mark - Load Ad 加载广告
-/// 加载广告按钮被点击
-- (void)loadAdButtonClickAction {
+/// 加载广告
+- (void)loadAd {
  
     [self showLog:kLocalizeStr(@"点击了加载广告")];
      
@@ -48,21 +51,23 @@
 }
  
 #pragma mark - Show Ad 展示广告
-/// 展示广告按钮被点击
-- (void)showAdButtonClickAction {
+/// 展示广告
+- (void)showAd {
     
     //场景统计功能，可选接入
     [[ATAdManager sharedManager] entryNativeScenarioWithPlacementID:Native_SelfRender_PlacementID scene:Native_SelfRender_SceneID];
     
-    //查询可用于展示的广告缓存(可选接入)
-    //[AdCheckTool getValidAdsForPlacementID:Native_SelfRender_PlacementID adType:AdTypeNative];
-    
-    //查询广告加载状态(可选接入)
-    //[AdCheckTool adLoadingStatusWithPlacementID:Native_SelfRender_PlacementID adType:AdTypeNative];
+//    //查询可用于展示的广告缓存(可选接入)
+//    NSArray <NSDictionary *> * adCaches = [[ATAdManager sharedManager] getNativeValidAdsForPlacementID:Native_SelfRender_PlacementID];
+//    ATDemoLog(@"getValidAds : %@",adCaches);
+//
+//    //查询广告加载状态(可选接入)
+//    ATCheckLoadModel * status = [[ATAdManager sharedManager] checkNativeLoadStatusForPlacementID:Native_SelfRender_PlacementID];
+//    ATDemoLog(@"checkLoadStatus : %d",status.isLoading);
     
     //检查是否有就绪
     if (![[ATAdManager sharedManager] nativeAdReadyForPlacementID:Native_SelfRender_PlacementID]) {
-        [self notReadyAlert];
+        [self loadAd];
         return;
     }
     
@@ -80,7 +85,7 @@
     config.videoPlayType = ATNativeADConfigVideoPlayOnlyWiFiAutoPlayType;
 
     //【手动布局方式】精确设置logo大小以及位置，与下方【Masonry方式】选择一种实现
-//    config.logoViewFrame = CGRectMake(kScreenW-50-10, SelfRenderViewHeight-50-10, 50, 50);
+    config.logoViewFrame = CGRectMake(kScreenW-50-10, SelfRenderViewHeight-50-10, 50, 50);
     
     //设置广告平台logo位置偏好(部分广告平台无法进行精确设置，则通过下面代码设置，Demo示例中均演示为右下角的情况)
     //若素材offer中logoUrl或logo有值时，才可以通过SelfRenderView中布局进行设置，没有值请使用本方法中的示例进行精确控制或者偏好位置设置。
@@ -124,36 +129,6 @@
     [nativeADView registerClickableViewArray:clickableViewArray];
     
     //绑定组件
-    [self prepareWithNativePrepareInfo:selfRenderView nativeADView:nativeADView];
-    
-    //渲染广告
-    [offer rendererWithConfiguration:config selfRenderView:selfRenderView nativeADView:nativeADView];
-    
-    //【Masonry方式】精确设置logo大小以及位置，与上方【手动布局方式】选择一种实现，请在渲染广告之后调用
-    if (nativeADView.logoImageView && nativeADView.logoImageView.superview) {
-        [nativeADView.logoImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.right.bottom.mas_equalTo(nativeADView).mas_offset(-10);
-            make.width.height.mas_equalTo(20);
-        }];
-    }
-    
-    //用于测试时打印
-//    [self printNativeAdInfoAfterRendererWithOffer:offer nativeADView:nativeADView];
-    
-    //隐藏logo，谨慎使用，请阅读文档：自渲染广告注意事项
-    //nativeADView.logoImageView.hidden = YES;
-    
-    //引用
-    self.adView = nativeADView;
-    
-    //展示广告
-    AdDisplayVC *showVc = [[AdDisplayVC alloc] initWithAdView:nativeADView offer:offer adViewSize:CGSizeMake(SelfRenderViewWidth, SelfRenderViewHeight)];
-    [self.navigationController pushViewController:showVc animated:YES];
-}
-
-#pragma mark - 绑定组件
-- (void)prepareWithNativePrepareInfo:(SelfRenderView *)selfRenderView nativeADView:(ATNativeADView *)nativeADView {
-    // 哪些组件需要绑定，哪些不需要，请参考文档：原生广告注意事项
     ATNativePrepareInfo *info = [ATNativePrepareInfo loadPrepareInfo:^(ATNativePrepareInfo * prepareInfo) {
         prepareInfo.textLabel = selfRenderView.textLabel;
         prepareInfo.advertiserLabel = selfRenderView.advertiserLabel;
@@ -167,8 +142,28 @@
         prepareInfo.mediaView = selfRenderView.mediaView;
     }];
     [nativeADView prepareWithNativePrepareInfo:info];
-}
+    
+    //渲染广告
+    [offer rendererWithConfiguration:config selfRenderView:selfRenderView nativeADView:nativeADView];
+    
+    //【Masonry方式】精确设置logo大小以及位置，与上方【手动布局方式】选择一种实现，请在渲染广告之后调用
+//    if (nativeADView.logoImageView && nativeADView.logoImageView.superview) {
+//        [nativeADView.logoImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
+//            make.right.bottom.mas_equalTo(nativeADView).mas_offset(-10);
+//            make.width.height.mas_equalTo(20);
+//        }];
+//    }
+//
+    //用于测试时打印
+//    [self printNativeAdInfoAfterRendererWithOffer:offer nativeADView:nativeADView];
  
+    self.adView = nativeADView;
+    
+    //展示广告
+    AdDisplayVC *showVc = [[AdDisplayVC alloc] initWithAdView:nativeADView offer:offer adViewSize:CGSizeMake(SelfRenderViewWidth, SelfRenderViewHeight)];
+    [self.navigationController pushViewController:showVc animated:YES];
+}
+  
 /// 用于测试时打印相关信息
 /// - Parameters:
 ///   - offer: 广告素材
@@ -211,6 +206,9 @@
 - (void)didFinishLoadingADWithPlacementID:(NSString *)placementID {
     BOOL isReady = [[ATAdManager sharedManager] nativeAdReadyForPlacementID:placementID];
     [self showLog:[NSString stringWithFormat:@"didFinishLoadingADWithPlacementID:%@ SelfRender 是否准备好:%@", placementID,isReady ? @"YES":@"NO"]];
+    
+    // 重置重试次数
+    self.retryAttempt = 0;
 }
  
 /// 广告位加载失败
@@ -220,6 +218,20 @@
 - (void)didFailToLoadADWithPlacementID:(NSString *)placementID error:(NSError *)error {
     ATDemoLog(@"didFailToLoadADWithPlacementID:%@ error:%@", placementID, error);
     [self showLog:[NSString stringWithFormat:@"didFailToLoadADWithPlacementID:%@ errorCode:%ld", placementID, error.code]];
+    
+    // 重试已达到 3 次，不再重试加载
+    if (self.retryAttempt >= 3) {
+       return;
+    }
+    self.retryAttempt++;
+    
+    // 加载失败重试延迟时间建议 10 秒
+    NSInteger delaySec = 10;
+
+    // 延迟重试
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, delaySec * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        [self loadAd];
+    });
 }
 
 /// 获得展示收益
@@ -241,13 +253,7 @@
 - (void)didShowNativeAdInAdView:(ATNativeADView *)adView placementID:(NSString *)placementID extra:(NSDictionary *)extra {
     ATDemoLog(@"didShowNativeAdInAdView:%@ extra:%@",placementID,extra);
     [self showLog:[NSString stringWithFormat:@"didShowNativeAdInAdView:%@", placementID]];
-    
     ATDemoLog(@"🔥--原生广告adInfo信息，展示后：%@",self.nativeAdOffer.adOfferInfo);
-    
-    //若有视频，且不希望同时展示主图和视频，可隐藏主图
-    dispatch_async(dispatch_get_main_queue(), ^{
-        self.selfRenderView.mainImageView.hidden = [adView isVideoContents];
-    });
 }
 
 /// 原生广告点击了关闭按钮
@@ -257,8 +263,12 @@
 ///   - extra: 额外信息
 - (void)didTapCloseButtonInAdView:(ATNativeADView *)adView placementID:(NSString *)placementID extra:(NSDictionary *)extra {
     ATDemoLog(@"didTapCloseButtonInAdView:%@ extra:%@", placementID, extra);
-    [self removeAd];
     [self showLog:[NSString stringWithFormat:@"didTapCloseButtonInAdView:%@", placementID]];
+    
+    // 销毁广告
+    [self removeAd];
+    // 预加载下一个广告
+    [self loadAd];
 }
 
 /// 原生广告开始播放视频
@@ -332,17 +342,4 @@
     [self showLog:[NSString stringWithFormat:@"didCloseDetailInAdView:%@", placementID]];
 }
  
-#pragma mark - Demo Needed 不用接入
-- (void)viewDidLoad {
-    [super viewDidLoad];
-     
-    [self setupDemoUI];
-}
-
-- (void)setupDemoUI {
-    [self addNormalBarWithTitle:self.title];
-    [self addLogTextView];
-    [self addFootView];
-} 
-   
-@end 
+@end

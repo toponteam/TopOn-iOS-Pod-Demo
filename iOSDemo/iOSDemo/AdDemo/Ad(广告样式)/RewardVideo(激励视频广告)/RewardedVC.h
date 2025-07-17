@@ -5,8 +5,8 @@
 //  Created by ltz on 2025/1/7.
 //
 
-#import "BaseVC.h"
+#import "BaseNormalBarVC.h"
  
-@interface RewardedVC : BaseVC
+@interface RewardedVC : BaseNormalBarVC
 
 @end

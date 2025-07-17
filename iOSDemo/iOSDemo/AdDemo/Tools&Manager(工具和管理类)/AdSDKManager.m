@@ -205,7 +205,7 @@ static AdSDKManager *sharedManager = nil;
     [self splashCallBackWithPlacementID:placementID result:NO];
 }
 
-- (void)didFinishLoadingADWithPlacementID:(NSString *)placementID { 
+- (void)didFinishLoadingADWithPlacementID:(NSString *)placementID {
     [self splashCallBackWithPlacementID:placementID result:YES];
 }
 

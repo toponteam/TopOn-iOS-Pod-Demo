@@ -8,7 +8,6 @@
 #import "SceneDelegate.h"
 #import "BaseNavigationController.h"
 #import "HomeViewController.h"
-#import "BaseNavigationController.h"
 #import "AdSDKManager.h"
 
 API_AVAILABLE(ios(13.0))
@@ -20,21 +19,10 @@ API_AVAILABLE(ios(13.0))
         return;
     }
     
-    UIWindowScene *windowScene = (UIWindowScene *)scene;
-    
-    // 创建window
-    self.window = [[UIWindow alloc] initWithWindowScene:windowScene];
-    self.window.backgroundColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0]; // kHexColor(0xffffff)
-    
-    if (@available(iOS 13.0, *)) {
-        self.window.overrideUserInterfaceStyle = UIUserInterfaceStyleLight;
-    }
-    
-    // 设置根视图控制器
-    BaseNavigationController *nav = [[BaseNavigationController alloc] initWithRootViewController:[HomeViewController new]];
-    self.window.rootViewController = nav;
-    [self.window makeKeyAndVisible];
+    //Demo UI
+    [self setupDemoUI:scene];
      
+    // iOS 13+版本在这里调用PPVC，确保Scene已经完全建立
     dispatch_async(dispatch_get_main_queue(), ^{
         //开屏广告展示启动图
         [[AdSDKManager sharedManager] addLaunchLoadingView];
@@ -66,6 +54,24 @@ API_AVAILABLE(ios(13.0))
     //        }];
     //    }];
     });
+}
+
+#pragma mark - Demo UI 可忽略
+- (void)setupDemoUI:(UIScene *)scene {
+    UIWindowScene *windowScene = (UIWindowScene *)scene;
+    
+    // 创建window
+    self.window = [[UIWindow alloc] initWithWindowScene:windowScene];
+    self.window.backgroundColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0]; // kHexColor(0xffffff)
+    
+    if (@available(iOS 13.0, *)) {
+        self.window.overrideUserInterfaceStyle = UIUserInterfaceStyleLight;
+    }
+    
+    // 设置根视图控制器
+    BaseNavigationController *nav = [[BaseNavigationController alloc] initWithRootViewController:[HomeViewController new]];
+    self.window.rootViewController = nav;
+    [self.window makeKeyAndVisible];
 }
 
 - (void)sceneDidDisconnect:(UIScene *)scene {

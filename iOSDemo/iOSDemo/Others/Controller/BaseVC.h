@@ -27,18 +27,18 @@
 - (void)showLog:(NSString *)logStr;
 
 - (void)notReadyAlert;
-- (void)clearLog; 
+- (void)clearLog;
 
 #pragma mark - actions
-- (void)loadAdButtonClickAction;
+- (void)loadAd;
 
-- (void)showAdButtonClickAction;
+- (void)showAd;
  
 - (void)hiddenAdButtonClickAction;
 
 - (void)removeAdButtonClickAction;
 
-- (void)reshowAdButtonClickAction;
+- (void)reshowAd;
 
 @end
  

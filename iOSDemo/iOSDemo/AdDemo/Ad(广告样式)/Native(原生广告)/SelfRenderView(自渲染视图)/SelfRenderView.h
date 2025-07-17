@@ -53,4 +53,4 @@
 - (instancetype)initWithOffer:(ATNativeAdOffer *)offer;
 - (void)destory;
 
-@end 
+@end

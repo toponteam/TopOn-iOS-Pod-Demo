@@ -5,8 +5,8 @@
 //  Created by ltz on 2025/1/11.
 //
 
-#import "BaseVC.h"
+#import "BaseNormalBarVC.h"
  
-@interface SelfRenderVC : BaseVC
+@interface SelfRenderVC : BaseNormalBarVC
 
 @end

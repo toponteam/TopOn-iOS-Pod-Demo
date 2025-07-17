@@ -12,6 +12,7 @@
 @interface BannerVC () <ATBannerDelegate>
 
 @property (nonatomic, strong) ATBannerView *bannerView;
+@property (nonatomic, assign) BOOL hasLoaded; // 广告加载状态标识
 
 @end
 
@@ -27,57 +28,54 @@
 #define BannerSize CGSizeMake(320, 50)
 
 #pragma mark - Load Ad 加载广告
-/// 加载广告按钮被点击
-- (void)loadAdButtonClickAction {
+/// 加载广告
+- (void)loadAd {
  
     [self showLog:kLocalizeStr(@"点击了加载广告")];
       
     NSMutableDictionary * loadConfigDict = [NSMutableDictionary dictionary];
     
     /*
-     注意不同平台的横幅广告有一定限制，例如配置的穿山甲横幅广告640*100，为了能填充完屏幕宽，计算高度H = (屏幕宽 *100)/640；那么在load的extra的size为（屏幕宽：H）。
+     注意不同平台的横幅广告有一定限制，例如配置的横幅广告640*100，为了能填充完屏幕宽，计算高度H = (屏幕宽 *100)/640；那么在load的extra的size为（屏幕宽：H）。
      
-     Note that banner ads on different platforms have certain restrictions. For example, the configured CSJ(TT) banner AD is 640*100. In order to fill the screen width, the height H = (screen width *100)/640 is calculated. Then the extra size of the load is (screen width: H).
+     Note that banner ads on different platforms have certain restrictions. For example, the configured banner AD is 640*100. In order to fill the screen width, the height H = (screen width *100)/640 is calculated. Then the extra size of the load is (screen width: H).
      */
     [loadConfigDict setValue:[NSValue valueWithCGSize:BannerSize] forKey:kATAdLoadingExtraBannerAdSizeKey];
     
-    [loadConfigDict setValue:@NO forKey:kATAdLoadingExtraBannerSizeAdjustKey];
+    //设置自定义参数
     [loadConfigDict setValue:@"media_val_BannerVC" forKey:kATAdLoadingExtraMediaExtraKey];
      
     //可选接入，如果使用了Admob广告平台，可添加以下配置
-//    [AdLoadConfigTool banner_loadExtraConfigAppendAdmob:loadConfigDict];
+    //[AdLoadConfigTool banner_loadExtraConfigAppendAdmob:loadConfigDict];
     
-    //当SDK版本小于v6.4.42+ 如果viewController需要传入其他控制器对象，您需要对其进行引用，SDK内部不会引用
-    [[ATAdManager sharedManager] loadADWithPlacementID:BannerPlacementID extra:loadConfigDict viewController:self delegate:self];
+    //开始加载
+    [[ATAdManager sharedManager] loadADWithPlacementID:BannerPlacementID extra:loadConfigDict delegate:self];
 }
  
 #pragma mark - Show Ad 展示广告
-/// 展示广告按钮被点击
-- (void)showAdButtonClickAction {
+/// 展示广告
+- (void)showAd {
     
     //场景统计功能，可选接入
     [[ATAdManager sharedManager] entryBannerScenarioWithPlacementID:BannerPlacementID scene:BannerSceneID];
     
-    //查询可用于展示的广告缓存(可选接入)
-    //[AdCheckTool getValidAdsForPlacementID:BannerPlacementID adType:AdTypeBanner];
+//    //查询可用于展示的广告缓存(可选接入)
+//    NSArray <NSDictionary *> * adCaches = [[ATAdManager sharedManager] getBannerValidAdsForPlacementID:BannerPlacementID];
+//    ATDemoLog(@"getValidAds : %@",adCaches);
+//
+//    //查询广告加载状态(可选接入)
+//    ATCheckLoadModel * status = [[ATAdManager sharedManager] checkBannerLoadStatusForPlacementID:BannerPlacementID];
+//    ATDemoLog(@"checkLoadStatus : %d",status.isLoading);
     
-    //查询广告加载状态(可选接入)
-    //[AdCheckTool adLoadingStatusWithPlacementID:BannerPlacementID adType:AdTypeBanner];
-    
-    //检查是否有就绪,showViewController参数需要与loadADWithPlacementID中的viewController对象一样
-    if (![[ATAdManager sharedManager] bannerAdReadyForPlacementID:BannerPlacementID showViewController:self]) {
-        [self notReadyAlert];
+    //检查是否有就绪
+    if (![[ATAdManager sharedManager] bannerAdReadyForPlacementID:BannerPlacementID]) {
+        [self loadAd];
         return;
     }
     
     //展示配置，Scene传入后台的场景ID，没有可传入空字符串，showCustomExt参数可传入自定义参数字符串
     ATShowConfig *config = [[ATShowConfig alloc] initWithScene:BannerSceneID showCustomExt:@"testShowCustomExt"];
-    //showViewController参数需要与loadADWithPlacementID、bannerAdReadyForPlacementID中的viewController、showViewController对象一样
-    config.showViewController = self;
-    
-    //移除之前可能存在的banner
-    [self removeAd];
-    
+ 
     //展示广告
     ATBannerView *bannerView = [[ATAdManager sharedManager] retrieveBannerViewForPlacementID:BannerPlacementID config:config];
     if (bannerView != nil) {
@@ -88,6 +86,7 @@
         [self.view addSubview:bannerView];
         self.bannerView = bannerView;
         
+        //布局
         [self.bannerView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.mas_equalTo(self.view);
             make.height.equalTo(@(BannerSize.height));
@@ -97,12 +96,12 @@
     }
 }
  
-#pragma mark - 移除广告(可选接入)
+#pragma mark - 销毁广告
 - (void)removeAd {
-    //移除视图以及引用
-    self.bannerView.delegate = nil;
+    [self.bannerView destroyBanner];
     [self.bannerView removeFromSuperview];
     self.bannerView = nil;
+    self.hasLoaded = NO;
 }
 
 #pragma mark - Demo按钮操作
@@ -111,27 +110,24 @@
     [self removeAd];
 }
  
+//临时隐藏，隐藏后会停止自动加载
 - (void)hiddenAdButtonClickAction {
     self.bannerView.hidden = YES;
 }
  
-- (void)reshowAdButtonClickAction {
+//隐藏后重新展示
+- (void)reshowAd {
     self.bannerView.hidden = NO;
 }
  
-- (void)viewDidDisappear:(BOOL)animated {
-    [super viewDidDisappear:animated];
-    
-    //彻底退出控制且不再返回时，释放Banner资源
-    [self removeAd];
-}
-
-#pragma mark - 广告位代理回调
+#pragma mark - ATAdLoadingDelegate
 /// 广告位加载完成
 /// - Parameter placementID: 广告位ID
 - (void)didFinishLoadingADWithPlacementID:(NSString *)placementID {
     BOOL isReady = [[ATAdManager sharedManager] bannerAdReadyForPlacementID:placementID];
     [self showLog:[NSString stringWithFormat:@"didFinishLoadingADWithPlacementID:%@ Banner 是否准备好:%@", placementID,isReady ? @"YES":@"NO"]];
+    
+    self.hasLoaded = YES;
 }
  
 /// 广告位加载失败
@@ -141,6 +137,8 @@
 - (void)didFailToLoadADWithPlacementID:(NSString *)placementID error:(NSError *)error {
     ATDemoLog(@"didFailToLoadADWithPlacementID:%@ error:%@", placementID, error);
     [self showLog:[NSString stringWithFormat:@"didFailToLoadADWithPlacementID:%@ errorCode:%ld", placementID, error.code]];
+    
+    self.hasLoaded = NO;
 }
 
 /// 获得展示收益
@@ -152,7 +150,7 @@
     [self showLog:[NSString stringWithFormat:@"didRevenueForPlacementID:%@", placementID]];
 }
 
-#pragma mark - 开屏广告事件代理回调
+#pragma mark - ATBannerDelegate
 
 /// 关闭按钮点击(当用户点击横幅上关闭按钮的情形)
 /// - Parameters:

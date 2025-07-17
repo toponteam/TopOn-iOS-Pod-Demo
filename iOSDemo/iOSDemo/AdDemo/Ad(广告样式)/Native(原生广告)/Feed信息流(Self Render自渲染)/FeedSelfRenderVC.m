@@ -185,7 +185,7 @@
         DemoOfferAdModel *offerModel1 = [[DemoOfferAdModel alloc] init];
         offerModel1.isNativeAd = NO;
         [self.dataSourceArray addObject:offerModel1];
-    } 
+    }
     [self.feedTableView reloadData];
 }
 

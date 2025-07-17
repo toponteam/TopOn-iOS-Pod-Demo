@@ -29,11 +29,8 @@
 		CA2715B72D912A6E0079E0A0 /* BaseTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA2715B62D912A6E0079E0A0 /* BaseTabBarController.m */; };
 		CA3CCEA02D3B9C5200A8BC7F /* LaunchLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA3CCE9F2D3B9C5200A8BC7F /* LaunchLoadingView.m */; };
 		CA3F2C9D2E0D2EF000493F4F /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CA3F2C9C2E0D2EF000493F4F /* SceneDelegate.m */; };
-		CA41B2DD2D62E8D900405B72 /* DrawSelfRenderView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA41B2DC2D62E8D900405B72 /* DrawSelfRenderView.m */; };
 		CA47064C2D5C8471003E7AD6 /* SDKGlobalConfigTool.m in Sources */ = {isa = PBXBuildFile; fileRef = CA47064B2D5C8471003E7AD6 /* SDKGlobalConfigTool.m */; };
 		CA4706512D5C8C32003E7AD6 /* TestModeTool.m in Sources */ = {isa = PBXBuildFile; fileRef = CA4706502D5C8C32003E7AD6 /* TestModeTool.m */; };
-		CA47065C2D5F3963003E7AD6 /* DrawCustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CA4706592D5F3963003E7AD6 /* DrawCustomCell.m */; };
-		CA47065F2D5F39D8003E7AD6 /* DrawAdCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CA47065E2D5F39D8003E7AD6 /* DrawAdCell.m */; };
 		CA4FCF4B2D3BAE0200B602A3 /* ExpressVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CA4FCF4A2D3BAE0200B602A3 /* ExpressVC.m */; };
 		CA4FCF552D3BBB1900B602A3 /* IMAVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CA4FCF542D3BBB1900B602A3 /* IMAVC.m */; };
 		CA5229CD2D55FB9900FB3D9C /* CustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CA5229CC2D55FB9900FB3D9C /* CustomCell.xib */; };
@@ -41,9 +38,10 @@
 		CA5229D12D55FC3F00FB3D9C /* AdCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CA5229D02D55FC3F00FB3D9C /* AdCell.m */; };
 		CA5AF6192D57601500D48D26 /* FeedTemplateVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CA5AF6182D57601500D48D26 /* FeedTemplateVC.m */; };
 		CA643BE62D3F6E01006D9512 /* FeedSelfRenderVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CA643BE52D3F6E01006D9512 /* FeedSelfRenderVC.m */; };
-		CA81164E2D8BCA7B00D0A5D7 /* SplashWithCustomBGVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CA81164D2D8BCA7B00D0A5D7 /* SplashWithCustomBGVC.m */; };
-		CAA063DD2DBDE15A006B6C38 /* AdCheckTool.m in Sources */ = {isa = PBXBuildFile; fileRef = CAA063DC2DBDE15A006B6C38 /* AdCheckTool.m */; };
-		CAA71CB82DAF6E4A00DF3CE1 /* DrawCustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CAA71CB72DAF6E4A00DF3CE1 /* DrawCustomCell.xib */; };
+		CA73FE2E2E28E54B006CBBE6 /* BaseNormalBarNoFootVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CA73FE282E28E54B006CBBE6 /* BaseNormalBarNoFootVC.m */; };
+		CA73FE2F2E28E54B006CBBE6 /* BaseOnlyBarVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CA73FE2C2E28E54B006CBBE6 /* BaseOnlyBarVC.m */; };
+		CA73FE302E28E54B006CBBE6 /* BaseNormalBarVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CA73FE2A2E28E54B006CBBE6 /* BaseNormalBarVC.m */; };
+		CA81164E2D8BCA7B00D0A5D7 /* SplashVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CA81164D2D8BCA7B00D0A5D7 /* SplashVC.m */; };
 		CACC65D02D93C83F00958DAE /* DataUploadTool.m in Sources */ = {isa = PBXBuildFile; fileRef = CACC65CF2D93C83F00958DAE /* DataUploadTool.m */; };
 		CACC65D32D93C95B00958DAE /* AdSDKManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CACC65D22D93C95B00958DAE /* AdSDKManager.m */; };
 		CADE554F2D32353B00E492CC /* AdLoadConfigTool.m in Sources */ = {isa = PBXBuildFile; fileRef = CADE554E2D32353B00E492CC /* AdLoadConfigTool.m */; };
@@ -53,7 +51,6 @@
 		CADE555E2D32625B00E492CC /* Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = CADE555D2D32625B00E492CC /* Tools.m */; };
 		CADE55622D32641600E492CC /* SelfRenderView.m in Sources */ = {isa = PBXBuildFile; fileRef = CADE55612D32641600E492CC /* SelfRenderView.m */; };
 		CADE55662D326A4700E492CC /* AdDisplayVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CADE55652D326A4700E492CC /* AdDisplayVC.m */; };
-		CAE54C872D3B4C8B0054C0EB /* SplashTypeSelectVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CAE54C862D3B4C8B0054C0EB /* SplashTypeSelectVC.m */; };
 		CAF8B0832D364FF600F3498E /* file in Resources */ = {isa = PBXBuildFile; fileRef = CAF8B0822D364FF600F3498E /* file */; };
 		CAF8F49F2D3FA7D900C6E7B9 /* DemoOfferAdModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CAF8F49E2D3FA7D900C6E7B9 /* DemoOfferAdModel.m */; };
 /* End PBXBuildFile section */
@@ -103,16 +100,10 @@
 		CA3CCE9F2D3B9C5200A8BC7F /* LaunchLoadingView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LaunchLoadingView.m; sourceTree = "<group>"; };
 		CA3F2C9B2E0D2EF000493F4F /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
 		CA3F2C9C2E0D2EF000493F4F /* SceneDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
-		CA41B2DB2D62E8D900405B72 /* DrawSelfRenderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DrawSelfRenderView.h; sourceTree = "<group>"; };
-		CA41B2DC2D62E8D900405B72 /* DrawSelfRenderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DrawSelfRenderView.m; sourceTree = "<group>"; };
 		CA47064A2D5C8471003E7AD6 /* SDKGlobalConfigTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SDKGlobalConfigTool.h; sourceTree = "<group>"; };
 		CA47064B2D5C8471003E7AD6 /* SDKGlobalConfigTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SDKGlobalConfigTool.m; sourceTree = "<group>"; };
 		CA47064F2D5C8C32003E7AD6 /* TestModeTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestModeTool.h; sourceTree = "<group>"; };
 		CA4706502D5C8C32003E7AD6 /* TestModeTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestModeTool.m; sourceTree = "<group>"; };
-		CA4706582D5F3963003E7AD6 /* DrawCustomCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DrawCustomCell.h; sourceTree = "<group>"; };
-		CA4706592D5F3963003E7AD6 /* DrawCustomCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DrawCustomCell.m; sourceTree = "<group>"; };
-		CA47065D2D5F39D8003E7AD6 /* DrawAdCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DrawAdCell.h; sourceTree = "<group>"; };
-		CA47065E2D5F39D8003E7AD6 /* DrawAdCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DrawAdCell.m; sourceTree = "<group>"; };
 		CA4CB4432DBA531E00D356EE /* CustomAdapterBannerAdapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomAdapterBannerAdapter.h; sourceTree = "<group>"; };
 		CA4CB4442DBA531E00D356EE /* CustomAdapterBannerAdapter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomAdapterBannerAdapter.m; sourceTree = "<group>"; };
 		CA4CB4452DBA531E00D356EE /* CustomAdapterBannerCustomEvent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomAdapterBannerCustomEvent.h; sourceTree = "<group>"; };
@@ -163,11 +154,14 @@
 		CA643BE42D3F6E01006D9512 /* FeedSelfRenderVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FeedSelfRenderVC.h; sourceTree = "<group>"; };
 		CA643BE52D3F6E01006D9512 /* FeedSelfRenderVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FeedSelfRenderVC.m; sourceTree = "<group>"; };
 		CA643BF02D3F7BBF006D9512 /* CoreML.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreML.framework; path = System/Library/Frameworks/CoreML.framework; sourceTree = SDKROOT; };
-		CA81164C2D8BCA7B00D0A5D7 /* SplashWithCustomBGVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SplashWithCustomBGVC.h; sourceTree = "<group>"; };
-		CA81164D2D8BCA7B00D0A5D7 /* SplashWithCustomBGVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SplashWithCustomBGVC.m; sourceTree = "<group>"; };
-		CAA063DB2DBDE15A006B6C38 /* AdCheckTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AdCheckTool.h; sourceTree = "<group>"; };
-		CAA063DC2DBDE15A006B6C38 /* AdCheckTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AdCheckTool.m; sourceTree = "<group>"; };
-		CAA71CB72DAF6E4A00DF3CE1 /* DrawCustomCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DrawCustomCell.xib; sourceTree = "<group>"; };
+		CA73FE272E28E54B006CBBE6 /* BaseNormalBarNoFootVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseNormalBarNoFootVC.h; sourceTree = "<group>"; };
+		CA73FE282E28E54B006CBBE6 /* BaseNormalBarNoFootVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseNormalBarNoFootVC.m; sourceTree = "<group>"; };
+		CA73FE292E28E54B006CBBE6 /* BaseNormalBarVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseNormalBarVC.h; sourceTree = "<group>"; };
+		CA73FE2A2E28E54B006CBBE6 /* BaseNormalBarVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseNormalBarVC.m; sourceTree = "<group>"; };
+		CA73FE2B2E28E54B006CBBE6 /* BaseOnlyBarVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseOnlyBarVC.h; sourceTree = "<group>"; };
+		CA73FE2C2E28E54B006CBBE6 /* BaseOnlyBarVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseOnlyBarVC.m; sourceTree = "<group>"; };
+		CA81164C2D8BCA7B00D0A5D7 /* SplashVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SplashVC.h; sourceTree = "<group>"; };
+		CA81164D2D8BCA7B00D0A5D7 /* SplashVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SplashVC.m; sourceTree = "<group>"; };
 		CACC65CE2D93C83F00958DAE /* DataUploadTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DataUploadTool.h; sourceTree = "<group>"; };
 		CACC65CF2D93C83F00958DAE /* DataUploadTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DataUploadTool.m; sourceTree = "<group>"; };
 		CACC65D12D93C95B00958DAE /* AdSDKManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AdSDKManager.h; sourceTree = "<group>"; };
@@ -186,8 +180,6 @@
 		CADE55612D32641600E492CC /* SelfRenderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SelfRenderView.m; sourceTree = "<group>"; };
 		CADE55642D326A4700E492CC /* AdDisplayVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AdDisplayVC.h; sourceTree = "<group>"; };
 		CADE55652D326A4700E492CC /* AdDisplayVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AdDisplayVC.m; sourceTree = "<group>"; };
-		CAE54C852D3B4C8B0054C0EB /* SplashTypeSelectVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SplashTypeSelectVC.h; sourceTree = "<group>"; };
-		CAE54C862D3B4C8B0054C0EB /* SplashTypeSelectVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SplashTypeSelectVC.m; sourceTree = "<group>"; };
 		CAF8B0822D364FF600F3498E /* file */ = {isa = PBXFileReference; lastKnownFileType = text; path = file; sourceTree = "<group>"; };
 		CAF8F49D2D3FA7D900C6E7B9 /* DemoOfferAdModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DemoOfferAdModel.h; sourceTree = "<group>"; };
 		CAF8F49E2D3FA7D900C6E7B9 /* DemoOfferAdModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DemoOfferAdModel.m; sourceTree = "<group>"; };
@@ -265,6 +257,7 @@
 		89255FBD2D2AE64800995FDE /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				CA73FE2D2E28E54B006CBBE6 /* sub */,
 				89255FBE2D2AE66B00995FDE /* BaseVC.h */,
 				89255FBF2D2AE66B00995FDE /* BaseVC.m */,
 				CA2715AF2D8C02540079E0A0 /* BaseNavigationController.h */,
@@ -359,8 +352,8 @@
 		89E1FCE72D30A2D3005C19FA /* Splash(开屏广告) */ = {
 			isa = PBXGroup;
 			children = (
-				CA4FCF4F2D3BB94100B602A3 /* Common(推荐接入方式) */,
-				CA4FCF4E2D3BB93400B602A3 /* MenuVC */,
+				CA81164C2D8BCA7B00D0A5D7 /* SplashVC.h */,
+				CA81164D2D8BCA7B00D0A5D7 /* SplashVC.m */,
 			);
 			path = "Splash(开屏广告)";
 			sourceTree = "<group>";
@@ -394,30 +387,6 @@
 				CA4FCF4C2D3BB8A100B602A3 /* MediaVideo(插播广告IMA) */,
 			);
 			path = "Ad(广告样式)";
-			sourceTree = "<group>";
-		};
-		CA4706562D5F38E9003E7AD6 /* FeedCell */ = {
-			isa = PBXGroup;
-			children = (
-				CA5229CA2D55FB9900FB3D9C /* CustomCell.h */,
-				CA5229CB2D55FB9900FB3D9C /* CustomCell.m */,
-				CA5229CC2D55FB9900FB3D9C /* CustomCell.xib */,
-				CA5229CF2D55FC3F00FB3D9C /* AdCell.h */,
-				CA5229D02D55FC3F00FB3D9C /* AdCell.m */,
-			);
-			path = FeedCell;
-			sourceTree = "<group>";
-		};
-		CA4706572D5F38F0003E7AD6 /* DrawCell */ = {
-			isa = PBXGroup;
-			children = (
-				CA4706582D5F3963003E7AD6 /* DrawCustomCell.h */,
-				CA4706592D5F3963003E7AD6 /* DrawCustomCell.m */,
-				CAA71CB72DAF6E4A00DF3CE1 /* DrawCustomCell.xib */,
-				CA47065D2D5F39D8003E7AD6 /* DrawAdCell.h */,
-				CA47065E2D5F39D8003E7AD6 /* DrawAdCell.m */,
-			);
-			path = DrawCell;
 			sourceTree = "<group>";
 		};
 		CA4CB4472DBA531E00D356EE /* Banner(横幅) */ = {
@@ -530,7 +499,6 @@
 				CA47064D2D5C8B2A003E7AD6 /* TestMode(测试模式与测试工具) */,
 				CACC65CD2D93C27D00958DAE /* UploadAdInfo(自行上传广告数据工具) */,
 				CADE55482D3234F600E492CC /* AdLoadConfig(加载广告配置工具) */,
-				CAA063DA2DBDE0D8006B6C38 /* AdCheckTools(检查广告状态工具) */,
 				CA4FCF472D3BAC5700B602A3 /* SDKGlobalConfig(SDK全局配置工具) */,
 			);
 			path = "Tools&Manager(工具和管理类)";
@@ -543,24 +511,6 @@
 				CA4FCF542D3BBB1900B602A3 /* IMAVC.m */,
 			);
 			path = "MediaVideo(插播广告IMA)";
-			sourceTree = "<group>";
-		};
-		CA4FCF4E2D3BB93400B602A3 /* MenuVC */ = {
-			isa = PBXGroup;
-			children = (
-				CAE54C852D3B4C8B0054C0EB /* SplashTypeSelectVC.h */,
-				CAE54C862D3B4C8B0054C0EB /* SplashTypeSelectVC.m */,
-			);
-			path = MenuVC;
-			sourceTree = "<group>";
-		};
-		CA4FCF4F2D3BB94100B602A3 /* Common(推荐接入方式) */ = {
-			isa = PBXGroup;
-			children = (
-				CA81164C2D8BCA7B00D0A5D7 /* SplashWithCustomBGVC.h */,
-				CA81164D2D8BCA7B00D0A5D7 /* SplashWithCustomBGVC.m */,
-			);
-			path = "Common(推荐接入方式)";
 			sourceTree = "<group>";
 		};
 		CA4FCF502D3BB98700B602A3 /* SingleSelfRender(单个自渲染广告) */ = {
@@ -618,13 +568,17 @@
 			path = "Feed信息流(Self Render自渲染)";
 			sourceTree = "<group>";
 		};
-		CAA063DA2DBDE0D8006B6C38 /* AdCheckTools(检查广告状态工具) */ = {
+		CA73FE2D2E28E54B006CBBE6 /* sub */ = {
 			isa = PBXGroup;
 			children = (
-				CAA063DB2DBDE15A006B6C38 /* AdCheckTool.h */,
-				CAA063DC2DBDE15A006B6C38 /* AdCheckTool.m */,
+				CA73FE272E28E54B006CBBE6 /* BaseNormalBarNoFootVC.h */,
+				CA73FE282E28E54B006CBBE6 /* BaseNormalBarNoFootVC.m */,
+				CA73FE292E28E54B006CBBE6 /* BaseNormalBarVC.h */,
+				CA73FE2A2E28E54B006CBBE6 /* BaseNormalBarVC.m */,
+				CA73FE2B2E28E54B006CBBE6 /* BaseOnlyBarVC.h */,
+				CA73FE2C2E28E54B006CBBE6 /* BaseOnlyBarVC.m */,
 			);
-			path = "AdCheckTools(检查广告状态工具)";
+			path = sub;
 			sourceTree = "<group>";
 		};
 		CABDE17D2DDC45E9009991E0 /* 仅示例,不参与demo编译 */ = {
@@ -689,8 +643,6 @@
 			children = (
 				CADE55602D32641600E492CC /* SelfRenderView.h */,
 				CADE55612D32641600E492CC /* SelfRenderView.m */,
-				CA41B2DB2D62E8D900405B72 /* DrawSelfRenderView.h */,
-				CA41B2DC2D62E8D900405B72 /* DrawSelfRenderView.m */,
 			);
 			path = "SelfRenderView(自渲染视图)";
 			sourceTree = "<group>";
@@ -731,8 +683,11 @@
 		CAF8F4A02D40E6D200C6E7B9 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				CA4706572D5F38F0003E7AD6 /* DrawCell */,
-				CA4706562D5F38E9003E7AD6 /* FeedCell */,
+				CA5229CA2D55FB9900FB3D9C /* CustomCell.h */,
+				CA5229CB2D55FB9900FB3D9C /* CustomCell.m */,
+				CA5229CC2D55FB9900FB3D9C /* CustomCell.xib */,
+				CA5229CF2D55FC3F00FB3D9C /* AdCell.h */,
+				CA5229D02D55FC3F00FB3D9C /* AdCell.m */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -803,7 +758,6 @@
 				CAF8B0832D364FF600F3498E /* file in Resources */,
 				8972AB992D2AD7A800CB5A22 /* Assets.xcassets in Resources */,
 				8972AB9B2D2AD7A800CB5A22 /* LaunchScreen.storyboard in Resources */,
-				CAA71CB82DAF6E4A00DF3CE1 /* DrawCustomCell.xib in Resources */,
 				8972AB9C2D2AD7A800CB5A22 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -841,9 +795,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOSDemo/Pods-iOSDemo-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOSDemo/Pods-iOSDemo-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -858,9 +816,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOSDemo/Pods-iOSDemo-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-iOSDemo/Pods-iOSDemo-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -886,11 +848,12 @@
 				CA643BE62D3F6E01006D9512 /* FeedSelfRenderVC.m in Sources */,
 				CADE55622D32641600E492CC /* SelfRenderView.m in Sources */,
 				899E18B12D2D7E9F005394C9 /* RewardedVC.m in Sources */,
-				CA47065F2D5F39D8003E7AD6 /* DrawAdCell.m in Sources */,
+				CA73FE2E2E28E54B006CBBE6 /* BaseNormalBarNoFootVC.m in Sources */,
+				CA73FE2F2E28E54B006CBBE6 /* BaseOnlyBarVC.m in Sources */,
+				CA73FE302E28E54B006CBBE6 /* BaseNormalBarVC.m in Sources */,
 				89255FBC2D2AE4A500995FDE /* LocalizationManager.m in Sources */,
 				898A0EC32D2C1E8000EF5B72 /* File.swift in Sources */,
 				CA5229CE2D55FB9900FB3D9C /* CustomCell.m in Sources */,
-				CA47065C2D5F3963003E7AD6 /* DrawCustomCell.m in Sources */,
 				CA47064C2D5C8471003E7AD6 /* SDKGlobalConfigTool.m in Sources */,
 				CA2715B72D912A6E0079E0A0 /* BaseTabBarController.m in Sources */,
 				8972AB9E2D2AD7A800CB5A22 /* main.m in Sources */,
@@ -898,23 +861,20 @@
 				CADE55542D323E0A00E492CC /* BannerVC.m in Sources */,
 				CAF8F49F2D3FA7D900C6E7B9 /* DemoOfferAdModel.m in Sources */,
 				CA4FCF4B2D3BAE0200B602A3 /* ExpressVC.m in Sources */,
-				CAA063DD2DBDE15A006B6C38 /* AdCheckTool.m in Sources */,
 				898A0EC12D2C183100EF5B72 /* DemoADFootView.m in Sources */,
 				89255FB82D2AE22700995FDE /* NaviBarView.m in Sources */,
 				899E18A52D2D6F5B005394C9 /* TwoButtonAlertView.m in Sources */,
 				CA4FCF552D3BBB1900B602A3 /* IMAVC.m in Sources */,
-				CAE54C872D3B4C8B0054C0EB /* SplashTypeSelectVC.m in Sources */,
 				CACC65D32D93C95B00958DAE /* AdSDKManager.m in Sources */,
 				CA3F2C9D2E0D2EF000493F4F /* SceneDelegate.m in Sources */,
 				CA5AF6192D57601500D48D26 /* FeedTemplateVC.m in Sources */,
 				899E18AA2D2D78B3005394C9 /* NormalNavBar.m in Sources */,
-				CA81164E2D8BCA7B00D0A5D7 /* SplashWithCustomBGVC.m in Sources */,
+				CA81164E2D8BCA7B00D0A5D7 /* SplashVC.m in Sources */,
 				CACC65D02D93C83F00958DAE /* DataUploadTool.m in Sources */,
 				898A0EBE2D2C11C000EF5B72 /* InterstitialVC.m in Sources */,
 				898A0EB82D2C063400EF5B72 /* CustomTableViewCell.m in Sources */,
 				89255F812D2ADF5E00995FDE /* HomeViewController.m in Sources */,
 				CA5229D12D55FC3F00FB3D9C /* AdCell.m in Sources */,
-				CA41B2DD2D62E8D900405B72 /* DrawSelfRenderView.m in Sources */,
 				CADE554F2D32353B00E492CC /* AdLoadConfigTool.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

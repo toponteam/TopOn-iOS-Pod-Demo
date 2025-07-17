@@ -15,6 +15,8 @@
 
 @property (strong, nonatomic) ATNativeADView  * adView;
 @property (nonatomic, strong) ATNativeAdOffer * nativeAdOffer;
+// 重试次数计数器
+@property (nonatomic, assign) NSInteger         retryAttempt;
 
 @end
 
@@ -41,7 +43,7 @@
  
 #pragma mark - Load Ad 加载广告
 /// 加载广告按钮被点击
-- (void)loadAdButtonClickAction {
+- (void)loadAd {
  
     [self showLog:kLocalizeStr(@"点击了加载广告")];
      
@@ -55,20 +57,22 @@
  
 #pragma mark - Show Ad 展示广告
 /// 展示广告按钮被点击
-- (void)showAdButtonClickAction {
+- (void)showAd {
     
     //场景统计功能，可选接入
     [[ATAdManager sharedManager] entryNativeScenarioWithPlacementID:Native_Express_PlacementID scene:Native_Express_SceneID];
     
-    //查询可用于展示的广告缓存(可选接入)
-    //[AdCheckTool getValidAdsForPlacementID:Native_Express_PlacementID adType:AdTypeNative];
-    
-    //查询广告加载状态(可选接入)
-    //[AdCheckTool adLoadingStatusWithPlacementID:Native_Express_PlacementID adType:AdTypeNative];
+//    //查询可用于展示的广告缓存(可选接入)
+//    NSArray <NSDictionary *> * adCaches = [[ATAdManager sharedManager] getNativeValidAdsForPlacementID:Native_SelfRender_PlacementID];
+//    ATDemoLog(@"getValidAds : %@",adCaches);
+//
+//    //查询广告加载状态(可选接入)
+//    ATCheckLoadModel * status = [[ATAdManager sharedManager] checkNativeLoadStatusForPlacementID:Native_SelfRender_PlacementID];
+//    ATDemoLog(@"checkLoadStatus : %d",status.isLoading);
     
     //检查是否有就绪
     if (![[ATAdManager sharedManager] nativeAdReadyForPlacementID:Native_Express_PlacementID]) {
-        [self notReadyAlert];
+        [self loadAd];
         return;
     }
     
@@ -90,8 +94,8 @@
     // 创建广告nativeADView
     ATNativeADView *nativeADView = [[ATNativeADView alloc] initWithConfiguration:config currentOffer:offer placementID:Native_Express_PlacementID];
  
-    //打印信息
-    [self printNativeAdInfoAfterRendererWithOffer:offer nativeADView:nativeADView];
+    //调试时打印信息
+    //[self printNativeAdInfoAfterRendererWithOffer:offer nativeADView:nativeADView];
     
     //渲染广告
     [offer rendererWithConfiguration:config selfRenderView:nil nativeADView:nativeADView];
@@ -131,6 +135,9 @@
 - (void)didFinishLoadingADWithPlacementID:(NSString *)placementID {
     BOOL isReady = [[ATAdManager sharedManager] nativeAdReadyForPlacementID:placementID];
     [self showLog:[NSString stringWithFormat:@"didFinishLoadingADWithPlacementID:%@ Express 是否准备好:%@", placementID,isReady ? @"YES":@"NO"]];
+    
+    // 重置重试次数
+    self.retryAttempt = 0;
 }
  
 /// 广告位加载失败
@@ -140,6 +147,20 @@
 - (void)didFailToLoadADWithPlacementID:(NSString *)placementID error:(NSError *)error {
     ATDemoLog(@"didFailToLoadADWithPlacementID:%@ error:%@", placementID, error);
     [self showLog:[NSString stringWithFormat:@"didFailToLoadADWithPlacementID:%@ errorCode:%ld", placementID, error.code]];
+    
+    // 重试已达到 3 次，不再重试加载
+    if (self.retryAttempt >= 3) {
+       return;
+    }
+    self.retryAttempt++;
+    
+    // 加载失败重试延迟时间建议 10 秒
+    NSInteger delaySec = 10;
+
+    // 延迟重试
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, delaySec * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        [self loadAd];
+    });
 }
 
 /// 获得展示收益
@@ -170,8 +191,12 @@
 ///   - extra: 额外信息
 - (void)didTapCloseButtonInAdView:(ATNativeADView *)adView placementID:(NSString *)placementID extra:(NSDictionary *)extra {
     ATDemoLog(@"didTapCloseButtonInAdView:%@ extra:%@", placementID, extra);
-    [self removeAd];
     [self showLog:[NSString stringWithFormat:@"didTapCloseButtonInAdView:%@", placementID]];
+    
+    // 销毁广告
+    [self removeAd];
+    // 预加载下一个广告
+    [self loadAd];
 }
 
 /// 原生广告开始播放视频
@@ -245,21 +270,5 @@
     [self showLog:[NSString stringWithFormat:@"didCloseDetailInAdView:%@", placementID]];
 }
  
-#pragma mark - Demo Needed 不用接入
-- (void)viewDidLoad {
-    [super viewDidLoad];
-     
-    [self setupDemoUI];
-}
-
-- (void)setupDemoUI {
-    [self addNormalBarWithTitle:self.title];
-    [self addLogTextView];
-    [self addFootView];
-}
-
-- (void)dealloc {
-    NSLog(@"ExpressVC dealloc");
-}
 
 @end

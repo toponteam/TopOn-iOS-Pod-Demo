@@ -1,11 +1,11 @@
 //
-//  SplashWithCustomBG.m
+//  SplashVC.m
 //  iOSDemo
 //
 //  Created by ltz on 2025/1/18.
 //
 
-#import "SplashWithCustomBGVC.h"
+#import "SplashVC.h"
 
 #import <AnyThinkSplash/AnyThinkSplash.h>
 
@@ -15,15 +15,14 @@
 
 #import "LaunchLoadingView.h"
 
-@interface SplashWithCustomBGVC () <ATSplashDelegate>
+@interface SplashVC () <ATSplashDelegate>
 
 /// 加载页面，使用自己的加载图
 @property (strong, nonatomic) LaunchLoadingView * launchLoadingView;
 
 @end
-
-/// 这是我们推荐的集成方式
-@implementation SplashWithCustomBGVC
+ 
+@implementation SplashVC
 
 //广告位ID
 #define SplashPlacementID @"n67eb688a3eeea"
@@ -33,28 +32,18 @@
  
 - (void)viewDidLoad {
     [super viewDidLoad];
-     
-    //demo用，无需关心与接入
-    [self setupDemoUI];
-    
-    //为了加快开屏广告效率，建议在进入当前页面之前发起开屏广告加载请求，例如初始化SDK之后，demo此处为了方便演示，在viewDidLoad进入时请求
-    [self loadAd];
-    
+ 
     //添加加载页面，当广告显示完毕后需要在代理中移除
     self.launchLoadingView = [LaunchLoadingView new];
     [self.launchLoadingView show];
+     
+    //为了加快开屏广告效率，建议在进入当前页面之前发起开屏广告加载请求，例如初始化SDK之后，demo此处为了方便演示，在viewDidLoad进入时请求
+    [self loadAd];
 }
 
 /// 进入首页
 - (void)enterHomeVC {
-    
     [self.launchLoadingView dismiss];
-    
-    //如果有页面跳转逻辑，请勿连续调用
-//    static dispatch_once_t onceToken;
-//    dispatch_once(&onceToken, ^{
-//        [self.launchLoadingView dismiss];
-//    });
 }
 
 #pragma mark - Load Ad 加载广告
@@ -69,10 +58,10 @@
     [loadConfigDict setValue:@"media_val_SplashVC" forKey:kATAdLoadingExtraMediaExtraKey];
     
     //可选接入，如果使用了Pangle广告平台，可添加以下配置
-//    [AdLoadConfigTool splash_loadExtraConfigAppend_Pangle:loadConfigDict];
+    //[AdLoadConfigTool splash_loadExtraConfigAppend_Pangle:loadConfigDict];
     
     //若选择使用优量汇(GDT)，建议接入
-    [AdLoadConfigTool splash_loadExtraConfigAppend_Tencent:loadConfigDict];
+    //[AdLoadConfigTool splash_loadExtraConfigAppend_Tencent:loadConfigDict];
     
     [[ATAdManager sharedManager] loadADWithPlacementID:SplashPlacementID
                                                  extra:loadConfigDict
@@ -80,41 +69,6 @@
                                          containerView:[self footLogoView]];
 }
  
-#pragma mark - Show Ad 展示广告
-/// 当前的keywindow下，控制器底部有Tabbar或NavigationBar显示的情况
-- (void)showSplash {
-    //场景统计功能，可选接入
-    [[ATAdManager sharedManager] entrySplashScenarioWithPlacementID:SplashPlacementID scene:SplashSceneID];
-    
-    //查询可用于展示的广告缓存(可选接入)
-    [AdCheckTool getValidAdsForPlacementID:SplashPlacementID adType:AdTypeSplash];
-    
-    //查询广告加载状态(可选接入)
-    //[AdCheckTool adLoadingStatusWithPlacementID:SplashPlacementID adType:AdTypeSplash];
-    
-    //检查是否有就绪
-    if (![[ATAdManager sharedManager] splashReadyForPlacementID:SplashPlacementID]) {
-        [self notReadyAlert];
-        return;
-    }
-    
-    //展示配置，Scene传入后台的场景ID，没有可传入空字符串，showCustomExt参数可传入自定义参数字符串
-    ATShowConfig *config = [[ATShowConfig alloc] initWithScene:SplashSceneID showCustomExt:@"testShowCustomExt"];
-    
-    //开屏相关参数配置
-    NSMutableDictionary *configDict = [NSMutableDictionary dictionary];
-    
-    //可选接入，自定义跳过按钮，多数平台已经不支持自定义跳过按钮，目前支持更改自定义跳过按钮有穿山甲(TT)，直投、ADX、原生作开屏和游可盈，具体需要运行看实际效果
-//    [AdLoadConfigTool splash_loadExtraConfigAppend_CustomSkipButton:configDict];
-    
-    //展示广告,在App原window中展示
-    [[ATAdManager sharedManager] showSplashWithPlacementID:SplashPlacementID config:config window:[UIApplication sharedApplication].keyWindow inViewController:self.tabBarController extra:configDict delegate:self];
-    
-    //没有tabBarController，仅有navigationController 时，使用下方
-//    [[ATAdManager sharedManager] showSplashWithPlacementID:SplashPlacementID config:config window:[UIApplication sharedApplication].keyWindow inViewController:self.navigationController extra:configDict delegate:self];
-}
-
-#pragma mark - 底部可自定义 FooterView
 /// 可选接入开屏底部LogoView
 - (UIView *)footLogoView {
     
@@ -136,18 +90,59 @@
      
     return footerCtrView;
 }
-
+ 
 /// footer点击事件
 - (void)footerImgClick:(UITapGestureRecognizer *)tap {
     ATDemoLog(@"footer click !!");
 }
  
-#pragma mark - 广告位代理回调
-/// 广告位加载完成
-/// - Parameter placementID: 广告位ID
-- (void)didFinishLoadingADWithPlacementID:(NSString *)placementID {
-    BOOL isReady = [[ATAdManager sharedManager] splashReadyForPlacementID:placementID];
-    [self showLog:[NSString stringWithFormat:@"didFinishLoadingADWithPlacementID:%@ Splash 是否准备好:%@", placementID,isReady ? @"YES":@"NO"]];
+#pragma mark - Show Ad 展示广告
+- (void)showSplash {
+    
+    //场景统计功能，可选接入
+    [[ATAdManager sharedManager] entrySplashScenarioWithPlacementID:SplashPlacementID scene:SplashSceneID];
+    
+//    //查询可用于展示的广告缓存(可选接入)
+//    NSArray <NSDictionary *> * adCaches = [[ATAdManager sharedManager] getSplashValidAdsForPlacementID:SplashPlacementID];
+//    ATDemoLog(@"getValidAds : %@",adCaches);
+//
+//    //查询广告加载状态(可选接入)
+//    ATCheckLoadModel * status = [[ATAdManager sharedManager] checkSplashLoadStatusForPlacementID:SplashPlacementID];
+//    ATDemoLog(@"checkLoadStatus : %d",status.isLoading);
+    
+    //检查是否有就绪
+    if (![[ATAdManager sharedManager] splashReadyForPlacementID:SplashPlacementID]) {
+        [self loadAd];
+        return;
+    }
+    
+    //展示配置，Scene传入后台的场景ID，没有可传入空字符串，showCustomExt参数可传入自定义参数字符串
+    ATShowConfig *config = [[ATShowConfig alloc] initWithScene:SplashSceneID showCustomExt:@"testShowCustomExt"];
+    
+    //开屏相关参数配置
+    NSMutableDictionary *configDict = [NSMutableDictionary dictionary];
+    
+    //可选接入，自定义跳过按钮，多数平台已经不支持自定义跳过按钮，目前支持更改自定义跳过按钮有穿山甲(TT)，直投、ADX、原生作开屏和游可盈，具体需要运行看实际效果
+//    [AdLoadConfigTool splash_loadExtraConfigAppend_CustomSkipButton:configDict];
+    
+    //展示广告,在App原window中展示
+    [[ATAdManager sharedManager] showSplashWithPlacementID:SplashPlacementID config:config window:[UIApplication sharedApplication].keyWindow inViewController:self.tabBarController extra:configDict delegate:self];
+}
+  
+
+/// 开屏广告加载完成
+/// - Parameters:
+///   - placementID: 广告位ID
+///   - isTimeout: 是否超时
+- (void)didFinishLoadingSplashADWithPlacementID:(NSString *)placementID isTimeout:(BOOL)isTimeout {
+    ATDemoLog(@"开屏加载成功:%@----是否超时:%d",placementID,isTimeout);
+    if (!isTimeout) {
+        //没有超时，展示开屏广告
+        [self showSplash];
+    }else {
+        //加载成功，但超时了
+        [self enterHomeVC];
+    }
 }
  
 /// 广告位加载失败
@@ -161,6 +156,16 @@
     //所有广告源加载失败了，进入首页
     [self enterHomeVC];
 }
+ 
+/// 开屏广告加载超时
+/// - Parameter placementID: 广告位ID
+- (void)didTimeoutLoadingSplashADWithPlacementID:(NSString *)placementID {
+    ATDemoLog(@"didTimeoutLoadingSplashADWithPlacementID:%@", placementID);
+    //超时了，首页加载完成后进入首页
+    [self showLog:[NSString stringWithFormat:@"开屏超时了"]];
+    //进入首页
+    [self enterHomeVC];
+}
 
 /// 获得展示收益
 /// - Parameters:
@@ -170,25 +175,12 @@
     ATDemoLog(@"didRevenueForPlacementID:%@ with extra: %@", placementID,extra);
     [self showLog:[NSString stringWithFormat:@"didRevenueForPlacementID:%@", placementID]];
 }
-  
-#pragma mark - 开屏广告事件代理回调
-- (void)didTimeoutLoadingSplashADWithPlacementID:(NSString *)placementID {
-    //超时了，首页加载完成后进入首页
-    [self showLog:[NSString stringWithFormat:@"开屏超时了"]];
-    //进入首页
-    [self enterHomeVC];
-}
 
-- (void)didFinishLoadingSplashADWithPlacementID:(NSString *)placementID isTimeout:(BOOL)isTimeout {
-    ATDemoLog(@"开屏加载成功:%@----是否超时:%d",placementID,isTimeout);
-    
-    if (!isTimeout) {
-        //没有超时，展示开屏广告
-        [self showSplash];
-    }else {
-        //加载成功，但超时了
-        //可以什么都不做，因为已经在didTimeoutLoadingSplashADWithPlacementID处理了超时
-    }
+/// Callback when the successful loading of the ad
+/// 加载成功且加载流程完毕
+- (void)didFinishLoadingADWithPlacementID:(NSString *)placementID {
+    ATDemoLog(@"didFinishLoadingADWithPlacementID:%@", placementID);
+    [self showLog:[NSString stringWithFormat:@"didFinishLoadingADWithPlacementID:%@", placementID]];
 }
 
 /// 开屏广告已展示
@@ -213,6 +205,9 @@
     
     //进入首页
     [self enterHomeVC];
+    
+    // 热启动预加载（可选）
+    // [self loadAd];
 }
 
 /// 开屏广告已点击
@@ -264,6 +259,9 @@
 //        ATAdCloseShowfail = 99          // ad showfail to close
 //    };
 //    ATAdCloseType closeType = [extra[kATADDelegateExtraDismissTypeKey] integerValue];
+    
+    // 热启动预加载（可选）
+    // [self loadAd];
 }
 
 /// 开屏广告关闭计时
@@ -301,15 +299,5 @@
     ATDemoLog(@"splashZoomOutViewDidCloseForPlacementID:%@",placementID);
     [self showLog:[NSString stringWithFormat:@"splashZoomOutViewDidCloseForPlacementID:%@ ",placementID]];
 }
-
-#pragma mark - Demo Needed 不用接入
-- (void)setupDemoUI {
-    [self addNormalBarWithTitle:@"首页"];
-    [self addLogTextView];
-}
-
-- (void)dealloc {
-    NSLog(@"SplashCommonVC dealloc");
-}
-
+  
 @end

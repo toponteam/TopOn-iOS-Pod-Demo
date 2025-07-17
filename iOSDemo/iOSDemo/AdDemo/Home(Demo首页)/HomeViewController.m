@@ -8,11 +8,12 @@
 #import "HomeViewController.h"
 #import "InterstitialVC.h"
 #import "RewardedVC.h"
-#import "SplashTypeSelectVC.h"
+#import "SplashVC.h"
 #import "BannerVC.h"
 #import "NativeTypeSelectVC.h"
 #import "IMAVC.h"
-
+#import "BaseTabBarController.h"
+#import "BaseNavigationController.h"
 #import "TestModeTool.h"
 
 @interface HomeViewController () <UITableViewDelegate,UITableViewDataSource>
@@ -66,9 +67,32 @@
     
     //Splash Ad Controller
     if ([selectedItem isEqualToString:kLocalizeStr(@"开屏广告")]) {
-        SplashTypeSelectVC * vc = [SplashTypeSelectVC new];
-        vc.title = selectedItem;
-        [self.navigationController pushViewController:vc animated:YES];
+        BaseTabBarController * tabbarController = [[BaseTabBarController alloc] init];
+        tabbarController.tabBar.barTintColor = [UIColor whiteColor];
+        tabbarController.tabBar.translucent = NO;
+        
+        SplashVC * firstViewController = [SplashVC new];
+        firstViewController.title = @"App Home";
+        BaseNavigationController * navi = [[BaseNavigationController alloc] initWithRootViewController:firstViewController];
+        
+        UIViewController *secondViewController = [[UIViewController alloc] init];
+        UIViewController *thirdViewController = [[UIViewController alloc] init];
+         
+        navi.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Ad" image:[UIImage imageNamed:@"home"]
+                                                                         tag:1];
+        
+        secondViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Empty"
+                                                                        image:[UIImage imageNamed:@""]
+                                                                          tag:2];
+        
+        thirdViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Empty"
+                                                                       image:[UIImage imageNamed:@""]
+                                                                         tag:3];
+         
+        NSArray *viewControllersArray = @[navi, secondViewController, thirdViewController];
+        tabbarController.viewControllers = viewControllersArray;
+        tabbarController.fromController = self.navigationController;
+        [self.navigationController pushViewController:tabbarController animated:NO];
     }
     
     //Banner Ad Controller

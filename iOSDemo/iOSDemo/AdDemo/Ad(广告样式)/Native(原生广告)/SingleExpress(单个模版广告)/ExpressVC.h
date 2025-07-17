@@ -5,8 +5,8 @@
 //  Created by ltz on 2025/1/18.
 //
 
-#import "BaseVC.h"
+#import "BaseNormalBarVC.h"
  
-@interface ExpressVC : BaseVC
+@interface ExpressVC : BaseNormalBarVC
 
 @end

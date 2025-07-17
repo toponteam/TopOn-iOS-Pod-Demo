@@ -44,7 +44,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     NSString *selectedItem = self.dataSource[indexPath.row][@"title"];
-    ATDemoLog(@"Selected: %@", selectedItem); 
+    ATDemoLog(@"Selected: %@", selectedItem);
     if ([selectedItem isEqualToString:kLocalizeStr(@"自渲染广告")]) {
         SelfRenderVC * vc = [SelfRenderVC new];
         vc.title = selectedItem;
@@ -64,7 +64,7 @@
         FeedTemplateVC * vc = [FeedTemplateVC new];
         vc.title = selectedItem;
         [self.navigationController pushViewController:vc animated:YES];
-    } 
+    }
 }
   
 - (void)viewDidLoad {
