@@ -212,7 +212,7 @@ Pod::Spec.new do |s|
   
   s.subspec 'gromore' do |ss|
     ss.ios.deployment_target = '10.0'
-    ss.vendored_frameworks = 'gromore/CSJMediation.xcframework','tt_mix/BUAdSDK.xcframework'
+    ss.vendored_frameworks = 'gromore/CSJMediation.xcframework','tt_mix/BUAdSDK.xcframework','gromore/AnyThinkGromoreAdapter.xcframework'
     ss.resource = 'tt_mix/CSJAdSDK.bundle'
   end
   
