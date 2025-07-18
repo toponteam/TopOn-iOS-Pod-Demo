@@ -96,7 +96,7 @@ Pod::Spec.new do |s|
   
   s.subspec 'gdt' do |ss|
     ss.ios.deployment_target = '10.0'
-    ss.vendored_library = 'gdt/*.xcframework'
+    ss.vendored_frameworks = 'gdt/*.xcframework'
   end
   
   s.subspec 'inmobi' do |ss|
@@ -206,7 +206,7 @@ Pod::Spec.new do |s|
 
   s.subspec 'tt_mix' do |ss|
     ss.ios.deployment_target = '10.0'
-    ss.vendored_frameworks = 'tt_mix/BUAdSDK.xcframework'
+    ss.vendored_frameworks = 'tt_mix/BUAdSDK.xcframework','tt_mix/AnyThinkTTAdapter_Mix.xcframework'
     ss.resource = 'tt_mix/CSJAdSDK.bundle'
   end
   
