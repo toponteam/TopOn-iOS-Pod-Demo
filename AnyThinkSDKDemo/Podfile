@@ -9,6 +9,7 @@ def share_pods
   pod 'Masonry'
   pod 'SDWebImage'
   pod 'MJRefresh'
+  pod 'GoogleAds-IMA-iOS-SDK', '3.20.0'
 
 
 end
@@ -25,80 +26,60 @@ target 'AnyThinkSDKDemo' do
         end
       end
   
+  
   # Comment the next line if you don't want to use dynamic frameworks
 #  use_frameworks!
   share_pods
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
 
-  pod 'AnyThinkiOS','6.4.10'
-  
-  
-  pod 'AnyThinkUnityAdsSDKAdapter','6.4.10'
-  pod 'AnyThinkAdmobSDKAdapter','6.4.10'
-  pod 'AnyThinkPangleSDKAdapter','6.4.10'
-  pod 'AnyThinkTTSDKAdapter','6.4.10'
-  pod 'AnyThinkFacebookSDKAdapter','6.4.10'
-  pod 'AnyThinkGDTSDKAdapter','6.4.10'
-  pod 'AnyThinkMintegralSDKAdapter','6.4.10'
-  pod 'AnyThinkApplovinSDKAdapter','6.4.10'
-  pod 'AnyThinkChartboostSDKAdapter','6.4.10'
-  pod 'AnyThinkVungleSDKAdapter','6.4.10'
-  pod 'AnyThinkInmobiSDKAdapter','6.4.10'
-  pod 'AnyThinkIronSourceSDKAdapter','6.4.10'
-  pod 'AnyThinkMaioSDKAdapter','6.4.10'
-  pod 'AnyThinkNendSDKAdapter','6.4.10'
-  pod 'AnyThinkSigmobSDKAdapter','6.4.10'
-  pod 'AnyThinkStartAppSDKAdapter','6.4.10'
-  pod 'AnyThinkKidozSDKAdapter','6.4.10'
-  pod 'AnyThinkFyberSDKAdapter','6.4.10'
-  pod 'AnyThinkMyTargetSDKAdapter','6.4.10'
-  pod 'AnyThinkKuaiShouSDKAdapter','6.4.10'
-  pod 'AnyThinkBaiduSDKAdapter','6.4.10'
-  pod 'AnyThinkOgurySDKAdapter','6.4.10'
-  pod 'AnyThinkAdColonySDKAdapter','6.4.10'
-  pod 'AnyThinkYandexSDKAdapter','6.4.10'
-  pod 'AnyThinkBigoSDKAdapter','6.4.10'
-  pod 'AnyThinkPubNativeSDKAdapter','6.4.10'
-  pod 'AnyThinkKlevinSDKAdapter','6.4.10'
-  pod 'GoogleAds-IMA-iOS-SDK', '3.20.0'
-
-
-
-#https://topon-sdk-release.oss-cn-hangzhou.aliyuncs.com/SDK_Release/v6.3.30/iOS/AnyThink_mediation/AnyThinkiOS.zip
-  
 ## 本地pod
-#  pod 'LocalThirdPartySDK/core', :path=> 'LSDK/'
-#  pod 'LocalThirdPartySDK/admob', :path=> 'LSDK/'
-#  pod 'LocalThirdPartySDK/applovin', :path=> 'LSDK/'
-#  pod 'LocalThirdPartySDK/baidu', :path=> 'LSDK/'
-#  pod 'LocalThirdPartySDK/chartboost', :path=> 'LSDK/'
-##  pod 'LocalThirdPartySDK/facebook', :path=> 'LSDK/'
-#  pod 'LocalThirdPartySDK/fyber', :path=> 'LSDK/'
-#  pod 'LocalThirdPartySDK/gdt', :path=> 'LSDK/'
-#  pod 'LocalThirdPartySDK/inmobi', :path=> 'LSDK/'
-#  pod 'LocalThirdPartySDK/ironsource', :path=> 'LSDK/'
-#  pod 'LocalThirdPartySDK/kidoz', :path=> 'LSDK/'
-#  pod 'LocalThirdPartySDK/kuaishou', :path=> 'LSDK/'
-#  pod 'LocalThirdPartySDK/maio', :path=> 'LSDK/'
-#  pod 'LocalThirdPartySDK/applovin', :path=> 'LSDK/'
-#  pod 'LocalThirdPartySDK/AppLovinMediationAdColonyAdapter', :path=> 'LSDK/'
-#  pod 'LocalThirdPartySDK/AppLovinMediationChartboostAdapter', :path=> 'LSDK/'
-#  pod 'LocalThirdPartySDK/AppLovinMediationTapjoyAdapter', :path=> 'LSDK/'
-#  pod 'LocalThirdPartySDK/mintegral', :path=> 'LSDK/'
-#  pod 'LocalThirdPartySDK/mobrain', :path=> 'LSDK/'
-##  pod 'LocalThirdPartySDK/mopub', :path=> 'LSDK/'
-#  pod 'LocalThirdPartySDK/MyTarget', :path=> 'LSDK/'
-#  pod 'LocalThirdPartySDK/nend', :path=> 'LSDK/'
-#  pod 'LocalThirdPartySDK/ogury', :path=> 'LSDK/'
-##  pod 'LocalThirdPartySDK/pangle_noChina', :path=> 'LSDK/'
-#  pod 'LocalThirdPartySDK/pangle_china_common', :path=> 'LSDK/'
-#  pod 'LocalThirdPartySDK/pangle_China', :path=> 'LSDK/'
-#  pod 'LocalThirdPartySDK/klevin', :path=> 'LSDK/'
-#  pod 'LocalThirdPartySDK/sigmob', :path=> 'LSDK/'
-#  pod 'LocalThirdPartySDK/startapp', :path=> 'LSDK/'
-#  pod 'LocalThirdPartySDK/tapjoy', :path=> 'LSDK/'
-#  pod 'LocalThirdPartySDK/unityads', :path=> 'LSDK/'
-#  pod 'LocalThirdPartySDK/vungle', :path=> 'LSDK/'
 
-end 
+  pod 'LocalThirdPartySDK/core', :path=> 'ThirdPartySDK/'
+  pod 'LocalThirdPartySDK/admob', :path=> 'ThirdPartySDK/'
+  pod 'LocalThirdPartySDK/applovin', :path=> 'ThirdPartySDK/'
+  pod 'LocalThirdPartySDK/aqy', :path=> 'ThirdPartySDK/'
+  pod 'LocalThirdPartySDK/tanx', :path=> 'ThirdPartySDK/'
+  pod 'LocalThirdPartySDK/baidu', :path=> 'ThirdPartySDK/'
+  pod 'LocalThirdPartySDK/bigo', :path=> 'ThirdPartySDK/'
+  pod 'LocalThirdPartySDK/facebook', :path=> 'ThirdPartySDK/'
+  pod 'LocalThirdPartySDK/gdt', :path=> 'ThirdPartySDK/'
+  pod 'LocalThirdPartySDK/inmobi', :path=> 'ThirdPartySDK/'
+  pod 'LocalThirdPartySDK/ironsource', :path=> 'ThirdPartySDK/'
+  pod 'LocalThirdPartySDK/JADYun', :path=> 'ThirdPartySDK/'
+  pod 'LocalThirdPartySDK/kidoz', :path=> 'ThirdPartySDK/'
+  pod 'LocalThirdPartySDK/klevin', :path=> 'ThirdPartySDK/'
+  pod 'LocalThirdPartySDK/kuaishou', :path=> 'ThirdPartySDK/'
+  pod 'LocalThirdPartySDK/Kwai', :path=> 'ThirdPartySDK/'
+  pod 'LocalThirdPartySDK/maio', :path=> 'ThirdPartySDK/'
+  pod 'LocalThirdPartySDK/mintegral', :path=> 'ThirdPartySDK/'
+  pod 'LocalThirdPartySDK/ms', :path=> 'ThirdPartySDK/'
+  pod 'LocalThirdPartySDK/mytarget', :path=> 'ThirdPartySDK/'
+  pod 'LocalThirdPartySDK/ogury', :path=> 'ThirdPartySDK/'
+  pod 'LocalThirdPartySDK/pangle', :path=> 'ThirdPartySDK/'
+  pod 'LocalThirdPartySDK/pubnative', :path=> 'ThirdPartySDK/'
+  pod 'LocalThirdPartySDK/qm', :path=> 'ThirdPartySDK/'
+  pod 'LocalThirdPartySDK/sigmob', :path=> 'ThirdPartySDK/'
+  pod 'LocalThirdPartySDK/smaato', :path=> 'ThirdPartySDK/'
+  pod 'LocalThirdPartySDK/startapp', :path=> 'ThirdPartySDK/'
+  pod 'LocalThirdPartySDK/unityads', :path=> 'ThirdPartySDK/'
+  pod 'LocalThirdPartySDK/vungle', :path=> 'ThirdPartySDK/'
+  pod 'LocalThirdPartySDK/tapjoy', :path=> 'ThirdPartySDK/'
+  
+  
+#  pod 'LocalThirdPartySDK/tt', :path=> 'ThirdPartySDK/'
+  pod 'LocalThirdPartySDK/tt_mix', :path=> 'ThirdPartySDK/'
+  pod 'LocalThirdPartySDK/gromore', :path=> 'ThirdPartySDK/'
+  
+  
+    
+#  pod 'LocalThirdPartySDK/bidmachine', :path=> 'ThirdPartySDK/'
+#  pod 'LocalThirdPartySDK/chartboost', :path=> 'ThirdPartySDK/'
+#  pod 'LocalThirdPartySDK/fyber', :path=> 'ThirdPartySDK/'
+#  pod 'YandexMobileAds','7.12.1'
+#  pod 'LocalThirdPartySDK/Yandex', :path=> 'ThirdPartySDK/'
+
+  
+  
+  
+end
