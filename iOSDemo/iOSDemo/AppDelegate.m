@@ -21,37 +21,37 @@
  
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-    //开启Demo日志打印
+    // Enable demo log output
     DemoLogAccess(1);
  
-    //布局demoUI,无需接入
+    // Set up demo UI; no integration required
     [self setupDemoUI];
     
-    //开屏广告展示启动图
+    // Display launch image for splash ad
     [[AdSDKManager sharedManager] addLaunchLoadingView];
-    //初始化SDK，在非欧盟地区发行的应用，需要用此方法初始化SDK接入，欧盟地区初始化替换为[[AdSDKManager sharedManager] initSDK_EU:];
+    // Initialize SDK: for non-EU releases use this method; for EU use [[AdSDKManager sharedManager] initSDK_EU:] instead.
     [[AdSDKManager sharedManager] initSDK];
-    //初始化广告SDK完成
+    // Ad SDK initialization completed
     
-    //加载开屏广告
+    // Load splash ad
     [[AdSDKManager sharedManager] loadSplashAdWithPlacementID:FirstAppOpen_PlacementID result:^(BOOL isSuccess) {
-        //加载成功
+        // Load succeeded
         if (isSuccess) {
-            //展示开屏广告
+            // Show splash ad
             [[AdSDKManager sharedManager] showSplashWithPlacementID:FirstAppOpen_PlacementID];
         }
     }];
     
-    //含欧盟地区初始化流程
-//    //欧盟地区初始化替换为[[AdSDKManager sharedManager] initSDK_EU:];
+    // EU-inclusive initialization flow
+//    //EU region, replace with [[AdSDKManager sharedManager] initSDK_EU:];
 //    [[AdSDKManager sharedManager] initSDK_EU:^{
-//        //初始化广告SDK完成
+//        // Initialization of Ad SDK completed
 //
-//        //加载开屏广告
+//        // Load splash ad
 //        [[AdSDKManager sharedManager] loadSplashAdWithPlacementID:FirstAppOpen_PlacementID result:^(BOOL isSuccess) {
-//            //加载成功
+//            // Load succeeded
 //            if (isSuccess) {
-//                //展示开屏广告
+//                // Show splash ad
 //                [[AdSDKManager sharedManager] showSplashWithPlacementID:FirstAppOpen_PlacementID];
 //            }
 //        }];
@@ -65,7 +65,7 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         if (@available(iOS 14, *)) {
-            //申请ATT权限 - 注意！若使用含欧盟地区初始化流程，请在initSDK_EU方法中调用申请ATT权限
+            // Request ATT permission — Note: if using the EU-inclusive initialization flow, request ATT inside initSDK_EU.
             [ATTrackingManager requestTrackingAuthorizationWithCompletionHandler:^(ATTrackingManagerAuthorizationStatus status) {
                 
             }];
@@ -75,7 +75,7 @@
     });
 }
   
-#pragma mark - Demo UI 可忽略
+#pragma mark - Demo UI (can be ignored)
 - (void)setupDemoUI {
     self.window = [UIWindow new];
     self.window.backgroundColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0]; // kHexColor(0xffffff)
@@ -83,9 +83,9 @@
        self.window.overrideUserInterfaceStyle = UIUserInterfaceStyleLight;
     }
     
-    // 访问苹果开发者官网，触发网络授权弹窗
+    // Visit Apple's developer site to trigger the network permission prompt
     [[[NSURLSession sharedSession] dataTaskWithURL:[NSURL URLWithString:@"https://developer.apple.com"] completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-        // 无需处理返回结果
+        // No need to handle the response
     }] resume];
       
     BaseNavigationController * nav = [[BaseNavigationController alloc] initWithRootViewController:[HomeViewController new]];
