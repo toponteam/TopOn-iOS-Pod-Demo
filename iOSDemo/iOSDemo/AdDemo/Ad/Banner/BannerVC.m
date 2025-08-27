@@ -12,26 +12,26 @@
 @interface BannerVC () <ATBannerDelegate>
 
 @property (nonatomic, strong) ATBannerView *bannerView;
-@property (nonatomic, assign) BOOL hasLoaded; // 广告加载状态标识
+@property (nonatomic, assign) BOOL hasLoaded; // Ad loading status flag
 
 @end
 
 @implementation BannerVC
 
-//广告位ID
+//Placement ID
 #define BannerPlacementID @"n67ecedf7904d9"
 
-//场景ID，可选，可在后台生成。没有可传入空字符串
+//Scene ID, optional, can be generated in backend. Pass empty string if none
 #define BannerSceneID @""
 
-//请注意，banner size需要和后台配置的比例一致
+//Note: banner size must match the ratio configured in backend
 #define BannerSize CGSizeMake(320, 50)
 
-#pragma mark - Load Ad 加载广告
-/// 加载广告
+#pragma mark - Load Ad
+/// Load ad
 - (void)loadAd {
  
-    [self showLog:kLocalizeStr(@"点击了加载广告")];
+    [self showLog:kLocalizeStr(@"Clicked load ad")];
       
     NSMutableDictionary * loadConfigDict = [NSMutableDictionary dictionary];
     
@@ -42,51 +42,51 @@
      */
     [loadConfigDict setValue:[NSValue valueWithCGSize:BannerSize] forKey:kATAdLoadingExtraBannerAdSizeKey];
     
-    //设置自定义参数
+    //Set custom parameters
     [loadConfigDict setValue:@"media_val_BannerVC" forKey:kATAdLoadingExtraMediaExtraKey];
      
-    //可选接入，如果使用了Admob广告平台，可添加以下配置
+    //Optional integration, add following config if using Admob ad platform
     //[AdLoadConfigTool banner_loadExtraConfigAppendAdmob:loadConfigDict];
     
-    //开始加载
+    //Start loading
     [[ATAdManager sharedManager] loadADWithPlacementID:BannerPlacementID extra:loadConfigDict delegate:self];
 }
  
-#pragma mark - Show Ad 展示广告
-/// 展示广告
+#pragma mark - Show Ad
+/// Show ad
 - (void)showAd {
     
-    //场景统计功能，可选接入
+    //Scene statistics feature, optional integration
     [[ATAdManager sharedManager] entryBannerScenarioWithPlacementID:BannerPlacementID scene:BannerSceneID];
     
-//    //查询可用于展示的广告缓存(可选接入)
+//    //Query available ad cache for display (optional integration)
 //    NSArray <NSDictionary *> * adCaches = [[ATAdManager sharedManager] getBannerValidAdsForPlacementID:BannerPlacementID];
 //    ATDemoLog(@"getValidAds : %@",adCaches);
 //
-//    //查询广告加载状态(可选接入)
+//    //Query ad loading status (optional integration)
 //    ATCheckLoadModel * status = [[ATAdManager sharedManager] checkBannerLoadStatusForPlacementID:BannerPlacementID];
 //    ATDemoLog(@"checkLoadStatus : %d",status.isLoading);
     
-    //检查是否有就绪
+    //Check if ready
     if (![[ATAdManager sharedManager] bannerAdReadyForPlacementID:BannerPlacementID]) {
         [self loadAd];
         return;
     }
     
-    //展示配置，Scene传入后台的场景ID，没有可传入空字符串，showCustomExt参数可传入自定义参数字符串
+    //Show config, Scene passes backend scene ID, pass empty string if none, showCustomExt parameter can pass custom parameter string
     ATShowConfig *config = [[ATShowConfig alloc] initWithScene:BannerSceneID showCustomExt:@"testShowCustomExt"];
  
-    //展示广告
+    //Show ad
     ATBannerView *bannerView = [[ATAdManager sharedManager] retrieveBannerViewForPlacementID:BannerPlacementID config:config];
     if (bannerView != nil) {
-        //赋值
+        //Assignment
         bannerView.delegate = self;
         bannerView.presentingViewController = self;
         bannerView.translatesAutoresizingMaskIntoConstraints = NO;
         [self.view addSubview:bannerView];
         self.bannerView = bannerView;
         
-        //布局
+        //Layout
         [self.bannerView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.mas_equalTo(self.view);
             make.height.equalTo(@(BannerSize.height));
@@ -96,7 +96,7 @@
     }
 }
  
-#pragma mark - 销毁广告
+#pragma mark - Destroy Ad
 - (void)removeAd {
     [self.bannerView destroyBanner];
     [self.bannerView removeFromSuperview];
@@ -104,36 +104,36 @@
     self.hasLoaded = NO;
 }
 
-#pragma mark - Demo按钮操作
-/// 通过demo移除按钮点击来移除banner广告
+#pragma mark - Demo Button Actions
+/// Remove banner ad through demo remove button click
 - (void)removeAdButtonClickAction {
     [self removeAd];
 }
  
-//临时隐藏，隐藏后会停止自动加载
+//Temporarily hide, auto-loading will stop after hiding
 - (void)hiddenAdButtonClickAction {
     self.bannerView.hidden = YES;
 }
  
-//隐藏后重新展示
+//Re-show after hiding
 - (void)reshowAd {
     self.bannerView.hidden = NO;
 }
  
 #pragma mark - ATAdLoadingDelegate
-/// 广告位加载完成
-/// - Parameter placementID: 广告位ID
+/// Placement loading completed
+/// - Parameter placementID: Placement ID
 - (void)didFinishLoadingADWithPlacementID:(NSString *)placementID {
     BOOL isReady = [[ATAdManager sharedManager] bannerAdReadyForPlacementID:placementID];
-    [self showLog:[NSString stringWithFormat:@"didFinishLoadingADWithPlacementID:%@ Banner 是否准备好:%@", placementID,isReady ? @"YES":@"NO"]];
+    [self showLog:[NSString stringWithFormat:@"didFinishLoadingADWithPlacementID:%@ Banner ready:%@", placementID,isReady ? @"YES":@"NO"]];
     
     self.hasLoaded = YES;
 }
  
-/// 广告位加载失败
+/// Placement loading failed
 /// - Parameters:
-///   - placementID: 广告位ID
-///   - error: 错误信息
+///   - placementID: Placement ID
+///   - error: Error information
 - (void)didFailToLoadADWithPlacementID:(NSString *)placementID error:(NSError *)error {
     ATDemoLog(@"didFailToLoadADWithPlacementID:%@ error:%@", placementID, error);
     [self showLog:[NSString stringWithFormat:@"didFailToLoadADWithPlacementID:%@ errorCode:%ld", placementID, error.code]];
@@ -141,10 +141,10 @@
     self.hasLoaded = NO;
 }
 
-/// 获得展示收益
+/// Received display revenue
 /// - Parameters:
-///   - placementID: 广告位ID
-///   - extra: 额外信息字典
+///   - placementID: Placement ID
+///   - extra: Extra information dictionary
 - (void)didRevenueForPlacementID:(NSString *)placementID extra:(NSDictionary *)extra {
     ATDemoLog(@"didRevenueForPlacementID:%@ with extra: %@", placementID,extra);
     [self showLog:[NSString stringWithFormat:@"didRevenueForPlacementID:%@", placementID]];
@@ -152,66 +152,66 @@
 
 #pragma mark - ATBannerDelegate
 
-/// 关闭按钮点击(当用户点击横幅上关闭按钮的情形)
+/// Close button clicked (when user clicks close button on banner)
 /// - Parameters:
-///   - bannerView: 横幅广告视图对象
-///   - placementID: 广告位ID
-///   - extra: 额外信息字典
+///   - bannerView: Banner ad view object
+///   - placementID: Placement ID
+///   - extra: Extra information dictionary
 - (void)bannerView:(ATBannerView *)bannerView didTapCloseButtonWithPlacementID:(NSString *)placementID extra:(NSDictionary *)extra {
     ATDemoLog(@"didTapCloseButtonWithPlacementID:%@ extra: %@", placementID,extra);
     [self showLog:[NSString stringWithFormat:@"bannerView:didTapCloseButtonWithPlacementID:%@", placementID]];
 
-    // 收到点击关闭按钮回调,移除bannerView
+    // Received close button click callback, remove bannerView
     [self removeAd];
 }
 
-/// 横幅广告已展示
+/// Banner ad displayed
 /// - Parameters:
-///   - bannerView: 横幅广告视图对象
-///   - placementID: 广告位ID
-///   - extra: 额外信息字典
+///   - bannerView: Banner ad view object
+///   - placementID: Placement ID
+///   - extra: Extra information dictionary
 - (void)bannerView:(ATBannerView *)bannerView didShowAdWithPlacementID:(NSString *)placementID extra:(NSDictionary *)extra {
     ATDemoLog(@"didShowAdWithPlacementID:%@ with extra: %@", placementID,extra);
     [self showLog:[NSString stringWithFormat:@"bannerView:didShowAdWithPlacementID:%@", placementID]];
      
 }
 
-/// 横幅广告被点击
+/// Banner ad clicked
 /// - Parameters:
-///   - bannerView: 横幅广告视图对象
-///   - placementID: 广告位ID
-///   - extra: 额外信息字典
+///   - bannerView: Banner ad view object
+///   - placementID: Placement ID
+///   - extra: Extra information dictionary
 - (void)bannerView:(ATBannerView *)bannerView didClickWithPlacementID:(NSString *)placementID extra:(NSDictionary *)extra{
     ATDemoLog(@"didClickWithPlacementID:%@ with extra: %@", placementID,extra);
     [self showLog:[NSString stringWithFormat:@"bannerView:didClickWithPlacementID:%@", placementID]];
 }
 
-/// 横幅广告已自动刷新
+/// Banner ad auto-refreshed
 /// - Parameters:
-///   - bannerView: 横幅广告视图对象
-///   - placementID: 广告位ID
-///   - extra: 额外信息字典
+///   - bannerView: Banner ad view object
+///   - placementID: Placement ID
+///   - extra: Extra information dictionary
 - (void)bannerView:(ATBannerView *)bannerView didAutoRefreshWithPlacement:(NSString *)placementID extra:(NSDictionary *)extra {
     ATDemoLog(@"didAutoRefreshWithPlacement:%@ with extra: %@", placementID,extra);
     [self showLog:[NSString stringWithFormat:@"bannerView:didAutoRefreshWithPlacement:%@", placementID]];
 }
 
-/// 横幅广告自动刷新失败
+/// Banner ad auto-refresh failed
 /// - Parameters:
-///   - bannerView: 横幅广告视图对象
-///   - placementID: 广告位ID
-///   - error: 错误信息
+///   - bannerView: Banner ad view object
+///   - placementID: Placement ID
+///   - error: Error information
 - (void)bannerView:(ATBannerView *)bannerView failedToAutoRefreshWithPlacementID:(NSString *)placementID error:(NSError *)error {
     ATDemoLog(@"failedToAutoRefreshWithPlacementID:%@ error:%@", placementID, error);
     [self showLog:[NSString stringWithFormat:@"bannerView:failedToAutoRefreshWithPlacementID:%@ errorCode:%ld", placementID, error.code]];
 }
  
-/// 横幅广告已打开或跳转深链接页面
+/// Banner ad opened or jumped to deep link page
 /// - Parameters:
-///   - bannerView: 横幅广告视图对象
-///   - placementID:  广告位ID
-///   - extra: 额外信息
-///   - success: 是否成功
+///   - bannerView: Banner ad view object
+///   - placementID: Placement ID
+///   - extra: Extra information
+///   - success: Whether successful
 - (void)bannerView:(ATBannerView *)bannerView didDeepLinkOrJumpForPlacementID:(NSString *)placementID extra:(NSDictionary *)extra result:(BOOL)success {
     ATDemoLog(@"didDeepLinkOrJumpForPlacementID:placementID:%@ with extra: %@, success:%@", placementID,extra, success ? @"YES" : @"NO");
     [self showLog:[NSString stringWithFormat:@"didDeepLinkOrJumpForPlacementID:%@, success:%@", placementID, success ? @"YES" : @"NO"]];

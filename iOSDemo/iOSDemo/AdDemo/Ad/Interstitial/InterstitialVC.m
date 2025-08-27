@@ -17,64 +17,64 @@
  
 @interface InterstitialVC () <ATInterstitialDelegate>
 
-@property (nonatomic, assign) NSInteger retryAttempt; // 重试次数计数器
+@property (nonatomic, assign) NSInteger retryAttempt; // Retry attempt counter
 
 @end
 
 @implementation InterstitialVC
  
-//广告位ID
+//Placement ID
 #define InterstitialPlacementID @"n67ece79734678"
 
-//场景ID，可选，可在后台生成。没有可传入空字符串
+//Scene ID, optional, can be generated in backend. Pass empty string if none
 #define InterstitialSceneID @""
 
-#pragma mark - Load Ad 加载广告
-/// 加载广告按钮被点击
+#pragma mark - Load Ad
+/// Load ad button clicked
 - (void)loadAd {
  
-    [self showLog:kLocalizeStr(@"点击了加载广告")];
+    [self showLog:kLocalizeStr(@"Load ad clicked")];
       
     NSMutableDictionary * loadConfigDict = [NSMutableDictionary dictionary];
     
-    //可选接入，设置加载透传参数
+    //Optional integration, set loading pass-through parameters
     [loadConfigDict setValue:@"media_val_InterstitialVC" forKey:kATAdLoadingExtraMediaExtraKey];
     
-    //(可选接入)如果使用了快手平台，可添加半屏插屏广告大小配置
+    //(Optional integration) If using Kuaishou platform, can add half-screen interstitial ad size configuration
     //[AdLoadConfigTool interstitial_loadExtraConfigAppend_KuaiShou:loadConfigDict];
     
-    //(可选接入)若开启共享广告位，对其进行相关设置
+    //(Optional integration) If shared placement is enabled, configure related settings
     //[AdLoadConfigTool setInterstitialSharePlacementConfig:loadConfigDict];
     
     [[ATAdManager sharedManager] loadADWithPlacementID:InterstitialPlacementID extra:loadConfigDict delegate:self];
 }
  
-#pragma mark - Show Ad 展示广告
-/// 展示广告按钮被点击
+#pragma mark - Show Ad
+/// Show ad button clicked
 - (void)showAd {
     
-    //场景统计功能(可选接入)
+    //Scene statistics function (optional integration)
     [[ATAdManager sharedManager] entryInterstitialScenarioWithPlacementID:InterstitialPlacementID scene:InterstitialSceneID];
     
-//    //查询可用于展示的广告缓存(可选接入)
+//    //Query available ad cache for display (optional integration)
 //    NSArray <NSDictionary *> * adCaches = [[ATAdManager sharedManager] getInterstitialValidAdsForPlacementID:InterstitialPlacementID];
 //    ATDemoLog(@"getValidAds : %@",adCaches);
 //
-//    //查询广告加载状态(可选接入)
+//    //Query ad loading status (optional integration)
 //    ATCheckLoadModel * status = [[ATAdManager sharedManager] checkInterstitialLoadStatusForPlacementID:InterstitialPlacementID];
 //    ATDemoLog(@"checkLoadStatus : %d",status.isLoading);
     
-    //检查是否有就绪
+    //Check if ready
     if (![[ATAdManager sharedManager] interstitialReadyForPlacementID:InterstitialPlacementID]) {
         [self loadAd];
         return;
     }
     
-    //展示配置，Scene传入后台的场景ID，没有可传入空字符串，showCustomExt参数可传入自定义参数字符串
+    //Display configuration, Scene passes backend scene ID, pass empty string if none, showCustomExt parameter can pass custom parameter string
     ATShowConfig *config = [[ATShowConfig alloc] initWithScene:InterstitialSceneID showCustomExt:@"testShowCustomExt"];
  
-    //展示广告
-    //若是全屏插屏，inViewController可传入根控制器，如tabbarController或navigationController，让广告遮挡住tabbar或navigationBar
+    //Show ad
+    //For fullscreen interstitial, inViewController can pass root controller like tabbarController or navigationController to let ad cover tabbar or navigationBar
     [[ATAdManager sharedManager] showInterstitialWithPlacementID:InterstitialPlacementID
                                                       showConfig:config
                                                 inViewController:self
@@ -83,25 +83,25 @@
 }
 
 #pragma mark - ATAdLoadingDelegate
-/// 广告位加载完成
-/// - Parameter placementID: 广告位ID
+/// Placement loading completed
+/// - Parameter placementID: Placement ID
 - (void)didFinishLoadingADWithPlacementID:(NSString *)placementID {
     BOOL isReady = [[ATAdManager sharedManager] interstitialReadyForPlacementID:placementID];
-    [self showLog:[NSString stringWithFormat:@"didFinishLoadingADWithPlacementID:%@ interstitial 是否准备好:%@", placementID,isReady ? @"YES":@"NO"]];
+    [self showLog:[NSString stringWithFormat:@"didFinishLoadingADWithPlacementID:%@ interstitial ready:%@", placementID,isReady ? @"YES":@"NO"]];
     
-    // 重置重试次数
+    // Reset retry attempt
     self.retryAttempt = 0;
 }
  
-/// 广告位加载失败
+/// Placement loading failed
 /// - Parameters:
-///   - placementID: 广告位ID
-///   - error: 错误信息
+///   - placementID: Placement ID
+///   - error: Error information
 - (void)didFailToLoadADWithPlacementID:(NSString *)placementID error:(NSError *)error {
     ATDemoLog(@"didFailToLoadADWithPlacementID:%@ error:%@", placementID, error);
     [self showLog:[NSString stringWithFormat:@"didFailToLoadADWithPlacementID:%@ errorCode:%ld", placementID, error.code]];
     
-    // 重试已达到 3 次，不再重试加载
+    // Retry has reached 3 times, no more retry loading
     if (self.retryAttempt >= 3) {
        return;
     }
@@ -116,10 +116,10 @@
     });
 }
 
-/// 获得展示收益
+/// Received display revenue
 /// - Parameters:
-///   - placementID: 广告位ID
-///   - extra: 额外信息字典
+///   - placementID: Placement ID
+///   - extra: Extra information dictionary
 - (void)didRevenueForPlacementID:(NSString *)placementID extra:(NSDictionary *)extra {
     ATDemoLog(@"didRevenueForPlacementID:%@ with extra: %@", placementID,extra);
     [self showLog:[NSString stringWithFormat:@"didRevenueForPlacementID:%@", placementID]];
@@ -127,76 +127,76 @@
 }
 
 #pragma mark - ATInterstitialDelegate
-/// 广告已经展示
+/// Ad displayed
 /// - Parameters:
-///   - placementID: 广告位ID
-///   - extra: 额外信息字典
+///   - placementID: Placement ID
+///   - extra: Extra information dictionary
 - (void)interstitialDidShowForPlacementID:(NSString *)placementID extra:(NSDictionary *)extra {
     ATDemoLog(@"interstitialDidShowForPlacementID:%@ extra:%@", placementID, extra);
     [self showLog:[NSString stringWithFormat:@"interstitialDidShowForPlacementID:%@", placementID]];
     
 }
 
-/// 广告展示失败
+/// Ad display failed
 /// - Parameters:
-///   - placementID: 广告位ID
-///   - error: 错误信息
-///   - extra: 额外信息字典
+///   - placementID: Placement ID
+///   - error: Error information
+///   - extra: Extra information dictionary
 - (void)interstitialFailedToShowForPlacementID:(NSString *)placementID error:(NSError *)error extra:(NSDictionary *)extra {
     ATDemoLog(@"interstitialFailedToShowForPlacementID:%@ error:%@ extra:%@", placementID, error, extra);
     [self showLog:[NSString stringWithFormat:@"interstitialFailedToShowForPlacementID:%@ error:%@", placementID, error]];
     
 }
 
-/// 视频播放失败
+/// Video playback failed
 /// - Parameters:
-///   - placementID: 广告位ID
-///   - error: 错误信息
-///   - extra: 额外信息字典
+///   - placementID: Placement ID
+///   - error: Error information
+///   - extra: Extra information dictionary
 - (void)interstitialDidFailToPlayVideoForPlacementID:(NSString *)placementID error:(NSError *)error extra:(NSDictionary *)extra {
     ATDemoLog(@"interstitialDidFailToPlayVideoForPlacementID:%@ error:%@ extra:%@", placementID, error, extra);
     [self showLog:[NSString stringWithFormat:@"interstitialDidFailToPlayVideoForPlacementID:%@ errorCode:%ld", placementID, error.code]];
     
-    // 预加载下一个广告
+    // Preload next ad
     [self loadAd];
 }
 
-/// 视频开始播放
+/// Video started playing
 /// - Parameters:
-///   - placementID: 广告位ID
-///   - extra: 额外信息字典
+///   - placementID: Placement ID
+///   - extra: Extra information dictionary
 - (void)interstitialDidStartPlayingVideoForPlacementID:(NSString *)placementID extra:(NSDictionary *)extra {
     ATDemoLog(@"interstitialDidStartPlayingVideoForPlacementID:%@ extra:%@", placementID, extra);
     [self showLog:[NSString stringWithFormat:@"interstitialDidStartPlayingVideoForPlacementID:%@", placementID]];
     
 }
 
-/// 视频结束播放
+/// Video finished playing
 /// - Parameters:
-///   - placementID: 广告位ID
-///   - extra: 额外信息字典
+///   - placementID: Placement ID
+///   - extra: Extra information dictionary
 - (void)interstitialDidEndPlayingVideoForPlacementID:(NSString *)placementID extra:(NSDictionary *)extra {
     ATDemoLog(@"interstitialDidEndPlayingVideoForPlacementID:%@ extra:%@", placementID, extra);
     [self showLog:[NSString stringWithFormat:@"interstitialDidEndPlayingVideoForPlacementID:%@", placementID]];
     
 }
 
-/// 广告已经关闭
+/// Ad closed
 /// - Parameters:
-///   - placementID: 广告位ID
-///   - extra: 额外信息字典
+///   - placementID: Placement ID
+///   - extra: Extra information dictionary
 - (void)interstitialDidCloseForPlacementID:(NSString *)placementID extra:(NSDictionary *)extra {
     ATDemoLog(@"interstitialDidCloseForPlacementID:%@ extra:%@", placementID, extra);
     [self showLog:[NSString stringWithFormat:@"interstitialDidCloseForPlacementID:%@", placementID]];
     
-    // 预加载下一个广告
+    // Preload next ad
     [self loadAd];
 }
 
-/// 广告已被点击(跳转)
+/// Ad clicked (redirect)
 /// - Parameters:
-///   - placementID: 广告位ID
-///   - extra: 额外信息字典
+///   - placementID: Placement ID
+///   - extra: Extra information dictionary
 - (void)interstitialDidClickForPlacementID:(NSString *)placementID extra:(NSDictionary *)extra {
     ATDemoLog(@"interstitialDidClickForPlacementID:%@ extra:%@", placementID, extra);
     [self showLog:[NSString stringWithFormat:@"interstitialDidClickForPlacementID:%@", placementID]];

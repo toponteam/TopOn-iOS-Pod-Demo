@@ -25,15 +25,15 @@
 
 @implementation FeedSelfRenderVC
 
-//广告位ID
+// Placement ID
 #define Feed_Native_SelfRender_PlacementID @"n67eceed5a282d"
 
-//场景ID，可选，可在后台生成。没有可传入空字符串
+// Scene ID, optional, can be generated in the backend. Pass empty string if not available
 #define Feed_Native_SelfRender_SceneID @""
  
 - (void)dealloc {
    NSLog(@"FeedSelfRenderVC dealloc");
-   //销毁没有释放的广告
+   // Destroy unreleased ads
 }
 
 #pragma mark - UITableViewDataSource
@@ -44,10 +44,10 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     if (self.dataSourceArray[indexPath.row].isNativeAd) {
-        //广告cell，动态高度
+        // Ad cell, dynamic height
         return UITableViewAutomaticDimension;
     }
-    //其他cell，自定义高度
+    // Other cells, custom height
     return 200;
 }
 
@@ -56,7 +56,7 @@
     DemoOfferAdModel *offerModel = self.dataSourceArray[indexPath.row];
     
     if (offerModel.isNativeAd) {
-        // 存在新的广告，可以刷新
+        // New ad available, can refresh
         ATNativeAdOffer *offer = [self getOfferAndLoadNext];
         if (offer) {
             offerModel.nativeADView = [self getNativeADViewWithOffer:offer];
@@ -75,83 +75,83 @@
     }
 }
    
-/// 通过广告offer获取ATNativeADView对象
-/// - Parameter offer: 已获取到的广告offer
+/// Get ATNativeADView object through ad offer
+/// - Parameter offer: The obtained ad offer
 - (ATNativeADView *)getNativeADViewWithOffer:(ATNativeAdOffer *)offer {
    
-    // 初始化config配置
+    // Initialize config configuration
     ATNativeADConfiguration *config = [[ATNativeADConfiguration alloc] init];
-    // 给原生广告进行预布局
+    // Pre-layout for native ad
     config.ADFrame = CGRectMake(0, 0, SelfRenderViewWidth, SelfRenderViewHeight);
-    // 给视频播放器进行预布局，建议在后面添加到自定义视图后，再次进行一次布局
+    // Pre-layout for video player, recommend to layout again after adding to custom view
     config.mediaViewFrame = CGRectMake(0, 0, SelfRenderViewMediaViewWidth, SelfRenderViewMediaViewHeight);
     config.delegate = self;
     config.rootViewController = self;
-    //设置仅wifi模式才自动播放，部分广告平台有效
+    // Set auto-play only in WiFi mode, effective for some ad platforms
     config.videoPlayType = ATNativeADConfigVideoPlayOnlyWiFiAutoPlayType;
     
-    //【手动布局方式】精确设置logo大小以及位置，与下方【Masonry方式】选择一种实现
+    // [Manual Layout] Precisely set logo size and position, choose one implementation with [Masonry Method] below
 //    config.logoViewFrame = CGRectMake(kScreenW-40-10-15, SelfRenderViewHeight-50-10, 40, 40);
     
-    //设置广告平台logo位置偏好(部分广告平台无法进行精确设置，则通过下面代码设置，Demo示例中均演示为右下角的情况)
-    //若素材offer中logoUrl或logo有值时，才可以通过SelfRenderView中布局进行设置，没有值请使用本方法中的示例进行精确控制或者偏好位置设置。
+    // Set ad platform logo position preference (some ad platforms cannot be precisely set, use the code below, Demo examples all show bottom-right corner)
+    // Only when logoUrl or logo has value in material offer, can be set through SelfRenderView layout, otherwise use examples in this method for precise control or preference position setting.
     [ATAPI sharedInstance].preferredAdLogoPosition = ATAdLogoPositionBottomRightCorner;
     
-    // 设置广告标识坐标x和y,部分广告平台有效
+    // Set ad identifier coordinates x and y, effective for some ad platforms
     // config.adChoicesViewOrigin = CGPointMake(10, 10);
      
-    // 打印素材组件
+    // Print material components
     NSDictionary *offerInfoDict = [Tools getOfferInfo:offer];
     ATDemoLog(@"🔥🔥🔥--自渲染广告素材，展示前：%@",offerInfoDict);
     
-    // 创建自渲染视图view，同时根据offer信息内容去赋值
+    // Create self-render view and assign values based on offer information
     SelfRenderView *selfRenderView = [[SelfRenderView alloc] initWithOffer:offer];
     
-    // 创建广告nativeADView
-    // 获取原生广告展示容器视图
+    // Create ad nativeADView
+    // Get native ad display container view
     ATNativeADView *nativeADView = [[ATNativeADView alloc] initWithConfiguration:config currentOffer:offer placementID:Feed_Native_SelfRender_PlacementID];
     
-    //创建可点击组件的容器数组
+    // Create container array for clickable components
     NSMutableArray *clickableViewArray = [NSMutableArray array];
     
-    // 获取mediaView，需要自行添加到自渲染视图上，必须调用
+    // Get mediaView, need to add to self-render view manually, must call
     UIView *mediaView = [nativeADView getMediaView];
     if (mediaView) {
-        // 赋值并布局
+        // Assign and layout
         selfRenderView.mediaView = mediaView;
     }
     
-    // 设置需要注册点击事件的UI控件，最好不要把信息流的父视图整体添加到点击事件中，不然可能会出现点击关闭按钮，还触发了点击信息流事件。
+    // Set UI controls that need to register click events, better not to add the entire parent view of the feed to click events, otherwise clicking the close button may still trigger the feed click event.
     [clickableViewArray addObjectsFromArray:@[selfRenderView.iconImageView,
                                               selfRenderView.titleLabel,
                                               selfRenderView.textLabel,
                                               selfRenderView.ctaLabel,
                                               selfRenderView.mainImageView]];
     
-    // 给UI控件注册点击事件
+    // Register click events for UI controls
     [nativeADView registerClickableViewArray:clickableViewArray];
     
-    //绑定组件
+    // Bind components
     [self prepareWithNativePrepareInfo:selfRenderView nativeADView:nativeADView];
     
-    //渲染广告
+    // Render ad
     [offer rendererWithConfiguration:config selfRenderView:selfRenderView nativeADView:nativeADView];
     
-    //【Masonry方式】精确设置logo大小以及位置，与上方【手动布局方式】选择一种实现，请在渲染广告之后调用，请基于nativeADView操作
+    // [Masonry Method] Precisely set logo size and position, choose one implementation with [Manual Layout] above, call after rendering ad, operate based on nativeADView
     [nativeADView.logoImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.right.bottom.mas_equalTo(nativeADView).mas_offset(-25);
         make.width.height.mas_equalTo(15);
     }];
  
-    //隐藏logo，谨慎使用，请阅读文档：自渲染广告注意事项
+    // Hide logo, use with caution, please read documentation: Self-render Ad Considerations
     //nativeADView.logoImageView.hidden = YES;
   
     return nativeADView;
 }
 
-#pragma mark - 绑定组件
+#pragma mark - Bind Components
 - (void)prepareWithNativePrepareInfo:(SelfRenderView *)selfRenderView nativeADView:(ATNativeADView *)nativeADView {
-    // 哪些组件需要绑定，哪些不需要，请参考文档：原生广告注意事项
+    // Which components need binding and which don't, please refer to documentation: Native Ad Considerations
     ATNativePrepareInfo *info = [ATNativePrepareInfo loadPrepareInfo:^(ATNativePrepareInfo * prepareInfo) {
         prepareInfo.textLabel = selfRenderView.textLabel;
         prepareInfo.advertiserLabel = selfRenderView.advertiserLabel;
@@ -167,25 +167,25 @@
     [nativeADView prepareWithNativePrepareInfo:info];
 }
 
-#pragma mark - 数据处理 data execute
+#pragma mark - Data Processing
 
-/// 添加数据源
-/// - Parameter isSuccess: 广告加载是否成功
+/// Add data source
+/// - Parameter isSuccess: Whether ad loading is successful
 - (void)setDataWithRequest:(BOOL)isSuccess {
     if (isSuccess) {
-        //加载广告成功，获取offer并添加数据模型
+        // Ad loading successful, get offer and add data model
         ATNativeAdOffer *offer = [self getOfferAndLoadNext];
         if (offer) {
             DemoOfferAdModel *offerModel = [[DemoOfferAdModel alloc] init];
             offerModel.nativeADView = [self getNativeADViewWithOffer:offer];
             offerModel.offer = offer;
-            //标记为广告
+            // Mark as ad
             offerModel.isNativeAd = YES;
             [self.dataSourceArray addObject:offerModel];
         }
     }
     
-    //添加非广告model，模拟开发者自己的业务Cell
+    // Add non-ad models, simulate developer's own business cells
     for (int i = 0; i < 3; i ++) {
         DemoOfferAdModel *offerModel1 = [[DemoOfferAdModel alloc] init];
         offerModel1.isNativeAd = NO;
@@ -194,21 +194,21 @@
     [self.feedTableView reloadData];
 }
 
-/// 获取offer并且发起下一次load
+/// Get offer and initiate next load
 - (ATNativeAdOffer *)getOfferAndLoadNext {
     
-    //场景统计功能，可选接入
+    // Scene statistics feature, optional integration
     [[ATAdManager sharedManager] entryNativeScenarioWithPlacementID:Feed_Native_SelfRender_PlacementID scene:Feed_Native_SelfRender_SceneID];
     
     ATNativeAdOffer *offer = [[ATAdManager sharedManager] getNativeAdOfferWithPlacementID:Feed_Native_SelfRender_PlacementID];
-    // load next
+    // Load next
     [self loadNativeAd];
     
     return offer;
 }
 
-/// 用户点击close，从列表中移除广告
-/// - Parameter nativeADView: 广告adView
+/// User clicks close, remove ad from list
+/// - Parameter nativeADView: Ad adView
 - (void)removeAd:(ATNativeADView *)nativeADView {
     for (int i=0; i<self.dataSourceArray.count; i++) {
         DemoOfferAdModel *offerModel = self.dataSourceArray[i];
@@ -217,9 +217,9 @@
             if (nativeADView && nativeADView.superview) {
                 [nativeADView removeFromSuperview];
             }
-            //销毁广告视图
+            // Destroy ad view
             [nativeADView destroyNative];
-            //销毁offer
+            // Destroy offer
             offerModel.offer = nil;
             offerModel.nativeADView = nil;
             
@@ -231,10 +231,10 @@
     }
 }
   
-/// 用于测试时打印相关信息
+/// Print related information for testing
 /// - Parameters:
-///   - offer: 广告素材
-///   - nativeADView: 广告对象view
+///   - offer: Ad material
+///   - nativeADView: Ad object view
 - (void)printNativeAdInfoAfterRendererWithOffer:(ATNativeAdOffer *)offer nativeADView:(ATNativeADView *)nativeADView {
     ATNativeAdRenderType nativeAdRenderType = [nativeADView getCurrentNativeAdRenderType];
     if (nativeAdRenderType == ATNativeAdRenderExpress) {
@@ -244,56 +244,56 @@
     }
     BOOL isVideoContents = [nativeADView isVideoContents];
     
-    //打印所有素材内容
+    // Print all material content
     [Tools printNativeAdOffer:offer];
     ATDemoLog(@"🔥--是否为原生视频广告：%d",isVideoContents);
 }
 
-#pragma mark - 广告位代理回调
-/// 广告位加载完成
-/// - Parameter placementID: 广告位ID
+#pragma mark - Placement Delegate Callbacks
+/// Placement loading completed
+/// - Parameter placementID: Placement ID
 - (void)didFinishLoadingADWithPlacementID:(NSString *)placementID {
     BOOL isReady = [[ATAdManager sharedManager] nativeAdReadyForPlacementID:placementID];
     [self showLog:[NSString stringWithFormat:@"didFinishLoadingADWithPlacementID:%@ SelfRender 是否准备好:%@", placementID,isReady ? @"YES":@"NO"]];
     
     if (self.feedTableView.mj_footer.refreshing == YES) {
         [self.feedTableView.mj_footer endRefreshing];
-        //请求成功，传入YES可以获取广告数据
+        // Request successful, pass YES to get ad data
         [self setDataWithRequest:YES];
     }
 }
  
-/// 广告位加载失败
+/// Placement loading failed
 /// - Parameters:
-///   - placementID: 广告位ID
-///   - error: 错误信息
+///   - placementID: Placement ID
+///   - error: Error information
 - (void)didFailToLoadADWithPlacementID:(NSString *)placementID error:(NSError *)error {
     ATDemoLog(@"didFailToLoadADWithPlacementID:%@ error:%@", placementID, error);
     [self showLog:[NSString stringWithFormat:@"didFailToLoadADWithPlacementID:%@ errorCode:%ld", placementID, error.code]];
     
     if (self.feedTableView.mj_footer.refreshing == YES) {
         [self.feedTableView.mj_footer endRefreshing];
-        //请求失败
+        // Request failed
         [self setDataWithRequest:NO];
     }
 }
 
-/// 获得展示收益
+/// Received display revenue
 /// - Parameters:
-///   - placementID: 广告位ID
-///   - extra: 额外信息字典
+///   - placementID: Placement ID
+///   - extra: Extra information dictionary
 - (void)didRevenueForPlacementID:(NSString *)placementID extra:(NSDictionary *)extra {
     ATDemoLog(@"didRevenueForPlacementID:%@ with extra: %@", placementID,extra);
     [self showLog:[NSString stringWithFormat:@"didRevenueForPlacementID:%@", placementID]];
 }
 
-#pragma mark - 原生广告事件回调
+#pragma mark - Native Ad Event Callbacks
 
-/// 原生广告已展示
+/// Native ad displayed
 /// - Parameters:
-///   - adView: 广告视图对象
-///   - placementID: 广告位ID
-///   - extra: 额外信息
+///   - adView: Ad view object
+///   - placementID: Placement ID
+///   - extra: Extra information
 - (void)didShowNativeAdInAdView:(ATNativeADView *)adView placementID:(NSString *)placementID extra:(NSDictionary *)extra {
     ATDemoLog(@"didShowNativeAdInAdView:%@ extra:%@",placementID,extra);
     [self showLog:[NSString stringWithFormat:@"didShowNativeAdInAdView:%@", placementID]];
@@ -301,85 +301,85 @@
     
 }
 
-/// 原生广告点击了关闭按钮
+/// Native ad close button clicked
 /// - Parameters:
-///   - adView: 广告视图对象
-///   - placementID: 广告位ID
-///   - extra: 额外信息
+///   - adView: Ad view object
+///   - placementID: Placement ID
+///   - extra: Extra information
 - (void)didTapCloseButtonInAdView:(ATNativeADView *)adView placementID:(NSString *)placementID extra:(NSDictionary *)extra {
     ATDemoLog(@"didTapCloseButtonInAdView:%@ extra:%@", placementID, extra);
     [self showLog:[NSString stringWithFormat:@"didTapCloseButtonInAdView:%@", placementID]];
     
-    //从列表移除
+    // Remove from list
     [self removeAd:adView];
 }
 
-/// 原生广告开始播放视频
+/// Native ad started playing video
 /// - Parameters:
-///   - adView: 广告视图对象
-///   - placementID: 广告位ID
-///   - extra: 额外信息字典
+///   - adView: Ad view object
+///   - placementID: Placement ID
+///   - extra: Extra information dictionary
 - (void)didStartPlayingVideoInAdView:(ATNativeADView *)adView placementID:(NSString *)placementID extra:(NSDictionary *)extra {
     ATDemoLog(@"didStartPlayingVideoInAdView:%@ extra: %@", placementID,extra);
     [self showLog:[NSString stringWithFormat:@"didStartPlayingVideoInAdView:%@", placementID]];
 }
 
-/// 原生广告视频播放结束
+/// Native ad video playback ended
 /// - Parameters:
-///   - adView: 广告视图对象
-///   - placementID: 广告位ID
-///   - extra: 额外信息字典
+///   - adView: Ad view object
+///   - placementID: Placement ID
+///   - extra: Extra information dictionary
 - (void)didEndPlayingVideoInAdView:(ATNativeADView *)adView placementID:(NSString *)placementID extra:(NSDictionary *)extra {
     ATDemoLog(@"didEndPlayingVideoInAdView:%@ extra: %@", placementID,extra);
     [self showLog:[NSString stringWithFormat:@"didEndPlayingVideoInAdView:%@", placementID]];
 }
 
-/// 原生广告用户已点击
+/// Native ad user clicked
 /// - Parameters:
-///   - adView: 广告视图对象
-///   - placementID: 广告位ID
-///   - extra: 额外信息字典
+///   - adView: Ad view object
+///   - placementID: Placement ID
+///   - extra: Extra information dictionary
 - (void)didClickNativeAdInAdView:(ATNativeADView *)adView placementID:(NSString *)placementID extra:(NSDictionary *)extra {
     ATDemoLog(@"didClickNativeAdInAdView:%@ extra:%@",placementID,extra);
     [self showLog:[NSString stringWithFormat:@"didClickNativeAdInAdView:%@", placementID]];
 }
  
-/// 原生广告已打开或跳转深链接页面
+/// Native ad opened or jumped to deep link page
 /// - Parameters:
-///   - adView: 广告视图对象
-///   - placementID: 广告位ID
-///   - extra: 额外信息
-///   - success: 是否成功
+///   - adView: Ad view object
+///   - placementID: Placement ID
+///   - extra: Extra information
+///   - success: Whether successful
 - (void)didDeepLinkOrJumpInAdView:(ATNativeADView *)adView placementID:(NSString *)placementID extra:(NSDictionary *)extra result:(BOOL)success {
     ATDemoLog(@"didDeepLinkOrJumpInAdView:placementID:%@ with extra: %@, success:%@", placementID,extra, success ? @"YES" : @"NO");
     [self showLog:[NSString stringWithFormat:@"didDeepLinkOrJumpInAdView:%@, success:%@", placementID, success ? @"YES" : @"NO"]];
 }
  
-/// 原生广告已进入全屏视频播放，通常是点击视频meidaView后自动跳转至一个播放落地页
+/// Native ad entered full-screen video playback, usually auto-jumps to a playback landing page after clicking video mediaView
 /// - Parameters:
-///   - adView: 广告视图对象
-///   - placementID: 广告位ID
-///   - extra: 额外信息
+///   - adView: Ad view object
+///   - placementID: Placement ID
+///   - extra: Extra information
 - (void)didEnterFullScreenVideoInAdView:(ATNativeADView *)adView placementID:(NSString *)placementID extra:(NSDictionary *)extra{
     ATDemoLog(@"didEnterFullScreenVideoInAdView:%@", placementID);
     [self showLog:[NSString stringWithFormat:@"didEnterFullScreenVideoInAdView:%@", placementID]];
 }
 
-/// 原生广告已退出全屏视频播放
+/// Native ad exited full-screen video playback
 /// - Parameters:
-///   - adView: 广告视图对象
-///   - placementID: 广告位ID
-///   - extra: 额外信息
+///   - adView: Ad view object
+///   - placementID: Placement ID
+///   - extra: Extra information
 - (void)didExitFullScreenVideoInAdView:(ATNativeADView *)adView placementID:(NSString *)placementID extra:(NSDictionary *)extra {
     ATDemoLog(@"didExitFullScreenVideoInAdView:%@", placementID);
     [self showLog:[NSString stringWithFormat:@"didExitFullScreenVideoInAdView:%@", placementID]];
 }
  
-/// 原生广告已退出详情页面
+/// Native ad exited detail page
 /// - Parameters:
-///   - adView: 广告视图对象
-///   - placementID: 广告位ID
-///   - extra: 额外信息
+///   - adView: Ad view object
+///   - placementID: Placement ID
+///   - extra: Extra information
 - (void)didCloseDetailInAdView:(ATNativeADView *)adView placementID:(NSString *)placementID extra:(NSDictionary *)extra {
     ATDemoLog(@"didCloseDetailInAdView:%@ extra:%@", placementID, extra);
     [self showLog:[NSString stringWithFormat:@"didCloseDetailInAdView:%@", placementID]];
@@ -391,21 +391,21 @@
     [self.feedTableView.mj_footer beginRefreshing];
 }
 
-/// 加载更多
+/// Load more
 - (void)upFreshLoadMoreData {
     [self loadNativeAd];
 }
  
-/// 加载广告
+/// Load ad
 - (void)loadNativeAd {
     NSMutableDictionary * loadConfigDict = [NSMutableDictionary dictionary];
     
-    //设置请求广告的尺寸
+    // Set ad request size
     [loadConfigDict setValue:[NSValue valueWithCGSize:CGSizeMake(SelfRenderViewWidth, SelfRenderViewHeight)] forKey:kATExtraInfoNativeAdSizeKey];
-    //请求自适应尺寸的原生广告(部分广告平台可用)（可选接入）
+    // Request adaptive size native ad (available for some ad platforms) (optional integration)
     [AdLoadConfigTool native_loadExtraConfigAppend_SizeToFit:loadConfigDict];
     
-    //快手原生广告滑一滑和点击相关控制
+    // KuaiShou native ad swipe and click control
 //    [AdLoadConfigTool native_loadExtraConfigAppend_KuaiShou_SlideOrClickAble:loadConfigDict];
     
     [[ATAdManager sharedManager] loadADWithPlacementID:Feed_Native_SelfRender_PlacementID extra:loadConfigDict delegate:self];
@@ -419,12 +419,12 @@
         _feedTableView.dataSource = self;
         _feedTableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
         
-        //绑定cell
+        // Bind cells
         [_feedTableView registerNib:[UINib nibWithNibName:@"CustomCell" bundle:nil] forCellReuseIdentifier:@"CustomCell"];
         [_feedTableView registerClass:[AdCell class] forCellReuseIdentifier:@"AdCell"];
         
-        //给一个合理的高度预估值
-        _feedTableView.estimatedRowHeight = SelfRenderViewHeight; // 设置一个合理的预估值
+        // Set a reasonable estimated height
+        _feedTableView.estimatedRowHeight = SelfRenderViewHeight; // Set a reasonable estimated value
         _feedTableView.rowHeight = UITableViewAutomaticDimension;
     }
     return _feedTableView;

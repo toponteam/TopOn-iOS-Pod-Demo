@@ -10,46 +10,46 @@
  
 @implementation TestModeTool
 
-/// 在指定vc上展示Debug UI，建议直接使用系统的UIViewController，传入继承或者自定义的vc可能导致显示异常
-/// 需要 pod 'TPNDebugUISDK' 测试完毕请移除⚠️
-/// - Parameter vc: 目标vc
+/// Show Debug UI on specified vc, recommend using system UIViewController directly, passing inherited or custom vc may cause display issues
+/// Requires pod 'TPNDebugUISDK' please remove after testing⚠️
+/// - Parameter vc: Target vc
 + (void)showDebugUI:(UIViewController *)vc {
-    //引入头文件 #import <AnyThinkDebuggerUISDK/ATDebuggerAPI.h>
-    //请注意，showType支持ATShowDebugUIPresent和ATShowDebugUIPush，如果遇到push不出来的情况，请保证您的导航控制器没有多余的继承.
-    //唤起条件：
+    //Import header file #import <AnyThinkDebuggerUISDK/ATDebuggerAPI.h>
+    //Note: showType supports ATShowDebugUIPresent and ATShowDebugUIPush, if push fails, ensure your navigation controller has no extra inheritance.
+    //Trigger conditions:
     //window - rootNavigation - viewController -> push debugUI
-    //1.iOS SDK已经成功初始化
-    //2.还未加载(load)任一广告
-    //3.关闭调试模式，即移除 -[ATSDKGlobalSetting setDebuggerConfig:] 相关代码
-    [[ATDebuggerAPI sharedInstance] showDebuggerInViewController:vc showType:ATShowDebugUIPresent debugkey:@"填入您的DebugKey，DebugKey在后台->账号管理->Key中获取，DebugKey需要与AppID，AppKey对应"];
+    //1.iOS SDK has been successfully initialized
+    //2.No ads have been loaded yet
+    //3.Disable debug mode, remove -[ATSDKGlobalSetting setDebuggerConfig:] related code
+    [[ATDebuggerAPI sharedInstance] showDebuggerInViewController:vc showType:ATShowDebugUIPresent debugkey:@"Enter your DebugKey, get DebugKey from Backend->Account Management->Key, DebugKey must correspond to AppID and AppKey"];
 }
 
-/// 开启测试模式(每次只能指定一个广告平台，不一定100%填充广告)
-/// 关闭测试模式，只需要注释掉相关方法即可关闭
-/// 上线前请移除⚠️测试完毕请移除⚠️
+/// Enable test mode (can only specify one ad platform at a time, not guaranteed 100% ad fill)
+/// To disable test mode, simply comment out related methods
+/// Please remove before release⚠️Please remove after testing⚠️
 /// - Parameters:
-///   - type: 本次需要测试广告平台类型
-///   - currentIDFAStr: 当前测试机器的idfa，必须传入有效值
+///   - type: Ad platform type to test this time
+///   - currentIDFAStr: Current test device IDFA, must pass valid value
 + (void)enableTestModeWith3rdSDKType:(ATAdNetWorkType)type currentIDFAStr:(NSString *)currentIDFAStr {
 
     [[ATSDKGlobalSetting sharedManager] setDebuggerConfig:^(ATDebuggerConfig * _Nullable debuggerConfig) {
         debuggerConfig.deviceIdfaStr = currentIDFAStr;
-        //指定需要测试的广告平台名称类型
+        //Specify the ad platform name type to test
         debuggerConfig.netWorkType = ATAdNetWorkApplovinType;
         
-//        指定广告平台的某一种类型
-//        debuggerConfig.adx_nativeAdType = ATADXNativeAdTypeSelfRender;//原生自渲染
+//        Specify a certain type of ad platform
+//        debuggerConfig.adx_nativeAdType = ATADXNativeAdTypeSelfRender;//Native self-rendering
     }];
 }
 
-/// 开启竞价广告源的测试模式
-/// 测试完毕请移除⚠️
+/// Enable header bidding ad source test mode
+/// Please remove after testing⚠️
 /// - Parameters:
-///   - currentIDFAStr: 当前测试机器的idfa，必须传入有效值
+///   - currentIDFAStr: Current test device IDFA, must pass valid value
 + (void)enableHeaderBiddingTestModeWithCurrentIDFAStr:(NSString *)currentIDFAStr {
-    //必须开启日志
+    //Must enable logging
     [ATAPI setLogEnabled:YES];
-    //测试完毕请移除⚠️
+    //Please remove after testing⚠️
     [ATSDKGlobalSetting sharedManager].headerBiddingTestModeDeviceID = currentIDFAStr;
 }
 

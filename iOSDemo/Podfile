@@ -1,7 +1,7 @@
-#建议使用github源，pod install前请检查终端代理网络是否通畅，如遇失败可尝试使用pod install --repo-update命令
+# Recommend using GitHub source, check terminal proxy network before pod install, try pod install --repo-update if failed
 source 'https://github.com/CocoaPods/Specs.git'
 
-#需要根据具体选择的第三方广告平台SDK版本来确定最低支持的iOS版本
+# Minimum iOS version depends on selected third-party ad platform SDK versions
 platform :ios, '13.0'
 
 post_install do |installer|
@@ -20,26 +20,26 @@ target 'iOSDemo' do
   #TopOn SDK
   pod 'TPNiOS','6.4.87'
 
-  #DebugUI,调试时建议接入,上线后去掉
+  # DebugUI, recommended for debugging, remove before release
   pod 'TPNDebugUISDK'
   
-  #为了降低Demo首次pod安装时间，Demo并未完整列举所有Adapter适配器的安装，若您需要使用自己的AppID/AppKey进行测试，请替换您选用的Adapter适配器后，重新执行pod install --repo-update安装
+  # To reduce Demo's initial pod install time, not all Adapter installations are listed. If you need to test with your own AppID/AppKey, replace with your selected Adapters and run pod install --repo-update
   
-  #Demo所用适配器，若想使用更多广告平台，请前往SDK下载中心获取:https://portal.toponad.net/m/sdk/download?type=iOS
+  # Adapters used in Demo, for more ad platforms visit SDK download center: https://portal.toponad.net/m/sdk/download?type=iOS
   pod 'TPNAdmobSDKAdapter','6.4.87'
   pod 'TPNMintegralSDKAdapter','6.4.87'
   pod 'TPNYandexSDKAdapter','6.4.87'
   pod 'TPNVungleSDKAdapter','6.4.87.1'
   
-  #Admob Interactive-media-ads广告类型,iOS13+
+  # Admob Interactive-media-ads ad type, iOS13+
   pod 'TPNIMASDKAdapter','6.4.87'
  
-  #第三方数据统计SDK
+  # Third-party analytics SDKs
 #  pod 'AppsFlyerFramework'
 #  pod 'Adjust'
 #  pod 'FirebaseAnalytics'
  
- #Demo UI依赖的第三库
+ # Third-party libraries for Demo UI
   pod 'Masonry'
   pod 'SDWebImage'
   pod 'MJRefresh'
