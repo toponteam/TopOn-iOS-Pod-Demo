@@ -379,12 +379,12 @@
 				89E1FCE72D30A2D3005C19FA /* Splash */,
 				CADE55512D323D8A00E492CC /* Banner */,
 				CADE55502D323D2800E492CC /* Native */,
-				CA4FCF4C2D3BB8A100B602A3 /* MediaVideo(插播广告IMA) */,
+				CA4FCF4C2D3BB8A100B602A3 /* MediaVideo */,
 			);
 			path = Ad;
 			sourceTree = "<group>";
 		};
-		CA4CB4472DBA531E00D356EE /* Banner(横幅) */ = {
+		CA4CB4472DBA531E00D356EE /* Banner */ = {
 			isa = PBXGroup;
 			children = (
 				CA4CB4432DBA531E00D356EE /* CustomAdapterBannerAdapter.h */,
@@ -392,7 +392,7 @@
 				CA4CB4452DBA531E00D356EE /* CustomAdapterBannerCustomEvent.h */,
 				CA4CB4462DBA531E00D356EE /* CustomAdapterBannerCustomEvent.m */,
 			);
-			path = "Banner(横幅)";
+			path = Banner;
 			sourceTree = "<group>";
 		};
 		CA4CB44C2DBA531E00D356EE /* C2S */ = {
@@ -406,17 +406,17 @@
 			path = C2S;
 			sourceTree = "<group>";
 		};
-		CA4CB44F2DBA531E00D356EE /* Base(基础类&C2S) */ = {
+		CA4CB44F2DBA531E00D356EE /* Base(C2S) */ = {
 			isa = PBXGroup;
 			children = (
 				CA4CB44C2DBA531E00D356EE /* C2S */,
 				CA4CB44D2DBA531E00D356EE /* CustomAdapterBaseManager.h */,
 				CA4CB44E2DBA531E00D356EE /* CustomAdapterBaseManager.m */,
 			);
-			path = "Base(基础类&C2S)";
+			path = "Base(C2S)";
 			sourceTree = "<group>";
 		};
-		CA4CB4542DBA531E00D356EE /* Interstitial(插屏) */ = {
+		CA4CB4542DBA531E00D356EE /* Interstitial */ = {
 			isa = PBXGroup;
 			children = (
 				CA4CB4502DBA531E00D356EE /* CustomAdapterInterstitialAdapter.h */,
@@ -424,10 +424,10 @@
 				CA4CB4522DBA531E00D356EE /* CustomAdapterInterstitialCustomEvent.h */,
 				CA4CB4532DBA531E00D356EE /* CustomAdapterInterstitialCustomEvent.m */,
 			);
-			path = "Interstitial(插屏)";
+			path = Interstitial;
 			sourceTree = "<group>";
 		};
-		CA4CB45B2DBA531E00D356EE /* Native(原生) */ = {
+		CA4CB45B2DBA531E00D356EE /* Native */ = {
 			isa = PBXGroup;
 			children = (
 				CA4CB4552DBA531E00D356EE /* CustomAdapterNativeAdapter.h */,
@@ -437,10 +437,10 @@
 				CA4CB4592DBA531E00D356EE /* CustomAdapterNativeRenderer.h */,
 				CA4CB45A2DBA531E00D356EE /* CustomAdapterNativeRenderer.m */,
 			);
-			path = "Native(原生)";
+			path = Native;
 			sourceTree = "<group>";
 		};
-		CA4CB4602DBA531E00D356EE /* RewardVideo(激励视频) */ = {
+		CA4CB4602DBA531E00D356EE /* RewardVideo */ = {
 			isa = PBXGroup;
 			children = (
 				CA4CB45C2DBA531E00D356EE /* CustomAdapterRewardVideoAdapter.h */,
@@ -448,10 +448,10 @@
 				CA4CB45E2DBA531E00D356EE /* CustomAdapterRewardVideoCustomEvent.h */,
 				CA4CB45F2DBA531E00D356EE /* CustomAdapterRewardVideoCustomEvent.m */,
 			);
-			path = "RewardVideo(激励视频)";
+			path = RewardVideo;
 			sourceTree = "<group>";
 		};
-		CA4CB4652DBA531E00D356EE /* Splash(开屏) */ = {
+		CA4CB4652DBA531E00D356EE /* Splash */ = {
 			isa = PBXGroup;
 			children = (
 				CA4CB4612DBA531E00D356EE /* CustomAdapterSplashAdapter.h */,
@@ -459,10 +459,10 @@
 				CA4CB4632DBA531E00D356EE /* CustomAdapterSplashCustomEvent.h */,
 				CA4CB4642DBA531E00D356EE /* CustomAdapterSplashCustomEvent.m */,
 			);
-			path = "Splash(开屏)";
+			path = Splash;
 			sourceTree = "<group>";
 		};
-		CA4CB46E2DBA531E00D356EE /* Tools(工具类) */ = {
+		CA4CB46E2DBA531E00D356EE /* Tools */ = {
 			isa = PBXGroup;
 			children = (
 				CA4CB4662DBA531E00D356EE /* ATC2SBiddingNetworkC2STool_QM.h */,
@@ -474,7 +474,7 @@
 				CA4CB46C2DBA531E00D356EE /* ATSafeThreadDictionary_QM.h */,
 				CA4CB46D2DBA531E00D356EE /* ATSafeThreadDictionary_QM.m */,
 			);
-			path = "Tools(工具类)";
+			path = Tools;
 			sourceTree = "<group>";
 		};
 		CA4FCF472D3BAC5700B602A3 /* SDKGlobalConfig */ = {
@@ -499,22 +499,22 @@
 			path = "Tools&Manager";
 			sourceTree = "<group>";
 		};
-		CA4FCF4C2D3BB8A100B602A3 /* MediaVideo(插播广告IMA) */ = {
+		CA4FCF4C2D3BB8A100B602A3 /* MediaVideo */ = {
 			isa = PBXGroup;
 			children = (
 				CA4FCF532D3BBB1900B602A3 /* IMAVC.h */,
 				CA4FCF542D3BBB1900B602A3 /* IMAVC.m */,
 			);
-			path = "MediaVideo(插播广告IMA)";
+			path = MediaVideo;
 			sourceTree = "<group>";
 		};
-		CA4FCF502D3BB98700B602A3 /* SingleSelfRender(单个自渲染广告) */ = {
+		CA4FCF502D3BB98700B602A3 /* SingleSelfRender */ = {
 			isa = PBXGroup;
 			children = (
 				CADE55582D325E2200E492CC /* SelfRenderVC.h */,
 				CADE55592D325E2200E492CC /* SelfRenderVC.m */,
 			);
-			path = "SingleSelfRender(单个自渲染广告)";
+			path = SingleSelfRender;
 			sourceTree = "<group>";
 		};
 		CA4FCF512D3BB9A400B602A3 /* MenuVC */ = {
@@ -526,22 +526,22 @@
 			path = MenuVC;
 			sourceTree = "<group>";
 		};
-		CA4FCF522D3BB9D400B602A3 /* SingleExpress(单个模版广告) */ = {
+		CA4FCF522D3BB9D400B602A3 /* SingleExpress */ = {
 			isa = PBXGroup;
 			children = (
 				CA4FCF492D3BAE0200B602A3 /* ExpressVC.h */,
 				CA4FCF4A2D3BAE0200B602A3 /* ExpressVC.m */,
 			);
-			path = "SingleExpress(单个模版广告)";
+			path = SingleExpress;
 			sourceTree = "<group>";
 		};
-		CA5AF6142D575F9500D48D26 /* Feed信息流(Template模版渲染) */ = {
+		CA5AF6142D575F9500D48D26 /* Feed(Template) */ = {
 			isa = PBXGroup;
 			children = (
 				CA5AF6172D57601500D48D26 /* FeedTemplateVC.h */,
 				CA5AF6182D57601500D48D26 /* FeedTemplateVC.m */,
 			);
-			path = "Feed信息流(Template模版渲染)";
+			path = "Feed(Template)";
 			sourceTree = "<group>";
 		};
 		CA5AF6162D575FDF00D48D26 /* Resource */ = {
@@ -554,13 +554,13 @@
 			path = Resource;
 			sourceTree = "<group>";
 		};
-		CA643BE32D3F6AFF006D9512 /* Feed信息流(Self Render自渲染) */ = {
+		CA643BE32D3F6AFF006D9512 /* Feed(SelfRender) */ = {
 			isa = PBXGroup;
 			children = (
 				CA643BE42D3F6E01006D9512 /* FeedSelfRenderVC.h */,
 				CA643BE52D3F6E01006D9512 /* FeedSelfRenderVC.m */,
 			);
-			path = "Feed信息流(Self Render自渲染)";
+			path = "Feed(SelfRender)";
 			sourceTree = "<group>";
 		};
 		CA73FE2D2E28E54B006CBBE6 /* sub */ = {
@@ -576,11 +576,11 @@
 			path = sub;
 			sourceTree = "<group>";
 		};
-		CABDE17D2DDC45E9009991E0 /* 仅示例,不参与demo编译 */ = {
+		CABDE17D2DDC45E9009991E0 /* Does not participate in compilation.   */ = {
 			isa = PBXGroup;
 			children = (
 			);
-			path = "仅示例,不参与demo编译";
+			path = "Does not participate in compilation.  ";
 			sourceTree = "<group>";
 		};
 		CACC65CD2D93C27D00958DAE /* UploadAdInfo */ = {
@@ -606,11 +606,11 @@
 			children = (
 				CA5AF6162D575FDF00D48D26 /* Resource */,
 				CADE55632D326A2E00E492CC /* AdDisplayVC */,
-				CADE555F2D32640700E492CC /* SelfRenderView(自渲染视图) */,
-				CA4FCF502D3BB98700B602A3 /* SingleSelfRender(单个自渲染广告) */,
-				CA4FCF522D3BB9D400B602A3 /* SingleExpress(单个模版广告) */,
-				CA643BE32D3F6AFF006D9512 /* Feed信息流(Self Render自渲染) */,
-				CA5AF6142D575F9500D48D26 /* Feed信息流(Template模版渲染) */,
+				CADE555F2D32640700E492CC /* SelfRenderView */,
+				CA4FCF502D3BB98700B602A3 /* SingleSelfRender */,
+				CA4FCF522D3BB9D400B602A3 /* SingleExpress */,
+				CA643BE32D3F6AFF006D9512 /* Feed(SelfRender) */,
+				CA5AF6142D575F9500D48D26 /* Feed(Template) */,
 			);
 			path = Native;
 			sourceTree = "<group>";
@@ -633,13 +633,13 @@
 			path = Tools;
 			sourceTree = "<group>";
 		};
-		CADE555F2D32640700E492CC /* SelfRenderView(自渲染视图) */ = {
+		CADE555F2D32640700E492CC /* SelfRenderView */ = {
 			isa = PBXGroup;
 			children = (
 				CADE55602D32641600E492CC /* SelfRenderView.h */,
 				CADE55612D32641600E492CC /* SelfRenderView.m */,
 			);
-			path = "SelfRenderView(自渲染视图)";
+			path = SelfRenderView;
 			sourceTree = "<group>";
 		};
 		CADE55632D326A2E00E492CC /* AdDisplayVC */ = {
@@ -654,14 +654,14 @@
 		CAF3EB892DB74D84009BE9F2 /* CustomAdapter */ = {
 			isa = PBXGroup;
 			children = (
-				CABDE17D2DDC45E9009991E0 /* 仅示例,不参与demo编译 */,
-				CA4CB4472DBA531E00D356EE /* Banner(横幅) */,
-				CA4CB44F2DBA531E00D356EE /* Base(基础类&C2S) */,
-				CA4CB4542DBA531E00D356EE /* Interstitial(插屏) */,
-				CA4CB45B2DBA531E00D356EE /* Native(原生) */,
-				CA4CB4602DBA531E00D356EE /* RewardVideo(激励视频) */,
-				CA4CB4652DBA531E00D356EE /* Splash(开屏) */,
-				CA4CB46E2DBA531E00D356EE /* Tools(工具类) */,
+				CABDE17D2DDC45E9009991E0 /* Does not participate in compilation.   */,
+				CA4CB4472DBA531E00D356EE /* Banner */,
+				CA4CB44F2DBA531E00D356EE /* Base(C2S) */,
+				CA4CB4542DBA531E00D356EE /* Interstitial */,
+				CA4CB45B2DBA531E00D356EE /* Native */,
+				CA4CB4602DBA531E00D356EE /* RewardVideo */,
+				CA4CB4652DBA531E00D356EE /* Splash */,
+				CA4CB46E2DBA531E00D356EE /* Tools */,
 			);
 			path = CustomAdapter;
 			sourceTree = "<group>";
