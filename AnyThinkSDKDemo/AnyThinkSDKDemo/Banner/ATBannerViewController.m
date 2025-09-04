@@ -55,30 +55,10 @@
 
 - (NSDictionary<NSString *,NSString *> *)placementIDs {
     return @{
-        @"ADX":               @"b62b4192930123",
-        @"All":               @"b62b420af2495a",
-        @"Applovin":          @"b62b420ae88f2d",
-        @"AdMob":             @"b62b420ae05bb4",
-        @"CSJ":               @"b62b420ad701a7",
-        @"Facebook":          @"b62b41f04bf88e",
-        @"Inmobi":            @"b62b41f0477eeb",
-        @"Baidu":             @"b62b41ef2d8032",
-        @"Unity Ads":         @"b62b41eeed7c11",
-        @"Nend":              @"b62b41c939ccd6",
-        @"HeaderBidding":     @"b62b41c8e4b841",
-        @"Mintegral":         @"b62b41c866b80b",
-        @"Fyber":             @"b62b41c7e08ddc",
-        @"Start.io":          @"b62b41c7d0076f",
-        @"Chartboost":        @"b62b41c79c29a0",
-        @"Vungle":            @"b62b41c799f611",
-        @"Adcolony":          @"b62b41c7913cee",
-        @"Cross Promotion":   @"b62b4192bc2351",
-        @"Kidoz":             @"b62b41920adccf",
-        @"Pangle":            @"b62b41522d24a3",
-        @"MyTarget":          @"b62b4191d37ee7",
-        @"GDT":               @"b62ea19b2d10b7",
-        @"Yandex":            @"b62ea19cb6e482",
-        @"Bigo":                @"b63909d6ca2269",
+        @"All":               @"b5bacaccb61c29",
+        @"Gromore":           @"b601cac8974c40",
+        @"Gromore_C2S":       @"b66cc5d3df1d78",
+        @"ADX":               @"b5fa24ff8a7446",
     };
 }
 

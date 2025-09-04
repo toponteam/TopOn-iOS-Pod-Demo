@@ -41,15 +41,7 @@
 
 - (NSDictionary<NSString *,NSString *> *)placementIDs {
     return @{
-        @"All":                       @"b62e797b5727c0",
-        @"Facebook(NativeBanner)":    @"b62b41c7781130",
-        @"Mintegral(Template)":       @"b62b41c7a6ecd5",
-        @"GDT(Template)":             @"b62b420b01bcd6",
-        @"CSJ(Template)":             @"b62ea1cad196bd",
-        @"Baidu(Template)":           @"b62ea1d100d9ba",
-        @"Kuaishou(Template)":        @"b62ea1d6c5b92f",
-        @"Klevin(Template)":          @"b62ea1e3f2a62b",
-        @"MyTarget(Template)":        @"b62ea1e8da3189",
+        @"Gromore":                   @"b632061087d06e",
     };
 }
 

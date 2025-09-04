@@ -52,26 +52,10 @@
 
 - (NSDictionary<NSString *,NSString *> *)placementIDs_native {
     return @{
-        @"ADX模板":                   @"b6329582f88dcb",
-        @"ADX自渲染":                   @"b62b41927c34b6",
-        @"All":                       @"b62b420bc116db",
-        @"Facebook":                  @"b62b420c00ebc4",
-        @"AdMob":                     @"b62b420bf038e3",
-        @"Inmobi":                    @"b62b420be79b6d",
-        @"Mintegral":                 @"b62b420bd30120",
-        @"GDT":                       @"b62b420b041609",
-        @"CSJ":                       @"b62b41eed70150",
-        @"Header Bidding":            @"b62b41c9114d7d",
-        @"Baidu":                     @"b62b41c8e14151",
-        @"Kuaishou":                  @"b62b41c8340233",
-        @"Cross Promotion":           @"b62b4192c5b5bb",
-        @"Pangle":                    @"b62b41524379fe",
-        @"Sigmob":                    @"b62b4151a7b236",
-        @"Klevin":                    @"b62b415198f735",
-        @"MyTarget":                  @"b62b4125af318d",
-        @"Vungle":                    @"b62b41257a99ad",
-        @"Nend":                      @"b62ea207862e3c",
-        @"Bigo":                @"b63909d9a254cd",
+        @"All":                       @"b5b0f5663c6e4a",
+        @"Gromore":                   @"b601cac6b99ead",
+        @"ADX":                       @"b5fa25023d0767",
+        @"KS":                        @"b5e4613e50cbf2",
     };
 }
 
