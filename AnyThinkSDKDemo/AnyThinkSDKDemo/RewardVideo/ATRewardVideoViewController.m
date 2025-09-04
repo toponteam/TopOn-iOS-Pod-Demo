@@ -8,6 +8,7 @@
 #import "ATRewardVideoViewController.h"
 #import <AnyThinkRewardedVideo/AnyThinkRewardedVideo.h>
 #import "ATModelButton.h"
+#import "SDWebImage/SDWebImage.h"
 
 @interface ATRewardVideoViewController () <ATRewardedVideoDelegate>
 @property (nonatomic, strong) ATModelButton *modelButton;
@@ -198,11 +199,20 @@
     
     if (self.isAuto) { //Auto loading mode
         if ([[ATRewardedVideoAutoAdManager sharedInstance] autoLoadRewardedVideoReadyForPlacementID:self.placementID]) {
+            
             [[ATRewardedVideoAutoAdManager sharedInstance] showAutoLoadRewardedVideoWithPlacementID:self.placementID scene:KTopOnRewardedVideoSceneID inViewController:self delegate:self];
         }
     }else { //Manual loading mode
         if ([[ATAdManager sharedManager] rewardedVideoReadyForPlacementID:self.placementID]) {
-            [[ATAdManager sharedManager] showRewardedVideoWithPlacementID:self.placementID scene:KTopOnRewardedVideoSceneID inViewController:self delegate:self];
+            
+            __weak __typeof(self)weakSelf = self;
+            ATShowConfig *config = [[ATShowConfig alloc] initWithScene:KTopOnRewardedVideoSceneID showCustomExt:@"testShowCustomExt"];
+
+            [[ATAdManager sharedManager] showRewardedVideoWithPlacementID:self.placementID config:config inViewController:self delegate:self nativeMixViewBlock:^(ATSelfRenderingMixRewardedVideoView * _Nonnull selfRenderingMixRewardedVideoView) {
+                [weakSelf renderSelfWith:selfRenderingMixRewardedVideoView];
+            }];
+            
+//            [[ATAdManager sharedManager] showRewardedVideoWithPlacementID:self.placementID scene:KTopOnRewardedVideoSceneID inViewController:self delegate:self];
         } else {
 //            reload Ads
 //            [self loadAd];
@@ -210,7 +220,102 @@
     }
 }
 
+- (void)renderSelfWith:(ATSelfRenderingMixRewardedVideoView *)selfRenderingMixInterstitialView {
+    // 三方自定义渲染插屏
+    
+    CGRect rect = selfRenderingMixInterstitialView.frame;
+    
+    UIImageView *bigImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, rect.size.width, rect.size.height)];
+    [bigImage setContentMode:UIViewContentModeScaleAspectFit];
+    [bigImage sd_setImageWithURL:[NSURL URLWithString:selfRenderingMixInterstitialView.mainImageURLString]];
+    [selfRenderingMixInterstitialView addSubview:bigImage];
+    
+    UIView *mediaView = [selfRenderingMixInterstitialView networkMediaView];
+    if (mediaView) {
+        mediaView.frame = CGRectMake(0, 0, rect.size.width, rect.size.height);
+        [selfRenderingMixInterstitialView addSubview:mediaView];
+    }
+    
+    UIView *optionView = [selfRenderingMixInterstitialView networkOptionsView];
+    if (optionView) {
+        optionView.frame = CGRectMake(0, rect.size.height - 30, 25, 25);
+        [selfRenderingMixInterstitialView addSubview:optionView];
+    }
+    
+    UIImageView *iconImage = [[UIImageView alloc] initWithFrame:CGRectMake(20, rect.size.height - 200, 80, 80)];
+    [iconImage setContentMode:UIViewContentModeScaleAspectFit];
+    [iconImage sd_setImageWithURL:[NSURL URLWithString:selfRenderingMixInterstitialView.iconImageURLString]];
+    [selfRenderingMixInterstitialView addSubview:iconImage];
+    iconImage.layer.masksToBounds = YES;
+    iconImage.layer.cornerRadius = 8;
+    
+    UILabel *label = [[UILabel alloc] init];
+    label.text = selfRenderingMixInterstitialView.titleString;
+    label.textColor = [UIColor whiteColor];
+    label.frame = CGRectMake(120, rect.size.height - 190, 200, 30);
+    [selfRenderingMixInterstitialView addSubview:label];
+    
+    UILabel *label2 = [[UILabel alloc] init];
+    label2.text = selfRenderingMixInterstitialView.textString;
+    label2.textColor = [UIColor whiteColor];
+    label2.frame = CGRectMake(120, rect.size.height - 160, 200, 30);
+    [selfRenderingMixInterstitialView addSubview:label2];
+    
+    UILabel *domainLabel = [[UILabel alloc] init];
+    domainLabel.text = selfRenderingMixInterstitialView.domainString;
+    domainLabel.textColor = [UIColor whiteColor];
+    domainLabel.frame = CGRectMake(0, rect.size.height - 50, 200, 10);
+    [selfRenderingMixInterstitialView addSubview:domainLabel];
+    
+    UILabel *sponsoredLabel = [[UILabel alloc] init];
+    sponsoredLabel.text = selfRenderingMixInterstitialView.sponsorString;
+    sponsoredLabel.textColor = [UIColor whiteColor];
+    sponsoredLabel.frame = CGRectMake(120, rect.size.height - 30, 200, 30);
+    [selfRenderingMixInterstitialView addSubview:sponsoredLabel];
+    
+    UILabel *label3 = [[UILabel alloc] init];
+    label3.text = selfRenderingMixInterstitialView.ctaString;
+    label3.textColor = [UIColor whiteColor];
+    label3.frame = CGRectMake(120, rect.size.height - 90, 200, 40);
+    [selfRenderingMixInterstitialView addSubview:label3];
+    label3.layer.masksToBounds = YES;
+    label3.layer.cornerRadius = 20;
+    label3.backgroundColor = [UIColor blueColor];
+    label3.textAlignment = NSTextAlignmentCenter;
+    
+    NSLog(@"开发者自渲染:domainString:%@---sponsorString:%@",selfRenderingMixInterstitialView.domainString,selfRenderingMixInterstitialView.sponsorString);
+    
+    ATSelfRenderingMixRewardedVideoModel *mixInterstitialModel = [ATSelfRenderingMixRewardedVideoModel loadMixRewardedVideoModel:^(ATSelfRenderingMixRewardedVideoModel * _Nonnull mixInterstitialModel) {
+        mixInterstitialModel.titleLabel = label;
+        mixInterstitialModel.textLabel = label2;
+        mixInterstitialModel.ctaView = label3;
+        mixInterstitialModel.iconImageView = iconImage;
+        mixInterstitialModel.domainLabel = domainLabel;
+        mixInterstitialModel.advertiserLabel = sponsoredLabel;
+        mixInterstitialModel.mainImageView = bigImage;
 
+    }];
+    
+    [selfRenderingMixInterstitialView bindViewRelation:mixInterstitialModel];
+    // 注册事件按钮
+    if (mediaView) {
+        [selfRenderingMixInterstitialView registerClickableViewArray:@[label,bigImage,mediaView,label2,label3,iconImage]];
+    } else {
+        [selfRenderingMixInterstitialView registerClickableViewArray:@[label,bigImage,label2,label3,iconImage]];
+    }
+    
+    //    float w = 80;
+    //    UIButton *closeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    //    closeBtn.frame = CGRectMake(rect.size.width-w, 60, w, 30);
+    //    closeBtn.titleLabel.textColor = [UIColor whiteColor];
+    //    [closeBtn setTitle:@"关闭" forState:UIControlStateNormal];
+    //    [selfRenderingMixInterstitialView addSubview:closeBtn];
+    // 注册关闭按钮  如果没有注册，会使用topon默认的关闭按钮
+    //    [selfRenderingMixInterstitialView registerClose:closeBtn];
+    
+    // 可获取三方自定义参数
+    NSLog(@"三方自定义参数： %@",[selfRenderingMixInterstitialView getExtra]);
+}
 
 - (void)showLog:(NSString *)logStr {
     dispatch_async(dispatch_get_main_queue(), ^{

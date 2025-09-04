@@ -540,8 +540,8 @@
 				9BBD009024863048009EAD66 /* Sources */,
 				9BBD009124863048009EAD66 /* Frameworks */,
 				9BBD009224863048009EAD66 /* Resources */,
-				888D1066486B9D7EFE435BB6 /* [CP] Copy Pods Resources */,
 				41E6915A245E31FDF7C92658 /* [CP] Embed Pods Frameworks */,
+				D2EBC4670B3CEE9840D5296A /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -620,7 +620,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-AnyThinkSDKDemo/Pods-AnyThinkSDKDemo-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		888D1066486B9D7EFE435BB6 /* [CP] Copy Pods Resources */ = {
+		D2EBC4670B3CEE9840D5296A /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
