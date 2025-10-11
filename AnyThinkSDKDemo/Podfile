@@ -65,6 +65,7 @@ target 'AnyThinkSDKDemo' do
   pod 'LocalThirdPartySDK/unityads', :path=> 'ThirdPartySDK/'
   pod 'LocalThirdPartySDK/vungle', :path=> 'ThirdPartySDK/'
   pod 'LocalThirdPartySDK/tapjoy', :path=> 'ThirdPartySDK/'
+  pod 'LocalThirdPartySDK/zy', :path=> 'ThirdPartySDK/'
   
   
 #  pod 'LocalThirdPartySDK/tt', :path=> 'ThirdPartySDK/'

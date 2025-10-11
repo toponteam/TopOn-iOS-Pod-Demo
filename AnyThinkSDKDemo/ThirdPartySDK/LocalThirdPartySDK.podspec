@@ -247,4 +247,10 @@ Pod::Spec.new do |s|
     ss.vendored_frameworks = 'yandex/*.xcframework'
   end
   
+  s.subspec 'zy' do |ss|
+    ss.ios.deployment_target = '10.0'
+    ss.vendored_frameworks = 'zy/*.xcframework','zy/OctopusSDK/*.xcframework'
+    ss.resource = 'zy/OctopusSDK/Assets/*.bundle'
+  end
+  
 end
