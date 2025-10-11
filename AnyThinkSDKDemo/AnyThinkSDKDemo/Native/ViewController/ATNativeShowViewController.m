@@ -6,7 +6,7 @@
 //
 
 #import "ATNativeShowViewController.h"
-#import <AnyThinkNative/ATNativeADView.h>
+#import <AnyThinkSDK/AnyThinkSDK.h>
 #import "ATNativeRenderView.h"
 
 @interface ATNativeShowViewController () <ATAdLoadingDelegate, ATNativeADDelegate>

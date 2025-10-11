@@ -13,7 +13,7 @@
 #import "ATDemoOfferAdMode.h"
 #import "MJRefresh.h"
 
-@import AnyThinkNative;
+#import <AnyThinkSDK/AnyThinkSDK.h>
 
 @interface ATNativeListViewController ()<UITableViewDelegate,UITableViewDataSource,ATNativeADDelegate>
 

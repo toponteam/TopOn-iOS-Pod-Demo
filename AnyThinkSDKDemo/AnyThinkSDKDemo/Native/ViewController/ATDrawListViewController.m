@@ -7,7 +7,7 @@
 //
 
 #import "ATDrawListViewController.h"
-#import <AnyThinkNative/AnyThinkNative.h>
+#import <AnyThinkSDK/AnyThinkSDK.h>
 #import "ATDrawListAdCell.h"
 #import "ATDrawListOtherCell.h"
 #import "ATNativeSelfRenderView.h"

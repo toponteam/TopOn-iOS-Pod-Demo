@@ -69,8 +69,8 @@ target 'AnyThinkSDKDemo' do
   
   
 #  pod 'LocalThirdPartySDK/tt', :path=> 'ThirdPartySDK/'
-  pod 'LocalThirdPartySDK/tt_mix', :path=> 'ThirdPartySDK/'
-  pod 'LocalThirdPartySDK/gromore', :path=> 'ThirdPartySDK/'
+#  pod 'LocalThirdPartySDK/tt_mix', :path=> 'ThirdPartySDK/'
+#  pod 'LocalThirdPartySDK/gromore', :path=> 'ThirdPartySDK/'
   
   
     

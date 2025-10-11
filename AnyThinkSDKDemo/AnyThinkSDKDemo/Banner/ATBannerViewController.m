@@ -7,7 +7,7 @@
 //
 
 #import "ATBannerViewController.h"
-#import <AnyThinkBanner/AnyThinkBanner.h>
+#import <AnyThinkSDK/AnyThinkSDK.h>
 
 #import "ATADFootView.h"
 #import "ATModelButton.h"

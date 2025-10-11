@@ -7,7 +7,7 @@
 //
 
 #import "ATSplashViewController.h"
-#import <AnyThinkSplash/AnyThinkSplash.h>
+#import <AnyThinkSDK/AnyThinkSDK.h>
 #import "ATADFootView.h"
 #import "ATModelButton.h"
 #import "ATMenuView.h"

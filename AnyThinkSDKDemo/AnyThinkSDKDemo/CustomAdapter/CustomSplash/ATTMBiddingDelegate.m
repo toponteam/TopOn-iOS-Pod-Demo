@@ -11,7 +11,7 @@
 
 #import <TianmuSDK/TianmuSDK.h>
 #import <TianmuSDK/TianmuSplashAd.h>
-#import <AnyThinkSplash/AnyThinkSplash.h>
+#import <AnyThinkSDK/AnyThinkSDK.h>
 
 @interface ATTMBiddingDelegate () <TianmuSplashAdDelegate>
 

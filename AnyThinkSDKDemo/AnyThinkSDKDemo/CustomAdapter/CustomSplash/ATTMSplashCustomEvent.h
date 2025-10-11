@@ -6,7 +6,7 @@
 //  Copyright © 2022 juanvision. All rights reserved.
 //
 
-#import <AnyThinkSplash/AnyThinkSplash.h>
+#import <AnyThinkSDK/AnyThinkSDK.h>
 #import <TianmuSDK/TianmuSDK.h>
 #import <TianmuSDK/TianmuSplashAd.h>
 #import <AnyThinkSDK/ATBidInfoCacheManager.h>

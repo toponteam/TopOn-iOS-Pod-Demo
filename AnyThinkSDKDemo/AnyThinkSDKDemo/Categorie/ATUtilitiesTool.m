@@ -33,7 +33,7 @@
     [extraDic ATDemo_setDictValue:nativeAdOffer.nativeAd.source key:@"source"];
     [extraDic ATDemo_setDictValue:nativeAdOffer.nativeAd.rating key:@"rating"];
     [extraDic ATDemo_setDictValue:@(nativeAdOffer.nativeAd.commentNum) key:@"commentNum"];
-    [extraDic ATDemo_setDictValue:@(nativeAdOffer.nativeAd.appSize) key:@"appSize"];
+    [extraDic ATDemo_setDictValue:nativeAdOffer.nativeAd.appSize key:@"appSize"];
     [extraDic ATDemo_setDictValue:nativeAdOffer.nativeAd.appPrice key:@"appPrice"];
     [extraDic ATDemo_setDictValue:@(nativeAdOffer.nativeAd.isExpressAd) key:@"isExpressAd"];
     [extraDic ATDemo_setDictValue:@(nativeAdOffer.nativeAd.isVideoContents) key:@"isVideoContents"];

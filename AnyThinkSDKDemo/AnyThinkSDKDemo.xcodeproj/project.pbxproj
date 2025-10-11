@@ -56,7 +56,6 @@
 		AC498DC125EE35F700955C17 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC498DC025EE35F700955C17 /* CoreTelephony.framework */; };
 		AC498DC325EE35FD00955C17 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC498DC225EE35FD00955C17 /* MobileCoreServices.framework */; };
 		AC498DC525EE360300955C17 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC498DC425EE360300955C17 /* SafariServices.framework */; };
-		AC498DC725EE360800955C17 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC498DC625EE360800955C17 /* StoreKit.framework */; };
 		AC498DC925EE360D00955C17 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC498DC825EE360D00955C17 /* SystemConfiguration.framework */; };
 		AC498DCB25EE361200955C17 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC498DCA25EE361200955C17 /* WebKit.framework */; };
 		AC498DCD25EE361D00955C17 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = AC498DCC25EE361800955C17 /* libsqlite3.tbd */; };
@@ -170,7 +169,6 @@
 		AC498DC025EE35F700955C17 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		AC498DC225EE35FD00955C17 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		AC498DC425EE360300955C17 /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
-		AC498DC625EE360800955C17 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		AC498DC825EE360D00955C17 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		AC498DCA25EE361200955C17 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		AC498DCC25EE361800955C17 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
@@ -199,7 +197,6 @@
 				AC498DC925EE360D00955C17 /* SystemConfiguration.framework in Frameworks */,
 				AC498DC125EE35F700955C17 /* CoreTelephony.framework in Frameworks */,
 				AC498DBB25EE35E500955C17 /* CoreLocation.framework in Frameworks */,
-				AC498DC725EE360800955C17 /* StoreKit.framework in Frameworks */,
 				AC498DC525EE360300955C17 /* SafariServices.framework in Frameworks */,
 				AC498DCB25EE361200955C17 /* WebKit.framework in Frameworks */,
 				AC498DB925EE35DE00955C17 /* AdSupport.framework in Frameworks */,
@@ -260,7 +257,6 @@
 				AC498DCC25EE361800955C17 /* libsqlite3.tbd */,
 				AC498DCA25EE361200955C17 /* WebKit.framework */,
 				AC498DC825EE360D00955C17 /* SystemConfiguration.framework */,
-				AC498DC625EE360800955C17 /* StoreKit.framework */,
 				AC498DC425EE360300955C17 /* SafariServices.framework */,
 				AC498DC225EE35FD00955C17 /* MobileCoreServices.framework */,
 				AC498DC025EE35F700955C17 /* CoreTelephony.framework */,
@@ -541,7 +537,7 @@
 				9BBD009124863048009EAD66 /* Frameworks */,
 				9BBD009224863048009EAD66 /* Resources */,
 				41E6915A245E31FDF7C92658 /* [CP] Embed Pods Frameworks */,
-				D2EBC4670B3CEE9840D5296A /* [CP] Copy Pods Resources */,
+				52F3E0D1277741D69106BF72 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -620,7 +616,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-AnyThinkSDKDemo/Pods-AnyThinkSDKDemo-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		D2EBC4670B3CEE9840D5296A /* [CP] Copy Pods Resources */ = {
+		52F3E0D1277741D69106BF72 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (

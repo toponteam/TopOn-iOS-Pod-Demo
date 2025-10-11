@@ -144,9 +144,6 @@
             NSLog(@"getArea:%@",error.domain);
     }];
     
-    ATBaiduTemplateRenderingAttribute *temp = [[ATBaiduTemplateRenderingAttribute alloc]init];
-    temp.iconWidth = @"22";
-    [[ATAdManager sharedManager] setBaiduTemplateRenderingAttribute: temp];
         
     // 设置系统平台信息，默认设置IOS=1
 //    ATSystemPlatformTypeIOS = 1,

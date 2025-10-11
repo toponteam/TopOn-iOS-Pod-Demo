@@ -5,7 +5,7 @@
 //  Created by Jason on 2021/10/29.
 //
 
-#import <AnyThinkNative/AnyThinkNative.h>
+#import <AnyThinkSDK/AnyThinkSDK.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

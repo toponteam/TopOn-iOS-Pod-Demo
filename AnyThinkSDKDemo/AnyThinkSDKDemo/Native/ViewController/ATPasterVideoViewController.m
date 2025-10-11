@@ -8,7 +8,7 @@
 
 #import "ATPasterVideoViewController.h"
 #import <AVFoundation/AVFoundation.h>
-#import <AnyThinkNative/AnyThinkNative.h>
+#import <AnyThinkSDK/AnyThinkSDK.h>
 #import "ATPasterSelfRenderView.h"
 #import "ATUtilitiesTool.h"
 

@@ -8,8 +8,7 @@
 
 #import "ATMediaVideoViewController.h"
 #import "ATModelButton.h"
-#import <AnyThinkMediaVideo/ATMediaVideoDelegate.h>
-#import <AnyThinkMediaVideo/ATAdManager+ATMediaVideo.h>
+#import <AnyThinkSDK/AnyThinkSDK.h>
 #import <GoogleInteractiveMediaAds/GoogleInteractiveMediaAds.h>
 
 // The content URL to play.

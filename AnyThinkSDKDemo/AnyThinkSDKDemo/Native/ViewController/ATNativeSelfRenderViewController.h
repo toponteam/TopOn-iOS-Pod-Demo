@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <AnyThinkSDK/AnyThinkSDK.h>
-#import <AnyThinkNative/AnyThinkNative.h>
+#import <AnyThinkSDK/AnyThinkSDK.h>
 
 @interface ATNativeSelfRenderViewController : UIViewController
 
