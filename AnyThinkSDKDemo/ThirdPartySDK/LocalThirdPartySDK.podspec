@@ -253,4 +253,9 @@ Pod::Spec.new do |s|
     ss.resource = 'zy/OctopusSDK/Assets/*.bundle'
   end
   
+  s.subspec 'beizi' do |ss|
+    ss.ios.deployment_target = '10.0'
+    ss.vendored_frameworks = 'beizi/*.xcframework'
+  end
+  
 end
