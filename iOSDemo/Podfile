@@ -18,7 +18,7 @@ target 'iOSDemo' do
   use_frameworks!
   
   #TopOn SDK
-  pod 'TPNiOS','6.4.87'
+  pod 'TPNiOS','6.4.93'
 
   # DebugUI, recommended for debugging, remove before release
   pod 'TPNDebugUISDK'
@@ -26,13 +26,13 @@ target 'iOSDemo' do
   # To reduce Demo's initial pod install time, not all Adapter installations are listed. If you need to test with your own AppID/AppKey, replace with your selected Adapters and run pod install --repo-update
   
   # Adapters used in Demo, for more ad platforms visit SDK download center: https://portal.toponad.net/m/sdk/download?type=iOS
-  pod 'TPNAdmobSDKAdapter','6.4.87'
-  pod 'TPNMintegralSDKAdapter','6.4.87'
-  pod 'TPNYandexSDKAdapter','6.4.87'
-  pod 'TPNVungleSDKAdapter','6.4.87.1'
-  
+  pod 'TPNVungleSDKAdapter','6.4.93'
+  pod 'TPNAdmobSDKAdapter','6.4.93.1'
+  pod 'TPNMintegralSDKAdapter','6.4.93'
+  pod 'TPNYandexSDKAdapter','6.4.93'
+ 
   # Admob Interactive-media-ads ad type, iOS13+
-  pod 'TPNIMASDKAdapter','6.4.87'
+  pod 'TPNIMASDKAdapter','6.4.93'
  
   # Third-party analytics SDKs
 #  pod 'AppsFlyerFramework'
