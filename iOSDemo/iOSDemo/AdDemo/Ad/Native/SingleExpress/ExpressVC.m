@@ -52,6 +52,9 @@
     // Request template ad with specified size, ad platform will match this size to return ad, not necessarily exact match, depends on template type selected in ad platform backend
     [loadConfigDict setValue:[NSValue valueWithCGSize:CGSizeMake(ExpressAdWidth, ExpressAdHeight)] forKey:kATExtraInfoNativeAdSizeKey];
     
+    // Adaptive height，Only CSJ，JD，KuaiShou supported
+    // [loadConfigDict setValue:@YES forKey:kATNativeAdSizeToFitKey];
+    
     [[ATAdManager sharedManager] loadADWithPlacementID:Native_Express_PlacementID extra:loadConfigDict delegate:self];
 }
  
@@ -94,32 +97,23 @@
     // Create ad nativeADView
     ATNativeADView *nativeADView = [[ATNativeADView alloc] initWithConfiguration:config currentOffer:offer placementID:Native_Express_PlacementID];
  
-    // Print information for debugging
-    //[self printNativeAdInfoAfterRendererWithOffer:offer nativeADView:nativeADView];
-    
     // Render ad
     [offer rendererWithConfiguration:config selfRenderView:nil nativeADView:nativeADView];
  
     // Reference
     self.adView = nativeADView;
     
+    //If turn on kATNativeAdSizeToFitKey to YES ,plz use offer.nativeAd.nativeExpressAdViewWidth,offer.nativeAd.nativeExpressAdViewHeight first.
+//    ATDemoLog(@"🔥--Ad network return size：%lf，%lf，You request size：%f,%f",offer.nativeAd.nativeExpressAdViewWidth,offer.nativeAd.nativeExpressAdViewHeight,ExpressAdWidth,ExpressAdHeight);
+    
+    BOOL isVideoContents = [nativeADView isVideoContents];
+    ATDemoLog(@"🔥--Is Native Video Ad? ：%d",isVideoContents);
+    
     // Show ad
     AdDisplayVC *showVc = [[AdDisplayVC alloc] initWithAdView:nativeADView offer:offer adViewSize:CGSizeMake(ExpressAdWidth, ExpressAdHeight)];
     [self.navigationController pushViewController:showVc animated:YES];
 }
  
-- (void)printNativeAdInfoAfterRendererWithOffer:(ATNativeAdOffer *)offer nativeADView:(ATNativeADView *)nativeADView {
-    ATNativeAdRenderType nativeAdRenderType = [nativeADView getCurrentNativeAdRenderType];
-    if (nativeAdRenderType == ATNativeAdRenderExpress) {
-        ATDemoLog(@"✅✅✅--Template ad");
-        ATDemoLog(@"🔥--Template ad width/height: %lf, %lf, requested width/height: %f,%f, if size difference is too large, check backend template configuration",offer.nativeAd.nativeExpressAdViewWidth,offer.nativeAd.nativeExpressAdViewHeight,ExpressAdWidth,ExpressAdHeight);
-    } else {
-        ATDemoLog(@"⚠️⚠️⚠️--This is self-rendered ad");
-    }
-    BOOL isVideoContents = [nativeADView isVideoContents];
-    ATDemoLog(@"🔥--Is native video ad: %d",isVideoContents);
-}
-
 #pragma mark - Remove Ad
 - (void)removeAd {
     if (self.adView && self.adView.superview) {

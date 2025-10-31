@@ -136,7 +136,6 @@
         prepareInfo.ratingLabel = selfRenderView.ratingLabel;
         prepareInfo.iconImageView = selfRenderView.iconImageView;
         prepareInfo.mainImageView = selfRenderView.mainImageView;
-        prepareInfo.logoImageView = selfRenderView.logoImageView;
         prepareInfo.ctaLabel = selfRenderView.ctaLabel;
         prepareInfo.dislikeButton = selfRenderView.dislikeButton;
         prepareInfo.mediaView = selfRenderView.mediaView;
