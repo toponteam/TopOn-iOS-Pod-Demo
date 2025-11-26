@@ -27,34 +27,17 @@
     // Set up demo UI; no integration required
     [self setupDemoUI];
     
-    // Display launch image for splash ad
-    [[AdSDKManager sharedManager] addLaunchLoadingView];
+ 
     // Initialize SDK: for non-EU releases use this method; for EU use [[AdSDKManager sharedManager] initSDK_EU:] instead.
     [[AdSDKManager sharedManager] initSDK];
-    // Ad SDK initialization completed
-    
-    // Load splash ad
-    [[AdSDKManager sharedManager] loadSplashAdWithPlacementID:FirstAppOpen_PlacementID result:^(BOOL isSuccess) {
-        // Load succeeded
-        if (isSuccess) {
-            // Show splash ad
-            [[AdSDKManager sharedManager] showSplashWithPlacementID:FirstAppOpen_PlacementID];
-        }
-    }];
-    
+    // Start splash ad
+    [[AdSDKManager sharedManager] startSplashAd];
+  
     // EU-inclusive initialization flow
 //    //EU region, replace with [[AdSDKManager sharedManager] initSDK_EU:];
 //    [[AdSDKManager sharedManager] initSDK_EU:^{
-//        // Initialization of Ad SDK completed
-//
-//        // Load splash ad
-//        [[AdSDKManager sharedManager] loadSplashAdWithPlacementID:FirstAppOpen_PlacementID result:^(BOOL isSuccess) {
-//            // Load succeeded
-//            if (isSuccess) {
-//                // Show splash ad
-//                [[AdSDKManager sharedManager] showSplashWithPlacementID:FirstAppOpen_PlacementID];
-//            }
-//        }];
+//        // Start splash ad
+//        [[AdSDKManager sharedManager] startSplashAd];
 //    }];
        
     return YES;
@@ -65,7 +48,7 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         if (@available(iOS 14, *)) {
-            // Request ATT permission — Note: if using the EU-inclusive initialization flow, request ATT inside initSDK_EU.
+            // Request ATT permission
             [ATTrackingManager requestTrackingAuthorizationWithCompletionHandler:^(ATTrackingManagerAuthorizationStatus status) {
                 
             }];

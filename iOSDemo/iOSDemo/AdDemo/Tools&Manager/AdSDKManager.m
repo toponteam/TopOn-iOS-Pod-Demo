@@ -16,10 +16,8 @@ static AdSDKManager *sharedManager = nil;
 
 @interface AdSDKManager() <ATAdLoadingDelegate, ATSplashDelegate>
 
-/// Loading view with custom loading image
+/// 加载页面，使用自己的加载图
 @property (strong, nonatomic) LaunchLoadingView * launchLoadingView;
-/// Store splash ad callback blocks
-@property (strong, nonatomic) NSMutableDictionary<NSString *, AdManagerSplashAdLoadBlock> *splashAdCallbacks;
 
 @end
 
@@ -29,16 +27,15 @@ static AdSDKManager *sharedManager = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         sharedManager = [[AdSDKManager alloc] init];
-        sharedManager.splashAdCallbacks = [NSMutableDictionary dictionary];
     });
     return sharedManager;
 }
 
 #pragma mark - public func
-/// GDPR/UMP process initialization
+/// GDPR/UMP流程初始化
 - (void)initSDK_EU:(AdManagerInitFinishBlock)block {
     [[ATAPI sharedInstance] showGDPRConsentDialogInViewController:[UIApplication sharedApplication].keyWindow.rootViewController dismissalCallback:^{
-        // Example of requesting ATT permission on non-first launch when user consents or data consent is unknown. Adjust according to your app's actual situation.
+        // 这里示例在用户同意，或者数据同意未知情况下的非首次启动申请ATT权限，您可以根据应用实际情况进行调整。
         if (([ATAPI sharedInstance].dataConsentSet == ATDataConsentSetUnknown && ([[NSUserDefaults standardUserDefaults] boolForKey:@"GDPR_First_Flag"] == YES))
             
             || [ATAPI sharedInstance].dataConsentSet == ATDataConsentSetPersonalized) {
@@ -59,69 +56,71 @@ static AdSDKManager *sharedManager = nil;
     }];
 }
  
-/// Initialize SDK, this method will not initialize ad platform SDKs simultaneously
+/// 初始化SDK，此方法不会同时初始化广告平台SDK
 - (void)initSDK {
     
-    // Log switch
+    // 日志开关
     [ATAPI setLogEnabled:YES];
-    // Integration check
+    // 检测集成
     [ATAPI integrationChecking];
     
-    // Optional integration, set splash ad preset strategy
+    // 可选接入，设置开屏广告预置策略
     // [[ATSDKGlobalSetting sharedManager] setPresetPlacementConfigPathBundle:[NSBundle mainBundle]];
     
-    //SDK custom parameter configuration, single item
+    //SDK自定义参数配置，单项
     [SDKGlobalConfigTool setCustomChannel:@"渠道xxx"];
     
-    //Optional integration, if using Pangle ad platform, set overseas privacy settings
+    //可选接入，若使用了Pangle广告平台，设置海外隐私项目
 //    [SDKGlobalConfigTool pangleCOPPACCPASetting];
 
-    //SDK custom parameter configuration, multiple items together, see other configurations in SDKGlobalConfigTool class
+    //SDK自定义参数配置，多项一起，其他配置在SDKGlobalConfigTool类中查看
 //    [SDKGlobalConfigTool setCustomData:@{kATCustomDataUserIDKey:@"test_custom_user_id",
 //                                         kATCustomDataChannelKey:@"custom_data_channel",
 //                                         kATCustomDataSubchannelKey:@"custom_data_subchannel",
 //                                         kATCustomDataAgeKey:@18,
-//                                         kATCustomDataGenderKey:@1,//Value filled during traffic grouping, must match the passed value
+//                                         kATCustomDataGenderKey:@1,//流量分组的时候填写的值，需要跟该传入的值一致
 //                                         kATCustomDataNumberOfIAPKey:@19,
 //                                         kATCustomDataIAPAmountKey:@20.0f,
 //                                         kATCustomDataIAPCurrencyKey:@"usd",}];
  
-    //Debug mode related tools TestModeTool
+    //调试模式相关工具 TestModeTool
 //    [TestModeTool showDebugUI:]
     
-    //Initialize SDK
+    //初始化SDK
     [[ATAPI sharedInstance] startWithAppID:kTopOnAppID appKey:kTopOnAppKey error:nil];
 }
  
-#pragma mark - Splash Ad Related
-- (void)addLaunchLoadingView {
-    //Add launch screen
-    //Add loading view, remove in delegate when ad display is complete
-    self.launchLoadingView = [LaunchLoadingView new];
-    [self.launchLoadingView show];
+#pragma mark - 开屏广告相关
+
+- (void)startSplashAd {
+    //开屏广告展示启动图
+    [self addLaunchLoadingView];
+    
+    [self loadSplashWithPlacementID:FirstAppOpen_PlacementID];
 }
 
-/// Load splash ad
-- (void)loadSplashAdWithPlacementID:(NSString *)placementID result:(AdManagerSplashAdLoadBlock)block {
-    
+- (void)addLaunchLoadingView {
+    //添加启动页
+    //添加加载页面，当广告显示完毕后需要在代理中移除
+    self.launchLoadingView = [LaunchLoadingView new];
+    [self.launchLoadingView show];
+    //启动demo 示例用计时器
     [self.launchLoadingView startTimer];
-    
-    // Save callback block by placementID
-    if (placementID && block) {
-        self.splashAdCallbacks[placementID] = block;
-    }
-     
+}
+
+/// 加载开屏广告
+- (void)loadSplashWithPlacementID:(NSString *)placementID {
     NSMutableDictionary *loadConfigDict = [NSMutableDictionary dictionary];
     
-    //Splash timeout duration
+    //开屏超时时间
     [loadConfigDict setValue:@(FirstAppOpen_Timeout) forKey:kATSplashExtraTolerateTimeoutKey];
-    //Custom load parameters
+    //自定义load参数
     [loadConfigDict setValue:@"media_val_SplashVC" forKey:kATAdLoadingExtraMediaExtraKey];
     
-    //Optional integration, if using Pangle ad platform, add the following configuration
+    //可选接入，如果使用了Pangle广告平台，可添加以下配置
     //[AdLoadConfigTool splash_loadExtraConfigAppend_Pangle:loadConfigDict];
     
-    //If choosing to use Tencent GDT, recommended integration
+    //若选择使用优量汇(GDT)，建议接入
     [AdLoadConfigTool splash_loadExtraConfigAppend_Tencent:loadConfigDict];
     
     [[ATAdManager sharedManager] loadADWithPlacementID:placementID
@@ -130,59 +129,56 @@ static AdSDKManager *sharedManager = nil;
                                          containerView:[self footLogoView]];
 }
 
-/// Show splash ad
+/// 展示开屏广告
 - (void)showSplashWithPlacementID:(NSString *)placementID {
-    //Check if ready
+    //检查是否有就绪
     if (![[ATAdManager sharedManager] splashReadyForPlacementID:placementID]) {
         return;
     }
     
-    //Scene statistics feature, optional integration
+    //场景统计功能，可选接入
     [[ATAdManager sharedManager] entrySplashScenarioWithPlacementID:placementID scene:@""];
      
-    //Show configuration, Scene passes backend scene ID, empty string if none, showCustomExt parameter can pass custom parameter string
+    //展示配置，Scene传入后台的场景ID，没有可传入空字符串，showCustomExt参数可传入自定义参数字符串
     ATShowConfig *config = [[ATShowConfig alloc] initWithScene:placementID showCustomExt:@"testShowCustomExt"];
     
-    //Splash ad related parameter configuration
+    //开屏相关参数配置
     NSMutableDictionary *configDict = [NSMutableDictionary dictionary];
     
-    //Optional integration, custom skip button, most platforms no longer support custom skip buttons, currently supporting custom skip button changes are Pangle(TT), direct, ADX, native as splash and Youkeyingm, specific effects need to be tested
+    //可选接入，自定义跳过按钮，多数平台已经不支持自定义跳过按钮，目前支持更改自定义跳过按钮有穿山甲(TT)，直投、ADX、原生作开屏和游可盈，具体需要运行看实际效果
 //    [AdLoadConfigTool splash_loadExtraConfigAppend_CustomSkipButton:configDict];
     
-    //Show ad
+    //展示广告
     [[ATAdManager sharedManager] showSplashWithPlacementID:placementID config:config window:[UIApplication sharedApplication].keyWindow inViewController:[UIApplication sharedApplication].keyWindow.rootViewController extra:configDict delegate:self];
 }
 
-#pragma mark - Splash Ad Load Callback Handling
-- (void)splashCallBackWithPlacementID:(NSString *)placementID result:(BOOL)result {
-    
-    if (result == NO) {
+#pragma mark - Private Methods
+
+/// 开屏广告加载回调判断
+- (void)showSplashOrEnterHomePageWithPlacementID:(NSString *)placementID loadResult:(BOOL)loadResult {
+    if (loadResult) {
+        [self showSplashWithPlacementID:placementID];
+    } else {
         [self.launchLoadingView dismiss];
-    }
-    
-    AdManagerSplashAdLoadBlock block = self.splashAdCallbacks[placementID];
-    if (block) {
-        block(result);
-        [self.splashAdCallbacks removeObjectForKey:placementID];
     }
 }
 
 #pragma mark - AppOpen FooterView
-/// Optional splash bottom LogoView integration, only supported by some ad platforms
+/// 可选接入开屏底部LogoView，仅部分广告平台支持
 - (UIView *)footLogoView {
     
-    //Width is screen width, height <=25% of screen height (depends on ad platform requirements)
+    //宽度为屏幕宽度,高度<=25%的屏幕高度(根据广告平台要求而定)
     UIView * footerCtrView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kOrientationScreenWidth, 120)];
     footerCtrView.backgroundColor = UIColor.whiteColor;
     
-    //Add image
+    //添加图片
     UIImageView * logoImageView = [UIImageView new];
     logoImageView.image = [UIImage imageNamed:@"logo"];
     logoImageView.contentMode = UIViewContentModeCenter;
     logoImageView.frame = footerCtrView.frame;
     [footerCtrView addSubview:logoImageView];
     
-    //Add click event
+    //添加点击事件
     UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(footerImgClick:)];
     logoImageView.userInteractionEnabled = YES;
     [logoImageView addGestureRecognizer:tap];
@@ -190,75 +186,75 @@ static AdSDKManager *sharedManager = nil;
     return footerCtrView;
 }
 
-/// Footer click event
+/// footer点击事件
 - (void)footerImgClick:(UITapGestureRecognizer *)tap {
     ATDemoLog(@"footer click !!");
 }
 
 #pragma mark - Ad Loading Delegate
-/// Ad placement load failed
+/// 广告位加载失败
 /// - Parameters:
-///   - placementID: Placement ID
-///   - error: Error information
+///   - placementID: 广告位ID
+///   - error: 错误信息
 - (void)didFailToLoadADWithPlacementID:(NSString *)placementID error:(NSError *)error {
-    //Handle splash callback
-    [self splashCallBackWithPlacementID:placementID result:NO];
+    //处理开屏回调
+    [self showSplashOrEnterHomePageWithPlacementID:placementID loadResult:NO];
 }
 
 - (void)didFinishLoadingADWithPlacementID:(NSString *)placementID {
-    [self splashCallBackWithPlacementID:placementID result:YES];
+    // All Ads load finished, please use didFinishLoadingSplashADWithPlacementID:isTimeout first
 }
 
-#pragma mark - Splash Ad Events
-/// Splash load successful, need to check if timeout
+#pragma mark - 开屏广告事件
+/// 开屏加载成功，需要判断是否超时
 /// - Parameters:
-///   - placementID: Placement ID
-///   - isTimeout: Whether timeout
+///   - placementID: 广告位ID
+///   - isTimeout: 是否超时
 - (void)didFinishLoadingSplashADWithPlacementID:(NSString *)placementID isTimeout:(BOOL)isTimeout {
-    //Handle splash callback
-    [self splashCallBackWithPlacementID:placementID result:!isTimeout];
+    //处理开屏回调
+    [self showSplashOrEnterHomePageWithPlacementID:placementID loadResult:!isTimeout];
 }
 
-/// Splash ad timeout
-/// - Parameter placementID: Placement ID
+/// 开屏广告超时
+/// - Parameter placementID: 广告位ID
 - (void)didTimeoutLoadingSplashADWithPlacementID:(NSString *)placementID {
-    //Handle splash callback
-    [self splashCallBackWithPlacementID:placementID result:NO];
+    //处理开屏回调
+    [self showSplashOrEnterHomePageWithPlacementID:placementID loadResult:NO];
 }
 
-/// Splash ad closed
+/// 开屏广告已关闭
 /// - Parameters:
-///   - placementID: Placement ID
-///   - extra: Extra information
+///   - placementID: 广告位ID
+///   - extra: 额外信息
 - (void)splashDidCloseForPlacementID:(NSString *)placementID extra:(NSDictionary *)extra {
-    //Handle splash callback
-    [self splashCallBackWithPlacementID:placementID result:NO];
+    //处理开屏回调
+    [self showSplashOrEnterHomePageWithPlacementID:placementID loadResult:NO];
 }
 
-/// Splash ad show failed
+/// 开屏广告展示失败
 /// - Parameters:
-///   - placementID: Placement ID
-///   - error: Error information
-///   - extra: Extra information
+///   - placementID: 广告位ID
+///   - error: 错误信息
+///   - extra: 额外信息
 - (void)splashDidShowFailedForPlacementID:(NSString*)placementID error:(NSError *)error extra:(NSDictionary *)extra {
-    //Handle splash callback
-    [self splashCallBackWithPlacementID:placementID result:NO];
+    //处理开屏回调
+    [self showSplashOrEnterHomePageWithPlacementID:placementID loadResult:NO];
 }
  
-/// Splash ad user clicked
+/// 开屏广告用户已点击
 /// - Parameters:
-///   - placementID: Placement ID
-///   - extra: Extra information
+///   - placementID: 广告位ID
+///   - extra: 额外信息
 - (void)splashDidClickForPlacementID:(nonnull NSString *)placementID extra:(nonnull NSDictionary *)extra {
-
+    
 }
  
-/// Splash ad exposed
+/// 开屏广告已曝光
 /// - Parameters:
-///   - placementID: Placement ID
-///   - extra: Extra information
+///   - placementID: 广告位ID
+///   - extra: 额外信息
 - (void)splashDidShowForPlacementID:(nonnull NSString *)placementID extra:(nonnull NSDictionary *)extra {
- 
+    [self.launchLoadingView dismiss];
 }
 
 

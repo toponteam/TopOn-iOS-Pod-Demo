@@ -39,20 +39,9 @@ typedef void (^AdManagerSplashAdLoadBlock)(BOOL isSuccess);
 
 #pragma mark - 开屏广告相关
 
-/// 添加启动页,初始化SDK之前添加，用于冷启动开屏
-- (void)addLaunchLoadingView;
-
-/// 加载开屏广告
-/// - Parameters:
-///   - placementID: 广告位ID
-///   - block: 结果回调
-- (void)loadSplashAdWithPlacementID:(NSString *)placementID result:(AdManagerSplashAdLoadBlock)block;
-
-/// 展示开屏广告
-/// - Parameter placementID: 广告位ID
-- (void)showSplashWithPlacementID:(NSString *)placementID;
+/// 启动开屏广告
+- (void)startSplashAd;
  
-
 @end
 
 
