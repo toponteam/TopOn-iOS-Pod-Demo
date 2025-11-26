@@ -47,14 +47,14 @@ static AdSDKManager *sharedManager = nil;
             }
         }
         
-        //v6.4.93 和以下版本 [ATAPI sharedInstance].dataConsentSet 在 app 首次启动时无法获得结果
-        //如果您想获得结果，可以参考以下代码：
+        //v6.4.93 and below [ATAPI sharedInstance].dataConsentSet cant get result at App first launch.
+        // if you want to get UMP consent result , please follow this example:
 //        NSString *purposeConsents = [[NSUserDefaults standardUserDefaults] stringForKey:@"IABTCF_PurposeConsents"];
 //        NSLog(@"purposeConsents:%@", purposeConsents);
 //        if (![purposeConsents containsString:@"1"]) {
-//           //不同意
+//           //not allow
 //        } else {
-//           //同意
+//           //allow
 //        }
         
         [self initSDK];
