@@ -10,38 +10,36 @@
 #import <AnyThinkInterstitial/AnyThinkInterstitial.h>
 #import <AnyThinkSplash/AnyThinkSplash.h>
 
-//初始化完成回调
+// Initialization completion callback
 typedef void (^AdManagerInitFinishBlock)(void);
-//开屏加载回调
+// Splash ad loading callback
 typedef void (^AdManagerSplashAdLoadBlock)(BOOL isSuccess);
 
-//在后台的应用ID
+// App ID from the dashboard
 #define kTopOnAppID  @"h67eb68399d31b"
 
-//在后台的应用维度AppKey，或者是账号维度AppKey
+// App-level AppKey or Account-level AppKey from the dashboard
 #define kTopOnAppKey @"a3983938bf3b5294c7f1a4b6cc67c6368"
 
-//冷启动开屏超时时间
+// Cold start splash ad timeout duration
 #define FirstAppOpen_Timeout 8
 
-//冷启动开屏广告位ID
+// Cold start splash ad placement ID
 #define FirstAppOpen_PlacementID @"n67eb688a3eeea"
 
 @interface AdSDKManager : NSObject
 
 + (instancetype)sharedManager;
  
-/// 应用若在欧盟地区发行，使用本方法初始化
+/// If the app is distributed in the EU, use this method for initialization
 - (void)initSDK_EU:(AdManagerInitFinishBlock)block;
 
-/// 初始化SDK
+/// Initialize SDK
 - (void)initSDK;
 
-#pragma mark - 开屏广告相关
+#pragma mark - Splash Ad Related
 
-/// 启动开屏广告
+/// Start splash ad
 - (void)startSplashAd;
  
 @end
-
-
