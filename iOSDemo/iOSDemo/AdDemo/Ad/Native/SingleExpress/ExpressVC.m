@@ -52,7 +52,7 @@
     // Request template ad with specified size, ad platform will match this size to return ad, not necessarily exact match, depends on template type selected in ad platform backend
     [loadConfigDict setValue:[NSValue valueWithCGSize:CGSizeMake(ExpressAdWidth, ExpressAdHeight)] forKey:kATExtraInfoNativeAdSizeKey];
     
-    // Adaptive height，Only CSJ，JD，KuaiShou supported
+    // Adaptive height，Some network supported , such as CSJ，JD，KuaiShou.
     // [loadConfigDict setValue:@YES forKey:kATNativeAdSizeToFitKey];
     
     [[ATAdManager sharedManager] loadADWithPlacementID:Native_Express_PlacementID extra:loadConfigDict delegate:self];
