@@ -47,6 +47,16 @@ static AdSDKManager *sharedManager = nil;
             }
         }
         
+        //v6.4.93 和以下版本 [ATAPI sharedInstance].dataConsentSet 在 app 首次启动时无法获得结果
+        //如果您想获得结果，可以参考以下代码：
+//        NSString *purposeConsents = [[NSUserDefaults standardUserDefaults] stringForKey:@"IABTCF_PurposeConsents"];
+//        NSLog(@"purposeConsents:%@", purposeConsents);
+//        if (![purposeConsents containsString:@"1"]) {
+//           //不同意
+//        } else {
+//           //同意
+//        }
+        
         [self initSDK];
         if (block) {
             block();
