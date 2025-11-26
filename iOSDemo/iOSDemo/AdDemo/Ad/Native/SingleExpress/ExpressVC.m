@@ -103,7 +103,7 @@
     // Reference
     self.adView = nativeADView;
     
-    //If turn on kATNativeAdSizeToFitKey to YES ,plz use offer.nativeAd.nativeExpressAdViewWidth,offer.nativeAd.nativeExpressAdViewHeight first.
+    //recommend use offer.nativeAd.nativeExpressAdViewWidth,offer.nativeAd.nativeExpressAdViewHeight first.
 //    ATDemoLog(@"🔥--Ad network return size：%lf，%lf，You request size：%f,%f",offer.nativeAd.nativeExpressAdViewWidth,offer.nativeAd.nativeExpressAdViewHeight,ExpressAdWidth,ExpressAdHeight);
     
     BOOL isVideoContents = [nativeADView isVideoContents];
