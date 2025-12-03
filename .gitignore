@@ -2,4 +2,9 @@
 iOSDemo/Podfile.lock
 iOSDemo/Pods
 iOSDemo/iOSDemo.xcworkspace
-iOSDemo/build 
+iOSDemo/build
+SwiftDemo/Podfile.lock
+SwiftDemo/Pods
+SwiftDemo/iOSDemo.xcworkspace
+SwiftDemo/build
+*.sh
