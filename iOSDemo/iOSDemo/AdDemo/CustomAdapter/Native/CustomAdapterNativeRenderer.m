@@ -41,6 +41,14 @@
     if ([value isKindOfClass:[QuMengNativeAd class]]) {
         QuMengNativeAd *nativeAd = (QuMengNativeAd *)value;
         [nativeAd registerContainer:self.ADView withClickableViews:[self.ADView clickableViews]];
+         
+        //关于logo的显示，通过self.configuration.logoViewFrame，获取开发者传入的 logoViewFrame，去给开发者创建并显示logo
+        
+        [self.ADView.logoImageView addSubview:nativeAd.logoImageView];
+        
+        [nativeAd.logoImageView AT_mas_makeConstraints:^(ATConstraintMaker *make) {
+            make.top.bottom.right.left.equalTo(self.ADView.logoImageView);
+        }];
     }
 }
 
