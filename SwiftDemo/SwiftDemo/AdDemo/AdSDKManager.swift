@@ -76,7 +76,11 @@ class AdSDKManager: NSObject {
         // TestModeTool.showDebugUI()
         
         // Initialize SDK
-        try? ATAPI.sharedInstance().start(withAppID: kAppID, appKey: kAppKey)
+        do {
+            try ATAPI.sharedInstance().start(withAppID: kAppID, appKey: kAppKey)
+        } catch {
+            print("AdSDK init error: \(error)")
+        }
     }
     
     // MARK: - Splash Ad Related

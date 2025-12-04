@@ -97,7 +97,12 @@ static AdSDKManager *sharedManager = nil;
 //    [TestModeTool showDebugUI:]
     
     // Initialize SDK
-    [[ATAPI sharedInstance] startWithAppID:kTopOnAppID appKey:kTopOnAppKey error:nil];
+    NSError * initError = nil;
+    [[ATAPI sharedInstance] startWithAppID:kTopOnAppID appKey:kTopOnAppKey error:&initError];
+    if (initError) {
+        //Initialize failed
+        NSLog(@"init failed : %@",initError);
+    }
 }
  
 #pragma mark - Splash Ad Related
