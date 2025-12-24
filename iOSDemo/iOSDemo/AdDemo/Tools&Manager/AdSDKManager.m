@@ -47,15 +47,22 @@ static AdSDKManager *sharedManager = nil;
             }
         }
         
-        //v6.4.93 and below [ATAPI sharedInstance].dataConsentSet cant get result at App first launch.
-        // if you want to get UMP consent result , please follow this example:
-//        NSString *purposeConsents = [[NSUserDefaults standardUserDefaults] stringForKey:@"IABTCF_PurposeConsents"];
-//        NSLog(@"purposeConsents:%@", purposeConsents);
-//        if (![purposeConsents containsString:@"1"]) {
-//           //not allow
-//        } else {
-//           //allow
-//        }
+        // If you have integrated and are using the Admob UMP popup, after the user makes a choice, [ATAPI sharedInstance].dataConsentSet in this callback cannot obtain results during the app's first launch
+        // If you want to obtain the results, you can refer to the following code:
+        // NSString *purposeConsents = [[NSUserDefaults standardUserDefaults] stringForKey:@"IABTCF_PurposeConsents"];
+        // NSLog(@"purposeConsents:%@", purposeConsents);
+        // if (![purposeConsents containsString:@"1"]) {
+        //    // User did not consent
+        // } else {
+        //    // User consented
+        // }
+
+        // // If you have not integrated or are not using Admob UMP, you can obtain the user's selection result in this callback.
+        // if ([ATAPI sharedInstance].dataConsentSet == ATDataConsentSetPersonalized) {
+        //     // User consented
+        // } else {
+        //     // User did not consent
+        // }
         
         [self initSDK];
         if (block) {
