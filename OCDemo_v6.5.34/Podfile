@@ -1,0 +1,49 @@
+# Recommend using GitHub source, check terminal proxy network before pod install, try pod install --repo-update if failed
+source 'https://github.com/CocoaPods/Specs.git'
+
+# Minimum iOS version depends on selected third-party ad platform SDK versions
+platform :ios, '13.0'
+
+post_install do |installer|
+  installer.generated_projects.each do |project|
+    project.targets.each do |target|
+        target.build_configurations.each do |config|
+            config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '13.0'
+         end
+    end
+  end
+end
+
+target 'iOSDemo' do
+  use_frameworks!
+  
+  #TopOn SDK
+  pod 'TPNiOS','6.5.34'
+
+  # DebugUI, recommended for debugging, remove before release
+  pod 'TPNDebugUISDK'
+  
+  # To reduce Demo's initial pod install time, not all Adapter installations are listed. If you need to test with your own AppID/AppKey, replace with your selected Adapters and run pod install --repo-update
+  
+  # Adapters used in Demo, for more ad platforms visit SDK download center: https://portal.toponad.net/m/sdk/download?type=iOS
+  # TopOn Adx SDK(necessary)
+  pod 'TPNMediationAdxSmartdigimktAdapter','6.5.42.1'
+  pod 'TPNMediationVungleAdapter','7.6.0.1'
+  pod 'TPNMediationAdmobAdapter','12.12.0.0'
+  pod 'TPNMediationMintegralAdapter','7.7.9.0'
+  pod 'TPNMediationYandexAdapter','7.16.1.0'
+   
+  # Third-party analytics SDKs
+#  pod 'AppsFlyerFramework'
+#  pod 'Adjust'
+#  pod 'FirebaseAnalytics'
+
+  # Custom Adapter SDK
+  pod 'MSMobAdSDK/MS','2.7.12.3'
+ 
+ # Third-party libraries for Demo UI
+  pod 'Masonry'
+  pod 'SDWebImage'
+  pod 'MJRefresh'
+ 
+end
