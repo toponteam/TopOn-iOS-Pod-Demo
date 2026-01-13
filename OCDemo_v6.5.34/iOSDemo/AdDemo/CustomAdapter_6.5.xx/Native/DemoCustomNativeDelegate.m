@@ -158,12 +158,21 @@
  *  新原生广告即将展现
  */
 - (void)msNativeFeedAdShow:(MSNativeFeedAdModel *)feedAd {
+    [self.adStatusBridge atOnAdShow:nil];
 }
  
 /**
  *  新原生广告展现失败
  */
 - (void)msNativeFeedAdShowFailed:(MSNativeFeedAdModel *)feedAd error:(NSError *)error {
+    [ATAdLogger logMessage:[NSString stringWithFormat:@"ATMSNativeCustomEvent::msNativeFeedAdShowFailed:error:%ld-%@-%@-%@",(long)error.code,error.domain,error.description,error.userInfo] type:ATLogTypeExternal];
+    
+    NSMutableDictionary * errorInfo = [NSMutableDictionary dictionary];
+    
+    //Set info if its available
+//    [errorInfo setValue: forKey:];
+    
+    [self.adStatusBridge atOnAdShowFailed:error extra:errorInfo];
 }
 
 /**
