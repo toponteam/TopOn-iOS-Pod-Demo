@@ -139,6 +139,10 @@
         prepareInfo.ctaLabel = selfRenderView.ctaLabel;
         prepareInfo.dislikeButton = selfRenderView.dislikeButton;
         prepareInfo.mediaView = selfRenderView.mediaView;
+        
+        //Only for Yandex , must bind & render
+//        prepareInfo.domainLabel = selfRenderView.domainLabel;
+//        prepareInfo.warningLabel = selfRenderView.warningLabel;
     }];
     [nativeADView prepareWithNativePrepareInfo:info];
     
