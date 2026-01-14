@@ -213,6 +213,9 @@ class FeedSelfRenderVC: BaseNormalBarVC {
             if let mediaView = selfRenderView.mediaView {
                 prepareInfo.mediaView = mediaView
             }
+            //Only for Yandex , must bind & render
+//            prepareInfo.domainLabel = selfRenderView.domainLabel
+//            prepareInfo.warningLabel = selfRenderView.warningLabel
         }
         nativeADView.prepare(with: info)
     }
