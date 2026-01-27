@@ -15,9 +15,7 @@
 static AdSDKManager *sharedManager = nil;
 
 @interface AdSDKManager() <ATAdLoadingDelegate, ATSplashDelegate>
-
-/// Loading page, use your own loading image
-@property (strong, nonatomic) LaunchLoadingView * launchLoadingView;
+ 
 
 @end
 
@@ -124,10 +122,8 @@ static AdSDKManager *sharedManager = nil;
 - (void)addLaunchLoadingView {
     // Add launch page
     // Add loading page, need to remove in delegate when ad display is finished
-    self.launchLoadingView = [LaunchLoadingView new];
-    [self.launchLoadingView show];
-    // Launch demo example uses timer
-    [self.launchLoadingView startTimer];
+    LaunchLoadingView *loadingView = [LaunchLoadingView sharedInstance];
+    [loadingView show];
 }
 
 /// Load splash ad
@@ -181,7 +177,7 @@ static AdSDKManager *sharedManager = nil;
     if (loadResult) {
         [self showSplashWithPlacementID:placementID];
     } else {
-        [self.launchLoadingView dismiss];
+        [[LaunchLoadingView sharedInstance] dismiss];
     }
 }
 
@@ -276,7 +272,7 @@ static AdSDKManager *sharedManager = nil;
 ///   - placementID: Ad placement ID
 ///   - extra: Extra info
 - (void)splashDidShowForPlacementID:(nonnull NSString *)placementID extra:(nonnull NSDictionary *)extra {
-    [self.launchLoadingView dismiss];
+    [[LaunchLoadingView sharedInstance] dismiss];
 }
 
 
