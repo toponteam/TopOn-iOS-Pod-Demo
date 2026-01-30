@@ -26,11 +26,11 @@
  
     // Set up demo UI; no integration required
     [self setupDemoUI];
-    
- 
+     
     // Initialize SDK: for non-EU releases use this method; for EU use [[AdSDKManager sharedManager] initSDK_EU:] instead.
     [[AdSDKManager sharedManager] initSDK];
-    // Start splash ad
+    
+    // Cold-start splash ad flow demo, including custom timer logic. If you need to use the SDK's built-in timeout timer, please refer to SplashVC.m.
     [[AdSDKManager sharedManager] startSplashAd];
   
     // EU-inclusive initialization flow

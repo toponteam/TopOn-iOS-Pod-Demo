@@ -21,7 +21,7 @@
     //1.iOS SDK has been successfully initialized
     //2.No ads have been loaded yet
     //3.Disable debug mode, remove -[ATSDKGlobalSetting setDebuggerConfig:] related code
-    [[ATDebuggerAPI sharedInstance] showDebuggerInViewController:vc showType:ATShowDebugUIPresent debugkey:@"Enter your DebugKey, get DebugKey from Backend->Account Management->Key, DebugKey must correspond to AppID and AppKey"];
+    [[ATDebuggerAPI sharedInstance] showDebuggerInViewController:vc showType:ATShowDebugUIPresent debugkey:@"Enter your DebugKey, get DebugKey from dashboard->Account Management->Key, DebugKey must correspond to AppID and AppKey"];
 }
 
 /// Enable test mode (can only specify one ad platform at a time, not guaranteed 100% ad fill)

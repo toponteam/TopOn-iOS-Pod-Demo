@@ -12,9 +12,7 @@
 #import "AdLoadConfigTool.h"
 
 #import "AppDelegate.h"
-
-#import "LaunchLoadingView.h"
-
+ 
 @interface SplashVC () <ATSplashDelegate>
  
 @end
@@ -29,17 +27,16 @@
  
 - (void)viewDidLoad {
     [super viewDidLoad];
- 
-    // Add loading view, which needs to be removed in the delegate after the ad finishes displaying
-    [[LaunchLoadingView sharedInstance] show];
-     
+  
     // To improve splash ad efficiency, it is recommended to initiate the ad loading request before entering the current page, such as after SDK initialization. For demonstration purposes, this demo requests the ad when viewDidLoad is called
     [self loadAd];
+    
+    [self showLog:@"Load started"];
 }
 
 /// Enter home page
 - (void)enterHomeVC {
-    [[LaunchLoadingView sharedInstance] dismiss];
+    
 }
 
 #pragma mark - Load Ad
@@ -186,9 +183,7 @@
 - (void)splashDidShowForPlacementID:(NSString *)placementID extra:(NSDictionary *)extra {
     ATDemoLog(@"splashDidShowForPlacementID:%@",placementID);
     [self showLog:[NSString stringWithFormat:@"splashDidShowForPlacementID:%@ ",placementID]];
-    
-    // Can hide after showing the ad to avoid blocking
-    [[LaunchLoadingView sharedInstance] dismiss];
+ 
 }
 
 /// Splash ad did close

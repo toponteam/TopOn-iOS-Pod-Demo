@@ -21,10 +21,10 @@
 //Placement ID
 #define BannerPlacementID @"n67ecedf7904d9"
 
-//Scene ID, optional, can be generated in backend. Pass empty string if none
+//Scene ID, optional, can be generated in dashboard. Pass empty string if none
 #define BannerSceneID @""
 
-//Note: banner size must match the ratio configured in backend
+//Note: banner size must match the ratio configured in dashboard
 #define BannerSize CGSizeMake(320, 50)
 
 #pragma mark - Load Ad
@@ -73,7 +73,7 @@
         return;
     }
     
-    //Show config, Scene passes backend scene ID, pass empty string if none, showCustomExt parameter can pass custom parameter string
+    //Show config, Scene passes dashboard scene ID, pass empty string if none, showCustomExt parameter can pass custom parameter string
     ATShowConfig *config = [[ATShowConfig alloc] initWithScene:BannerSceneID showCustomExt:@"testShowCustomExt"];
  
     //Show ad

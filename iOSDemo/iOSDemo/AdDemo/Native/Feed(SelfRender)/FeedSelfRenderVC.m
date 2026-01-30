@@ -28,7 +28,7 @@
 // Placement ID
 #define Feed_Native_SelfRender_PlacementID @"n67eceed5a282d"
 
-// Scene ID, optional, can be generated in the backend. Pass empty string if not available
+// Scene ID, optional, can be generated in the dashboard. Pass empty string if not available
 #define Feed_Native_SelfRender_SceneID @""
  
 - (void)dealloc {

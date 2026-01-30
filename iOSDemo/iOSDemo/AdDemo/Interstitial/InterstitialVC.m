@@ -26,7 +26,7 @@
 //Placement ID
 #define InterstitialPlacementID @"n67ece79734678"
 
-//Scene ID, optional, can be generated in backend. Pass empty string if none
+//Scene ID, optional, can be generated in dashboard. Pass empty string if none
 #define InterstitialSceneID @""
 
 #pragma mark - Load Ad
@@ -70,7 +70,7 @@
         return;
     }
     
-    //Display configuration, Scene passes backend scene ID, pass empty string if none, showCustomExt parameter can pass custom parameter string
+    //Display configuration, Scene passes dashboard scene ID, pass empty string if none, showCustomExt parameter can pass custom parameter string
     ATShowConfig *config = [[ATShowConfig alloc] initWithScene:InterstitialSceneID showCustomExt:@"testShowCustomExt"];
  
     //Show ad

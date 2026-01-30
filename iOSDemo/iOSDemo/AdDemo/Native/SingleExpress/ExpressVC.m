@@ -30,12 +30,12 @@
 // SDK rendering - actual third-party ad is self-rendered placement
 //#define Native_Express_PlacementID @"n67ff515ba1460"
 
-// Scene ID, optional, can be generated in backend. Pass empty string if none
+// Scene ID, optional, can be generated in dashboard. Pass empty string if none
 #define Native_Express_SceneID @""
 
-// Note: template aspect ratio should match backend selection
+// Note: template aspect ratio should match dashboard selection
 #define ExpressAdWidth (kScreenW)
-// Note: template aspect ratio should match backend selection
+// Note: template aspect ratio should match dashboard selection
 #define ExpressAdHeight (kScreenW/2.f)
 
 #define ExpressMediaViewWidth (kScreenW)
@@ -49,7 +49,7 @@
      
     NSMutableDictionary * loadConfigDict = [NSMutableDictionary dictionary];
     
-    // Request template ad with specified size, ad platform will match this size to return ad, not necessarily exact match, depends on template type selected in ad platform backend
+    // Request template ad with specified size, ad platform will match this size to return ad, not necessarily exact match, depends on template type selected in ad platform dashboard
     [loadConfigDict setValue:[NSValue valueWithCGSize:CGSizeMake(ExpressAdWidth, ExpressAdHeight)] forKey:kATExtraInfoNativeAdSizeKey];
     
     // Adaptive height，Some network supported , such as CSJ，JD，KuaiShou.

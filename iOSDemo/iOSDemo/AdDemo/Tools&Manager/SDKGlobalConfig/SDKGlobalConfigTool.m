@@ -10,7 +10,7 @@
 @implementation SDKGlobalConfigTool
 
 /// Custom traffic segmentation rule, rule format: key=value, call this method before loading ads with placement ID
-/// Backend rule changes take effect in ~5 minutes; local segmentation policy cached in sandbox for 30 minutes
+/// dashboard rule changes take effect in ~5 minutes; local segmentation policy cached in sandbox for 30 minutes
 /// - Parameters:
 ///   - key: Rule key
 ///   - value: Rule value
@@ -19,7 +19,7 @@
     
     //Placement policy has 30min sandbox cache, try deleting and reinstalling for testing, set custom segmentation rules before loading ads.
     //Example:
-    //TopOn backend configured custom segmentation rule: isTest=1
+    //TopOn dashboard configured custom segmentation rule: isTest=1
     //Use this method: [AdLoadConfigTool joinSegmentRuleWithKey:@"isTest" value:@"1" placementID:placementID]
     [[ATSDKGlobalSetting sharedManager] setCustomData:@{key:value} forPlacementID:placementID];
 }
