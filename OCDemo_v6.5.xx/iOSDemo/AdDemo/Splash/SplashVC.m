@@ -31,7 +31,7 @@
     // To improve splash ad efficiency, it is recommended to initiate the ad loading request before entering the current page, such as after SDK initialization. For demonstration purposes, this demo requests the ad when viewDidLoad is called
     [self loadAd];
     
-    ATDemoLog(@"SplashVC Load started");
+    [self showLog:@"Load started"];
 }
  
 #pragma mark - Load Ad
