@@ -18,7 +18,7 @@
 //{
 //    id = 84c3c5940e4fab2d8712299d631e09b3; // Display ID generated for each impression
 //    "publisher_revenue" = "0.0015"; //Revenue from each impression
-//    "ad_source_id" = 9805; //Ad source ID, can query specific Network info via ad source ID in developer backend or SDK Open API
+//    "ad_source_id" = 9805; //Ad source ID, can query specific Network info via ad source ID in developer dashboard or SDK Open API
 //    "network_firm_id" = 8;   //Refer to Network Firm Id Table
 //    "adsource_isHeaderBidding" = 0;  //Whether it's Header Bidding ad source, 1 for Header Bidding ad source
 //    "adsource_price" = 1.5;  // eCPM currency unit

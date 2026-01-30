@@ -174,6 +174,12 @@ static AdSDKManager *sharedManager = nil;
 /// Splash ad load callback judgment
 - (void)showSplashOrEnterHomePageWithPlacementID:(NSString *)placementID loadResult:(BOOL)loadResult {
     if (loadResult) {
+        
+        //The app's own timer logic takes precedence. If the app's own timer expires, ads will no longer be displayed.
+        if ([LaunchLoadingView sharedInstance].localTimerTimeout == YES) {
+            return;
+        }
+        
         [self showSplashWithPlacementID:placementID];
     } else {
         [[LaunchLoadingView sharedInstance] dismiss];

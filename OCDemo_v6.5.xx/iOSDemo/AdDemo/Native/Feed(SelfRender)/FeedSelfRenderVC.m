@@ -1,76 +1,84 @@
 //
-//  SelfRenderVC.m
+//  FeedSelfRenderVC.m
 //  iOSDemo
 //
-//  Created by ltz on 2025/1/11.
+//  Created by ltz on 2025/1/21.
 //
 
-#import "SelfRenderVC.h"
+#import "FeedSelfRenderVC.h"
 
 #import <AnyThinkSDK/AnyThinkSDK.h>
 
-#import "AdLoadConfigTool.h"
+#import <MJRefresh/MJRefresh.h>
 #import "SelfRenderView.h"
-#import "AdDisplayVC.h"
+#import "DemoOfferAdModel.h"
+#import "AdCell.h"
+#import "CustomCell.h"
+#import "AdLoadConfigTool.h"
 
-@interface SelfRenderVC () <ATNativeADDelegate>
-
-@property (strong, nonatomic) ATNativeADView  * adView;
-@property (strong, nonatomic) SelfRenderView  * selfRenderView;
-@property (nonatomic, strong) ATNativeAdOffer * nativeAdOffer;
-// Retry attempt counter
-@property (nonatomic, assign) NSInteger         retryAttempt;
+@interface FeedSelfRenderVC () <ATNativeADDelegate,UITableViewDelegate,UITableViewDataSource>
+ 
+@property (nonatomic, strong) NSMutableArray <DemoOfferAdModel *> * dataSourceArray;
+@property (nonatomic, strong) UITableView * feedTableView;
 
 @end
 
-@implementation SelfRenderVC
+@implementation FeedSelfRenderVC
 
 // Placement ID
-#define Native_SelfRender_PlacementID @"n67eceed5a282d"
+#define Feed_Native_SelfRender_PlacementID @"n67eceed5a282d"
 
-// Scene ID, optional, can be generated in the backend. Pass empty string if not available
-#define Native_SelfRender_SceneID @""
+// Scene ID, optional, can be generated in the dashboard. Pass empty string if not available
+#define Feed_Native_SelfRender_SceneID @""
  
-#pragma mark - Load Ad
-/// Load ad
-- (void)loadAd {
- 
-    [self showLog:kLocalizeStr(@"Clicked load ad")];
-     
-    NSMutableDictionary * loadConfigDict = [NSMutableDictionary dictionary];
-    
-    // Set ad request size
-    [loadConfigDict setValue:[NSValue valueWithCGSize:CGSizeMake(SelfRenderViewWidth, SelfRenderViewHeight)] forKey:kATExtraInfoNativeAdSizeKey];
-    // Request adaptive size native ad (available for some ad platforms)
-    [AdLoadConfigTool native_loadExtraConfigAppend_SizeToFit:loadConfigDict];
-    
-    // KuaiShou native ad swipe and click control
-//    [AdLoadConfigTool native_loadExtraConfigAppend_KuaiShou_SlideOrClickAble:loadConfigDict];
-  
-    [[ATAdManager sharedManager] loadADWithPlacementID:Native_SelfRender_PlacementID extra:loadConfigDict delegate:self];
+- (void)dealloc {
+   NSLog(@"FeedSelfRenderVC dealloc");
+   // Destroy unreleased ads
 }
- 
-#pragma mark - Show Ad
-/// Show ad
-- (void)showAd {
+
+#pragma mark - UITableViewDataSource
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return self.dataSourceArray.count;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    // Scene statistics feature, optional integration
-    [[ATAdManager sharedManager] entryNativeScenarioWithPlacementID:Native_SelfRender_PlacementID scene:Native_SelfRender_SceneID];
-    
-//    // Query available ad cache for display (optional integration)
-//    NSArray <NSDictionary *> * adCaches = [[ATAdManager sharedManager] getNativeValidAdsForPlacementID:Native_SelfRender_PlacementID];
-//    ATDemoLog(@"getValidAds : %@",adCaches);
-//
-//    // Query ad loading status (optional integration)
-//    ATCheckLoadModel * status = [[ATAdManager sharedManager] checkNativeLoadStatusForPlacementID:Native_SelfRender_PlacementID];
-//    ATDemoLog(@"checkLoadStatus : %d",status.isLoading);
-    
-    // Check if ready
-    if (![[ATAdManager sharedManager] nativeAdReadyForPlacementID:Native_SelfRender_PlacementID]) {
-        [self loadAd];
-        return;
+    if (self.dataSourceArray[indexPath.row].isNativeAd) {
+        // Ad cell, dynamic height
+        return UITableViewAutomaticDimension;
     }
+    // Other cells, custom height
+    return 200;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
+    DemoOfferAdModel *offerModel = self.dataSourceArray[indexPath.row];
+    
+    if (offerModel.isNativeAd) {
+        // New ad available, can refresh
+        ATNativeAdOffer *offer = [self getOfferAndLoadNext];
+        if (offer) {
+            offerModel.nativeADView = [self getNativeADViewWithOffer:offer];
+            offerModel.offer = offer;
+        }
+        
+        AdCell *cell = [[AdCell alloc] initWithStyle:0 reuseIdentifier:@"AdCell"];
+        ATDemoLog(@"adView之前--%@",cell.adView);
+        cell.adView = offerModel.nativeADView;
+        ATDemoLog(@"adView之后--%@",cell.adView);
+        return cell;
+        
+    }else{
+        CustomCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CustomCell"];
+        return cell;
+    }
+}
+   
+/// Get ATNativeADView object through ad offer
+/// - Parameter offer: The obtained ad offer
+- (ATNativeADView *)getNativeADViewWithOffer:(ATNativeAdOffer *)offer {
+   
     // Initialize config configuration
     ATNativeADConfiguration *config = [[ATNativeADConfiguration alloc] init];
     // Pre-layout for native ad
@@ -79,33 +87,29 @@
     config.mediaViewFrame = CGRectMake(0, 0, SelfRenderViewMediaViewWidth, SelfRenderViewMediaViewHeight);
     config.delegate = self;
     config.rootViewController = self;
-    // Make ad view container fit the ad
-    config.sizeToFit = YES;
     // Set auto-play only in WiFi mode, effective for some ad platforms
     config.videoPlayType = ATNativeADConfigVideoPlayOnlyWiFiAutoPlayType;
-
+    
     // [Manual Layout] Precisely set logo size and position, choose one implementation with [Masonry Method] below
-    config.logoViewFrame = CGRectMake(kScreenW-50-10, SelfRenderViewHeight-50-10, 50, 50);
+//    config.logoViewFrame = CGRectMake(kScreenW-40-10-15, SelfRenderViewHeight-50-10, 40, 40);
     
     // Set ad platform logo position preference (some ad platforms cannot be precisely set, use the code below, Demo examples all show bottom-right corner)
     // Only when logoUrl or logo has value in material offer, can be set through SelfRenderView layout, otherwise use examples in this method for precise control or preference position setting.
     [ATAPI sharedInstance].preferredAdLogoPosition = ATAdLogoPositionBottomRightCorner;
     
-    // Set ad identifier coordinates x and y, effective for some ad platforms, set outside screen to achieve hiding effect
+    // Set ad identifier coordinates x and y, effective for some ad platforms
     // config.adChoicesViewOrigin = CGPointMake(10, 10);
-    
-    // Get offer ad object, consumes one ad cache after retrieval
-    ATNativeAdOffer *offer = [[ATAdManager sharedManager] getNativeAdOfferWithPlacementID:Native_SelfRender_PlacementID scene:Native_SelfRender_SceneID];
+     
+    // Print material components
     NSDictionary *offerInfoDict = [Tools getOfferInfo:offer];
     ATDemoLog(@"🔥🔥🔥--自渲染广告素材，展示前：%@",offerInfoDict);
-    self.nativeAdOffer = offer;
     
     // Create self-render view and assign values based on offer information
     SelfRenderView *selfRenderView = [[SelfRenderView alloc] initWithOffer:offer];
     
     // Create ad nativeADView
     // Get native ad display container view
-    ATNativeADView *nativeADView = [[ATNativeADView alloc] initWithConfiguration:config currentOffer:offer placementID:Native_SelfRender_PlacementID];
+    ATNativeADView *nativeADView = [[ATNativeADView alloc] initWithConfiguration:config currentOffer:offer placementID:Feed_Native_SelfRender_PlacementID];
     
     // Create container array for clickable components
     NSMutableArray *clickableViewArray = [NSMutableArray array];
@@ -118,7 +122,6 @@
     }
     
     // Set UI controls that need to register click events, better not to add the entire parent view of the feed to click events, otherwise clicking the close button may still trigger the feed click event.
-    // Close button (dislikeButton) does not need to register click events
     [clickableViewArray addObjectsFromArray:@[selfRenderView.iconImageView,
                                               selfRenderView.titleLabel,
                                               selfRenderView.textLabel,
@@ -129,6 +132,26 @@
     [nativeADView registerClickableViewArray:clickableViewArray];
     
     // Bind components
+    [self prepareWithNativePrepareInfo:selfRenderView nativeADView:nativeADView];
+    
+    // Render ad
+    [offer rendererWithConfiguration:config selfRenderView:selfRenderView nativeADView:nativeADView];
+    
+    // [Masonry Method] Precisely set logo size and position, choose one implementation with [Manual Layout] above, call after rendering ad, operate based on nativeADView
+    [nativeADView.logoImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.right.bottom.mas_equalTo(nativeADView).mas_offset(-25);
+        make.width.height.mas_equalTo(15);
+    }];
+ 
+    // Hide logo, use with caution, please read documentation: Self-render Ad Considerations
+    //nativeADView.logoImageView.hidden = YES;
+  
+    return nativeADView;
+}
+
+#pragma mark - Bind Components
+- (void)prepareWithNativePrepareInfo:(SelfRenderView *)selfRenderView nativeADView:(ATNativeADView *)nativeADView {
+    // Which components need binding and which don't, please refer to documentation: Native Ad Considerations
     ATNativePrepareInfo *info = [ATNativePrepareInfo loadPrepareInfo:^(ATNativePrepareInfo * prepareInfo) {
         prepareInfo.textLabel = selfRenderView.textLabel;
         prepareInfo.advertiserLabel = selfRenderView.advertiserLabel;
@@ -139,32 +162,72 @@
         prepareInfo.ctaLabel = selfRenderView.ctaLabel;
         prepareInfo.dislikeButton = selfRenderView.dislikeButton;
         prepareInfo.mediaView = selfRenderView.mediaView;
-        
-        //Only for Yandex , must bind & render
-//        prepareInfo.domainLabel = selfRenderView.domainLabel;
-//        prepareInfo.warningLabel = selfRenderView.warningLabel;
     }];
     [nativeADView prepareWithNativePrepareInfo:info];
+}
+
+#pragma mark - Data Processing
+
+/// Add data source
+/// - Parameter isSuccess: Whether ad loading is successful
+- (void)setDataWithRequest:(BOOL)isSuccess {
+    if (isSuccess) {
+        // Ad loading successful, get offer and add data model
+        ATNativeAdOffer *offer = [self getOfferAndLoadNext];
+        if (offer) {
+            DemoOfferAdModel *offerModel = [[DemoOfferAdModel alloc] init];
+            offerModel.nativeADView = [self getNativeADViewWithOffer:offer];
+            offerModel.offer = offer;
+            // Mark as ad
+            offerModel.isNativeAd = YES;
+            [self.dataSourceArray addObject:offerModel];
+        }
+    }
     
-    // Render ad
-    [offer rendererWithConfiguration:config selfRenderView:selfRenderView nativeADView:nativeADView];
+    // Add non-ad models, simulate developer's own business cells
+    for (int i = 0; i < 3; i ++) {
+        DemoOfferAdModel *offerModel1 = [[DemoOfferAdModel alloc] init];
+        offerModel1.isNativeAd = NO;
+        [self.dataSourceArray addObject:offerModel1];
+    }
+    [self.feedTableView reloadData];
+}
+
+/// Get offer and initiate next load
+- (ATNativeAdOffer *)getOfferAndLoadNext {
     
-    // [Masonry Method] Precisely set logo size and position, choose one implementation with [Manual Layout] above, call after rendering ad
-//    if (nativeADView.logoImageView && nativeADView.logoImageView.superview) {
-//        [nativeADView.logoImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
-//            make.right.bottom.mas_equalTo(nativeADView).mas_offset(-10);
-//            make.width.height.mas_equalTo(20);
-//        }];
-//    }
-//
-    // For testing print
-//    [self printNativeAdInfoAfterRendererWithOffer:offer nativeADView:nativeADView];
- 
-    self.adView = nativeADView;
+    // Scene statistics feature, optional integration
+    [[ATAdManager sharedManager] entryNativeScenarioWithPlacementID:Feed_Native_SelfRender_PlacementID scene:Feed_Native_SelfRender_SceneID];
     
-    // Show ad
-    AdDisplayVC *showVc = [[AdDisplayVC alloc] initWithAdView:nativeADView offer:offer adViewSize:CGSizeMake(SelfRenderViewWidth, SelfRenderViewHeight)];
-    [self.navigationController pushViewController:showVc animated:YES];
+    ATNativeAdOffer *offer = [[ATAdManager sharedManager] getNativeAdOfferWithPlacementID:Feed_Native_SelfRender_PlacementID];
+    // Load next
+    [self loadNativeAd];
+    
+    return offer;
+}
+
+/// User clicks close, remove ad from list
+/// - Parameter nativeADView: Ad adView
+- (void)removeAd:(ATNativeADView *)nativeADView {
+    for (int i=0; i<self.dataSourceArray.count; i++) {
+        DemoOfferAdModel *offerModel = self.dataSourceArray[i];
+        if (offerModel.isNativeAd && offerModel.nativeADView == nativeADView) {
+            
+            if (nativeADView && nativeADView.superview) {
+                [nativeADView removeFromSuperview];
+            }
+            // Destroy ad view
+            [nativeADView destroyNative];
+            // Destroy offer
+            offerModel.offer = nil;
+            offerModel.nativeADView = nil;
+            
+            [self.dataSourceArray removeObject:offerModel];
+            [self.feedTableView reloadData];
+             
+            break;
+        }
+    }
 }
   
 /// Print related information for testing
@@ -185,24 +248,6 @@
     ATDemoLog(@"🔥--是否为原生视频广告：%d",isVideoContents);
 }
 
-#pragma mark - Remove Ad
-- (void)removeAd {
-    if (self.adView && self.adView.superview) {
-        [self.adView removeFromSuperview];
-    }
-    [self.adView destroyNative];
-    self.adView = nil;
-    // Destroy offer more timely
-    [self.selfRenderView destory];
-    self.selfRenderView = nil;
-}
- 
-- (void)dealloc {
-    
-    // Purpose is to correctly release: [self.adView destroyNative];
-    [self removeAd];
-}
-
 #pragma mark - Placement Delegate Callbacks
 /// Placement loading completed
 /// - Parameter placementID: Placement ID
@@ -210,8 +255,11 @@
     BOOL isReady = [[ATAdManager sharedManager] nativeAdReadyForPlacementID:placementID];
     [self showLog:[NSString stringWithFormat:@"didFinishLoadingADWithPlacementID:%@ SelfRender 是否准备好:%@", placementID,isReady ? @"YES":@"NO"]];
     
-    // Reset retry attempts
-    self.retryAttempt = 0;
+    if (self.feedTableView.mj_footer.refreshing == YES) {
+        [self.feedTableView.mj_footer endRefreshing];
+        // Request successful, pass YES to get ad data
+        [self setDataWithRequest:YES];
+    }
 }
  
 /// Placement loading failed
@@ -222,19 +270,11 @@
     ATDemoLog(@"didFailToLoadADWithPlacementID:%@ error:%@", placementID, error);
     [self showLog:[NSString stringWithFormat:@"didFailToLoadADWithPlacementID:%@ errorCode:%ld", placementID, error.code]];
     
-    // Retry has reached 3 times, no more retry loading
-    if (self.retryAttempt >= 3) {
-       return;
+    if (self.feedTableView.mj_footer.refreshing == YES) {
+        [self.feedTableView.mj_footer endRefreshing];
+        // Request failed
+        [self setDataWithRequest:NO];
     }
-    self.retryAttempt++;
-    
-    // Calculate delay time: power of 2, maximum 8 seconds
-    NSInteger delaySec = pow(2, MIN(3, self.retryAttempt));
-
-    // Delayed retry loading ad
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, delaySec * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-        [self loadAd];
-    });
 }
 
 /// Received display revenue
@@ -256,10 +296,11 @@
 - (void)didShowNativeAdInAdView:(ATNativeADView *)adView placementID:(NSString *)placementID extra:(NSDictionary *)extra {
     ATDemoLog(@"didShowNativeAdInAdView:%@ extra:%@",placementID,extra);
     [self showLog:[NSString stringWithFormat:@"didShowNativeAdInAdView:%@", placementID]];
-    ATDemoLog(@"🔥--原生广告adInfo信息，展示后：%@",self.nativeAdOffer.adOfferInfo);
+    
+    
 }
 
-/// Native ad clicked close button
+/// Native ad close button clicked
 /// - Parameters:
 ///   - adView: Ad view object
 ///   - placementID: Placement ID
@@ -268,10 +309,8 @@
     ATDemoLog(@"didTapCloseButtonInAdView:%@ extra:%@", placementID, extra);
     [self showLog:[NSString stringWithFormat:@"didTapCloseButtonInAdView:%@", placementID]];
     
-    // Destroy ad
-    [self removeAd];
-    // Preload the next ad
-    [self loadAd];
+    // Remove from list
+    [self removeAd:adView];
 }
 
 /// Native ad started playing video
@@ -315,7 +354,7 @@
     [self showLog:[NSString stringWithFormat:@"didDeepLinkOrJumpInAdView:%@, success:%@", placementID, success ? @"YES" : @"NO"]];
 }
  
-/// Native ad entered fullscreen video playback, usually auto-jumps to a playback landing page after clicking video mediaView
+/// Native ad entered full-screen video playback, usually auto-jumps to a playback landing page after clicking video mediaView
 /// - Parameters:
 ///   - adView: Ad view object
 ///   - placementID: Placement ID
@@ -325,7 +364,7 @@
     [self showLog:[NSString stringWithFormat:@"didEnterFullScreenVideoInAdView:%@", placementID]];
 }
 
-/// Native ad exited fullscreen video playback
+/// Native ad exited full-screen video playback
 /// - Parameters:
 ///   - adView: Ad view object
 ///   - placementID: Placement ID
@@ -343,6 +382,69 @@
 - (void)didCloseDetailInAdView:(ATNativeADView *)adView placementID:(NSString *)placementID extra:(NSDictionary *)extra {
     ATDemoLog(@"didCloseDetailInAdView:%@ extra:%@", placementID, extra);
     [self showLog:[NSString stringWithFormat:@"didCloseDetailInAdView:%@", placementID]];
+}
+
+#pragma mark - TableView Data Refresh
+- (void)footerRefresh {
+    self.feedTableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(upFreshLoadMoreData)];
+    [self.feedTableView.mj_footer beginRefreshing];
+}
+
+/// Load more
+- (void)upFreshLoadMoreData {
+    [self loadNativeAd];
+}
+ 
+/// Load ad
+- (void)loadNativeAd {
+    NSMutableDictionary * loadConfigDict = [NSMutableDictionary dictionary];
+    
+    // Set ad request size
+    [loadConfigDict setValue:[NSValue valueWithCGSize:CGSizeMake(SelfRenderViewWidth, SelfRenderViewHeight)] forKey:kATExtraInfoNativeAdSizeKey];
+    // Request adaptive size native ad (available for some ad platforms) (optional integration)
+    [AdLoadConfigTool native_loadExtraConfigAppend_SizeToFit:loadConfigDict];
+    
+    // KuaiShou native ad swipe and click control
+//    [AdLoadConfigTool native_loadExtraConfigAppend_KuaiShou_SlideOrClickAble:loadConfigDict];
+    
+    [[ATAdManager sharedManager] loadADWithPlacementID:Feed_Native_SelfRender_PlacementID extra:loadConfigDict delegate:self];
+}
+ 
+#pragma mark - getter
+- (UITableView *)feedTableView {
+    if (!_feedTableView) {
+        _feedTableView = [[UITableView alloc] init];
+        _feedTableView.delegate = self;
+        _feedTableView.dataSource = self;
+        _feedTableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+        
+        // Bind cells
+        [_feedTableView registerNib:[UINib nibWithNibName:@"CustomCell" bundle:nil] forCellReuseIdentifier:@"CustomCell"];
+        [_feedTableView registerClass:[AdCell class] forCellReuseIdentifier:@"AdCell"];
+        
+        // Set a reasonable estimated height
+        _feedTableView.estimatedRowHeight = SelfRenderViewHeight; // Set a reasonable estimated value
+        _feedTableView.rowHeight = UITableViewAutomaticDimension;
+    }
+    return _feedTableView;
+}
+
+- (NSMutableArray *)dataSourceArray {
+    if (_dataSourceArray) return _dataSourceArray;
+    NSMutableArray *dataSourceArray = [NSMutableArray array];
+    return _dataSourceArray = dataSourceArray;
+}
+ 
+#pragma mark - Demo UI
+- (void)viewDidLoad {
+    [super viewDidLoad];
+     
+    [self.view addSubview:self.feedTableView];
+    [self.feedTableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.nbar.mas_bottom);
+        make.left.right.bottom.mas_equalTo(self.view);
+    }];
+    [self footerRefresh];
 }
  
 @end

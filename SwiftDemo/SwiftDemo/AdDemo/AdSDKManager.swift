@@ -8,9 +8,7 @@
 import Foundation
 import UIKit
 import AnyThinkSDK
-import AnyThinkInterstitial
-import AnyThinkSplash
-import AnyThinkRewardedVideo
+ 
 import AppTrackingTransparency
  
 /// Initialization completion callback
@@ -23,19 +21,10 @@ let kAppID = "h67eb68399d31b"
 
 /// Application-level AppKey or account-level AppKey in the backend
 let kAppKey = "a3983938bf3b5294c7f1a4b6cc67c6368"
-
-/// Cold start splash timeout duration
-let FirstAppOpen_Timeout = 8
-
-/// Cold start splash placement ID
-let FirstAppOpen_PlacementID = "n67eb688a3eeea"
-
+  
 class AdSDKManager: NSObject {
      
     static let shared = AdSDKManager()
-     
-    /// Loading page, using custom loading image
-    private var launchLoadingView: LaunchLoadingView?
  
     private override init() {
         super.init()
@@ -82,80 +71,7 @@ class AdSDKManager: NSObject {
             print("AdSDK init error: \(error)")
         }
     }
-    
-    // MARK: - Splash Ad Related
-    
-    /// Add launch page, add before SDK initialization, used for cold start splash
-    func addLaunchLoadingView() {
-        // Add launch page
-        // Add loading page, needs to be removed in ad delegate when ad display is completed
-        launchLoadingView = LaunchLoadingView()
-        launchLoadingView?.show()
-    }
-    
-    /// Splash ad
-    func startSplashAd() {
-         
-        // Splash ad displays launch image
-        addLaunchLoadingView()
-        launchLoadingView?.startTimer()
-        
-        loadSplash(withPlacementID: FirstAppOpen_PlacementID)
-    }
-    
-    func loadSplash(withPlacementID placementID: String) {
-        var loadConfigDict: [String: Any] = [:]
-        
-        // Splash timeout duration
-        loadConfigDict[kATSplashExtraTolerateTimeoutKey] = FirstAppOpen_Timeout
-        
-        // Custom load parameters
-        loadConfigDict[kATAdLoadingExtraMediaExtraKey] = "Your custom string"
-        
-        // Custom user id parameter, used to pass to ad platform SDK
-        loadConfigDict[kATAdLoadingExtraUserIDKey] = "Your custom user ID"
-         
-        // Optional integration, if using Pangle ad platform, can add the following configuration
-        // AdLoadConfigTool.splash_loadExtraConfigAppend_Pangle(&loadConfigDict)
-        
-        // If choosing to use Tencent GDT, recommended to integrate
-        // AdLoadConfigTool.splash_loadExtraConfigAppend_Tencent(&loadConfigDict)
-        
-        ATAdManager.shared().loadAD(withPlacementID: placementID,
-                                          extra: loadConfigDict,
-                                          delegate: self,
-                                          containerView: footLogoView())
-    }
-    
-    /// Show splash ad
-    /// - Parameter placementID: Placement ID
-    func showSplash(withPlacementID placementID: String) {
-        // Check if ready
-        guard ATAdManager.shared().splashReady(forPlacementID: placementID) else {
-            return
-        }
-        
-        // Scene statistics function, optional integration
-        ATAdManager.shared().entrySplashScenario(withPlacementID: placementID, scene: "")
-        
-        // Show configuration, Scene passes backend scene ID, can pass empty string if none, showCustomExt parameter can pass custom parameter string
-        let config = ATShowConfig(scene: placementID, showCustomExt: "Your ShowCustomExt String")
-        
-        // Splash related parameter configuration
-        let configDict: [String: Any] = [:]
-        
-        // Optional integration, custom skip button, most platforms no longer support custom skip buttons, currently supporting custom skip button modification are CSJ(TT), direct investment, ADX, native as splash and YouKeYing, specific effects need to be tested by running
-        // AdLoadConfigTool.splash_loadExtraConfigAppend_CustomSkipButton(&configDict)
-        
-        // Show ad
-        ATAdManager.shared().showSplash(withPlacementID: placementID,
-                                             config: config,
-                                             window: UIApplication.shared.currentKeyWindow!,
-                                             in: UIApplication.shared.topMostViewController() ?? UIViewController(),
-                                             extra: configDict,
-                                             delegate: self)
-    }
-    
+     
     /// GDPR/UMP process initialization
     /// - Parameter block: Initialization completion callback
     func initSDK_EU(_ block: @escaping AdManagerInitFinishBlock) {
@@ -195,52 +111,6 @@ class AdSDKManager: NSObject {
             UserDefaults.standard.set(true, forKey: "GDPR_First_Flag")
         }
     }
-    
-    // MARK: - Private Methods
-    
-    /// Splash ad loading callback judgment
-    /// - Parameters:
-    ///   - placementID: Placement ID
-    ///   - result: Result
-    private func showSplashOrEnterHomePage(withPlacementID placementID: String, loadResult: Bool) {
-        if loadResult == true {
-            showSplash(withPlacementID: placementID)
-        }else {
-            launchLoadingView?.dismiss()
-        }
-    }
-    
-    /// Optional integration splash bottom LogoView, only supported by some ad platforms
-    /// - Returns: footer view
-    private func footLogoView() -> UIView {
-        // Width is screen width, height <= 25% of screen height (depending on ad platform requirements)
-        let footerCtrView = UIView(frame: CGRect(x: 0, y: 0, width: kOrientationScreenWidth, height: 120))
-        footerCtrView.backgroundColor = .white
-        
-        // Add image
-        let logoImageView = UIImageView()
-        logoImageView.image = UIImage(named: "logo")
-        logoImageView.contentMode = .center
-        logoImageView.frame = footerCtrView.frame
-        footerCtrView.addSubview(logoImageView)
-        
-        // Add click event
-        let tap = UITapGestureRecognizer(target: self, action: #selector(footerImgClick(_:)))
-        logoImageView.isUserInteractionEnabled = true
-        logoImageView.addGestureRecognizer(tap)
-        
-        return footerCtrView
-    }
-    
-    /// Footer click event
-    /// - Parameter tap: Gesture recognizer
-    @objc private func footerImgClick(_ tap: UITapGestureRecognizer) {
-        ATDemoLog("footer click !!")
-    }
-    
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
 }
 
 // MARK: - UIApplication Extension (Multi-scene safe keyWindow and top-level VC)
@@ -275,76 +145,4 @@ extension UIApplication {
         return baseVC
     }
 }
-
-// MARK: - ATAdLoadingDelegate
-extension AdSDKManager: ATAdLoadingDelegate {
-    
-    /// Placement loading failed
-    /// - Parameters:
-    ///   - placementID: Placement ID
-    ///   - error: Error information
-    func didFailToLoadAD(withPlacementID placementID: String, error: Error) {
-        // Handle splash callback
-        showSplashOrEnterHomePage(withPlacementID: placementID, loadResult: false)
-    }
-    
-    func didFinishLoadingAD(withPlacementID placementID: String) {
-        // All Ads load finished, please use didFinishLoadingSplashAD:withPlacementID:isTimeout first
-    }
-}
-
-// MARK: - ATSplashDelegate
-extension AdSDKManager: ATSplashDelegate {
-    
-    /// Splash ad loading successful, need to check if timeout occurred
-    /// - Parameters:
-    ///   - placementID: Placement ID
-    ///   - isTimeout: Whether timeout occurred
-    func didFinishLoadingSplashAD(withPlacementID placementID: String, isTimeout: Bool) {
-        // Splash ad loading successful, need to check if timeout occurred
-        // Handle splash callback
-        showSplashOrEnterHomePage(withPlacementID: placementID, loadResult: !isTimeout)
-    }
-    
-    /// Splash ad loading timeout
-    /// - Parameter placementID: Placement ID
-    func didTimeoutLoadingSplashAD(withPlacementID placementID: String) {
-        // Handle splash callback
-        showSplashOrEnterHomePage(withPlacementID: placementID, loadResult: false)
-    }
-    
-    /// Splash ad closed
-    /// - Parameters:
-    ///   - placementID: Placement ID
-    ///   - extra: Extra information
-    func splashDidClose(forPlacementID placementID: String, extra: [AnyHashable : Any]) {
-        // Handle splash callback
-        showSplashOrEnterHomePage(withPlacementID: placementID, loadResult: false)
-    }
-    
-    /// Splash ad display failed
-    /// - Parameters:
-    ///   - placementID: Placement ID
-    ///   - error: Error information
-    ///   - extra: Extra information
-    func splashDidShowFailed(forPlacementID placementID: String, error: Error, extra: [AnyHashable : Any]) {
-        // Handle splash callback
-        showSplashOrEnterHomePage(withPlacementID: placementID, loadResult: false)
-    }
-    
-    /// Splash ad clicked
-    /// - Parameters:
-    ///   - placementID: Placement ID
-    ///   - extra: Extra information
-    func splashDidClick(forPlacementID placementID: String, extra: [AnyHashable : Any]) {
  
-    }
-    
-    /// Splash ad display successful
-    /// - Parameters:
-    ///   - placementID: Placement ID
-    ///   - extra: Extra information
-    func splashDidShow(forPlacementID placementID: String, extra: [AnyHashable : Any]) {
-        launchLoadingView?.dismiss()
-    }
-}

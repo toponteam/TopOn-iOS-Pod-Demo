@@ -1,69 +1,61 @@
 //
-//  ExpressVC.m
+//  SelfRenderVC.m
 //  iOSDemo
 //
-//  Created by ltz on 2025/1/18.
+//  Created by ltz on 2025/1/11.
 //
 
-#import "ExpressVC.h"
+#import "SelfRenderVC.h"
 
 #import <AnyThinkSDK/AnyThinkSDK.h>
- 
+
+#import "AdLoadConfigTool.h"
+#import "SelfRenderView.h"
 #import "AdDisplayVC.h"
 
-@interface ExpressVC () <ATNativeADDelegate>
+@interface SelfRenderVC () <ATNativeADDelegate>
 
 @property (strong, nonatomic) ATNativeADView  * adView;
+@property (strong, nonatomic) SelfRenderView  * selfRenderView;
 @property (nonatomic, strong) ATNativeAdOffer * nativeAdOffer;
-// Retry attempts counter
+// Retry attempt counter
 @property (nonatomic, assign) NSInteger         retryAttempt;
 
 @end
 
-@implementation ExpressVC
+@implementation SelfRenderVC
 
 // Placement ID
+#define Native_SelfRender_PlacementID @"n67eceed5a282d"
 
-// Third-party ad platform with native template rendering
-#define Native_Express_PlacementID @"n67ee1208bb52d"
-
-// SDK rendering - actual third-party ad is self-rendered placement
-//#define Native_Express_PlacementID @"n67ff515ba1460"
-
-// Scene ID, optional, can be generated in backend. Pass empty string if none
-#define Native_Express_SceneID @""
-
-// Note: template aspect ratio should match backend selection
-#define ExpressAdWidth (kScreenW)
-// Note: template aspect ratio should match backend selection
-#define ExpressAdHeight (kScreenW/2.f)
-
-#define ExpressMediaViewWidth (kScreenW)
-#define ExpressMediaViewHeight (350 - kNavigationBarHeight - 150)
+// Scene ID, optional, can be generated in the dashboard. Pass empty string if not available
+#define Native_SelfRender_SceneID @""
  
 #pragma mark - Load Ad
-/// Load ad button clicked
+/// Load ad
 - (void)loadAd {
  
     [self showLog:kLocalizeStr(@"Clicked load ad")];
      
     NSMutableDictionary * loadConfigDict = [NSMutableDictionary dictionary];
     
-    // Request template ad with specified size, ad platform will match this size to return ad, not necessarily exact match, depends on template type selected in ad platform backend
-    [loadConfigDict setValue:[NSValue valueWithCGSize:CGSizeMake(ExpressAdWidth, ExpressAdHeight)] forKey:kATExtraInfoNativeAdSizeKey];
+    // Set ad request size
+    [loadConfigDict setValue:[NSValue valueWithCGSize:CGSizeMake(SelfRenderViewWidth, SelfRenderViewHeight)] forKey:kATExtraInfoNativeAdSizeKey];
+    // Request adaptive size native ad (available for some ad platforms)
+    [AdLoadConfigTool native_loadExtraConfigAppend_SizeToFit:loadConfigDict];
     
-    // Adaptive height，Some network supported , such as CSJ，JD，KuaiShou.
-    // [loadConfigDict setValue:@YES forKey:kATNativeAdSizeToFitKey];
-    
-    [[ATAdManager sharedManager] loadADWithPlacementID:Native_Express_PlacementID extra:loadConfigDict delegate:self];
+    // KuaiShou native ad swipe and click control
+//    [AdLoadConfigTool native_loadExtraConfigAppend_KuaiShou_SlideOrClickAble:loadConfigDict];
+  
+    [[ATAdManager sharedManager] loadADWithPlacementID:Native_SelfRender_PlacementID extra:loadConfigDict delegate:self];
 }
  
 #pragma mark - Show Ad
-/// Show ad button clicked
+/// Show ad
 - (void)showAd {
     
     // Scene statistics feature, optional integration
-    [[ATAdManager sharedManager] entryNativeScenarioWithPlacementID:Native_Express_PlacementID scene:Native_Express_SceneID];
+    [[ATAdManager sharedManager] entryNativeScenarioWithPlacementID:Native_SelfRender_PlacementID scene:Native_SelfRender_SceneID];
     
 //    // Query available ad cache for display (optional integration)
 //    NSArray <NSDictionary *> * adCaches = [[ATAdManager sharedManager] getNativeValidAdsForPlacementID:Native_SelfRender_PlacementID];
@@ -74,46 +66,125 @@
 //    ATDemoLog(@"checkLoadStatus : %d",status.isLoading);
     
     // Check if ready
-    if (![[ATAdManager sharedManager] nativeAdReadyForPlacementID:Native_Express_PlacementID]) {
+    if (![[ATAdManager sharedManager] nativeAdReadyForPlacementID:Native_SelfRender_PlacementID]) {
         [self loadAd];
         return;
     }
     
     // Initialize config configuration
     ATNativeADConfiguration *config = [[ATNativeADConfiguration alloc] init];
-    // Set size for template ad nativeADView, usually the size set when requesting ad
-    config.ADFrame = CGRectMake(0, 0, ExpressAdWidth, ExpressAdHeight);
+    // Pre-layout for native ad
+    config.ADFrame = CGRectMake(0, 0, SelfRenderViewWidth, SelfRenderViewHeight);
+    // Pre-layout for video player, recommend to layout again after adding to custom view
+    config.mediaViewFrame = CGRectMake(0, 0, SelfRenderViewMediaViewWidth, SelfRenderViewMediaViewHeight);
     config.delegate = self;
-    // Set display root controller
     config.rootViewController = self;
-    // Enable template ad adaptive height, when actual returned ad size differs from requested size, SDK will automatically adjust nativeADView size to actual returned ad size.
+    // Make ad view container fit the ad
     config.sizeToFit = YES;
     // Set auto-play only in WiFi mode, effective for some ad platforms
     config.videoPlayType = ATNativeADConfigVideoPlayOnlyWiFiAutoPlayType;
- 
+
+    // [Manual Layout] Precisely set logo size and position, choose one implementation with [Masonry Method] below
+    config.logoViewFrame = CGRectMake(kScreenW-50-10, SelfRenderViewHeight-50-10, 50, 50);
+    
+    // Set ad platform logo position preference (some ad platforms cannot be precisely set, use the code below, Demo examples all show bottom-right corner)
+    // Only when logoUrl or logo has value in material offer, can be set through SelfRenderView layout, otherwise use examples in this method for precise control or preference position setting.
+    [ATAPI sharedInstance].preferredAdLogoPosition = ATAdLogoPositionBottomRightCorner;
+    
+    // Set ad identifier coordinates x and y, effective for some ad platforms, set outside screen to achieve hiding effect
+    // config.adChoicesViewOrigin = CGPointMake(10, 10);
+    
     // Get offer ad object, consumes one ad cache after retrieval
-    ATNativeAdOffer *offer = [[ATAdManager sharedManager] getNativeAdOfferWithPlacementID:Native_Express_PlacementID scene:Native_Express_SceneID];
+    ATNativeAdOffer *offer = [[ATAdManager sharedManager] getNativeAdOfferWithPlacementID:Native_SelfRender_PlacementID scene:Native_SelfRender_SceneID];
+    NSDictionary *offerInfoDict = [Tools getOfferInfo:offer];
+    ATDemoLog(@"🔥🔥🔥--自渲染广告素材，展示前：%@",offerInfoDict);
+    self.nativeAdOffer = offer;
+    
+    // Create self-render view and assign values based on offer information
+    SelfRenderView *selfRenderView = [[SelfRenderView alloc] initWithOffer:offer];
     
     // Create ad nativeADView
-    ATNativeADView *nativeADView = [[ATNativeADView alloc] initWithConfiguration:config currentOffer:offer placementID:Native_Express_PlacementID];
- 
+    // Get native ad display container view
+    ATNativeADView *nativeADView = [[ATNativeADView alloc] initWithConfiguration:config currentOffer:offer placementID:Native_SelfRender_PlacementID];
+    
+    // Create container array for clickable components
+    NSMutableArray *clickableViewArray = [NSMutableArray array];
+    
+    // Get mediaView, need to add to self-render view manually, must call
+    UIView *mediaView = [nativeADView getMediaView];
+    if (mediaView) {
+        // Assign and layout
+        selfRenderView.mediaView = mediaView;
+    }
+    
+    // Set UI controls that need to register click events, better not to add the entire parent view of the feed to click events, otherwise clicking the close button may still trigger the feed click event.
+    // Close button (dislikeButton) does not need to register click events
+    [clickableViewArray addObjectsFromArray:@[selfRenderView.iconImageView,
+                                              selfRenderView.titleLabel,
+                                              selfRenderView.textLabel,
+                                              selfRenderView.ctaLabel,
+                                              selfRenderView.mainImageView]];
+    
+    // Register click events for UI controls
+    [nativeADView registerClickableViewArray:clickableViewArray];
+    
+    // Bind components
+    ATNativePrepareInfo *info = [ATNativePrepareInfo loadPrepareInfo:^(ATNativePrepareInfo * prepareInfo) {
+        prepareInfo.textLabel = selfRenderView.textLabel;
+        prepareInfo.advertiserLabel = selfRenderView.advertiserLabel;
+        prepareInfo.titleLabel = selfRenderView.titleLabel;
+        prepareInfo.ratingLabel = selfRenderView.ratingLabel;
+        prepareInfo.iconImageView = selfRenderView.iconImageView;
+        prepareInfo.mainImageView = selfRenderView.mainImageView;
+        prepareInfo.ctaLabel = selfRenderView.ctaLabel;
+        prepareInfo.dislikeButton = selfRenderView.dislikeButton;
+        prepareInfo.mediaView = selfRenderView.mediaView;
+        
+        //Only for Yandex , must bind & render
+//        prepareInfo.domainLabel = selfRenderView.domainLabel;
+//        prepareInfo.warningLabel = selfRenderView.warningLabel;
+    }];
+    [nativeADView prepareWithNativePrepareInfo:info];
+    
     // Render ad
-    [offer rendererWithConfiguration:config selfRenderView:nil nativeADView:nativeADView];
+    [offer rendererWithConfiguration:config selfRenderView:selfRenderView nativeADView:nativeADView];
+    
+    // [Masonry Method] Precisely set logo size and position, choose one implementation with [Manual Layout] above, call after rendering ad
+//    if (nativeADView.logoImageView && nativeADView.logoImageView.superview) {
+//        [nativeADView.logoImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
+//            make.right.bottom.mas_equalTo(nativeADView).mas_offset(-10);
+//            make.width.height.mas_equalTo(20);
+//        }];
+//    }
+//
+    // For testing print
+//    [self printNativeAdInfoAfterRendererWithOffer:offer nativeADView:nativeADView];
  
-    // Reference
     self.adView = nativeADView;
     
-    //recommend use offer.nativeAd.nativeExpressAdViewWidth,offer.nativeAd.nativeExpressAdViewHeight first.
-//    ATDemoLog(@"🔥--Ad network return size：%lf，%lf，You request size：%f,%f",offer.nativeAd.nativeExpressAdViewWidth,offer.nativeAd.nativeExpressAdViewHeight,ExpressAdWidth,ExpressAdHeight);
-    
-    BOOL isVideoContents = [nativeADView isVideoContents];
-    ATDemoLog(@"🔥--Is Native Video Ad? ：%d",isVideoContents);
-    
     // Show ad
-    AdDisplayVC *showVc = [[AdDisplayVC alloc] initWithAdView:nativeADView offer:offer adViewSize:CGSizeMake(ExpressAdWidth, ExpressAdHeight)];
+    AdDisplayVC *showVc = [[AdDisplayVC alloc] initWithAdView:nativeADView offer:offer adViewSize:CGSizeMake(SelfRenderViewWidth, SelfRenderViewHeight)];
     [self.navigationController pushViewController:showVc animated:YES];
 }
- 
+  
+/// Print related information for testing
+/// - Parameters:
+///   - offer: Ad material
+///   - nativeADView: Ad object view
+- (void)printNativeAdInfoAfterRendererWithOffer:(ATNativeAdOffer *)offer nativeADView:(ATNativeADView *)nativeADView {
+    ATNativeAdRenderType nativeAdRenderType = [nativeADView getCurrentNativeAdRenderType];
+    if (nativeAdRenderType == ATNativeAdRenderExpress) {
+        ATDemoLog(@"⚠️⚠️⚠️--这是原生模板了");
+    } else {
+        ATDemoLog(@"✅✅✅--这是原生自渲染");
+    }
+    BOOL isVideoContents = [nativeADView isVideoContents];
+    
+    // Print all material content
+    [Tools printNativeAdOffer:offer];
+    ATDemoLog(@"🔥--是否为原生视频广告：%d",isVideoContents);
+}
+
 #pragma mark - Remove Ad
 - (void)removeAd {
     if (self.adView && self.adView.superview) {
@@ -121,14 +192,23 @@
     }
     [self.adView destroyNative];
     self.adView = nil;
+    // Destroy offer more timely
+    [self.selfRenderView destory];
+    self.selfRenderView = nil;
 }
  
+- (void)dealloc {
+    
+    // Purpose is to correctly release: [self.adView destroyNative];
+    [self removeAd];
+}
+
 #pragma mark - Placement Delegate Callbacks
 /// Placement loading completed
 /// - Parameter placementID: Placement ID
 - (void)didFinishLoadingADWithPlacementID:(NSString *)placementID {
     BOOL isReady = [[ATAdManager sharedManager] nativeAdReadyForPlacementID:placementID];
-    [self showLog:[NSString stringWithFormat:@"didFinishLoadingADWithPlacementID:%@ Express 是否准备好:%@", placementID,isReady ? @"YES":@"NO"]];
+    [self showLog:[NSString stringWithFormat:@"didFinishLoadingADWithPlacementID:%@ SelfRender 是否准备好:%@", placementID,isReady ? @"YES":@"NO"]];
     
     // Reset retry attempts
     self.retryAttempt = 0;
@@ -176,6 +256,7 @@
 - (void)didShowNativeAdInAdView:(ATNativeADView *)adView placementID:(NSString *)placementID extra:(NSDictionary *)extra {
     ATDemoLog(@"didShowNativeAdInAdView:%@ extra:%@",placementID,extra);
     [self showLog:[NSString stringWithFormat:@"didShowNativeAdInAdView:%@", placementID]];
+    ATDemoLog(@"🔥--原生广告adInfo信息，展示后：%@",self.nativeAdOffer.adOfferInfo);
 }
 
 /// Native ad clicked close button
@@ -189,7 +270,7 @@
     
     // Destroy ad
     [self removeAd];
-    // Preload next ad
+    // Preload the next ad
     [self loadAd];
 }
 
@@ -264,5 +345,4 @@
     [self showLog:[NSString stringWithFormat:@"didCloseDetailInAdView:%@", placementID]];
 }
  
-
 @end

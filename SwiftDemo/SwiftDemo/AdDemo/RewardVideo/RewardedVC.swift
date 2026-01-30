@@ -6,8 +6,7 @@
 //
 
 import UIKit
-import AnyThinkSDK
-import AnyThinkRewardedVideo
+import AnyThinkSDK 
 
 class RewardedVC: BaseNormalBarVC {
     

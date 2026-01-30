@@ -6,8 +6,7 @@
 //
 
 import UIKit
-import AnyThinkSDK
-import AnyThinkInterstitial
+import AnyThinkSDK 
 
 class InterstitialVC: BaseNormalBarVC {
     
