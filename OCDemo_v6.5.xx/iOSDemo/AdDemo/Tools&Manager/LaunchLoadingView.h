@@ -9,24 +9,24 @@
  
 @interface LaunchLoadingView : UIView
 
-/// 获取单例实例
+/// Get singleton instance
 + (instancetype)sharedInstance;
 
-/// 禁止外部调用init方法
+/// Prohibit external calls to init methods
 + (instancetype)new NS_UNAVAILABLE;
 - (instancetype)init NS_UNAVAILABLE;
 - (instancetype)initWithFrame:(CGRect)frame NS_UNAVAILABLE;
 
-//用于控制本地自建计时器时间到之后，是否展示广告，若需要使用SDK自带的超时计时器，请参考SplashVC.m
+/// Used to control whether to show the ad after the local custom timer expires. If you need to use the SDK's built-in timeout timer, please refer to SplashVC.m
 @property (nonatomic, assign) BOOL localTimerTimeout;
  
-/// 显示加载视图
+/// Show loading view
 - (void)show;
 
-/// 隐藏并移除加载视图
+/// Hide and remove loading view
 - (void)dismiss;
 
-/// 启动计时器
+/// Start timer
 - (void)startTimer;
 
 @end

@@ -14,7 +14,7 @@
 @property (nonatomic, strong) NSTimer *timer;
 @property (nonatomic, assign) NSInteger seconds;
   
-//自建计时器超时时间，通常大于SDK的kATSplashExtraTolerateTimeoutKey的设置，可根据您的具体需求调整
+// Custom timer timeout duration, typically greater than the SDK's kATSplashExtraTolerateTimeoutKey setting. Can be adjusted according to your specific requirements.
 #define LaunchLoadingView_Timeout 10
 
 @end
@@ -37,18 +37,18 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        // 设置背景色
+        // Set background color
         self.backgroundColor = [UIColor whiteColor];
         
-        // 创建并设置logo ImageView
+        // Create and configure logo ImageView
         UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo"]];
         imageView.contentMode = UIViewContentModeScaleAspectFit;
         imageView.translatesAutoresizingMaskIntoConstraints = NO;
         
-        // 将ImageView添加到自定义视图上
+        // Add ImageView to custom view
         [self addSubview:imageView];
         
-        // 创建计时器标签
+        // Create timer label
         self.timerLabel = [[UILabel alloc] init];
         self.timerLabel.textAlignment = NSTextAlignmentCenter;
         self.timerLabel.textColor = [UIColor blackColor];
@@ -57,15 +57,15 @@
         self.timerLabel.translatesAutoresizingMaskIntoConstraints = NO;
         [self addSubview:self.timerLabel];
         
-        // 居中约束
+        // Center constraints
         NSLayoutConstraint *centerXConstraint = [NSLayoutConstraint constraintWithItem:imageView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterX multiplier:1 constant:0];
         NSLayoutConstraint *centerYConstraint = [NSLayoutConstraint constraintWithItem:imageView attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterY multiplier:1 constant:0];
         
-        // 计时器标签约束
+        // Timer label constraints
         NSLayoutConstraint *labelCenterXConstraint = [NSLayoutConstraint constraintWithItem:self.timerLabel attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterX multiplier:1 constant:0];
         NSLayoutConstraint *labelTopConstraint = [NSLayoutConstraint constraintWithItem:self.timerLabel attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:imageView attribute:NSLayoutAttributeBottom multiplier:1 constant:20];
         
-        // 激活约束
+        // Activate constraints
         [NSLayoutConstraint activateConstraints:@[centerXConstraint, centerYConstraint, labelCenterXConstraint, labelTopConstraint]];
     }
     return self;
@@ -74,15 +74,15 @@
 #pragma mark - Public Methods
 
 - (void)show {
-    // 如果已经被添加到视图层级中，直接返回，避免重复添加
+    // If already added to the view hierarchy, return directly to avoid duplicate addition
     if (self.superview) {
         return;
     }
     
-    // 请您确保在主线程执行UI操作
+    // Please ensure UI operations are executed on the main thread
     UIWindow *keyWindow = nil;
     
-    // iOS 13及以上使用新API
+    // Use new API for iOS 13 and above
     if (@available(iOS 13.0, *)) {
         NSArray<UIScene *> *windowScenes = [[[UIApplication sharedApplication] connectedScenes] allObjects];
         for (UIWindowScene *scene in windowScenes) {
@@ -99,12 +99,12 @@
         }
     }
     
-    // 兼容iOS 13以下或上述方法未获取到的情况
+    // Fallback for iOS versions below 13 or if the above method didn't retrieve the window
     if (!keyWindow) {
         keyWindow = [UIApplication sharedApplication].keyWindow;
     }
     
-    // 最后的兼容方案：尝试获取第一个window
+    // Last fallback: try to get the first window
     if (!keyWindow) {
         keyWindow = [[UIApplication sharedApplication].windows firstObject];
     }
@@ -115,16 +115,16 @@
     }
     
     @try {
-        // 更新frame确保填满整个屏幕
+        // Update frame to ensure it fills the entire screen
         self.frame = keyWindow.bounds;
         
-        // 添加到window上，确保在最顶层
+        // Add to window to ensure it's on top
         [keyWindow addSubview:self];
         [keyWindow bringSubviewToFront:self];
          
         NSLog(@"LaunchLoadingView: Successfully added to window");
     } @catch (NSException *exception) {
-        // 捕获异常，记录日志
+        // Catch exception and log it
         NSLog(@"LaunchLoadingView show exception: %@", exception);
     }
     
@@ -132,16 +132,16 @@
 }
 
 - (void)dismiss {
-    // 先停止计时器，避免继续触发
+    // Stop the timer first to prevent further triggers
     [self stopTimer];
     
-    // 请您确保在主线程执行UI操作
+    // Please ensure UI operations are executed on the main thread
     if (!self.superview) {
         return;
     }
     
     @try {
-        // 兼容性处理：先从父视图移除
+        // Compatibility handling: remove from superview first
         [self removeFromSuperview];
         UIWindow *currentWindow = self.window;
         if (currentWindow && [currentWindow.subviews containsObject:self]) {
@@ -149,30 +149,30 @@
         }
         
     } @catch (NSException *exception) {
-        // 捕获异常，记录日志但不影响程序运行
+        // Catch exception, log it but don't affect program execution
         NSLog(@"LaunchLoadingView dismiss exception: %@", exception);
     }
 }
 
 - (void)startTimer {
-    // 先停止之前的计时器
+    // Stop the previous timer first
     [self stopTimer];
     
-    // 重置计时器
+    // Reset timer
     self.seconds = 0;
     
-    // 重置超时标记
+    // Reset timeout flag
     self.localTimerTimeout = NO;
     
-    // 更新UI显示初始时间
+    // Update UI to display initial time
     self.timerLabel.text = [NSString stringWithFormat:@"%@ 00:00 ,%@:%d",
                             kLocalizeStr(@"当前"),
                             kLocalizeStr(@"总超时时间"),
                             FirstAppOpen_Timeout];
     
-    // 创建NSTimer并添加到主线程的RunLoop中
-    // 使用scheduledTimerWithTimeInterval在主线程创建定时器
-    // NSRunLoopCommonModes确保在滚动等操作时也能正常触发
+    // Create NSTimer and add it to the main thread's RunLoop
+    // Use scheduledTimerWithTimeInterval to create timer on main thread
+    // NSRunLoopCommonModes ensures it can trigger normally during scrolling and other operations
     __weak typeof(self) weakSelf = self;
     self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0
                                                  repeats:YES
@@ -183,7 +183,7 @@
         }
     }];
     
-    // 将计时器添加到NSRunLoopCommonModes，确保UI操作时也能正常运行
+    // Add timer to NSRunLoopCommonModes to ensure it runs normally during UI operations
     [[NSRunLoop mainRunLoop] addTimer:self.timer forMode:NSRunLoopCommonModes];
 }
 
@@ -192,9 +192,9 @@
 - (void)updateTimer {
     self.seconds++;
     
-    // 检查是否达到超时时间
+    // Check if timeout has been reached
     if (self.seconds >= LaunchLoadingView_Timeout) {
-        // 超时了，自动移除视图
+        // Timeout reached, automatically remove view
         NSLog(@"LaunchLoadingView timeout reached: %ld seconds", (long)self.seconds);
         [self dismiss];
         self.localTimerTimeout = YES;
@@ -204,7 +204,7 @@
     NSInteger minutes = self.seconds / 60;
     NSInteger remainingSeconds = self.seconds % 60;
     
-    // NSTimer已经在主线程运行，直接更新UI
+    // NSTimer is already running on main thread, update UI directly
     self.timerLabel.text = [NSString stringWithFormat:@"%@ %02ld:%02ld ,%@:%d",
                             kLocalizeStr(@"当前"),
                             (long)minutes,
@@ -215,7 +215,7 @@
 
 - (void)stopTimer {
     if (self.timer) {
-        // 确保在主线程停止计时器
+        // Ensure timer is stopped on main thread
         if ([NSThread isMainThread]) {
             [self.timer invalidate];
             self.timer = nil;
@@ -233,9 +233,9 @@
 - (void)willMoveToSuperview:(UIView *)newSuperview {
     [super willMoveToSuperview:newSuperview];
     
-    // 当视图即将从父视图移除时（newSuperview为nil），执行清理
+    // When the view is about to be removed from superview (newSuperview is nil), perform cleanup
     if (newSuperview == nil) {
-        // 停止计时器
+        // Stop timer
         [self stopTimer];
     }
 }
@@ -243,9 +243,9 @@
 - (void)didMoveToSuperview {
     [super didMoveToSuperview];
     
-    // 当视图添加到新的父视图时，可以在这里做一些初始化
+    // When the view is added to a new superview, you can do some initialization here
     if (self.superview) {
-        // 确保frame正确
+        // Ensure frame is correct
         if (self.window) {
             self.frame = self.window.bounds;
         }
@@ -253,7 +253,7 @@
 }
 
 - (void)dealloc {
-    // 确保在对象销毁时停止计时器和清理资源
+    // Ensure timer is stopped and resources are cleaned up when the object is destroyed
     [self stopTimer];
     NSLog(@"LaunchLoadingView: dealloc called");
 }

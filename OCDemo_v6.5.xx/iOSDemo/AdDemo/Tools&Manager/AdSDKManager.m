@@ -112,7 +112,11 @@ static AdSDKManager *sharedManager = nil;
 #pragma mark - Splash Ad Related
 
 - (void)startSplashAd {
-    // Splash ad shows launch image
+    // OPTIONAL: Add launch loading view before showing splash ad
+    // Note: This is an optional integration. Different apps may have different implementation
+    // approaches and loading times. Developers should decide whether to use this feature
+    // based on their specific app requirements and user experience considerations.
+    // You may customize or skip this step according to your app's actual needs.
     [self addLaunchLoadingView];
     
     [self loadSplashWithPlacementID:FirstAppOpen_PlacementID];
@@ -251,7 +255,7 @@ static AdSDKManager *sharedManager = nil;
 ///   - extra: Extra info
 - (void)splashDidCloseForPlacementID:(NSString *)placementID extra:(NSDictionary *)extra {
     // Handle splash callback
-    [self showSplashOrEnterHomePageWithPlacementID:placementID loadResult:NO];
+    [[LaunchLoadingView sharedInstance] dismiss];
 }
 
 /// Splash ad show failed
@@ -277,7 +281,7 @@ static AdSDKManager *sharedManager = nil;
 ///   - placementID: Ad placement ID
 ///   - extra: Extra info
 - (void)splashDidShowForPlacementID:(nonnull NSString *)placementID extra:(nonnull NSDictionary *)extra {
-    [[LaunchLoadingView sharedInstance] dismiss];
+    
 }
 
 
