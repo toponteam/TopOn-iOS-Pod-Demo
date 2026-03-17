@@ -42,7 +42,7 @@
     }];
 }
 
-/// Enable header bidding ad source test mode for TopOn ADX
+/// Enable header bidding ad source test mode
 /// Please remove after testing⚠️
 /// - Parameters:
 ///   - currentIDFAStr: Current test device IDFA, must pass valid value

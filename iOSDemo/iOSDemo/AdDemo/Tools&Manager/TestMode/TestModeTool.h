@@ -29,7 +29,7 @@
 + (void)enableTestModeWith3rdSDKType:(ATAdNetWorkType)type currentIDFAStr:(NSString *)currentIDFAStr;
  
 
-/// 开启竞价广告源的测试模式
+/// 开启HeaderBidding广告源的测试模式
 /// 测试完毕请移除⚠️
 /// - Parameters:
 ///   - currentIDFAStr: 当前测试机器的idfa，必须传入有效值
