@@ -196,6 +196,16 @@
     
     // Enter home page
     [self enterHomeVC];
+     
+    // Get close reason here: dismiss_type
+//    typedef NS_OPTIONS(NSInteger, ATAdCloseType) {
+//        ATAdCloseUnknow = 1,            // ad close type unknow
+//        ATAdCloseSkip = 2,              // ad skip to close
+//        ATAdCloseCountdown = 3,         // ad countdown to close
+//        ATAdCloseClickcontent = 4,      // ad clickcontent to close
+//        ATAdCloseShowfail = 99          // ad showfail to close
+//    };
+//    ATAdCloseType closeType = [extra[kATADDelegateExtraDismissTypeKey] integerValue];
     
     // Pre-load for hot launch (optional)
     // [self loadAd];
