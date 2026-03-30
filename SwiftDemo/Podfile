@@ -18,16 +18,16 @@ target 'SwiftDemo' do
   use_frameworks!
   
   #TopOn SDK
-  pod 'TPNiOS','6.5.34'
+  pod 'TPNiOS','6.5.43'
 
   # DebugUI, recommended for debugging, remove before release
-  pod 'TPNDebugUISDK'
+  pod 'TPNDebugUISDK','1.0.7'
   
   # To reduce Demo's initial pod install time, not all Adapter installations are listed. If you need to test with your own AppID/AppKey, replace with your selected Adapters and run pod install --repo-update
   
   # Adapters used in Demo, for more ad platforms visit SDK download center: https://portal.toponad.net/m/sdk/download?type=iOS
   # TopOn Adx SDK(necessary)
-  pod 'TPNMediationAdxSmartdigimktAdapter','6.5.42.1'
+  pod 'TPNMediationAdxSmartdigimktAdapter','6.5.45.0'
   pod 'TPNMediationVungleAdapter','7.6.0.1'
   pod 'TPNMediationAdmobAdapter','12.12.0.0'
   pod 'TPNMediationMintegralAdapter','7.7.9.0'
