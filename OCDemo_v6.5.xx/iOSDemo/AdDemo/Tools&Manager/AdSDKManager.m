@@ -33,40 +33,28 @@ static AdSDKManager *sharedManager = nil;
 - (void)initSDK_EU:(AdManagerInitFinishBlock)block {
     [[ATAPI sharedInstance] showGDPRConsentDialogInViewController:[UIApplication sharedApplication].keyWindow.rootViewController dismissalCallback:^{
         // Here is an example of requesting ATT permission when the user consents or data consent is unknown and it is not the first launch. You can adjust it according to the actual situation of the app.
-        if (([ATAPI sharedInstance].dataConsentSet == ATDataConsentSetUnknown && ([[NSUserDefaults standardUserDefaults] boolForKey:@"GDPR_First_Flag"] == YES))
-            
-            || [ATAPI sharedInstance].dataConsentSet == ATDataConsentSetPersonalized) {
-            
+        
+        //Get the user selected UMP result
+        ATDataConsentSet result = [ATAPI sharedInstance].dataConsentSet;
+  
+        NSLog(@"!!! The user selected UMP result %ld",(long)result);
+        
+        if (result == ATDataConsentSetPersonalized) {
+            // User consented
             if (@available(iOS 14, *)) {
                 [ATTrackingManager requestTrackingAuthorizationWithCompletionHandler:^(ATTrackingManagerAuthorizationStatus status) {
                     
                 }];
             }
+        }else {
+            // User did not consent
         }
-        
-        // If you have integrated and are using the Admob UMP popup, after the user makes a choice, [ATAPI sharedInstance].dataConsentSet in this callback cannot obtain results during the app's first launch
-        // If you want to obtain the results, you can refer to the following code:
-        // NSString *purposeConsents = [[NSUserDefaults standardUserDefaults] stringForKey:@"IABTCF_PurposeConsents"];
-        // NSLog(@"purposeConsents:%@", purposeConsents);
-        // if (![purposeConsents containsString:@"1"]) {
-        //    // User did not consent
-        // } else {
-        //    // User consented
-        // }
-
-        // // If you have not integrated or are not using Admob UMP, you can obtain the user's selection result in this callback.
-        // if ([ATAPI sharedInstance].dataConsentSet == ATDataConsentSetPersonalized) {
-        //     // User consented
-        // } else {
-        //     // User did not consent
-        // }
-        
+ 
         [self initSDK];
+        
         if (block) {
             block();
         }
-        
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"GDPR_First_Flag"];
     }];
 }
  
