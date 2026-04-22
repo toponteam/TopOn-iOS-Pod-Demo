@@ -18,7 +18,7 @@ target 'SwiftDemo' do
   use_frameworks!
   
   #TopOn SDK
-  pod 'TPNiOS','6.5.43'
+  pod 'TPNiOS','6.5.45'
 
   # DebugUI, recommended for debugging, remove before release
   pod 'TPNDebugUISDK','1.0.7'
