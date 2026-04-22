@@ -60,6 +60,10 @@
 //    ATCheckLoadModel * status = [[ATAdManager sharedManager] checkRewardedVideoLoadStatusForPlacementID:RewardedPlacementID];
 //    ATDemoLog(@"checkLoadStatus : %d",status.isLoading);
 //
+    //    //Get ad price (optional integration)
+    //    NSDictionary *adOfferInfo = status.adOfferInfo;
+    //    ATDemoLog(@"adOfferInfo : %@",adOfferInfo);
+    
     //Check if ready
     if (![[ATAdManager sharedManager] rewardedVideoReadyForPlacementID:RewardedPlacementID]) {
         [self loadAd];

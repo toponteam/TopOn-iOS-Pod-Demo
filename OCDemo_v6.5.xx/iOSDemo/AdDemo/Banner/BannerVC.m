@@ -67,6 +67,10 @@
 //    ATCheckLoadModel * status = [[ATAdManager sharedManager] checkBannerLoadStatusForPlacementID:BannerPlacementID];
 //    ATDemoLog(@"checkLoadStatus : %d",status.isLoading);
     
+    //    //Get ad price (optional integration)
+    //    NSDictionary *adOfferInfo = status.adOfferInfo;
+    //    ATDemoLog(@"adOfferInfo : %@",adOfferInfo);
+    
     //Check if ready
     if (![[ATAdManager sharedManager] bannerAdReadyForPlacementID:BannerPlacementID]) {
         [self loadAd];

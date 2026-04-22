@@ -65,6 +65,10 @@
 //    ATCheckLoadModel * status = [[ATAdManager sharedManager] checkNativeLoadStatusForPlacementID:Native_SelfRender_PlacementID];
 //    ATDemoLog(@"checkLoadStatus : %d",status.isLoading);
     
+    //    //Get ad price (optional integration)
+    //    NSDictionary *adOfferInfo = status.adOfferInfo;
+    //    ATDemoLog(@"adOfferInfo : %@",adOfferInfo);
+    
     // Check if ready
     if (![[ATAdManager sharedManager] nativeAdReadyForPlacementID:Native_SelfRender_PlacementID]) {
         [self loadAd];

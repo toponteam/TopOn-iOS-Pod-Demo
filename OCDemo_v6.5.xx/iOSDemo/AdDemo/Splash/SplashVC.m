@@ -98,6 +98,10 @@
 //    ATCheckLoadModel * status = [[ATAdManager sharedManager] checkSplashLoadStatusForPlacementID:SplashPlacementID];
 //    ATDemoLog(@"checkLoadStatus : %d",status.isLoading);
     
+    //    //Get ad price (optional integration)
+    //    NSDictionary *adOfferInfo = status.adOfferInfo;
+    //    ATDemoLog(@"adOfferInfo : %@",adOfferInfo);
+    
     // Check if ad is ready
     if (![[ATAdManager sharedManager] splashReadyForPlacementID:SplashPlacementID]) {
         [self loadAd];

@@ -61,6 +61,10 @@
 //    ATCheckLoadModel * status = [[ATAdManager sharedManager] checkInterstitialLoadStatusForPlacementID:InterstitialPlacementID];
 //    ATDemoLog(@"checkLoadStatus : %d",status.isLoading);
     
+    //    //Get ad price (optional integration)
+    //    NSDictionary *adOfferInfo = status.adOfferInfo;
+    //    ATDemoLog(@"adOfferInfo : %@",adOfferInfo);
+    
     //Check if ready
     if (![[ATAdManager sharedManager] interstitialReadyForPlacementID:InterstitialPlacementID]) {
         [self loadAd];
