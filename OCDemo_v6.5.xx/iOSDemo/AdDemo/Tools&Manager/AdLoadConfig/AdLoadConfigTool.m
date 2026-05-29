@@ -83,7 +83,7 @@
     }
     
     UIImage * appLaunchBGImg = [UIImage imageNamed:@"Enter your background image"];
-    [config setValue:appLaunchBGImg forKey:@"kATGDTSplashBackgroundImageKey"];
+    [config setValue:appLaunchBGImg forKey:kATSplashExtraBackgroundImageKey];
     
     //Choose background for ad loading, recommend matching app's background color
     UIColor * appLaunchBGColor = [UIColor whiteColor];
